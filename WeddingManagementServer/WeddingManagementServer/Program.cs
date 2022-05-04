@@ -20,11 +20,18 @@ namespace WeddingManagementServer
 {
     internal class Program
     {
+        internal static string sqlConnectionString = "Data Source=" +
+                        Environment.GetEnvironmentVariable("DBServer", EnvironmentVariableTarget.User) +
+                        ";Initial Catalog=" +
+                        Environment.GetEnvironmentVariable("DBicatalog_Wedding", EnvironmentVariableTarget.User) +
+                        ";User ID=" +
+                        Environment.GetEnvironmentVariable("DBusername", EnvironmentVariableTarget.User) +
+                        ";Password=" +
+                        Environment.GetEnvironmentVariable("DBpassword", EnvironmentVariableTarget.User) +
+                        ";MultipleActiveResultSets = true;";
         static X509Certificate serverCertificate = new X509Certificate(@"F:\Python Learning\web_cert2022\server.pfx", Environment.GetEnvironmentVariable("certpass", EnvironmentVariableTarget.User));
 
         static ConcurrentDictionary<string, Client> sessions = new ConcurrentDictionary<string, Client>();
-
-        internal static SqlConnection sql;
         static Random rand;
         static void Main(string[] args)
         {
@@ -33,29 +40,20 @@ namespace WeddingManagementServer
                 Console.WriteLine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location));
                 rand = new Random();
 
-                using (sql = new SqlConnection(
-                        "Data Source=" +
-                        Environment.GetEnvironmentVariable("DBServer", EnvironmentVariableTarget.User) +
-                        ";Initial Catalog=" +
-                        Environment.GetEnvironmentVariable("DBicatalog_Wedding", EnvironmentVariableTarget.User) +
-                        ";User ID=" +
-                        Environment.GetEnvironmentVariable("DBusername", EnvironmentVariableTarget.User) +
-                        ";Password=" +
-                        Environment.GetEnvironmentVariable("DBpassword", EnvironmentVariableTarget.User) +
-                        ";MultipleActiveResultSets = true;"
-                        ))
+                using (SqlConnection sql = new SqlConnection(sqlConnectionString))
                 {
                     try
                     {
                         sql.Open();
                         Data.InitializeData();
-                        ExecuteServer();
+                        sql.Close();
                     }
                     catch (Exception e)
                     {
                         Console.WriteLine(e.ToString());
                     }
                 }
+                ExecuteServer();
             }
             catch (Exception e)
             {
@@ -179,7 +177,7 @@ namespace WeddingManagementServer
                                 }
                                 if (!do_work) Interlocked.Exchange(ref sessions[data].is_locked, 0);
                             }
-                            catch (Exception clientquit)
+                            catch (Exception )
                             {
                                 //Console.WriteLine(clientquit.ToString());
                                 shutdown(data);
@@ -190,7 +188,7 @@ namespace WeddingManagementServer
                                 {
                                     Interlocked.Exchange(ref sessions[data].is_waited, 0);
                                 }
-                                catch (Exception e)
+                                catch (Exception )
                                 {
 
                                 }
@@ -205,137 +203,143 @@ namespace WeddingManagementServer
                         try
                         {
                             string commandtext = "select top 1 id, name, pw, priority from account where username=@username";
-                            SqlCommand command = new SqlCommand(commandtext, sql);
-                            command.Parameters.AddWithValue("@username", act.username);
-                            using (SqlDataReader reader = command.ExecuteReader())
+                            using (SqlConnection sql = new SqlConnection(sqlConnectionString))
                             {
-                                Console.WriteLine("After avatar");
-                                if (reader.Read())
+                                sql.Open();
+                                using (SqlCommand command = new SqlCommand(commandtext, sql))
                                 {
-                                    //if (act.pw == reader["pw"].ToString())
-                                    if (act.pw == reader["pw"].ToString() || Crypter.CheckPassword(act.pw, reader["pw"].ToString()))
+                                    command.Parameters.AddWithValue("@username", act.username);
+                                    using (SqlDataReader reader = command.ExecuteReader())
                                     {
-                                        bool skip = false;
-                                        if (act.pw == reader["pw"].ToString())
+                                        Console.WriteLine("After avatar");
+                                        if (reader.Read())
                                         {
-                                            using (SqlCommand changepass = new SqlCommand("update top (1) account set pw = @pw where id = @id", sql))
+                                            //if (act.pw == reader["pw"].ToString())
+                                            if (act.pw == reader["pw"].ToString() || Crypter.CheckPassword(act.pw, reader["pw"].ToString()))
                                             {
-                                                changepass.Parameters.AddWithValue("@pw", Crypter.Blowfish.Crypt(act.pw));
-                                                changepass.Parameters.AddWithValue("@id", reader["id"].ToString());
-                                                changepass.ExecuteNonQuery();
-                                                sslStream.Write(Encoding.Unicode.GetBytes("-200"));
-                                                skip = true;
-                                            }
-                                        }
-                                        if (!skip)
-                                        {
-                                            string id = reader["id"].ToString();
-                                            string str_id = id;
-                                            while (id.Length < 19) id = '0' + id;
-
-                                            sslStream.Write(Encoding.Unicode.GetBytes("0200" + id));
-                                            Console.WriteLine("Before dictionaries");
-                                            try
-                                            {
-                                                if (sessions.ContainsKey(id))
+                                                bool skip = false;
+                                                if (act.pw == reader["pw"].ToString())
                                                 {
+                                                    using (SqlCommand changepass = new SqlCommand("update top (1) account set pw = @pw where id = @id", sql))
+                                                    {
+                                                        changepass.Parameters.AddWithValue("@pw", Crypter.Blowfish.Crypt(act.pw));
+                                                        changepass.Parameters.AddWithValue("@id", reader["id"].ToString());
+                                                        changepass.ExecuteNonQuery();
+                                                        sslStream.Write(Encoding.Unicode.GetBytes("-200"));
+                                                        skip = true;
+                                                    }
+                                                }
+                                                if (!skip)
+                                                {
+                                                    string id = reader["id"].ToString();
+                                                    string str_id = id;
+                                                    while (id.Length < 19) id = '0' + id;
+
+                                                    sslStream.Write(Encoding.Unicode.GetBytes("0200" + id));
+                                                    Console.WriteLine("Before dictionaries");
                                                     try
                                                     {
-                                                        Interlocked.Exchange(ref sessions[id].is_locked, 1);
-                                                        sessions[id].stream.Write(Encoding.Unicode.GetBytes("2004"));
-                                                        Console.WriteLine("User logged in from another device");
-                                                    }
-                                                    catch (Exception iknow)
-                                                    {
+                                                        if (sessions.ContainsKey(id))
+                                                        {
+                                                            try
+                                                            {
+                                                                Interlocked.Exchange(ref sessions[id].is_locked, 1);
+                                                                sessions[id].stream.Write(Encoding.Unicode.GetBytes("2004"));
+                                                                Console.WriteLine("User logged in from another device");
+                                                            }
+                                                            catch (Exception )
+                                                            {
 
-                                                    }
-                                                    finally
-                                                    {
-                                                        shutdown(id);
-                                                    }
+                                                            }
+                                                            finally
+                                                            {
+                                                                shutdown(id);
+                                                            }
 
-                                                }
-                                                Client client = new Client();
-                                                Console.WriteLine("got id");
-                                                Int64 id_int = (Int64)reader["id"];
-                                                while (sessions.ContainsKey(id)) await Task.Delay(1000);
-                                                client.client = c;
-                                                client.stream = sslStream;
-                                                client.is_locked = 0;
-                                                client.id = id;
-                                                client.priority = (Int16)reader["priority"];
-                                                sessions.AddOrUpdate(id, client, (key, oldValue) => { shutdown(key); return client; });
-                                                Console.WriteLine("Joined");
-                                            }
-                                            catch (Exception e)
-                                            {
-                                                Console.WriteLine(e.ToString());
-                                                shutdown(str_id);
-                                            }/*
+                                                        }
+                                                        Client client = new Client();
+                                                        Console.WriteLine("got id");
+                                                        Int64 id_int = (Int64)reader["id"];
+                                                        while (sessions.ContainsKey(id)) await Task.Delay(1000);
+                                                        client.client = c;
+                                                        client.stream = sslStream;
+                                                        client.is_locked = 0;
+                                                        client.id = id;
+                                                        client.priority = (Int16)reader["priority"];
+                                                        sessions.AddOrUpdate(id, client, (key, oldValue) => { shutdown(key); return client; });
+                                                        Console.WriteLine("Joined");
+                                                    }
+                                                    catch (Exception e)
+                                                    {
+                                                        Console.WriteLine(e.ToString());
+                                                        shutdown(str_id);
+                                                    }/*
                                                     finally
                                                     {
                                                         is_locked[id] = false;
                                                     }*/
-                                            c = null;
-                                            sslStream = null;
+                                                    c = null;
+                                                    sslStream = null;
+                                                }
+                                            }
+                                            else
+                                            {
+                                                try
+                                                {
+                                                    try
+                                                    {
+                                                        sslStream.Write(Encoding.Unicode.GetBytes("-200"));
+                                                    }
+                                                    catch
+                                                    {
+
+                                                    }
+                                                    try
+                                                    {
+                                                        sslStream.Dispose();
+                                                    }
+                                                    catch
+                                                    {
+
+                                                    }
+                                                    c.Dispose();
+                                                }
+                                                catch (Exception e)
+                                                {
+                                                    Console.WriteLine(e.ToString());
+                                                }
+                                            } // wrong password
+
                                         }
+                                        else
+                                        {
+                                            try
+                                            {
+                                                try
+                                                {
+                                                    sslStream.Write(Encoding.Unicode.GetBytes("-200"));
+                                                }
+                                                catch
+                                                {
+
+                                                }
+                                                try
+                                                {
+                                                    sslStream.Dispose();
+                                                }
+                                                catch
+                                                {
+
+                                                }
+                                                c.Dispose();
+                                            }
+                                            catch (Exception e)
+                                            {
+                                                Console.WriteLine(e.ToString());
+                                            }
+                                        } // log-in failed account doesn't exist
                                     }
-                                    else
-                                    {
-                                        try
-                                        {
-                                            try
-                                            {
-                                                sslStream.Write(Encoding.Unicode.GetBytes("-200"));
-                                            }
-                                            catch
-                                            {
-
-                                            }
-                                            try
-                                            {
-                                                sslStream.Dispose();
-                                            }
-                                            catch
-                                            {
-
-                                            }
-                                            c.Dispose();
-                                        }
-                                        catch (Exception e)
-                                        {
-                                            Console.WriteLine();
-                                        }
-                                    } // wrong password
-
                                 }
-                                else
-                                {
-                                    try
-                                    {
-                                        try
-                                        {
-                                            sslStream.Write(Encoding.Unicode.GetBytes("-200"));
-                                        }
-                                        catch
-                                        {
-
-                                        }
-                                        try
-                                        {
-                                            sslStream.Dispose();
-                                        }
-                                        catch
-                                        {
-
-                                        }
-                                        c.Dispose();
-                                    }
-                                    catch (Exception e)
-                                    {
-                                        Console.WriteLine(e.ToString());
-                                    }
-                                } // log-in failed account doesn't exist
                             }
                         }
                         catch (Exception e)
@@ -442,16 +446,19 @@ namespace WeddingManagementServer
                                                     }
                                                     string id_string = randomid.ToString();
                                                     while (id_string.Length < 19) id_string = '0' + id_string;
-                                                    using (SqlCommand command = new SqlCommand("insert into account values (@id, @username, @pw, @priority)", sql))
+                                                    using (var sql = new SqlConnection(sqlConnectionString))
                                                     {
-                                                        command.Parameters.AddWithValue("@id", id_string);
-                                                        command.Parameters.AddWithValue("@username", act.username);
-                                                        command.Parameters.AddWithValue("@pw", Crypter.Blowfish.Crypt(act.pw));
-                                                        command.Parameters.AddWithValue("@priority", act.priority);
-                                                        command.ExecuteNonQuery();
+                                                        sql.Open();
+                                                        using (SqlCommand command = new SqlCommand("insert into account values (@id, @username, @pw, @priority)", sql))
+                                                        {
+                                                            command.Parameters.AddWithValue("@id", id_string);
+                                                            command.Parameters.AddWithValue("@username", act.username);
+                                                            command.Parameters.AddWithValue("@pw", Crypter.Blowfish.Crypt(act.pw));
+                                                            command.Parameters.AddWithValue("@priority", act.priority);
+                                                            command.ExecuteNonQuery();
+                                                        }
+                                                        sessions[id].Queue_command(Encoding.Unicode.GetBytes("1011")); // New account created
                                                     }
-                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("1011")); // New account created
-
                                                 }
                                                 else
                                                 {
@@ -476,54 +483,278 @@ namespace WeddingManagementServer
                                         if (sessions[id].priority <= Data.GetRecruiterLevel() && sessions[id].priority < act.priority)
                                         {
                                             Int16 currentPriority;
-                                            if (act.id != null)
+                                            using (var sql = new SqlConnection(sqlConnectionString))
                                             {
-                                                if (sessions.ContainsKey(act.id))
+                                                sql.Open();
+                                                if (act.id != null)
                                                 {
-                                                    currentPriority = sessions[act.id].priority;
-                                                }
-                                                else
-                                                {
-                                                    using (SqlCommand command = new SqlCommand("select priority from account where id = @id", sql))
+                                                    if (sessions.ContainsKey(act.id))
                                                     {
-                                                        command.Parameters.AddWithValue("@id", act.id);
+                                                        currentPriority = sessions[act.id].priority;
+                                                    }
+                                                    else
+                                                    {
+                                                        using (SqlCommand command = new SqlCommand("select priority from account where id = @id", sql))
+                                                        {
+                                                            command.Parameters.AddWithValue("@id", act.id);
+                                                            currentPriority = (Int16)command.ExecuteScalar();
+                                                        }
+                                                    }
+                                                }
+                                                else if (act.username != null)
+                                                {
+                                                    using (SqlCommand command = new SqlCommand("select priority from account where username = @username", sql))
+                                                    {
+                                                        command.Parameters.AddWithValue("@username", act.username);
                                                         currentPriority = (Int16)command.ExecuteScalar();
                                                     }
                                                 }
-                                            }
-                                            else if (act.username != null)
-                                            {
-                                                using (SqlCommand command = new SqlCommand("select priority from account where username = @username", sql))
+                                                else
                                                 {
-                                                    command.Parameters.AddWithValue("@username", act.username);
-                                                    currentPriority = (Int16)command.ExecuteScalar();
+                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("-111"));
+                                                    break;
                                                 }
-                                            }
-                                            else
-                                            {
-                                                sessions[id].Queue_command(Encoding.Unicode.GetBytes("-111"));
-                                                break;
-                                            }
-                                            if (sessions[id].priority < currentPriority)
-                                            {
-                                                using (SqlCommand command = new SqlCommand("update account set priority = @priority where username = @username", sql))
+                                                if (sessions[id].priority < currentPriority)
                                                 {
-                                                    command.Parameters.AddWithValue("@username", act.username);
-                                                    command.Parameters.AddWithValue("@priority", act.priority);
-                                                    command.ExecuteNonQuery();
+                                                    using (SqlCommand command = new SqlCommand("update account set priority = @priority where username = @username", sql))
+                                                    {
+                                                        command.Parameters.AddWithValue("@username", act.username);
+                                                        command.Parameters.AddWithValue("@priority", act.priority);
+                                                        command.ExecuteNonQuery();
+                                                    }
+                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("2111")); // Account promoted/demoted
                                                 }
-                                                sessions[id].Queue_command(Encoding.Unicode.GetBytes("2111")); // Account promoted/demoted
-                                            }
-                                            else
-                                            {
-                                                sessions[id].Queue_command(Encoding.Unicode.GetBytes("3111")); // You have no right to do this
-                                            }
-                                                
+                                                else
+                                                {
+                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("3111")); // You have no right to do this
+                                                }
+                                            }    
                                         }
                                         else
                                         {
                                             sessions[id].Queue_command(Encoding.Unicode.GetBytes("3111")); // You have no right to do this
                                         }
+                                    }
+                                    break;
+
+                                    // get types of lobbies 
+                                case "0020":
+                                    {
+                                        List<LobbyType> lobbyTypes = new List<LobbyType>();
+                                        using (var sql = new SqlConnection(sqlConnectionString))
+                                        {
+                                            sql.Open();
+                                            using (SqlCommand command = new SqlCommand("select * from LOBBYTYPE", sql))
+                                            {
+                                                using (SqlDataReader reader = command.ExecuteReader())
+                                                {
+                                                    while (reader.Read())
+                                                    {
+                                                        lobbyTypes.Add(new LobbyType(reader["idLobbyType"].ToString(), reader["LobbyName"].ToString(), (long)reader["MinTablePrice"]));
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        sessions[id].Queue_command(Combine(Encoding.Unicode.GetBytes("0020"),
+                                            Encoding.Unicode.GetBytes(Wrap_data_with_byte(Jil.JSON.Serialize(lobbyTypes)))));
+                                    }
+                                    break;
+
+                                // get list of lobbies
+                                case "0021":
+                                    {
+                                        List<Lobby> lobbies = new List<Lobby>();
+                                        using (var sql = new SqlConnection(sqlConnectionString))
+                                        {
+                                            sql.Open();
+                                            using (SqlCommand command = new SqlCommand("select * from LOBBY", sql))
+                                            {
+                                                using (SqlDataReader reader = command.ExecuteReader())
+                                                {
+                                                    while (reader.Read())
+                                                    {
+                                                        lobbies.Add(new Lobby(reader["idLobby"].ToString(), reader["idLobbyType"].ToString(), reader["LobbyName"].ToString(), (int)reader["MaxTable"], (bool)reader["Status"]));
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        sessions[id].Queue_command(Combine(Encoding.Unicode.GetBytes("0021"),
+                                            Encoding.Unicode.GetBytes(Wrap_data_with_byte(Jil.JSON.Serialize(lobbies)))));
+                                    }
+                                    break;
+
+                                // get list of shifts
+                                case "0022":
+                                    {
+                                        List<Shift> shifts = new List<Shift>();
+                                        using (var sql = new SqlConnection(sqlConnectionString))
+                                        {
+                                            sql.Open();
+                                            using (SqlCommand command = new SqlCommand("select * from SHIFT", sql))
+                                            {
+                                                using (SqlDataReader reader = command.ExecuteReader())
+                                                {
+                                                    while (reader.Read())
+                                                    {
+                                                        shifts.Add(new Shift(reader["idShift"].ToString(), (DateTime)reader["Starting"], (DateTime)reader["Ending"]));
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        sessions[id].Queue_command(Combine(Encoding.Unicode.GetBytes("0022"),
+                                            Encoding.Unicode.GetBytes(Wrap_data_with_byte(Jil.JSON.Serialize(shifts)))));
+                                    }
+                                    break;
+
+                                // get list of weddings
+                                case "0023":
+                                    {
+                                        List<WeddingInfo> weddings = new List<WeddingInfo>();
+                                        using (var sql = new SqlConnection(sqlConnectionString))
+                                        {
+                                            sql.Open();
+                                            using (SqlCommand command = new SqlCommand("select * from WEDDING", sql))
+                                            {
+                                                using (SqlDataReader reader = command.ExecuteReader())
+                                                {
+                                                    while (reader.Read())
+                                                    {
+                                                        weddings.Add(new WeddingInfo(
+                                                            reader["idWedding"].ToString(),
+                                                            reader["idLobby"].ToString(),
+                                                            reader["idShift"].ToString(), 
+                                                            (DateTime)reader["BookingDate"], 
+                                                            (DateTime)reader["WeddingDate"], 
+                                                            reader["PhoneNumber"].ToString(),
+                                                            reader["BroomName"].ToString(),
+                                                            reader["BrideName"].ToString(),
+                                                            (int)reader["AmountOfTable"],
+                                                            (int)reader["AmountOfContingencyTable"],
+                                                            (long)reader["TablePrice"],
+                                                            (long)reader["Deposit"]
+                                                            ));
+                                                    }
+                                                }
+                                            }
+                                            
+                                        }
+                                        sessions[id].Queue_command(Combine(Encoding.Unicode.GetBytes("0023"),
+                                            Encoding.Unicode.GetBytes(Wrap_data_with_byte(Jil.JSON.Serialize(weddings)))));
+                                    }
+                                    break;
+
+                                // get list of menus
+                                case "0024":
+                                    {
+                                        List<Menu> menus = new List<Menu>();
+                                        using (var sql = new SqlConnection(sqlConnectionString))
+                                        {
+                                            sql.Open();
+                                            using (SqlCommand command = new SqlCommand("select * from MENU", sql))
+                                            {
+                                                using (SqlDataReader reader = command.ExecuteReader())
+                                                {
+                                                    while (reader.Read())
+                                                    {
+                                                        menus.Add(new Menu(reader["idDishes"].ToString(), reader["DishesName"].ToString(), (long)reader["DishesPrice"], reader["Note"].ToString()));
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        sessions[id].Queue_command(Combine(Encoding.Unicode.GetBytes("0024"),
+                                            Encoding.Unicode.GetBytes(Wrap_data_with_byte(Jil.JSON.Serialize(menus)))));
+                                    }
+                                    break;
+
+                                // get list of services
+                                case "0025":
+                                    {
+                                        List<Service> services = new List<Service>();
+                                        using (var sql = new SqlConnection(sqlConnectionString))
+                                        {
+                                            sql.Open();
+                                            using (SqlCommand command = new SqlCommand("select * from SERVICE", sql))
+                                            {
+                                                using (SqlDataReader reader = command.ExecuteReader())
+                                                {
+                                                    while (reader.Read())
+                                                    {
+                                                        services.Add(new Service(reader["idService"].ToString(), reader["ServiceName"].ToString(), (long)reader["ServicePrice"], reader["Note"].ToString()));
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        sessions[id].Queue_command(Combine(Encoding.Unicode.GetBytes("0025"),
+                                            Encoding.Unicode.GetBytes(Wrap_data_with_byte(Jil.JSON.Serialize(services)))));
+                                    }
+                                    break;
+
+                                // get lish of Table Details
+                                case "0026":
+                                    {
+                                    List<TableDetail> tableDetails = new List<TableDetail>();
+                                    using (var sql = new SqlConnection(sqlConnectionString))
+                                    {
+                                            sql.Open();
+                                            using (SqlCommand command = new SqlCommand("select * from TABLE_DETAIL", sql))
+                                            {
+                                                using (SqlDataReader reader = command.ExecuteReader())
+                                                {
+                                                    while (reader.Read())
+                                                    {
+                                                        tableDetails.Add(new TableDetail(reader["idWedding"].ToString(), reader["idDishes"].ToString(), (int)reader["AmountOfDishes"], (long)reader["TotalDishesPrice"], reader["Note"].ToString()));
+                                                    }
+                                                }
+                                            }
+                                    }
+                                    sessions[id].Queue_command(Combine(Encoding.Unicode.GetBytes("0026"),
+                                        Encoding.Unicode.GetBytes(Wrap_data_with_byte(Jil.JSON.Serialize(tableDetails)))));
+                                    }
+                                    break;
+
+                                // get list of service details
+                                case "0027":
+                                    {
+                                        List<ServiceDetail> services = new List<ServiceDetail>();
+                                        using (var sql = new SqlConnection(sqlConnectionString))
+                                        {
+                                            sql.Open();
+                                            using (SqlCommand command = new SqlCommand("select * from SERVICE_DETAIL", sql))
+                                            {
+                                                using (SqlDataReader reader = command.ExecuteReader())
+                                                {
+                                                    while (reader.Read())
+                                                    {
+                                                        services.Add(new ServiceDetail(reader["idWedding"].ToString(), reader["idService"].ToString(), (int)reader["AmountOfService"], (long)reader["TotalServicePrice"], reader["Note"].ToString()));
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        sessions[id].Queue_command(Combine(Encoding.Unicode.GetBytes("0027"),
+                                            Encoding.Unicode.GetBytes(Wrap_data_with_byte(Jil.JSON.Serialize(services)))));
+                                    }
+                                    break;
+
+                                // get list of bills
+                                case "0028":
+                                    {
+                                        List<Bill> bills = new List<Bill>();
+                                        using (var sql = new SqlConnection(sqlConnectionString))
+                                        {
+                                            sql.Open();
+                                            using (SqlCommand command = new SqlCommand("select * from BILL", sql))
+                                            {
+                                                using (SqlDataReader reader = command.ExecuteReader())
+                                                {
+                                                    while (reader.Read())
+                                                    {
+                                                        bills.Add(new Bill(reader["idBill"].ToString(), (DateTime)reader["InvoiceDate"], (long)reader["TablePricetotal"], (long)reader["ServicePriceTotal"], (long)reader["Total"], (DateTime)reader["PaymentDate"], (long)reader["MoneyLeft"]));
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        sessions[id].Queue_command(Combine(Encoding.Unicode.GetBytes("0028"),
+                                            Encoding.Unicode.GetBytes(Wrap_data_with_byte(Jil.JSON.Serialize(bills)))));
                                     }
                                     break;
 
@@ -581,11 +812,11 @@ namespace WeddingManagementServer
             {
                 if (se.Contains("open and available Connection"))
                 {
-                    sql.Open();
+                    //sql.Open();
                 }
                 else if (se.Contains("Execution Timeout Expired"))
                 {
-                    sql.Open();
+                    //sql.Open();
                 }
                 else if (se.Contains("was forcibly closed"))
                 {
@@ -605,7 +836,7 @@ namespace WeddingManagementServer
             {
                 sessions[id].stream.Dispose();
             }
-            catch (Exception e)
+            catch (Exception )
             {
 
             }
@@ -613,7 +844,7 @@ namespace WeddingManagementServer
             {
                 sessions[id].client.Dispose();
             }
-            catch (Exception e)
+            catch (Exception )
             {
 
             }
@@ -623,15 +854,103 @@ namespace WeddingManagementServer
         private static bool check_existed_username(string v)
         {
             string commandtext = "select top 1 id from ACCOUNTS where username=@username";
-            SqlCommand command = new SqlCommand(commandtext, sql);
-            command.Parameters.AddWithValue("@username", v);
-            using (SqlDataReader reader = command.ExecuteReader())
+            using (SqlConnection sql = new SqlConnection(sqlConnectionString))
             {
-                if (reader.Read())
+                sql.Open();
+                using (SqlCommand command = new SqlCommand(commandtext, sql))
                 {
-                    return true;
+                    command.Parameters.AddWithValue("@username", v);
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            return true;
+                        }
+                        else return false;
+                    }
                 }
-                else return false;
+            }
+        }
+
+        private static bool check_existed_id(long randomid, string key)
+        {
+            if (randomid > 0)
+            {
+                switch (key)
+                {
+                    case "LT":
+                        {
+                            string idStr = key + randomid.ToString();
+                            return check_existed_id("LOBBY_TYPE", "idLobbyType", idStr);
+                        }
+                    case "LO":
+                        {
+                            string idStr = key + randomid.ToString();
+                            return check_existed_id("LOBBY", "idLobby", idStr);
+                        }
+                    case "SH":
+                        {
+                            string idStr = key + randomid.ToString();
+                            return check_existed_id("SHIFT", "idShift", idStr);
+                        }
+                    case "WD":
+                        {
+                            string idStr = key + randomid.ToString();
+                            return check_existed_id("WEDDING_INFOR", "idWedding", idStr);
+                        }
+                    case "MN":
+                        {
+                            string idStr = key + randomid.ToString();
+                            return check_existed_id("MENU", "idDishes", idStr);
+                        }
+                    case "SV":
+                        {
+                            string idStr = key + randomid.ToString();
+                            return check_existed_id("SERVICE", "idService", idStr);
+                        }
+                    case "BI":
+                        {
+                            string idStr = key + randomid.ToString();
+                            return check_existed_id("BILL", "idBill", idStr);
+                        }
+                    case "RR":
+                        {
+                            string idStr = key + randomid.ToString();
+                            return check_existed_id("REVENUE_REPORT", "idReport", idStr);
+                        }
+                    case "PA":
+                        {
+                            string idStr = key + randomid.ToString();
+                            return check_existed_id("PARAMETER", "idParameter", idStr);
+                        }
+                    default:
+                        return true;
+                }
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        private static bool check_existed_id(string table, string idColumn, string key)
+        {
+            string commandtext = "select top 1 id from " + table + " where " + idColumn +"=@id";
+            using (SqlConnection sql = new SqlConnection(sqlConnectionString))
+            {
+                sql.Open();
+                using (SqlCommand command = new SqlCommand(commandtext, sql))
+                {
+                    command.Parameters.AddWithValue("@id", key);
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            return true;
+                        }
+                        else return false;
+                    }
+                }
             }
         }
 
@@ -640,15 +959,21 @@ namespace WeddingManagementServer
             if (randomid > 0)
             {
                 string commandtext = "select top 1 id from ACCOUNTS where id=@id";
-                SqlCommand command = new SqlCommand(commandtext, sql);
-                command.Parameters.AddWithValue("@id", randomid);
-                using (SqlDataReader reader = command.ExecuteReader())
+                using (SqlConnection sql = new SqlConnection(sqlConnectionString))
                 {
-                    if (reader.Read())
+                    sql.Open();
+                    using (SqlCommand command = new SqlCommand(commandtext, sql))
                     {
-                        return true;
+                        command.Parameters.AddWithValue("@id", randomid);
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                return true;
+                            }
+                            else return false;
+                        }
                     }
-                    else return false;
                 }
             }
             return true;
