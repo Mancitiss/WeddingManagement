@@ -560,6 +560,68 @@ namespace WeddingManagementServer
                                     }
                                     break;
 
+                                // update a type of lobbies
+                                case "0120":
+                                    {
+                                        try
+                                        {
+                                            Tools.Receive_data_automatically(s, out string json);
+                                            LobbyType lobbyType = Jil.JSON.Deserialize<LobbyType>(json);
+                                            using (var sql = new SqlConnection(sqlConnectionString))
+                                            {
+                                                sql.Open();
+                                                if (lobbyType.id != null)
+                                                {
+                                                    if (lobbyType.id.Length == 21)
+                                                    {
+                                                        string key = lobbyType.id.Substring(0, 2);
+                                                        long idl = long.Parse(lobbyType.id.Substring(2));
+                                                        if (key.Equals("LT") && check_existed_id(idl, key))
+                                                        {
+                                                            using (SqlCommand command = new SqlCommand("update LOBBYTYPE set LobbyName = @LobbyName, MinTablePrice = @MinTablePrice where idLobbyType = @idLobbyType", sql))
+                                                            {
+                                                                command.Parameters.AddWithValue("@idLobbyType", lobbyType.id);
+                                                                command.Parameters.AddWithValue("@LobbyName", lobbyType.name);
+                                                                command.Parameters.AddWithValue("@MinTablePrice", lobbyType.minTablePrice);
+                                                                if (command.ExecuteNonQuery() > 0)
+                                                                {
+                                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("0120")); // Lobby type updated
+                                                                }
+                                                                else
+                                                                {
+                                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("0220")); // Lobby type not updated
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                    else if (lobbyType.id.Length == 0) {
+                                                        string lobbyId = "LT" + GetNewIdFromTable("LB").ToString();
+                                                        using (SqlCommand command = new SqlCommand("insert into LOBBYTYPE values (@idLobbyType, @LobbyName, @MinTablePrice)", sql))
+                                                        {
+                                                            command.Parameters.AddWithValue("@idLobbyType", lobbyId);
+                                                            command.Parameters.AddWithValue("@LobbyName", lobbyType.name);
+                                                            command.Parameters.AddWithValue("@MinTablePrice", lobbyType.minTablePrice);
+                                                            if(command.ExecuteNonQuery() > 0)
+                                                            {
+                                                                sessions[id].Queue_command(Encoding.Unicode.GetBytes("0320" + lobbyId)); // Lobby type added
+                                                            }
+                                                            else
+                                                            {
+                                                                sessions[id].Queue_command(Encoding.Unicode.GetBytes("0220")); // Lobby type not updated
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                                
+                                            }
+                                        } 
+                                        catch (Exception )
+                                        {
+                                            sessions[id].Queue_command(Encoding.Unicode.GetBytes("0220"));
+                                        }
+                                    }
+                                    break;
+
                                 // get list of lobbies
                                 case "0021":
                                     {
@@ -583,6 +645,73 @@ namespace WeddingManagementServer
                                     }
                                     break;
 
+                                // update a lobby
+                                case "0121":
+                                    {
+                                        try
+                                        {
+                                            Tools.Receive_data_automatically(s, out string json);
+                                            Lobby lobby = Jil.JSON.Deserialize<Lobby>(json);
+                                            using (var sql = new SqlConnection(sqlConnectionString))
+                                            {
+                                                sql.Open();
+                                                if (lobby.idLobby != null)
+                                                {
+                                                    if (lobby.idLobby.Length == 21)
+                                                    {
+                                                        string key = lobby.idLobby.Substring(0, 2);
+                                                        long idl = long.Parse(lobby.idLobby.Substring(2));
+                                                        if (key.Equals("LB") && check_existed_id(idl, key))
+                                                        {
+                                                            using (SqlCommand command = new SqlCommand("update LOBBY set idLobbyType = @idLobbyType, LobbyName = @LobbyName, MaxTable = @MaxTable, Status = @Status where idLobby = @idLobby", sql))
+                                                            {
+                                                                command.Parameters.AddWithValue("@idLobby", lobby.idLobby);
+                                                                command.Parameters.AddWithValue("@idLobbyType", lobby.idLobbyType);
+                                                                command.Parameters.AddWithValue("@LobbyName", lobby.LobbyName);
+                                                                command.Parameters.AddWithValue("@MaxTable", lobby.MaxTable);
+                                                                command.Parameters.AddWithValue("@Status", lobby.Status);
+                                                                if (command.ExecuteNonQuery() > 0)
+                                                                {
+                                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("0121")); // Lobby updated
+                                                                }
+                                                                else
+                                                                {
+                                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("0221")); // Lobby not updated
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                    else if (lobby.idLobby.Length == 0)
+                                                    {
+                                                        string lobbyId = "LB" + GetNewIdFromTable("LB").ToString();
+                                                        using (SqlCommand command = new SqlCommand("insert into LOBBY values (@idLobby, @idLobbyType, @LobbyName, @MaxTable, @Status)", sql))
+                                                        {
+                                                            command.Parameters.AddWithValue("@idLobby", lobbyId);
+                                                            command.Parameters.AddWithValue("@idLobbyType", lobby.idLobbyType);
+                                                            command.Parameters.AddWithValue("@LobbyName", lobby.LobbyName);
+                                                            command.Parameters.AddWithValue("@MaxTable", lobby.MaxTable);
+                                                            command.Parameters.AddWithValue("@Status", lobby.Status);
+                                                            if (command.ExecuteNonQuery() > 0)
+                                                            {
+                                                                sessions[id].Queue_command(Encoding.Unicode.GetBytes("0321" + lobbyId)); // Lobby added
+                                                            }
+                                                            else
+                                                            {
+                                                                sessions[id].Queue_command(Encoding.Unicode.GetBytes("0221")); // Lobby not updated
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        catch (Exception )
+                                        {
+                                            sessions[id].Queue_command(Encoding.Unicode.GetBytes("0221"));
+                                        }
+                                    }
+                                    break;
+                                    
+
                                 // get list of shifts
                                 case "0022":
                                     {
@@ -603,6 +732,68 @@ namespace WeddingManagementServer
                                         }
                                         sessions[id].Queue_command(Combine(Encoding.Unicode.GetBytes("0022"),
                                             Encoding.Unicode.GetBytes(Wrap_data_with_byte(Jil.JSON.Serialize(shifts)))));
+                                    }
+                                    break;
+
+                                // update a shift
+                                case "0122":
+                                    {
+                                        try
+                                        {
+                                            Tools.Receive_data_automatically(s, out string json);
+                                            Shift shift = Jil.JSON.Deserialize<Shift>(json);
+                                            using (var sql = new SqlConnection(sqlConnectionString))
+                                            {
+                                                sql.Open();
+                                                if (shift.idShift != null)
+                                                {
+                                                    if (shift.idShift.Length == 21)
+                                                    {
+                                                        string key = shift.idShift.Substring(0, 2);
+                                                        long idl = long.Parse(shift.idShift.Substring(2));
+                                                        if (key.Equals("SH") && check_existed_id(idl, key))
+                                                        {
+                                                            using (SqlCommand command = new SqlCommand("update SHIFT set Starting = @Starting, Ending = @Ending where idShift = @idShift", sql))
+                                                            {
+                                                                command.Parameters.AddWithValue("@idShift", shift.idShift);
+                                                                command.Parameters.AddWithValue("@Starting", shift.Starting);
+                                                                command.Parameters.AddWithValue("@Ending", shift.Ending);
+                                                                if (command.ExecuteNonQuery() > 0)
+                                                                {
+                                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("0122")); // Shift updated
+                                                                }
+                                                                else
+                                                                {
+                                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("0222")); // Shift not updated
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                    else if (shift.idShift.Length == 0)
+                                                    {
+                                                        string shiftId = "SH" + GetNewIdFromTable("SH").ToString();
+                                                        using (SqlCommand command = new SqlCommand("insert into SHIFT values(@idShift, @Starting, @Ending)", sql))
+                                                        {
+                                                            command.Parameters.AddWithValue("@idShift", shiftId);
+                                                            command.Parameters.AddWithValue("@Starting", shift.Starting);
+                                                            command.Parameters.AddWithValue("@Ending", shift.Ending);
+                                                            if (command.ExecuteNonQuery() > 0)
+                                                            {
+                                                                sessions[id].Queue_command(Encoding.Unicode.GetBytes("0322" + shiftId)); // Shift added
+                                                            }
+                                                            else
+                                                            {
+                                                                sessions[id].Queue_command(Encoding.Unicode.GetBytes("0222")); // Shift not updated
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        catch (Exception)
+                                        {
+                                            sessions[id].Queue_command(Encoding.Unicode.GetBytes("0222"));
+                                        }
                                     }
                                     break;
 
@@ -643,6 +834,59 @@ namespace WeddingManagementServer
                                     }
                                     break;
 
+                                // update a wedding
+                                case "0123":
+                                    {
+                                        try
+                                        {
+                                            Tools.Receive_data_automatically(s, out string json);
+                                            WeddingInfo wedding = Jil.JSON.Deserialize<WeddingInfo>(json);
+                                            using (var sql = new SqlConnection(sqlConnectionString))
+                                            {
+                                                sql.Open();
+                                                if (wedding.idWedding != null)
+                                                {
+                                                    if (wedding.idWedding.Length == 21)
+                                                    {
+                                                        string key = wedding.idWedding.Substring(0, 2);
+                                                        long idl = long.Parse(wedding.idWedding.Substring(2));
+                                                        if (key.Equals("WE") && check_existed_id(idl, key))
+                                                        {
+                                                            using (SqlCommand command = new SqlCommand("update WEDDING set idLobby = @idLobby, idShift = @idShift, BookingDate = @BookingDate, WeddingDate = @WeddingDate, PhoneNumber = @PhoneNumber, BroomName = @BroomName, BrideName = @BrideName, AmountOfTable = @AmountOfTable, AmountOfContingencyTable = @AmountOfContingencyTable, TablePrice = @TablePrice, Deposit = @Deposit where idWedding = @idWedding", sql))
+                                                            {
+                                                                command.Parameters.AddWithValue("@idWedding", wedding.idWedding);
+                                                                command.Parameters.AddWithValue("@idLobby", wedding.idLobby);
+                                                                command.Parameters.AddWithValue("@idShift", wedding.idShift);
+                                                                command.Parameters.AddWithValue("@BookingDate", wedding.BookingDate);
+                                                                command.Parameters.AddWithValue("@WeddingDate", wedding.WeddingDate);
+                                                                command.Parameters.AddWithValue("@PhoneNumber", wedding.PhoneNumber);
+                                                                command.Parameters.AddWithValue("@BroomName", wedding.BroomName);
+                                                                command.Parameters.AddWithValue("@BrideName", wedding.BrideName);
+                                                                command.Parameters.AddWithValue("@AmountOfTable", wedding.AmountOfTable);
+                                                                command.Parameters.AddWithValue("@AmountOfContingencyTable", wedding.AmountOfContingencyTable);
+                                                                command.Parameters.AddWithValue("@TablePrice", wedding.TablePrice);
+                                                                command.Parameters.AddWithValue("@Deposit", wedding.Deposit);
+                                                                if (command.ExecuteNonQuery() > 0)
+                                                                {
+                                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("0223")); // Wedding updated
+                                                                }
+                                                                else
+                                                                {
+                                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("0223")); // Wedding not updated
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        catch (Exception)
+                                        {
+                                            sessions[id].Queue_command(Encoding.Unicode.GetBytes("0223"));
+                                        }
+                                    }
+                                    break;
+
                                 // get list of menus
                                 case "0024":
                                     {
@@ -666,6 +910,52 @@ namespace WeddingManagementServer
                                     }
                                     break;
 
+                                // update a menu
+                                case "0124":
+                                    {
+                                        try
+                                        {
+                                            Tools.Receive_data_automatically(s, out string json);
+                                            Menu menu = Jil.JSON.Deserialize<Menu>(json);
+                                            using (var sql = new SqlConnection(sqlConnectionString))
+                                            {
+                                                sql.Open();
+                                                if (menu.idDishes != null)
+                                                {
+                                                    if (menu.idDishes.Length == 21)
+                                                    {
+                                                        string key = menu.idDishes.Substring(0, 2);
+                                                        long idl = long.Parse(menu.idDishes.Substring(2));
+                                                        if (key.Equals("ME") && check_existed_id(idl, key))
+                                                        {
+                                                            using (SqlCommand command = new SqlCommand("update MENU set DishesName = @DishesName, DishesPrice = @DishesPrice, Note = @Note where idDishes = @idDishes", sql))
+                                                            {
+                                                                command.Parameters.AddWithValue("@idDishes", menu.idDishes);
+                                                                command.Parameters.AddWithValue("@DishesName", menu.DishesName);
+                                                                command.Parameters.AddWithValue("@DishesPrice", menu.DishesPrice);
+                                                                command.Parameters.AddWithValue("@Note", menu.Note);
+                                                                if (command.ExecuteNonQuery() > 0)
+                                                                {
+                                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("0223")); // Menu updated
+                                                                }
+                                                                else
+                                                                {
+                                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("0223")); // Menu not updated
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        catch (Exception)
+                                        {
+                                            sessions[id].Queue_command(Encoding.Unicode.GetBytes("0223"));
+                                        }
+                                    }
+                                    break;
+                                    
+
                                 // get list of services
                                 case "0025":
                                     {
@@ -686,6 +976,51 @@ namespace WeddingManagementServer
                                         }
                                         sessions[id].Queue_command(Combine(Encoding.Unicode.GetBytes("0025"),
                                             Encoding.Unicode.GetBytes(Wrap_data_with_byte(Jil.JSON.Serialize(services)))));
+                                    }
+                                    break;
+
+                                // update a service
+                                case "0125":
+                                    {
+                                        try
+                                        {
+                                            Tools.Receive_data_automatically(s, out string json);
+                                            Service service = Jil.JSON.Deserialize<Service>(json);
+                                            using (var sql = new SqlConnection(sqlConnectionString))
+                                            {
+                                                sql.Open();
+                                                if (service.idService != null)
+                                                {
+                                                    if (service.idService.Length == 21)
+                                                    {
+                                                        string key = service.idService.Substring(0, 2);
+                                                        long idl = long.Parse(service.idService.Substring(2));
+                                                        if (key.Equals("SE") && check_existed_id(idl, key))
+                                                        {
+                                                            using (SqlCommand command = new SqlCommand("update SERVICE set ServiceName = @ServiceName, ServicePrice = @ServicePrice, Note = @Note where idService = @idService", sql))
+                                                            {
+                                                                command.Parameters.AddWithValue("@idService", service.idService);
+                                                                command.Parameters.AddWithValue("@ServiceName", service.ServiceName);
+                                                                command.Parameters.AddWithValue("@ServicePrice", service.ServicePrice);
+                                                                command.Parameters.AddWithValue("@Note", service.Note);
+                                                                if (command.ExecuteNonQuery() > 0)
+                                                                {
+                                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("0223")); // Service updated
+                                                                }
+                                                                else
+                                                                {
+                                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("0223")); // Service not updated
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        catch (Exception)
+                                        {
+                                            sessions[id].Queue_command(Encoding.Unicode.GetBytes("0223"));
+                                        }
                                     }
                                     break;
 
@@ -872,6 +1207,27 @@ namespace WeddingManagementServer
             }
         }
 
+        internal static long GetNewAccountId()
+        {
+            Int64 randomid = 0;
+            while (randomid <= 0 || check_existed_id(randomid))
+            {
+                randomid = NextInt64(rand);
+            }
+            return randomid;
+        }
+
+        internal static long GetNewIdFromTable(string tableKey)
+        {
+            if (tableKey.Length > 2) throw new Exception("Table key is too long");
+            Int64 randomid = 0;
+            while (randomid <= 0 || check_existed_id(randomid, tableKey))
+            {
+                randomid = NextInt64(rand);
+            }
+            return randomid;
+        }
+
         private static bool check_existed_id(long randomid, string key)
         {
             if (randomid > 0)
@@ -924,7 +1280,7 @@ namespace WeddingManagementServer
                             return check_existed_id("PARAMETER", "idParameter", idStr);
                         }
                     default:
-                        return true;
+                        throw new Exception("Unknown table key");
                 }
             }
             else
