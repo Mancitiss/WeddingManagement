@@ -611,6 +611,27 @@ namespace WeddingManagementServer
                                                             }
                                                         }
                                                     }
+                                                    else if (lobbyType.id.Length == 22 && lobbyType.id.StartsWith("-"))
+                                                    {
+                                                        // delete a lobby type
+                                                        string key = lobbyType.id.Substring(1, 2);
+                                                        long idl = long.Parse(lobbyType.id.Substring(3));
+                                                        if (key.Equals("LT") && check_existed_id(idl, key))
+                                                        {
+                                                            using (SqlCommand command = new SqlCommand("delete from LOBBYTYPE where idLobbyType = @idLobbyType", sql))
+                                                            {
+                                                                command.Parameters.AddWithValue("@idLobbyType", lobbyType.id);
+                                                                if (command.ExecuteNonQuery() > 0)
+                                                                {
+                                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("0420")); // Lobby type deleted
+                                                                }
+                                                                else
+                                                                {
+                                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("0220")); // Lobby type not deleted
+                                                                }
+                                                            }
+                                                        }
+                                                    }
                                                 }
                                                 
                                             }
@@ -701,6 +722,27 @@ namespace WeddingManagementServer
                                                             }
                                                         }
                                                     }
+                                                    else if (lobby.idLobby.Length == 22 && lobby.idLobby.StartsWith("-"))
+                                                    {
+                                                        // delete a lobby
+                                                        string key = lobby.idLobby.Substring(1, 2);
+                                                        long idl = long.Parse(lobby.idLobby.Substring(3));
+                                                        if (key.Equals("LB") && check_existed_id(idl, key))
+                                                        {
+                                                            using (SqlCommand command = new SqlCommand("delete from LOBBY where idLobby = @idLobby", sql))
+                                                            {
+                                                                command.Parameters.AddWithValue("@idLobby", lobby.idLobby);
+                                                                if (command.ExecuteNonQuery() > 0)
+                                                                {
+                                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("0421")); // Lobby deleted
+                                                                }
+                                                                else
+                                                                {
+                                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("0221")); // Lobby not deleted
+                                                                }
+                                                            }
+                                                        }
+                                                    }
                                                 }
                                             }
                                         }
@@ -784,6 +826,27 @@ namespace WeddingManagementServer
                                                             else
                                                             {
                                                                 sessions[id].Queue_command(Encoding.Unicode.GetBytes("0222")); // Shift not updated
+                                                            }
+                                                        }
+                                                    }
+                                                    else if (shift.idShift.Length == 22 && shift.idShift.StartsWith("-"))
+                                                    {
+                                                        // delete a shift
+                                                        string key = shift.idShift.Substring(1, 2);
+                                                        long idl = long.Parse(shift.idShift.Substring(3));
+                                                        if (key.Equals("SH") && check_existed_id(idl, key))
+                                                        {
+                                                            using (SqlCommand command = new SqlCommand("delete from SHIFT where idShift = @idShift", sql))
+                                                            {
+                                                                command.Parameters.AddWithValue("@idShift", shift.idShift);
+                                                                if (command.ExecuteNonQuery() > 0)
+                                                                {
+                                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("0422")); // Shift deleted
+                                                                }
+                                                                else
+                                                                {
+                                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("0222")); // Shift not deleted
+                                                                }
                                                             }
                                                         }
                                                     }
