@@ -43,7 +43,7 @@ namespace WindowsFormsApp1
             return "";
         }
 
-        private static bool receive_data_automatically(SslStream stream, out string data)
+        internal static bool receive_data_automatically(SslStream stream, out string data)
         {
             if (Stream_receive(stream, 4, out data))
             {
@@ -66,7 +66,7 @@ namespace WindowsFormsApp1
             return false;
         }
 
-        private static bool receive_ASCII_data_automatically(SslStream stream, out string data)
+        internal static bool receive_ASCII_data_automatically(SslStream stream, out string data)
         {
             if (Stream_receive_ASCII(stream, 2, out data))
             {
@@ -88,7 +88,7 @@ namespace WindowsFormsApp1
             return false;
         }
 
-        private static bool Stream_receive(SslStream stream, int byte_expected, out string data_string)
+        internal static bool Stream_receive(SslStream stream, int byte_expected, out string data_string)
         {
             try
             {
@@ -126,7 +126,7 @@ namespace WindowsFormsApp1
             }
         }
 
-        private static bool Stream_receive_ASCII(SslStream stream, int byte_expected, out string data_string)
+        internal static bool Stream_receive_ASCII(SslStream stream, int byte_expected, out string data_string)
         {
             int total_byte_received = 0;
             byte[] data = new byte[byte_expected];
@@ -175,7 +175,7 @@ namespace WindowsFormsApp1
             return image;
         }
 
-        private static bool SslStream_receive_bytes(SslStream stream, int byte_expected, out byte[] data)
+        internal static bool SslStream_receive_bytes(SslStream stream, int byte_expected, out byte[] data)
         {
             int total_byte_received = 0;
             data = new byte[byte_expected];

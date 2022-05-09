@@ -22,9 +22,161 @@ namespace WindowsFormsApp1
         internal static SslStream stream;
         internal static Account user;
 
+        static bool loginResult = true; // set this back to true after use
+
+        static string currentID = null;
+
         private static int workeradded = 0;
 
         internal static ConcurrentQueue<byte[]> commands = new ConcurrentQueue<byte[]>();
+
+        public static void ExecuteClient()
+        {
+            try
+            {
+                while (user != null && client!= null && client.Connected)
+                {
+                    //Console.WriteLine("In loop");
+                    try
+                    {
+                        Receive_from_id(client);
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.ToString());
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+            finally
+            {
+                Logout();
+            }
+        }
+
+        private static void Receive_from_id(TcpClient self)
+        {
+            try
+            {
+                if (Stream_receive(stream, 8, out string data))
+                {
+                    instruction = data;
+                    Console.WriteLine(data);
+                    switch (instruction)
+                    {
+                        case "-200": // -200 = logged in failed
+                            {
+                                Console.WriteLine("Thong tin dang nhap bi sai");
+                                loginResult = false;
+                            } // logged in failed
+                            break;
+                        case "0200": // logged in successfully
+                            { // 0200 = logged in successfully
+                                if (receive_data_automatically(stream, out data))
+                                {
+                                    user = Jil.JSON.Deserialize<Account>(data);
+                                }
+                            } // successfully logged in
+                            break;
+                        case "1011": // 1011 = New account created successfully
+                            {
+                                Console.WriteLine("New account created");
+                            } // New account created successfully
+                            break;
+                        case "1111": // 1111 = Username exists
+                            {
+                                Console.WriteLine("This username is already in use");
+                            } // username is already in use
+                            break;
+                        case "2004": // 2004 = log in from another device
+                            {
+                                Console.WriteLine("You are logged in from another device, you will be logged out");
+
+                                // invoke show login form and log out current user like below
+                                //Program.mainform.Invoke(Program.mainform.show_login_delegate);
+
+                            } // logged in from another device, will log out
+                            break;
+                        case "4269": // password changed successfully
+                            {
+                                Console.WriteLine("Password changed successfully!");
+                                
+                                // invoke "change password successfully" delegate like below
+                                //Program.mainform.formSettings.Invoke(Program.mainform.formSettings.changeSettingsWarning, new object[] { "Password changed successfully!", Color.FromArgb(143, 228, 185) });
+                            } // successfully changed password
+                            break;
+                        case "9624": // old password is incorrect
+                            {
+                                Console.WriteLine("Old Password is not correct!!");
+
+                                // invoke "old password is incorrect" delegate like below
+                                //Program.mainform.formSettings.Invoke(Program.mainform.formSettings.changeSettingsWarning, new object[] { "Current password is incorrect!", Color.FromArgb(213, 54, 41) });
+
+                            } // password is incorrect
+                            break;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+        }
+
+        public static bool Logged_in(string tk, string mk)
+        {
+            string server_address = ConfigurationManager.AppSettings.Get("sever_address");
+            client = new TcpClient(server_address, Convert.ToInt16(ConfigurationManager.AppSettings.Get("port")));
+            stream = new SslStream(
+                client.GetStream(),
+                false,
+                new RemoteCertificateValidationCallback(ValidateServerCertificate),
+                null
+                );
+            try
+            {
+                stream.AuthenticateAsClient(server_address);
+            }
+            catch (AuthenticationException e)
+            {
+                Console.WriteLine("Exception: {0}", e.Message);
+                if (e.InnerException != null)
+                {
+                    Console.WriteLine("Inner exception: {0}", e.InnerException.Message);
+                }
+                Console.WriteLine("Authentication failed - closing the connection.");
+                stream.Close();
+                client.Close();
+                return false;
+            }
+            try
+            {
+                Queue_command(Encoding.Unicode.GetBytes("0010" + data_with_byte(tk) + data_with_byte(mk))); //0010 = log in
+                Receive_from_id(client);
+                if (user == null)
+                {
+                    Queue_command(Encoding.Unicode.GetBytes("2004")); // 2004 = stop client
+                    Ping();
+                    stream.Close();
+                    client.Close();
+                    return false;
+                }
+                currentID = user.id;
+                if (!loginResult)
+                {
+                    return false;
+                }
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.StackTrace);
+                return false;
+            }
+        }
 
         internal static void Ping()
         {

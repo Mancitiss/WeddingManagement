@@ -9,15 +9,15 @@ namespace WindowsFormsApp1
     internal class Account
     {
         internal string username;
-        internal string name;
         internal string id;
+        internal Int16 priority;
 
         internal Account() { }
-        internal Account(string username, string name, string id)
+        internal Account(string username, string id, Int16 priority)
         {
             this.username = username;
-            this.name = name;
             this.id = id;
+            this.priority = priority;
         }
     }
 }
