@@ -194,7 +194,7 @@ namespace WeddingManagementServer
                                 }
                             }
                         }
-                    }
+                    } // 0012 = work available
                     else
                     if (instruction == "0010") // 0010 = log in
                     {
@@ -346,7 +346,7 @@ namespace WeddingManagementServer
                         {
                             Console.WriteLine(e.ToString());
                         }
-                    }
+                    } // 0010 = log in
                     else
                     {
                         try
@@ -427,7 +427,8 @@ namespace WeddingManagementServer
                             switch (instruction)
                             {
                                 // create new account (only recruiters and admins can do this)
-                                case "0011":
+                                // return 1011 if success, else 1111
+                                case "0011": // register new account
                                     {
                                         try
                                         {
@@ -476,6 +477,7 @@ namespace WeddingManagementServer
 
 
                                 // promote/demote account (only recruiters and admins can do this)
+                                // return 2111 if success, else 3111
                                 case "0111":
                                     {
                                         Tools.Receive_data_automatically(s, out string json);
@@ -538,6 +540,7 @@ namespace WeddingManagementServer
                                     break;
 
                                     // get types of lobbies 
+                                    // return 0020 + json(List<LobbyType>) in unicode
                                 case "0020":
                                     {
                                         List<LobbyType> lobbyTypes = new List<LobbyType>();

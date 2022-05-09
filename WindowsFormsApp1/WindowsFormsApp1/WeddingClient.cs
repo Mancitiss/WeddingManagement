@@ -100,6 +100,16 @@ namespace WindowsFormsApp1
 
                             } // logged in from another device, will log out
                             break;
+                        case "2111":
+                            {
+                                // account promoted/demoted successfully
+                            }
+                            break;
+                        case "3111":
+                            {
+                                // account promoted/demoted failed, you may not have permission
+                            }
+                            break;
                         case "4269": // password changed successfully
                             {
                                 Console.WriteLine("Password changed successfully!");
@@ -116,6 +126,18 @@ namespace WindowsFormsApp1
                                 //Program.mainform.formSettings.Invoke(Program.mainform.formSettings.changeSettingsWarning, new object[] { "Current password is incorrect!", Color.FromArgb(213, 54, 41) });
 
                             } // password is incorrect
+                            break;
+
+
+
+                        // app management commands
+                        case "0020":
+                            {
+                                if (receive_data_automatically(stream, out data))
+                                {
+                                    //List<LobbyType> lobbyTypes = Jil.JSON.Deserialize<List<LobbyType>>(data);
+                                }
+                            }
                             break;
                     }
                 }
