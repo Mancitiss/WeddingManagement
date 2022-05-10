@@ -113,7 +113,7 @@ namespace WindowsFormsApp1
                         case "4269": // password changed successfully
                             {
                                 Console.WriteLine("Password changed successfully!");
-                                
+
                                 // invoke "change password successfully" delegate like below
                                 //Program.mainform.formSettings.Invoke(Program.mainform.formSettings.changeSettingsWarning, new object[] { "Password changed successfully!", Color.FromArgb(143, 228, 185) });
                             } // successfully changed password
@@ -131,12 +131,188 @@ namespace WindowsFormsApp1
 
 
                         // app management commands
+
+                        // get lobby types
                         case "0020":
                             {
                                 if (receive_data_automatically(stream, out data))
                                 {
-                                    //List<LobbyType> lobbyTypes = Jil.JSON.Deserialize<List<LobbyType>>(data);
+                                    List<LobbyType> lobbyTypes = Jil.JSON.Deserialize<List<LobbyType>>(data);
+                                    // do whatever you want to do with the data here
+
                                 }
+                            }
+                            break;
+
+                        // update lobby type successfully
+                        case "0120":
+                            {
+                                // inform user that lobby type has been updated and update lobby type list
+                            }
+                            break;
+
+                        // update lobby type failed
+                        // don't update the last lobby type change 
+                        // don't add the on waiting lobby type to the list
+                        case "0220":
+                            {
+                                // inform user that lobby type has not been updated
+                            }
+                            break;
+
+                        // lobby type added, get ID
+                        case "0320":
+                            {
+                                if (Stream_receive(stream, 42, out string lobbyTypeId))
+                                {
+                                    // add the on waiting lobby type to the list with this ID
+
+                                }
+                            }
+                            break;
+
+                        // lobby type deleted
+                        case "0420":
+                            {
+                                // remove the on waiting lobby type from the list
+
+                            }
+                            break;
+
+                        // get list of lobbies
+                        case "0021":
+                            {
+                                if (receive_data_automatically(stream, out string json))
+                                {
+                                    List<Lobby> lobbies = Jil.JSON.Deserialize<List<Lobby>>(json);
+                                    // do whatever you want to do with the data here
+
+                                }
+                            }
+                            break;
+
+                        // update lobby successfully
+                        case "0121":
+                            {
+                                // inform user that lobby has been updated and update lobby list
+                            }
+                            break;
+
+                        // update lobby failed
+                        // don't update the last lobby change
+                        // don't add the on waiting lobby to the list
+                        case "0221":
+                            {
+                                // inform user that lobby has not been updated
+                            }
+                            break;
+
+                        // lobby added, get ID
+                        case "0321":
+                            {
+                                if (Stream_receive(stream, 42, out string lobbyId))
+                                {
+                                    // add the on waiting lobby to the list with this ID
+
+                                }
+                            }
+                            break;
+
+                        // lobby deleted
+                        case "0421":
+                            {
+                                // remove the on waiting lobby from the list
+
+                            }
+                            break;
+
+                        // get list of shifts
+                        case "0022":
+                            {
+                                if (receive_data_automatically(stream, out string json))
+                                {
+                                    List<Shift> shifts = Jil.JSON.Deserialize<List<Shift>>(json);
+                                    // do whatever you want to do with the data here
+
+                                }
+                            }
+                            break;
+
+                        // update shift successfully
+                        case "0122":
+                            {
+                                // inform user that shift has been updated and update shift list
+
+                            }
+                            break;
+
+                        // update shift failed
+                        case "0222":
+                            {
+                                // inform user that shift has not been updated
+                                
+                            }
+                            break;
+
+                        // shift added, get ID
+                        case "0322":
+                            {
+                                if (Stream_receive(stream, 42, out string shiftId))
+                                {
+                                    // add the on waiting shift to the list with this ID
+                                }
+                            }
+                            break;
+
+                        // shift deleted
+                        case "0422":
+                            {
+                                // remove the on waiting shift from the list
+                            }
+                            break;
+
+                        // get list of weddings
+                        case "0023":
+                            {
+                                if (receive_data_automatically(stream, out string json))
+                                {
+                                    List<WeddingInfo> weddings = Jil.JSON.Deserialize<List<WeddingInfo>>(json);
+                                    // do whatever you want to do with the data here
+
+                                }
+                            }
+                            break;
+
+                        // update wedding successfully
+                        case "0123":
+                            {
+                                // inform user that wedding has been updated and update wedding list
+                                
+                            }
+                            break;
+
+                        // update wedding failed
+                        case "0223":
+                            {
+                                // inform user that wedding has not been updated
+                            }
+                            break;
+
+                        // wedding added, get ID
+                        case "0323":
+                            {
+                                if (Stream_receive(stream, 42, out string weddingId))
+                                {
+                                    // add the on waiting wedding to the list with this ID
+                                }
+                            }
+                            break;
+
+                            
+
+                        default:
+                            {
+                                
                             }
                             break;
                     }
