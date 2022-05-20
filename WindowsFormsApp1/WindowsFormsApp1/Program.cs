@@ -8,10 +8,8 @@ namespace WindowsFormsApp1
 {
     internal static class Program
     {
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
-        [STAThread]
+        internal static FormHome mainform;
+        
         static void Main()
         {
             Application.EnableVisualStyles();

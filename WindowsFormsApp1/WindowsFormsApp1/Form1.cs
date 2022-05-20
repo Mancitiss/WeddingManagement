@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -37,10 +38,106 @@ namespace WindowsFormsApp1
             this.Close();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Login(object sender, EventArgs e)
         {
-            FormHome tempForm =new FormHome();
-            tempForm.ShowDialog();
+            if (this.EmptyTextBoxes())
+            {
+                if (EmptyTextBoxes())
+                {
+                    //labelWarning.Text = "Something is missing!";
+                    Console.WriteLine("Something is missing!");
+                    return;
+                }
+            }
+            else
+            {
+                if (CheckInvalidUsernameCharacter())
+                {
+                    //labelWarning.Text = "User name or Password is incorrect";
+                    Console.WriteLine("Invalid username");
+                    return;
+                }
+                else
+                {
+                    if (CheckInvalidPasswordCharacter())
+                    {
+                        //labelWarning.Text = "User name or Password is incorrect";
+                        Console.WriteLine("Invalid characters in password");
+                        return;
+                    }
+                    else
+                    {
+                        if (!CorrectPassword())
+                        {
+                            //labelWarning.Text = "User name or Password is incorrect";
+                            Console.WriteLine("Incorrect password");
+                            return;
+                        }
+                    }
+                }
+            }
+            //labelWarning.Text = "You have logged in successfully".ToUpper();
+            //labelWarning.ForeColor = Color.FromArgb(37, 75, 133);
+            Console.WriteLine("Form creating");
+            var frm = new FormHome();
+            frm.Location = new System.Drawing.Point(Screen.FromControl(this).WorkingArea.Width / 4, Screen.FromControl(this).WorkingArea.Height / 4);
+            frm.StartPosition = FormStartPosition.CenterScreen;
+            //frm.FormClosing += delegate { this.Show(); this.Opacity = 1; };
+            this.ResetTexts();
+            frm.Show();
+            this.Hide();
+            Program.mainform = frm;
+            Console.WriteLine("Clieant Thread creating");
+            Thread thread = new Thread(WeddingClient.ExecuteClient);
+            thread.IsBackground = true;
+            thread.Start();
+            Console.WriteLine("Client thread started");
+        }
+        
+        private void ResetTexts()
+        {
+            textboxUsername.Text = "";
+            textboxPassword.Text = "";
+        }
+
+        private bool CorrectPassword()
+        {
+            bool res = WeddingClient.Logged_in(textboxUsername.Text, textboxPassword.Text);
+            WeddingClient.loginResult = true;
+            return res;
+        }
+        
+        private bool CheckInvalidPasswordCharacter()
+        {
+            foreach (char i in textboxPassword.Text)
+            {
+                if (!(i == 33 || i > 34 && i < 38 || i >= 42 && i <= 43 || i == 45 || i >= 48 && i <= 57 || i >= 64 && i <= 90 || i == 94 || i == 95 || i >= 97 && i <= 122))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private bool CheckInvalidUsernameCharacter()
+        {
+            foreach (char i in textboxUsername.Text)
+            {
+                if (!(i >= 48 && i <= 57 || i >= 65 && i <= 90 || i >= 97 && i <= 122 || i == 95))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private bool EmptyTextBoxes()
+        {
+            if (string.IsNullOrEmpty(textboxUsername.Text) || string.IsNullOrEmpty(textboxPassword.Text))
+            {
+                return true;
+            }
+            return false;
         }
     }
 }
