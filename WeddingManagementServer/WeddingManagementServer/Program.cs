@@ -646,7 +646,7 @@ namespace WeddingManagementServer
                                     }
                                     break;
 
-                                // get list of lobbies
+  // get list of lobbies
                                 case "0021":
                                     {
                                         List<Lobby> lobbies = new List<Lobby>();

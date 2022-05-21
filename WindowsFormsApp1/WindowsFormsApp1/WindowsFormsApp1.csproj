@@ -50,6 +50,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Account.cs" />
+    <Compile Include="CustomeBorderTextbox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CustomeBorderTextbox.Designer.cs">
+      <DependentUpon>CustomeBorderTextbox.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dishes.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -85,6 +91,12 @@
     </Compile>
     <Compile Include="FormServices.Designer.cs">
       <DependentUpon>FormServices.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormWedding.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormWedding.Designer.cs">
+      <DependentUpon>FormWedding.cs</DependentUpon>
     </Compile>
     <Compile Include="Lobby.cs" />
     <Compile Include="LobbyType.cs" />
@@ -123,6 +135,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormServices.resx">
       <DependentUpon>FormServices.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormWedding.resx">
+      <DependentUpon>FormWedding.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MenuItem.resx">
       <DependentUpon>MenuItem.cs</DependentUpon>

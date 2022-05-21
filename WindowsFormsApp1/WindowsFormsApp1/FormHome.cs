@@ -26,6 +26,7 @@ namespace WindowsFormsApp1
         private void btnWedding_Click(object sender, EventArgs e)
         {
             this.panelNavigate.Top=this.btnWedding.Top;
+            
         }
 
         private void btnMenu_Click(object sender, EventArgs e)
@@ -45,9 +46,10 @@ namespace WindowsFormsApp1
             this.panelNavigate.Top = this.btnReport.Top;
         }
 
-        private void btnEmpty_Click(object sender, EventArgs e)
+        private void btnLobby_Click(object sender, EventArgs e)
         {
-            this.panelNavigate.Top = this.btnEmpty.Top;
+            this.panelNavigate.Top = this.btnLobby.Top;
+            openChildForm(new FormLobby());
         }
         private void openChildForm (Form childForm)
         {
