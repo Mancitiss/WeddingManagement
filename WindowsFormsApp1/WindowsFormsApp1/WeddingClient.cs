@@ -22,7 +22,7 @@ namespace WindowsFormsApp1
         internal static SslStream stream;
         internal static Account user;
 
-        static bool loginResult = true; // set this back to true after use
+        internal static bool loginResult = true; // set this back to true after use
 
         static string currentID = null;
 
@@ -412,7 +412,7 @@ namespace WindowsFormsApp1
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.ToString());
+                //Console.WriteLine(e.ToString());
             }
         }
 

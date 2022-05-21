@@ -198,31 +198,31 @@ namespace WeddingManagementServer
                     else
                     if (instruction == "0010") // 0010 = log in
                     {
-                        Receive_data_automatically(sslStream, out string json);
-                        Account act = Jil.JSON.Deserialize<Account>(json);
+                        Receive_data_automatically(sslStream, out string tk);
+                        Receive_data_automatically(sslStream, out string mk);
                         try
                         {
-                            string commandtext = "select top 1 id, name, pw, priority from account where username=@username";
+                            string commandtext = "select top 1 id, pw, priority from ACCOUNTS where username=@username";
                             using (SqlConnection sql = new SqlConnection(sqlConnectionString))
                             {
                                 sql.Open();
                                 using (SqlCommand command = new SqlCommand(commandtext, sql))
                                 {
-                                    command.Parameters.AddWithValue("@username", act.username);
+                                    command.Parameters.AddWithValue("@username", tk);
                                     using (SqlDataReader reader = command.ExecuteReader())
                                     {
                                         Console.WriteLine("After avatar");
                                         if (reader.Read())
                                         {
                                             //if (act.pw == reader["pw"].ToString())
-                                            if (act.pw == reader["pw"].ToString() || Crypter.CheckPassword(act.pw, reader["pw"].ToString()))
+                                            if (mk == reader["pw"].ToString() || Crypter.CheckPassword(mk, reader["pw"].ToString()))
                                             {
                                                 bool skip = false;
-                                                if (act.pw == reader["pw"].ToString())
+                                                if (mk == reader["pw"].ToString())
                                                 {
-                                                    using (SqlCommand changepass = new SqlCommand("update top (1) account set pw = @pw where id = @id", sql))
+                                                    using (SqlCommand changepass = new SqlCommand("update top (1) ACCOUNTS set pw = @pw where id = @id", sql))
                                                     {
-                                                        changepass.Parameters.AddWithValue("@pw", Crypter.Blowfish.Crypt(act.pw));
+                                                        changepass.Parameters.AddWithValue("@pw", Crypter.Blowfish.Crypt(mk));
                                                         changepass.Parameters.AddWithValue("@id", reader["id"].ToString());
                                                         changepass.ExecuteNonQuery();
                                                         sslStream.Write(Encoding.Unicode.GetBytes("-200"));
@@ -235,7 +235,9 @@ namespace WeddingManagementServer
                                                     string str_id = id;
                                                     while (id.Length < 19) id = '0' + id;
 
-                                                    sslStream.Write(Encoding.Unicode.GetBytes("0200" + id));
+                                                    Account account = new Account(id, (short)reader["priority"]);
+                                                    String json = Jil.JSON.Serialize<Account>(account);
+                                                    sslStream.Write(Encoding.Unicode.GetBytes("0200" + Wrap_data_with_byte(json)));
                                                     Console.WriteLine("Before dictionaries");
                                                     try
                                                     {
@@ -337,7 +339,7 @@ namespace WeddingManagementServer
                                             {
                                                 Console.WriteLine(e.ToString());
                                             }
-                                        } // log-in failed account doesn't exist
+                                        } // log-in failed ACCOUNTS doesn't exist
                                     }
                                 }
                             }
@@ -426,9 +428,9 @@ namespace WeddingManagementServer
                             string instruction = data;
                             switch (instruction)
                             {
-                                // create new account (only recruiters and admins can do this)
+                                // create new ACCOUNTS (only recruiters and admins can do this)
                                 // return 1011 if success, else 1111
-                                case "0011": // register new account
+                                case "0011": // register new ACCOUNTS
                                     {
                                         try
                                         {
@@ -450,7 +452,7 @@ namespace WeddingManagementServer
                                                     using (var sql = new SqlConnection(sqlConnectionString))
                                                     {
                                                         sql.Open();
-                                                        using (SqlCommand command = new SqlCommand("insert into account values (@id, @username, @pw, @priority)", sql))
+                                                        using (SqlCommand command = new SqlCommand("insert into ACCOUNTS values (@id, @username, @pw, @priority)", sql))
                                                         {
                                                             command.Parameters.AddWithValue("@id", id_string);
                                                             command.Parameters.AddWithValue("@username", act.username);
@@ -458,7 +460,7 @@ namespace WeddingManagementServer
                                                             command.Parameters.AddWithValue("@priority", act.priority);
                                                             command.ExecuteNonQuery();
                                                         }
-                                                        sessions[id].Queue_command(Encoding.Unicode.GetBytes("1011")); // New account created
+                                                        sessions[id].Queue_command(Encoding.Unicode.GetBytes("1011")); // New ACCOUNTS created
                                                     }
                                                 }
                                                 else
@@ -476,7 +478,7 @@ namespace WeddingManagementServer
                                     break;
 
 
-                                // promote/demote account (only recruiters and admins can do this)
+                                // promote/demote ACCOUNTS (only recruiters and admins can do this)
                                 // return 2111 if success, else 3111
                                 case "0111":
                                     {
@@ -496,7 +498,7 @@ namespace WeddingManagementServer
                                                     }
                                                     else
                                                     {
-                                                        using (SqlCommand command = new SqlCommand("select priority from account where id = @id", sql))
+                                                        using (SqlCommand command = new SqlCommand("select priority from ACCOUNTS where id = @id", sql))
                                                         {
                                                             command.Parameters.AddWithValue("@id", act.id);
                                                             currentPriority = (Int16)command.ExecuteScalar();
@@ -505,7 +507,7 @@ namespace WeddingManagementServer
                                                 }
                                                 else if (act.username != null)
                                                 {
-                                                    using (SqlCommand command = new SqlCommand("select priority from account where username = @username", sql))
+                                                    using (SqlCommand command = new SqlCommand("select priority from ACCOUNTS where username = @username", sql))
                                                     {
                                                         command.Parameters.AddWithValue("@username", act.username);
                                                         currentPriority = (Int16)command.ExecuteScalar();
@@ -518,13 +520,13 @@ namespace WeddingManagementServer
                                                 }
                                                 if (sessions[id].priority < currentPriority)
                                                 {
-                                                    using (SqlCommand command = new SqlCommand("update account set priority = @priority where username = @username", sql))
+                                                    using (SqlCommand command = new SqlCommand("update ACCOUNTS set priority = @priority where username = @username", sql))
                                                     {
                                                         command.Parameters.AddWithValue("@username", act.username);
                                                         command.Parameters.AddWithValue("@priority", act.priority);
                                                         command.ExecuteNonQuery();
                                                     }
-                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("2111")); // Account promoted/demoted
+                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("2111")); // ACCOUNTS promoted/demoted
                                                 }
                                                 else
                                                 {
@@ -1614,7 +1616,7 @@ namespace WeddingManagementServer
             }
         }
 
-        internal static long GetNewAccountId()
+        internal static long GetNewACCOUNTSId()
         {
             Int64 randomid = 0;
             while (randomid <= 0 || check_existed_id(randomid))
