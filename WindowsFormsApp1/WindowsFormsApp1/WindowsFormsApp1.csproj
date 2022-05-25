@@ -174,11 +174,8 @@
     <PackageReference Include="Bunifu.UI.WinForms">
       <Version>6.0.0-Beta</Version>
     </PackageReference>
-    <PackageReference Include="Guna.UI2.WinForms">
-      <Version>2.0.3.2</Version>
-    </PackageReference>
     <PackageReference Include="Jil">
-      <Version>2.17.0</Version>
+      <Version>3.0.0-alpha2</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

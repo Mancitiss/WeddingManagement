@@ -23,10 +23,6 @@ namespace WindowsFormsApp1
 
         }
 
-        private void guna2TextBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
 
         private void label2_Click(object sender, EventArgs e)
         {
@@ -96,20 +92,20 @@ namespace WindowsFormsApp1
         
         private void ResetTexts()
         {
-            textboxUsername.Text = "";
-            textboxPassword.Text = "";
+            textBoxUserName.Text = "";
+            textBoxPassWord.Text = "";
         }
 
         private bool CorrectPassword()
         {
-            bool res = WeddingClient.Logged_in(textboxUsername.Text, textboxPassword.Text);
+            bool res = WeddingClient.Logged_in(textBoxUserName.Text, textBoxPassWord.Text);
             WeddingClient.loginResult = true;
             return res;
         }
         
         private bool CheckInvalidPasswordCharacter()
         {
-            foreach (char i in textboxPassword.Text)
+            foreach (char i in textBoxPassWord.Text)
             {
                 if (!(i == 33 || i > 34 && i < 38 || i >= 42 && i <= 43 || i == 45 || i >= 48 && i <= 57 || i >= 64 && i <= 90 || i == 94 || i == 95 || i >= 97 && i <= 122))
                 {
@@ -121,7 +117,7 @@ namespace WindowsFormsApp1
 
         private bool CheckInvalidUsernameCharacter()
         {
-            foreach (char i in textboxUsername.Text)
+            foreach (char i in textBoxUserName.Text)
             {
                 if (!(i >= 48 && i <= 57 || i >= 65 && i <= 90 || i >= 97 && i <= 122 || i == 95))
                 {
@@ -133,7 +129,7 @@ namespace WindowsFormsApp1
 
         private bool EmptyTextBoxes()
         {
-            if (string.IsNullOrEmpty(textboxUsername.Text) || string.IsNullOrEmpty(textboxPassword.Text))
+            if (string.IsNullOrEmpty(textBoxUserName.Text) || string.IsNullOrEmpty(textBoxPassWord.Text))
             {
                 return true;
             }
