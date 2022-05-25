@@ -147,7 +147,12 @@ namespace WindowsFormsApp1
                         // update lobby type successfully
                         case "0120":
                             {
-                                // inform user that lobby type has been updated and update lobby type list
+                                if (receive_data_automatically(stream, out string json))
+                                {
+                                    LobbyType lobbyType = Jil.JSON.Deserialize<LobbyType>(json);
+                                    // inform user that lobby type has been updated and update lobby type list
+                                }
+
                             }
                             break;
 
@@ -163,10 +168,10 @@ namespace WindowsFormsApp1
                         // lobby type added, get ID
                         case "0320":
                             {
-                                if (Stream_receive(stream, 42, out string lobbyTypeId))
+                                if (receive_data_automatically(stream, out data))
                                 {
-                                    // add the on waiting lobby type to the list with this ID
-
+                                    LobbyType lobbyType = Jil.JSON.Deserialize<LobbyType>(data);
+                                    // add lobby type to list
                                 }
                             }
                             break;
@@ -174,7 +179,11 @@ namespace WindowsFormsApp1
                         // lobby type deleted
                         case "0420":
                             {
-                                // remove the on waiting lobby type from the list
+                                if (receive_data_automatically(stream, out data))
+                                {
+                                    LobbyType lobbyType = Jil.JSON.Deserialize<LobbyType>(data);
+                                    // remove lobby type from list if it exists and equals to this lobbytype object
+                                }
 
                             }
                             break;
@@ -194,7 +203,11 @@ namespace WindowsFormsApp1
                         // update lobby successfully
                         case "0121":
                             {
-                                // inform user that lobby has been updated and update lobby list
+                                if (receive_data_automatically(stream, out string json))
+                                {
+                                    Lobby lobby = Jil.JSON.Deserialize<Lobby>(json);
+                                    // inform user that lobby has been updated and update lobby list
+                                }
                             }
                             break;
 
@@ -210,10 +223,10 @@ namespace WindowsFormsApp1
                         // lobby added, get ID
                         case "0321":
                             {
-                                if (Stream_receive(stream, 42, out string lobbyId))
+                                if (receive_data_automatically(stream, out string json))
                                 {
-                                    // add the on waiting lobby to the list with this ID
-
+                                    Lobby lobby = Jil.JSON.Deserialize<Lobby>(json);
+                                    // add lobby to list
                                 }
                             }
                             break;
@@ -221,8 +234,11 @@ namespace WindowsFormsApp1
                         // lobby deleted
                         case "0421":
                             {
-                                // remove the on waiting lobby from the list
-
+                                if (receive_data_automatically(stream, out string json))
+                                {
+                                    Lobby lobby = Jil.JSON.Deserialize<Lobby>(json);
+                                    // remove lobby from list if it exists and equals to this lobby object
+                                }
                             }
                             break;
 
@@ -241,8 +257,11 @@ namespace WindowsFormsApp1
                         // update shift successfully
                         case "0122":
                             {
-                                // inform user that shift has been updated and update shift list
-
+                                if (receive_data_automatically(stream, out string json))
+                                {
+                                    Shift shift = Jil.JSON.Deserialize<Shift>(json);
+                                    // inform user that shift has been updated and update shift list
+                                }
                             }
                             break;
 
@@ -257,9 +276,10 @@ namespace WindowsFormsApp1
                         // shift added, get ID
                         case "0322":
                             {
-                                if (Stream_receive(stream, 42, out string shiftId))
+                                if (receive_data_automatically(stream, out string json))
                                 {
-                                    // add the on waiting shift to the list with this ID
+                                    Shift shift = Jil.JSON.Deserialize<Shift>(json);
+                                    // add shift to list
                                 }
                             }
                             break;
@@ -267,7 +287,11 @@ namespace WindowsFormsApp1
                         // shift deleted
                         case "0422":
                             {
-                                // remove the on waiting shift from the list
+                                if (receive_data_automatically(stream, out string json))
+                                {
+                                    Shift shift = Jil.JSON.Deserialize<Shift>(json);
+                                    // remove shift from list if it exists and equals to this shift object
+                                }
                             }
                             break;
 
@@ -286,8 +310,11 @@ namespace WindowsFormsApp1
                         // update wedding successfully
                         case "0123":
                             {
-                                // inform user that wedding has been updated and update wedding list
-                                
+                                if (receive_data_automatically(stream, out string json))
+                                {
+                                    WeddingInfo wedding = Jil.JSON.Deserialize<WeddingInfo>(json);
+                                    // inform user that wedding has been updated and update wedding list
+                                }
                             }
                             break;
 
@@ -301,13 +328,232 @@ namespace WindowsFormsApp1
                         // wedding added, get ID
                         case "0323":
                             {
-                                if (Stream_receive(stream, 42, out string weddingId))
+                                if (receive_data_automatically(stream, out string json))
                                 {
-                                    // add the on waiting wedding to the list with this ID
+                                    WeddingInfo wedding = Jil.JSON.Deserialize<WeddingInfo>(json);
+                                    // add wedding to list
+                                }
+                            }
+                            break;
+                        // wedding canceled
+                        case "0423":
+                            {
+                                if (receive_data_automatically(stream, out string json))
+                                {
+                                    WeddingInfo wedding = Jil.JSON.Deserialize<WeddingInfo>(json);
+                                    // remove wedding from list if it exists and equals to this wedding object
                                 }
                             }
                             break;
 
+                        // get menus
+                        case "0024":
+                            {
+                                if (receive_data_automatically(stream, out string json))
+                                {
+                                    List<Menu> menus = Jil.JSON.Deserialize<List<Menu>>(json);
+                                    // do whatever you want to do with the data here
+
+                                }
+                            }
+                            break;
+
+                        // update menu successfully
+                        case "0124":
+                            {
+                                if (receive_data_automatically(stream, out string json))
+                                {
+                                    Menu menu = Jil.JSON.Deserialize<Menu>(json);
+                                    // inform user that menu has been updated and update menu list
+                                }
+                            }
+                            break;
+
+                        // update menu failed
+                        case "0224":
+                            {
+                                // inform user that menu has not been updated
+                            }
+                            break;
+
+                        // menu added, get ID
+                        case "0324":
+                            {
+                                if (receive_data_automatically(stream, out string json))
+                                {
+                                    Menu menu = Jil.JSON.Deserialize<Menu>(json);
+                                    // add menu to list
+                                }
+                            }
+                            break;
+
+                        // menu deleted
+                        case "0424":
+                            {
+                                if (receive_data_automatically(stream, out string json))
+                                {
+                                    Menu menu = Jil.JSON.Deserialize<Menu>(json);
+                                    // remove menu from list if it exists and equals to this menu object
+                                }
+                            }
+                            break;
+
+                        // get list of services
+                        case "0025":
+                            {
+                                if (receive_data_automatically(stream, out string json))
+                                {
+                                    List<Service> services = Jil.JSON.Deserialize<List<Service>>(json);
+                                    // do whatever you want to do with the data here
+
+                                }
+                            }
+                            break;
+
+                        // update service successfully
+                        case "0125":
+                            {
+                                if (receive_data_automatically(stream, out string json))
+                                {
+                                    Service service = Jil.JSON.Deserialize<Service>(json);
+                                    // inform user that service has been updated and update service list
+                                }
+                            }
+                            break;
+
+                        // update service failed
+                        case "0225":
+                            {
+                                // inform user that service has not been updated
+                            }
+                            break;
+
+                        // service added, get ID
+                        case "0325":
+                            {
+                                if (receive_data_automatically(stream, out string json))
+                                {
+                                    Service service = Jil.JSON.Deserialize<Service>(json);
+                                    // add service to list
+                                }
+                            }
+                            break;
+
+                        // service deleted
+                        case "0425":
+                            {
+                                if (receive_data_automatically(stream, out string json))
+                                {
+                                    Service service = Jil.JSON.Deserialize<Service>(json);
+                                    // remove service from list if it exists and equals to this service object
+                                }
+                            }
+                            break;
+                            
+
+                        case "0026":
+                            {
+                                if (receive_data_automatically(stream, out string json))
+                                {
+                                    List<TableDetail> tableDetails = Jil.JSON.Deserialize<List<TableDetail>>(json);
+                                    // do whatever you want to do with the data here
+
+                                }
+                            }
+                            break;
+
+                        // update table successfully
+                        case "0126":
+                            {
+                                if (receive_data_automatically(stream, out string json))
+                                {
+                                    TableDetail tableDetail = Jil.JSON.Deserialize<TableDetail>(json);
+                                    // inform user that table has been updated and update table list
+                                }
+                            }
+                            break;
+
+                        // update table failed
+                        case "0226":
+                            {
+                                // inform user that table has not been updated
+                            }
+                            break;
+
+                        // table added, get ID
+                        case "0326":
+                            {
+                                if (receive_data_automatically(stream, out string json))
+                                {
+                                    TableDetail tableDetail = Jil.JSON.Deserialize<TableDetail>(json);
+                                    // add table to list
+                                }
+                            }
+                            break;
+
+                        // table deleted
+                        case "0426":
+                            {
+                                if (receive_data_automatically(stream, out string json))
+                                {
+                                    TableDetail tableDetail = Jil.JSON.Deserialize<TableDetail>(json);
+                                    // remove table from list if it exists and equals to this table object
+                                }
+                            }
+                            break;
+                            
+                            // get service detail
+                        case "0027":
+                            {
+                                if (receive_data_automatically(stream, out string json))
+                                {
+                                    List<ServiceDetail> serviceDetails = Jil.JSON.Deserialize<List<ServiceDetail>>(json);
+                                    // do whatever you want to do with the data here
+
+                                }
+                            }
+                            break;
+
+                        // update service detail successfully
+                        case "0127":
+                            {
+                                if (receive_data_automatically(stream, out string json))
+                                {
+                                    ServiceDetail serviceDetail = Jil.JSON.Deserialize<ServiceDetail>(json);
+                                    // inform user that service detail has been updated and update service detail list
+                                }
+                            }
+                            break;
+
+                        // update service detail failed
+                        case "0227":
+                            {
+                                // inform user that service detail has not been updated
+                            }
+                            break;
+
+                        // service detail added, get ID
+                        case "0327":
+                            {
+                                if (receive_data_automatically(stream, out string json))
+                                {
+                                    ServiceDetail serviceDetail = Jil.JSON.Deserialize<ServiceDetail>(json);
+                                    // add service detail to list
+                                }
+                            }
+                            break;
+
+                        // service detail deleted
+                        case "0427":
+                            {
+                                if (receive_data_automatically(stream, out string json))
+                                {
+                                    ServiceDetail serviceDetail = Jil.JSON.Deserialize<ServiceDetail>(json);
+                                    // remove service detail from list if it exists and equals to this service detail object
+                                }
+                            }
+                            break;
+                            
                             
 
                         default:

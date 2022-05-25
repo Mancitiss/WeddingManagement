@@ -25,5 +25,12 @@ namespace WindowsFormsApp1
         {
             return id == null || name == null;
         }
+
+        internal bool Equals(LobbyType other)
+        {
+            return this.id.Equals(other.id) &&
+                this.name.Equals(other.name) &&
+                this.minTablePrice.Equals(other.minTablePrice);
+        }
     }
 }
