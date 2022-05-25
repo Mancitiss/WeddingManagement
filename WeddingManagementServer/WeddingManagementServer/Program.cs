@@ -608,7 +608,7 @@ namespace WeddingManagementServer
                                                             command.Parameters.AddWithValue("@MinTablePrice", lobbyType.minTablePrice);
                                                             if(command.ExecuteNonQuery() > 0)
                                                             {
-                                                                sessions[id].Queue_command(Encoding.Unicode.GetBytes("0320" + lobbyId)); // Lobby type added
+                                                                sessions[id].Queue_command(Encoding.Unicode.GetBytes("0320" + Wrap_data_with_byte(Jil.JSON.Serialize<LobbyType>(lobbyType)))); // Lobby type added
                                                             }
                                                             else
                                                             {
@@ -628,7 +628,7 @@ namespace WeddingManagementServer
                                                                 command.Parameters.AddWithValue("@idLobbyType", lobbyType.id);
                                                                 if (command.ExecuteNonQuery() > 0)
                                                                 {
-                                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("0420")); // Lobby type deleted
+                                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("0420" + Wrap_data_with_byte(Jil.JSON.Serialize<LobbyType>(lobbyType)))); // Lobby type deleted
                                                                 }
                                                                 else
                                                                 {
@@ -698,7 +698,7 @@ namespace WeddingManagementServer
                                                                 command.Parameters.AddWithValue("@Status", lobby.Status);
                                                                 if (command.ExecuteNonQuery() > 0)
                                                                 {
-                                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("0121")); // Lobby updated
+                                                                    sessions[id].Queue_command(Combine(Encoding.Unicode.GetBytes("0121" + Wrap_data_with_byte(Jil.JSON.Serialize<Lobby>(lobby))))); // Lobby updated
                                                                 }
                                                                 else
                                                                 {
@@ -719,7 +719,7 @@ namespace WeddingManagementServer
                                                             command.Parameters.AddWithValue("@Status", lobby.Status);
                                                             if (command.ExecuteNonQuery() > 0)
                                                             {
-                                                                sessions[id].Queue_command(Encoding.Unicode.GetBytes("0321" + lobbyId)); // Lobby added
+                                                                sessions[id].Queue_command(Combine(Encoding.Unicode.GetBytes("0321" + Wrap_data_with_byte(Jil.JSON.Serialize<Lobby>(lobby))))); // Lobby added
                                                             }
                                                             else
                                                             {
@@ -807,7 +807,7 @@ namespace WeddingManagementServer
                                                                 command.Parameters.AddWithValue("@Ending", shift.Ending);
                                                                 if (command.ExecuteNonQuery() > 0)
                                                                 {
-                                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("0122")); // Shift updated
+                                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("0122" + Wrap_data_with_byte(Jil.JSON.Serialize<Shift>(shift)))); // Shift updated
                                                                 }
                                                                 else
                                                                 {
@@ -826,7 +826,7 @@ namespace WeddingManagementServer
                                                             command.Parameters.AddWithValue("@Ending", shift.Ending);
                                                             if (command.ExecuteNonQuery() > 0)
                                                             {
-                                                                sessions[id].Queue_command(Encoding.Unicode.GetBytes("0322" + shiftId)); // Shift added
+                                                                sessions[id].Queue_command(Encoding.Unicode.GetBytes("0322" + Wrap_data_with_byte(Jil.JSON.Serialize<Shift>(shift)))); // Shift added
                                                             }
                                                             else
                                                             {
@@ -846,7 +846,7 @@ namespace WeddingManagementServer
                                                                 command.Parameters.AddWithValue("@idShift", shift.idShift);
                                                                 if (command.ExecuteNonQuery() > 0)
                                                                 {
-                                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("0422")); // Shift deleted
+                                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("0422" + Wrap_data_with_byte(Jil.JSON.Serialize<Shift>(shift)))); // Shift deleted
                                                                 }
                                                                 else
                                                                 {
@@ -936,7 +936,7 @@ namespace WeddingManagementServer
                                                                 command.Parameters.AddWithValue("@Deposit", wedding.Deposit);
                                                                 if (command.ExecuteNonQuery() > 0)
                                                                 {
-                                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("0123")); // Wedding updated
+                                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("0123" + Wrap_data_with_byte(Jil.JSON.Serialize<WeddingInfo>(wedding)))); // Wedding updated
                                                                 }
                                                                 else
                                                                 {
@@ -964,7 +964,7 @@ namespace WeddingManagementServer
                                                             command.Parameters.AddWithValue("@Deposit", wedding.Deposit);
                                                             if (command.ExecuteNonQuery() > 0)
                                                             {
-                                                                sessions[id].Queue_command(Encoding.Unicode.GetBytes("0323" + idWD)); // Wedding added
+                                                                sessions[id].Queue_command(Encoding.Unicode.GetBytes("0323" + Wrap_data_with_byte(Jil.JSON.Serialize<WeddingInfo>(wedding)))); // Wedding added
                                                             }
                                                             else
                                                             {
@@ -984,7 +984,7 @@ namespace WeddingManagementServer
                                                                 command.Parameters.AddWithValue("@idWedding", wedding.idWedding);
                                                                 if (command.ExecuteNonQuery() > 0)
                                                                 {
-                                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("0423")); // Wedding deleted
+                                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("0423" + Wrap_data_with_byte(Jil.JSON.Serialize<WeddingInfo>(wedding)))); // Wedding deleted
                                                                 }
                                                                 else
                                                                 {
@@ -1052,7 +1052,7 @@ namespace WeddingManagementServer
                                                                 command.Parameters.AddWithValue("@Note", menu.Note);
                                                                 if (command.ExecuteNonQuery() > 0)
                                                                 {
-                                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("0124")); // Menu updated
+                                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("0124" + Wrap_data_with_byte(Jil.JSON.Serialize<Menu>(menu)))); // Menu updated
                                                                 }
                                                                 else
                                                                 {
@@ -1072,7 +1072,7 @@ namespace WeddingManagementServer
                                                             command.Parameters.AddWithValue("@Note", menu.Note);
                                                             if (command.ExecuteNonQuery() > 0)
                                                             {
-                                                                sessions[id].Queue_command(Encoding.Unicode.GetBytes("0324" + idDish)); // Menu added
+                                                                sessions[id].Queue_command(Encoding.Unicode.GetBytes("0324" + Wrap_data_with_byte(Jil.JSON.Serialize<Menu>(menu)))); // Menu added
 
                                                             }
                                                             else
@@ -1092,7 +1092,7 @@ namespace WeddingManagementServer
                                                                 command.Parameters.AddWithValue("@idDishes", menu.idDishes);
                                                                 if (command.ExecuteNonQuery() > 0)
                                                                 {
-                                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("0424")); // Menu deleted
+                                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("0424" + Wrap_data_with_byte(Jil.JSON.Serialize<Menu>(menu)))); // Menu deleted
                                                                 }
                                                                 else
                                                                 {
@@ -1161,7 +1161,7 @@ namespace WeddingManagementServer
                                                                 command.Parameters.AddWithValue("@Note", service.Note);
                                                                 if (command.ExecuteNonQuery() > 0)
                                                                 {
-                                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("0125")); // Service updated
+                                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("0125" + Wrap_data_with_byte(Jil.JSON.Serialize<Service>(service)))); // Service updated
                                                                 }
                                                                 else
                                                                 {
@@ -1181,7 +1181,7 @@ namespace WeddingManagementServer
                                                             command.Parameters.AddWithValue("@Note", service.Note);
                                                             if (command.ExecuteNonQuery() > 0)
                                                             {
-                                                                sessions[id].Queue_command(Encoding.Unicode.GetBytes("0325" + idService)); // Service added
+                                                                sessions[id].Queue_command(Encoding.Unicode.GetBytes("0325" + Wrap_data_with_byte(Jil.JSON.Serialize<Service>(service)))); // Service added
                                                             }
                                                             else
                                                             {
@@ -1200,7 +1200,7 @@ namespace WeddingManagementServer
                                                                 command.Parameters.AddWithValue("@idService", service.idService);
                                                                 if (command.ExecuteNonQuery() > 0)
                                                                 {
-                                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("0425")); // Service deleted
+                                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("0425" + Wrap_data_with_byte(Jil.JSON.Serialize<Service>(service)))); // Service deleted
                                                                 }
                                                                 else
                                                                 {
@@ -1282,7 +1282,7 @@ namespace WeddingManagementServer
                                                                                 command.Parameters.AddWithValue("@Note", tableDetail.Note);
                                                                                 if (command.ExecuteNonQuery() > 0)
                                                                                 {
-                                                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("0326")); // Table detail added
+                                                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("0326" + Wrap_data_with_byte(Jil.JSON.Serialize<TableDetail>(tableDetail)))); // Table detail added
                                                                                 }
                                                                                 else
                                                                                 {
@@ -1307,7 +1307,7 @@ namespace WeddingManagementServer
                                                                                 command.Parameters.AddWithValue("@Note", tableDetail.Note);
                                                                                 if (command.ExecuteNonQuery() > 0)
                                                                                 {
-                                                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("0126")); // Table detail updated
+                                                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("0126" + Wrap_data_with_byte(Jil.JSON.Serialize<TableDetail>(tableDetail)))); // Table detail updated
                                                                                 }
                                                                                 else
                                                                                 {
@@ -1329,7 +1329,7 @@ namespace WeddingManagementServer
                                                                                 command.Parameters.AddWithValue("@idDishes", tableDetail.idDishes);
                                                                                 if (command.ExecuteNonQuery() > 0)
                                                                                 {
-                                                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("0426")); // Table detail deleted
+                                                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("0426" + Wrap_data_with_byte(Jil.JSON.Serialize<TableDetail>(tableDetail)))); // Table detail deleted
                                                                                 }
                                                                                 else
                                                                                 {
@@ -1413,7 +1413,7 @@ namespace WeddingManagementServer
                                                                                 command.Parameters.AddWithValue("@Note", serviceDetail.Note);
                                                                                 if (command.ExecuteNonQuery() > 0)
                                                                                 {
-                                                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("0327")); // Service detail added
+                                                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("0327" + Wrap_data_with_byte(Jil.JSON.Serialize<ServiceDetail>(serviceDetail)))); // Service detail added
                                                                                 }
                                                                                 else
                                                                                 {
@@ -1434,7 +1434,7 @@ namespace WeddingManagementServer
                                                                             command.Parameters.AddWithValue("@Note", serviceDetail.Note);
                                                                             if (command.ExecuteNonQuery() > 0)
                                                                             {
-                                                                                sessions[id].Queue_command(Encoding.Unicode.GetBytes("0127")); // Service detail updated
+                                                                                sessions[id].Queue_command(Encoding.Unicode.GetBytes("0127" + Wrap_data_with_byte(Jil.JSON.Serialize<ServiceDetail>(serviceDetail)))); // Service detail updated
                                                                             }
                                                                             else
                                                                             {
@@ -1454,7 +1454,7 @@ namespace WeddingManagementServer
                                                                                 command.Parameters.AddWithValue("@idService", serviceDetail.idService);
                                                                                 if (command.ExecuteNonQuery() > 0)
                                                                                 {
-                                                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("0427")); // Service detail deleted
+                                                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("0427" + Wrap_data_with_byte(Jil.JSON.Serialize<ServiceDetail>(serviceDetail)))); // Service detail deleted
                                                                                 }
                                                                                 else
                                                                                 {
