@@ -31,29 +31,32 @@ namespace WindowsFormsApp1
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            if(this.textBox1.Text == "" || this.textBox2.Text == "" || this.tbImage.Text == "")
+            if(this.textBox1.Text == "" || this.textBox2.Text == "" )
             {
                 MessageBox.Show("Vui lòng điền đủ thông tin");
             }
             else
             {
-                WeddingClient.Add_Dishes(this.textBox1.Text,this.textBox2.Text,this.tbImage.Text);
+                Dishes d= new Dishes();
+                d._lbNameText=this.textBox1.Text;
+                d._lbPriceText=this.textBox2.Text;
+                this.addDishes(d);
             }    
             
         }
 
         private void FormDishes_Load(object sender, EventArgs e)
         {
-            foreach (Menu m in WeddingClient.Get_Dishes())
-            {
-                Dishes d = new Dishes();
+            //foreach (Menu m in WeddingClient.Get_Dishes())
+            //{
+            //    Dishes d = new Dishes();
 
-                d._btnClick = false;
-                d._imgPath = m.Note;
-                d._lbNameText = m.DishesName;
-                d._lbPriceText = m.DishesPrice.ToString();
-                this.flowLayoutPanel1.Controls.Add(d);
-             }
+            //    d._btnClick = false;
+            //    d._imgPath = m.Note;
+            //    d._lbNameText = m.DishesName;
+            //    d._lbPriceText = m.DishesPrice.ToString();
+            //    this.flowLayoutPanel1.Controls.Add(d);
+            // }
         }
     
 
@@ -71,6 +74,10 @@ namespace WindowsFormsApp1
             t.SetApartmentState(System.Threading.ApartmentState.STA);
             t.Start();
             t.Join();
+        }
+        private void addDishes(Dishes d)
+        {
+            this.flowLayoutPanel1.Controls.Add(d);
         }
     }
 }
