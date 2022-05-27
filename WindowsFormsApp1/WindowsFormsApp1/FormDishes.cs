@@ -13,9 +13,13 @@ namespace WindowsFormsApp1
 
     public partial class FormDishes : Form
     {
+        internal delegate void AddMenu(List<Menu> menus);
+        internal AddMenu AddMenuDelegate;
         public FormDishes()
         {
             InitializeComponent();
+            AddMenuDelegate = new AddMenu(AddDishes);
+            WeddingClient.Queue_command(Encoding.Unicode.GetBytes("0024"));
         }
 
         private void btnCMenu_Click(object sender, EventArgs e)
@@ -40,23 +44,13 @@ namespace WindowsFormsApp1
                 Dishes d= new Dishes();
                 d._lbNameText=this.textBox1.Text;
                 d._lbPriceText=this.textBox2.Text;
-                this.addDishes(d);
+                //this.AddDishes(d); don't add from here
             }    
             
         }
 
         private void FormDishes_Load(object sender, EventArgs e)
         {
-            //foreach (Menu m in WeddingClient.Get_Dishes())
-            //{
-            //    Dishes d = new Dishes();
-
-            //    d._btnClick = false;
-            //    d._imgPath = m.Note;
-            //    d._lbNameText = m.DishesName;
-            //    d._lbPriceText = m.DishesPrice.ToString();
-            //    this.flowLayoutPanel1.Controls.Add(d);
-            // }
         }
     
 
@@ -75,9 +69,18 @@ namespace WindowsFormsApp1
             t.Start();
             t.Join();
         }
-        private void addDishes(Dishes d)
+        internal void AddDishes(List<Menu> menus)
         {
-            this.flowLayoutPanel1.Controls.Add(d);
+            foreach (Menu m in menus)
+            {
+                Dishes d = new Dishes();
+
+                d._btnClick = false;
+                //d._imgPath = m.Note;
+                d._lbNameText = m.DishesName;
+                d._lbPriceText = m.DishesPrice.ToString();
+                this.flowLayoutPanel1.Controls.Add(d);
+            }
         }
     }
 }

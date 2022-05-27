@@ -6,32 +6,37 @@ using System.Threading.Tasks;
 
 namespace WeddingManagementServer
 {
-    internal class Account
+    public class Account
     {
-        internal string id;
-        internal string username;
-        internal string pw;
-        internal Int16 priority;
+        public string id;
+        public string username;
+        public string pw;
+        public short priority;
 
-        internal Account(string username, string pw, Int16 priority)
+        public Account(string username, string pw, short priority)
         {
+            this.id = "";
             this.username = username;
             this.pw = pw;
             this.priority = priority;
         }
 
-        internal Account(string id, Int16 priority)
+        public Account(string id, short priority)
         {
             this.id = id;
             this.priority = priority;
+            this.username = "";
+            this.pw = "";
         }
 
-        internal Account(string username, string pw)
+        public Account(string username, string pw)
         {
             this.username = username;
             this.pw = pw;
+            this.priority = 0;
+            this.id = "";
         }
         
-        internal Account() { }
+        public Account() { }
     }
 }

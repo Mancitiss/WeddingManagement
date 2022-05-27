@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace WeddingManagementServer
 {
-    internal class Bill
+    public class Bill
     {
-        internal string idBill;
-        internal DateTime InvoiceDate;
-        internal long TablePriceTotal;
-        internal long ServicePriceTotal;
-        internal long Total;
-        internal DateTime PaymentDate;
-        internal long MoneyLeft;
+        public string idBill;
+        public DateTime InvoiceDate;
+        public long TablePriceTotal;
+        public long ServicePriceTotal;
+        public long Total;
+        public DateTime PaymentDate;
+        public long MoneyLeft;
 
-        internal Bill(string idBill, DateTime InvoiceDate, long TablePriceTotal, long ServicePriceTotal, long Total, DateTime PaymentDate, long MoneyLeft)
+        public Bill(string idBill, DateTime InvoiceDate, long TablePriceTotal, long ServicePriceTotal, long Total, DateTime PaymentDate, long MoneyLeft)
         {
             this.idBill = idBill;
             this.InvoiceDate = InvoiceDate;
@@ -28,6 +28,6 @@ namespace WeddingManagementServer
         }
 
         // default constructor
-        internal Bill() { }
+        public Bill() { }
     }
 }

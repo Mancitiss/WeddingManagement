@@ -1,14 +1,14 @@
 ﻿namespace WindowsFormsApp1
 {
-    internal class TableDetail
+    public class TableDetail
     {
-        internal string idWedding;
-        internal string idDishes;
-        internal int AmountOfDishes;
-        internal long TotalDishesPrice;
-        internal string Note;
+        public string idWedding;
+        public string idDishes;
+        public int AmountOfDishes;
+        public long TotalDishesPrice;
+        public string Note;
 
-        internal TableDetail(string idWedding, string idDishes, int amountOfDishes, long totalDishesPrice, string note)
+        public TableDetail(string idWedding, string idDishes, int amountOfDishes, long totalDishesPrice, string note)
         {
             this.idWedding = idWedding;
             this.idDishes = idDishes;
@@ -19,11 +19,11 @@
         }
 
         // default
-        internal TableDetail()
+        public TableDetail()
         {
         }
 
-        internal bool Equals(TableDetail tableDetail)
+        public bool Equals(TableDetail tableDetail)
         {
             // check if all properties are equal
             return this.idWedding == tableDetail.idWedding &&

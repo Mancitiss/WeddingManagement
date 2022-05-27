@@ -114,13 +114,14 @@ namespace WeddingManagementServer
                 */
 
                 SslStream_receive(sslStream, 8, out string data);
-                //Console.WriteLine("not logged in:"+data);
+                Console.WriteLine("not logged in:"+data);
                 if (data != null && data != "")
                 {
                     string instruction = data;
                     if (instruction == "0012") //0012 = work available
                     {
                         SslStream_receive_ASCII(sslStream, 19, out data);
+                        Console.WriteLine(data);
                         sslStream.Dispose();
                         c.Dispose();
                         bool pass = false;
@@ -234,9 +235,11 @@ namespace WeddingManagementServer
                                                     string id = reader["id"].ToString();
                                                     string str_id = id;
                                                     while (id.Length < 19) id = '0' + id;
-
+                                                    
                                                     Account account = new Account(id, (short)reader["priority"]);
-                                                    String json = Jil.JSON.Serialize<Account>(account);
+                                                    Console.WriteLine(account.id + "\n" + account.priority);
+                                                    string json = Jil.JSON.Serialize(account);
+                                                    Console.WriteLine(json);
                                                     sslStream.Write(Encoding.Unicode.GetBytes("0200" + Wrap_data_with_byte(json)));
                                                     Console.WriteLine("Before dictionaries");
                                                     try

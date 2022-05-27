@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsApp1
 {
-    internal class Menu
+    public class Menu
     {
-        internal string idDishes;
-        internal string DishesName;
-        internal long DishesPrice;
-        internal string Note;
+        public string idDishes;
+        public string DishesName;
+        public long DishesPrice;
+        public string Note;
 
-        internal Menu(string idDishes, string DishesName, long DishesPrice, string Note)
+        public Menu(string idDishes, string DishesName, long DishesPrice, string Note)
         {
             this.idDishes = idDishes;
             this.DishesName = DishesName;
@@ -21,11 +21,11 @@ namespace WindowsFormsApp1
             this.Note = Note;
         }
 
-        internal Menu()
+        public Menu()
         {
         }
 
-        internal bool Equals(Menu menu)
+        public bool Equals(Menu menu)
         {
             return this.idDishes.Equals(menu.idDishes) &&
                    this.DishesName.Equals(menu.DishesName) &&

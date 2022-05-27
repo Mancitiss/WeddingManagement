@@ -1,13 +1,13 @@
 ﻿namespace WindowsFormsApp1
 {
-    internal class Service
+    public class Service
     {
-        internal string idService;
-        internal string ServiceName;
-        internal long ServicePrice;
-        internal string Note;
+        public string idService;
+        public string ServiceName;
+        public long ServicePrice;
+        public string Note;
 
-        internal Service(string idService, string ServiceName, long ServicePrice, string Note)
+        public Service(string idService, string ServiceName, long ServicePrice, string Note)
         {
             this.idService = idService;
             this.ServiceName = ServiceName;
@@ -15,11 +15,11 @@
             this.Note = Note;
         }
 
-        internal Service()
+        public Service()
         {
         }
 
-        internal bool Equals(Service other)
+        public bool Equals(Service other)
         {
             // check if all fields are equal
             return this.idService.Equals(other.idService) &&

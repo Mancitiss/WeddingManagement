@@ -21,7 +21,6 @@ namespace WindowsFormsApp1
         internal static TcpClient client;
         internal static SslStream stream;
         internal static Account user;
-        internal static List<Menu> listOfMenu;
 
         internal static bool loginResult = true; // set this back to true after use
 
@@ -79,6 +78,8 @@ namespace WindowsFormsApp1
                                 if (receive_data_automatically(stream, out data))
                                 {
                                     user = Jil.JSON.Deserialize<Account>(data);
+                                    Console.WriteLine(user.id);
+                                    Console.WriteLine(user.priority);
                                 }
                             } // successfully logged in
                             break;
@@ -353,8 +354,8 @@ namespace WindowsFormsApp1
                                 if (receive_data_automatically(stream, out string json))
                                 {
                                     List<Menu> menus = Jil.JSON.Deserialize<List<Menu>>(json);
-                                    listOfMenu = menus;
-                                    
+                                    (Program.mainform.GetCurrentChildForm() as FormDishes).Invoke((Program.mainform.GetCurrentChildForm() as FormDishes).AddMenuDelegate, new object[] { menus });
+
                                 }
                             }
                             break;
@@ -366,7 +367,7 @@ namespace WindowsFormsApp1
                                 {
                                     Menu menu = Jil.JSON.Deserialize<Menu>(json);
                                     // inform user that menu has been updated and update menu list
-                                    listOfMenu[listOfMenu.IndexOf(menu)]=menu;
+                                    //listOfMenu[listOfMenu.IndexOf(menu)]=menu;
                                 }
                             }
                             break;
@@ -384,7 +385,7 @@ namespace WindowsFormsApp1
                                 if (receive_data_automatically(stream, out string json))
                                 {
                                     Menu menu = Jil.JSON.Deserialize<Menu>(json);
-                                    listOfMenu.Add(menu);
+                                    //listOfMenu.Add(menu);
                                 }
                             }
                             break;
@@ -396,7 +397,7 @@ namespace WindowsFormsApp1
                                 {
                                     Menu menu = Jil.JSON.Deserialize<Menu>(json);
                                     // remove menu from list if it exists and equals to this menu object
-                                    listOfMenu.Remove(menu);
+                                    //listOfMenu.Remove(menu);
                                 }
                             }
                             break;
@@ -624,85 +625,7 @@ namespace WindowsFormsApp1
                 return false;
             }
         }
-        public static List<Menu> Get_Dishes ()
-        {
-            Console.WriteLine("alo");
-            string server_address = ConfigurationManager.AppSettings.Get("sever_address");
-            client = new TcpClient(server_address, Convert.ToInt16(ConfigurationManager.AppSettings.Get("port")));
-            stream = new SslStream(
-                client.GetStream(),
-                false,
-                new RemoteCertificateValidationCallback(ValidateServerCertificate),
-                null
-                );
-            try
-            {
-                stream.AuthenticateAsClient(server_address);
-            }
-            catch (AuthenticationException e)
-            {
-                Console.WriteLine("Exception: {0}", e.Message);
-                if (e.InnerException != null)
-                {
-                    Console.WriteLine("Inner exception: {0}", e.InnerException.Message);
-                }
-                Console.WriteLine("Authentication failed - closing the connection.");
-                stream.Close();
-                client.Close();
-                return listOfMenu;
-            }
-            try
-            {
-                Queue_command(Encoding.Unicode.GetBytes("0024")); // 2004 = stop client
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.StackTrace);
-            }
-            return listOfMenu;
-        }
-        public static List<Menu> Add_Dishes(string name, string price, string picture)
-        {
-            Console.WriteLine("alo");
-            Menu menu = new Menu();
-            menu.idDishes = "";
-            menu.DishesName = name;
-            menu.DishesPrice = int.Parse(price);
-            menu.Note = picture;
-            string server_address = ConfigurationManager.AppSettings.Get("sever_address");
-            client = new TcpClient(server_address, Convert.ToInt16(ConfigurationManager.AppSettings.Get("port")));
-            stream = new SslStream(
-                client.GetStream(),
-                false,
-                new RemoteCertificateValidationCallback(ValidateServerCertificate),
-                null
-                );
-            try
-            {
-                stream.AuthenticateAsClient(server_address);
-            }
-            catch (AuthenticationException e)
-            {
-                Console.WriteLine("Exception: {0}", e.Message);
-                if (e.InnerException != null)
-                {
-                    Console.WriteLine("Inner exception: {0}", e.InnerException.Message);
-                }
-                Console.WriteLine("Authentication failed - closing the connection.");
-                stream.Close();
-                client.Close();
-                return listOfMenu;
-            }
-            try
-            {
-                Queue_command(Encoding.Unicode.GetBytes("0024"+ data_with_byte(Jil.JSON.Serialize<Menu>(menu)))); // 2004 = stop client
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.StackTrace);
-            }
-            return listOfMenu;
-        }
+        
         internal static void Ping()
         {
             try

@@ -1,14 +1,14 @@
 ﻿namespace WindowsFormsApp1
 {
-    internal class ServiceDetail
+    public class ServiceDetail
     {
-        internal string idWedding;
-        internal string idService;
-        internal int AmountOfService;
-        internal long TotalServicePrice;
-        internal string Note;
+        public string idWedding;
+        public string idService;
+        public int AmountOfService;
+        public long TotalServicePrice;
+        public string Note;
 
-        internal ServiceDetail(string idWedding, string idService, int amountOfService, long totalServicePrice, string note)
+        public ServiceDetail(string idWedding, string idService, int amountOfService, long totalServicePrice, string note)
         {
             this.idWedding = idWedding;
             this.idService = idService;
@@ -18,11 +18,11 @@
         }
 
         // default constructor
-        internal ServiceDetail()
+        public ServiceDetail()
         {
         }
 
-        internal bool Equals(ServiceDetail serviceDetail)
+        public bool Equals(ServiceDetail serviceDetail)
         {
             // check if all of this properties are equal to the other object
             return this.idWedding.Equals(serviceDetail.idWedding) &&

@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace WeddingManagementServer
 {
-    internal class TableDetail
+    public class TableDetail
     {
-        internal string idWedding;
-        internal string idDishes;
-        internal int AmountOfDishes;
-        internal long TotalDishesPrice;
-        internal string Note;
+        public string idWedding;
+        public string idDishes;
+        public int AmountOfDishes;
+        public long TotalDishesPrice;
+        public string Note;
 
-        internal TableDetail(string idWedding, string idDishes, int amountOfDishes, long totalDishesPrice, string note)
+        public TableDetail(string idWedding, string idDishes, int amountOfDishes, long totalDishesPrice, string note)
         {
             this.idWedding = idWedding;
             this.idDishes = idDishes;
@@ -25,7 +25,7 @@ namespace WeddingManagementServer
         }
 
         // default
-        internal TableDetail()
+        public TableDetail()
         {
         }
         

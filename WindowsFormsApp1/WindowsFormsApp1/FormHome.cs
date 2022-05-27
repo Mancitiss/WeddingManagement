@@ -13,6 +13,11 @@ namespace WindowsFormsApp1
     public partial class FormHome : Form
     {
         private Form curChildForm;
+
+        public Form GetCurrentChildForm()
+        {
+            return curChildForm;
+        }
         public FormHome()
         {
             InitializeComponent();
