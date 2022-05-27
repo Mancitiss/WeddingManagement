@@ -661,11 +661,14 @@ namespace WindowsFormsApp1
             }
             return listOfMenu;
         }
-        public static List<Menu> Add_Dishes()
+        public static List<Menu> Add_Dishes(string name, string price, string picture)
         {
             Console.WriteLine("alo");
             Menu menu = new Menu();
             menu.idDishes = "";
+            menu.DishesName = name;
+            menu.DishesPrice = int.Parse(price);
+            menu.Note = picture;
             string server_address = ConfigurationManager.AppSettings.Get("sever_address");
             client = new TcpClient(server_address, Convert.ToInt16(ConfigurationManager.AppSettings.Get("port")));
             stream = new SslStream(
@@ -692,7 +695,7 @@ namespace WindowsFormsApp1
             }
             try
             {
-                Queue_command(Encoding.Unicode.GetBytes("0324")); // 2004 = stop client
+                Queue_command(Encoding.Unicode.GetBytes("0024"+ data_with_byte(Jil.JSON.Serialize<Menu>(menu)))); // 2004 = stop client
             }
             catch (Exception e)
             {
