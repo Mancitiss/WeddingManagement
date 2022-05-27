@@ -26,6 +26,7 @@ namespace WindowsFormsApp1
         private void btnWedding_Click(object sender, EventArgs e)
         {
             this.panelNavigate.Top=this.btnWedding.Top;
+            openChildForm(new FormBooking());
             
         }
 
