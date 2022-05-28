@@ -14,7 +14,9 @@ namespace WindowsFormsApp1
     public partial class FormDishes : Form
     {
         internal delegate void AddMenu(List<Menu> menus);
+        internal delegate void AddOneMenu(Menu menu);
         internal AddMenu AddMenuDelegate;
+        internal AddOneMenu AddOneMenuDelegate;
         public FormDishes()
         {
             InitializeComponent();
@@ -48,6 +50,7 @@ namespace WindowsFormsApp1
                 m.idDishes = "";
                 m.DishesName = d._lbNameText;
                 m.DishesPrice = int.Parse(d._lbPriceText);
+                AddOneMenuDelegate = new AddOneMenu(AddOneDishes);
                 WeddingClient.Queue_command(Encoding.Unicode.GetBytes("0124" + Tools.data_with_byte(Jil.JSON.Serialize<Menu>(m))));
                 //this.AddDishes(d); don't add from here
             }    
@@ -87,5 +90,15 @@ namespace WindowsFormsApp1
                 this.flowLayoutPanel1.Controls.Add(d);
             }
         }
+        internal void AddOneDishes(Menu menu)
+        {
+            Dishes d = new Dishes();
+            MessageBox.Show(menu.DishesName);
+            d._btnClick = false;
+            //d._imgPath = m.Note;
+            d._lbNameText = menu.DishesName;
+            d._lbPriceText = menu.DishesPrice.ToString();
+            this.flowLayoutPanel1.Controls.Add(d);
+        }    
     }
 }

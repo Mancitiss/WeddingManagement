@@ -385,7 +385,7 @@ namespace WindowsFormsApp1
                                 if (receive_data_automatically(stream, out string json))
                                 {
                                     Menu menu = Jil.JSON.Deserialize<Menu>(json);
-                                    //listOfMenu.Add(menu);
+                                    (Program.mainform.GetCurrentChildForm() as FormDishes).Invoke((Program.mainform.GetCurrentChildForm() as FormDishes).AddOneMenuDelegate, new object[] { menu });
                                 }
                             }
                             break;
