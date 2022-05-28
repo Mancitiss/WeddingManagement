@@ -59,7 +59,7 @@ namespace WindowsFormsApp1
         }
         private void openChildForm (Form childForm)
         {
-            if (childForm == null) ;
+            if (childForm == null) return;
             childForm.TopLevel = false;
             childForm.Dock = DockStyle.Fill;
             this.curChildForm = childForm;

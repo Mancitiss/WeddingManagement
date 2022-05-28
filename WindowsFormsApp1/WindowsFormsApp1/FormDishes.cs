@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,15 +14,36 @@ namespace WindowsFormsApp1
 
     public partial class FormDishes : Form
     {
+        public static ConcurrentDictionary<string, Dishes> dishes = new ConcurrentDictionary<string, Dishes>();
+        public static ConcurrentDictionary<string, byte> selectedDishesIDs = new System.Collections.Concurrent.ConcurrentDictionary<string, byte>();
+
         internal delegate void AddMenu(List<Menu> menus);
-        internal delegate void AddOneMenu(Menu menu);
         internal AddMenu AddMenuDelegate;
+
+        internal delegate void AddOneMenu(Menu menu);
         internal AddOneMenu AddOneMenuDelegate;
+        internal delegate void RemoveOneMenu(Menu menu);
+        internal RemoveOneMenu RemoveOneMenuDelegate;
+        internal delegate void UpdateOneMenu(Menu menu);
+        internal UpdateOneMenu UpdateOneMenuDelegate;
+
         public FormDishes()
         {
+            dishes = new ConcurrentDictionary<string, Dishes>();
+            selectedDishesIDs = new ConcurrentDictionary<string, byte>();
             InitializeComponent();
             AddMenuDelegate = new AddMenu(AddDishes);
-            WeddingClient.Queue_command(Encoding.Unicode.GetBytes("0024"));
+            AddOneMenuDelegate = new AddOneMenu(AddOneDishes);
+            UpdateOneMenuDelegate = new UpdateOneMenu(UpdateOneDishes);
+            RemoveOneMenuDelegate = new RemoveOneMenu(RemoveOneDishes);
+        }
+
+        private void UpdateOneDishes(Menu menu)
+        {
+            dishes[menu.idDishes].menu = menu;
+            dishes[menu.idDishes].id = menu.idDishes;
+            dishes[menu.idDishes]._lbNameText = menu.DishesName;
+            dishes[menu.idDishes]._lbPriceText = menu.DishesPrice.ToString();
         }
 
         private void btnCMenu_Click(object sender, EventArgs e)
@@ -35,6 +57,14 @@ namespace WindowsFormsApp1
             this.Close();
         }
 
+        private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) )
+            {
+                e.Handled = true;
+            }
+        }
+
         private void btnAdd_Click(object sender, EventArgs e)
         {
             if(this.textBox1.Text == "" || this.textBox2.Text == "" )
@@ -43,14 +73,10 @@ namespace WindowsFormsApp1
             }
             else
             {
-                Dishes d= new Dishes();
-                d._lbNameText=this.textBox1.Text;
-                d._lbPriceText=this.textBox2.Text;
                 Menu m = new Menu();
                 m.idDishes = "";
-                m.DishesName = d._lbNameText;
-                m.DishesPrice = int.Parse(d._lbPriceText);
-                AddOneMenuDelegate = new AddOneMenu(AddOneDishes);
+                m.DishesName = this.textBox1.Text;
+                m.DishesPrice = int.Parse(this.textBox2.Text);
                 WeddingClient.Queue_command(Encoding.Unicode.GetBytes("0124" + Tools.data_with_byte(Jil.JSON.Serialize<Menu>(m))));
                 //this.AddDishes(d); don't add from here
             }    
@@ -59,6 +85,7 @@ namespace WindowsFormsApp1
 
         private void FormDishes_Load(object sender, EventArgs e)
         {
+            WeddingClient.Queue_command(Encoding.Unicode.GetBytes("0024"));
         }
     
 
@@ -72,33 +99,59 @@ namespace WindowsFormsApp1
                     this.tbImage.Text = dlg.FileName;
                 }
             }));
-
+            
             t.SetApartmentState(System.Threading.ApartmentState.STA);
             t.Start();
             t.Join();
         }
-        internal void AddDishes(List<Menu> menus)
+        private void AddDishes(List<Menu> menus)
         {
             foreach (Menu m in menus)
             {
-                Dishes d = new Dishes();
-                MessageBox.Show(m.DishesName);
-                d._btnClick = false;
-                //d._imgPath = m.Note;
-                d._lbNameText = m.DishesName;
-                d._lbPriceText = m.DishesPrice.ToString();
-                this.flowLayoutPanel1.Controls.Add(d);
+                Dishes d = new Dishes(m); 
+                if (!dishes.ContainsKey(m.idDishes))
+                {
+                    this.flowLayoutPanel1.Controls.Add(d);
+                }
+                FormDishes.dishes.AddOrUpdate(d.id, d, (key, oldValue) => d);
             }
         }
-        internal void AddOneDishes(Menu menu)
+        private void AddOneDishes(Menu menu)
         {
-            Dishes d = new Dishes();
-            MessageBox.Show(menu.DishesName);
-            d._btnClick = false;
-            //d._imgPath = m.Note;
-            d._lbNameText = menu.DishesName;
-            d._lbPriceText = menu.DishesPrice.ToString();
-            this.flowLayoutPanel1.Controls.Add(d);
-        }    
+            Dishes d = new Dishes(menu); 
+            if (!dishes.ContainsKey(menu.idDishes))
+            {
+                this.flowLayoutPanel1.Controls.Add(d);
+            }
+            FormDishes.dishes.AddOrUpdate(d.id, d, (key, oldValue) => d);
+            Console.WriteLine(d.id);
+            Console.WriteLine(d.menu.idDishes);
+        }
+        
+        private void RemoveOneDishes(Menu menu)
+        {
+            Dishes d;
+            if(FormDishes.dishes.TryGetValue(menu.idDishes, out d))
+            {
+                this.flowLayoutPanel1.Controls.Remove(d);
+                FormDishes.dishes.TryRemove(menu.idDishes, out Dishes _);
+            }
+        }
+        
+        private void btnRemove_Click(object sender, EventArgs e)
+        {
+            foreach (string id in FormDishes.selectedDishesIDs.Keys)
+            {
+                Dishes d;
+                if (FormDishes.dishes.TryGetValue(id, out d))
+                {
+                    d.id = "-" + d.id;
+                    Console.WriteLine(d.id);
+                    d.menu.idDishes = "-" + d.menu.idDishes;
+                    WeddingClient.Queue_command(Encoding.Unicode.GetBytes("0124" + Tools.data_with_byte(Jil.JSON.Serialize<Menu>(d.menu))));
+                }
+            }
+            selectedDishesIDs.Clear();
+        }  
     }
 }

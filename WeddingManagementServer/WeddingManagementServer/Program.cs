@@ -603,10 +603,10 @@ namespace WeddingManagementServer
                                                         }
                                                     }
                                                     else if (lobbyType.id.Length == 0) {
-                                                        string lobbyId = "LT" + GetNewIdFromTable("LB").ToString();
+                                                        lobbyType.id = "LT" + GetNewIdFromTable("LB").ToString().PadLeft(19, '0');
                                                         using (SqlCommand command = new SqlCommand("insert into LOBBYTYPE (idLobbyType, LobbyName, MinTablePrice) values (@idLobbyType, @LobbyName, @MinTablePrice)", sql))
                                                         {
-                                                            command.Parameters.AddWithValue("@idLobbyType", lobbyId);
+                                                            command.Parameters.AddWithValue("@idLobbyType", lobbyType.id) ;
                                                             command.Parameters.AddWithValue("@LobbyName", lobbyType.name);
                                                             command.Parameters.AddWithValue("@MinTablePrice", lobbyType.minTablePrice);
                                                             if(command.ExecuteNonQuery() > 0)
@@ -712,10 +712,10 @@ namespace WeddingManagementServer
                                                     }
                                                     else if (lobby.idLobby.Length == 0)
                                                     {
-                                                        string lobbyId = "LB" + GetNewIdFromTable("LB").ToString();
+                                                        lobby.idLobby = "LB" + GetNewIdFromTable("LB").ToString().PadLeft(19, '0');
                                                         using (SqlCommand command = new SqlCommand("insert into LOBBY (idLobby, idLobbyType, LobbyName, MaxTable, Status) values (@idLobby, @idLobbyType, @LobbyName, @MaxTable, @Status)", sql))
                                                         {
-                                                            command.Parameters.AddWithValue("@idLobby", lobbyId);
+                                                            command.Parameters.AddWithValue("@idLobby", lobby.idLobby);
                                                             command.Parameters.AddWithValue("@idLobbyType", lobby.idLobbyType);
                                                             command.Parameters.AddWithValue("@LobbyName", lobby.LobbyName);
                                                             command.Parameters.AddWithValue("@MaxTable", lobby.MaxTable);
@@ -735,6 +735,7 @@ namespace WeddingManagementServer
                                                         // delete a lobby
                                                         string key = lobby.idLobby.Substring(1, 2);
                                                         long idl = long.Parse(lobby.idLobby.Substring(3));
+                                                        lobby.idLobby = lobby.idLobby.Substring(1);
                                                         if (key.Equals("LB") && check_existed_id(idl, key))
                                                         {
                                                             using (SqlCommand command = new SqlCommand("update LOBBY set available = 0 where idLobby = @idLobby", sql))
@@ -821,10 +822,10 @@ namespace WeddingManagementServer
                                                     }
                                                     else if (shift.idShift.Length == 0)
                                                     {
-                                                        string shiftId = "SH" + GetNewIdFromTable("SH").ToString();
+                                                        shift.idShift = "SH" + GetNewIdFromTable("SH").ToString().PadLeft(19, '0');
                                                         using (SqlCommand command = new SqlCommand("insert into SHIFT (idShift, Starting, Ending) values (@idShift, @Starting, @Ending)", sql))
                                                         {
-                                                            command.Parameters.AddWithValue("@idShift", shiftId);
+                                                            command.Parameters.AddWithValue("@idShift", shift.idShift);
                                                             command.Parameters.AddWithValue("@Starting", shift.Starting);
                                                             command.Parameters.AddWithValue("@Ending", shift.Ending);
                                                             if (command.ExecuteNonQuery() > 0)
@@ -921,6 +922,7 @@ namespace WeddingManagementServer
                                                     {
                                                         string key = wedding.idWedding.Substring(0, 2);
                                                         long idl = long.Parse(wedding.idWedding.Substring(2));
+                                                        wedding.idWedding = wedding.idWedding.Substring(1);
                                                         if (key.Equals("WE") && check_existed_id(idl, key))
                                                         {
                                                             using (SqlCommand command = new SqlCommand("update WEDDING set idLobby = @idLobby, idShift = @idShift, BookingDate = @BookingDate, WeddingDate = @WeddingDate, PhoneNumber = @PhoneNumber, BroomName = @BroomName, BrideName = @BrideName, AmountOfTable = @AmountOfTable, AmountOfContingencyTable = @AmountOfContingencyTable, TablePrice = @TablePrice, Deposit = @Deposit where idWedding = @idWedding", sql))
@@ -950,10 +952,10 @@ namespace WeddingManagementServer
                                                     }
                                                     else if (wedding.idWedding.Length == 0)
                                                     {
-                                                        string idWD = "WD" + GetNewIdFromTable("WD").ToString();
+                                                        wedding.idWedding = "WD" + GetNewIdFromTable("WD").ToString().PadLeft(19, '0');
                                                         using (SqlCommand command = new SqlCommand("insert into WEDDING (idWedding, idLobby, idShift, BookingDate, WeddingDate, PhoneNumber, BroomName, BrideName, AmountOfTable, AmountOfContingencyTable, TablePrice, Deposit) values (@idWedding, @idLobby, @idShift, @BookingDate, @WeddingDate, @PhoneNumber, @BroomName, @BrideName, @AmountOfTable, @AmountOfContingencyTable, @TablePrice, @Deposit)", sql))
                                                         {
-                                                            command.Parameters.AddWithValue("@idWedding", idWD);
+                                                            command.Parameters.AddWithValue("@idWedding", wedding.idWedding);
                                                             command.Parameters.AddWithValue("@idLobby", wedding.idLobby);
                                                             command.Parameters.AddWithValue("@idShift", wedding.idShift);
                                                             command.Parameters.AddWithValue("@BookingDate", wedding.BookingDate);
@@ -1073,10 +1075,10 @@ namespace WeddingManagementServer
                                                     if (menu.idDishes.Length == 0)
                                                     {
                                                         Console.WriteLine("Adding");
-                                                        string idDish = "MN" + GetNewIdFromTable("MN").ToString();
+                                                        menu.idDishes = "MN" + GetNewIdFromTable("MN").ToString().PadLeft(19, '0');
                                                         using (SqlCommand command = new SqlCommand("insert into MENU (idDishes, DishesName, DishesPrice, Note) values (@idDishes, @DishesName, @DishesPrice, @Note)", sql))
                                                         {
-                                                            command.Parameters.AddWithValue("@idDishes", idDish);
+                                                            command.Parameters.AddWithValue("@idDishes", menu.idDishes);
                                                             command.Parameters.AddWithValue("@DishesName", menu.DishesName);
                                                             command.Parameters.AddWithValue("@DishesPrice", menu.DishesPrice);
                                                             command.Parameters.AddWithValue("@Note", menu.Note);
@@ -1094,19 +1096,24 @@ namespace WeddingManagementServer
                                                     }
                                                     else if (menu.idDishes.Length == 22 && menu.idDishes.StartsWith("-"))
                                                     {
+                                                        Console.WriteLine("Deleting");
                                                         string key = menu.idDishes.Substring(1, 2);
                                                         long idl = long.Parse(menu.idDishes.Substring(3));
+                                                        menu.idDishes = menu.idDishes.Substring(1);
                                                         if (key.Equals("MN") && check_existed_id(idl, key))
                                                         {
+                                                            Console.WriteLine("Exists");
                                                             using (SqlCommand command = new SqlCommand("update MENU set available = 0 where idDishes = @idDishes", sql))
                                                             {
                                                                 command.Parameters.AddWithValue("@idDishes", menu.idDishes);
                                                                 if (command.ExecuteNonQuery() > 0)
                                                                 {
+                                                                    Console.WriteLine("Deleted");
                                                                     sessions[id].Queue_command(Encoding.Unicode.GetBytes("0424" + Wrap_data_with_byte(Jil.JSON.Serialize<Menu>(menu)))); // Menu deleted
                                                                 }
                                                                 else
                                                                 {
+                                                                    Console.WriteLine("Not deleted");
                                                                     sessions[id].Queue_command(Encoding.Unicode.GetBytes("0224")); // Menu not deleted
                                                                 }
                                                             }
@@ -1184,10 +1191,10 @@ namespace WeddingManagementServer
                                                     }
                                                     else if (service.idService.Length == 0)
                                                     {
-                                                        string idService = "SE" + GetNewIdFromTable("SE").ToString();
+                                                        service.idService = "SE" + GetNewIdFromTable("SE").ToString().PadLeft(19, '0');
                                                         using (SqlCommand command = new SqlCommand("insert into SERVICE (idService, ServiceName, ServicePrice, Note) values (@idService, @ServiceName, @ServicePrice, @Note)", sql))
                                                         {
-                                                            command.Parameters.AddWithValue("@idService", idService);
+                                                            command.Parameters.AddWithValue("@idService", service.idService);
                                                             command.Parameters.AddWithValue("@ServiceName", service.ServiceName);
                                                             command.Parameters.AddWithValue("@ServicePrice", service.ServicePrice);
                                                             command.Parameters.AddWithValue("@Note", service.Note);
@@ -1205,6 +1212,7 @@ namespace WeddingManagementServer
                                                     {
                                                         string key = service.idService.Substring(1, 2);
                                                         long idl = long.Parse(service.idService.Substring(3));
+                                                        service.idService = service.idService.Substring(1);
                                                         if (key.Equals("SE") && check_existed_id(idl, key))
                                                         {
                                                             using (SqlCommand command = new SqlCommand("update SERVICE set available = 0 where idService = @idService", sql))
@@ -1283,6 +1291,7 @@ namespace WeddingManagementServer
                                                                     {
                                                                         string key = tableDetail.idDishes.Substring(1, 2);
                                                                         long idl = long.Parse(tableDetail.idDishes.Substring(3));
+                                                                        tableDetail.idDishes = tableDetail.idDishes.Substring(1);
                                                                         if (key.Equals("MN") && check_existed_id(idl, key))
                                                                         {
                                                                             using (SqlCommand command = new SqlCommand("update TABLE_DETAIL set idDishes = @idDishes, AmountOfDishes = @AmountOfDishes, TotalDishesPrice = @TotalDishesPrice, Note = @Note where idWedding = @idWedding", sql))
@@ -1308,7 +1317,7 @@ namespace WeddingManagementServer
                                                                     {
                                                                         string key = tableDetail.idWedding.Substring(0, 2);
                                                                         long idl = long.Parse(tableDetail.idWedding.Substring(2));
-                                                                        if (key.Equals("WE") && check_existed_id(idl, key))
+                                                                        if (key.Equals("MN") && check_existed_id(idl, key))
                                                                         {
                                                                             using (SqlCommand command = new SqlCommand("update TABLE_DETAIL set AmountOfDishes = @AmountOfDishes, TotalDishesPrice = @TotalDishesPrice, Note = @Note where idWedding = @idWedding and idDishes = @idDishes", sql))
                                                                             {
@@ -1331,9 +1340,10 @@ namespace WeddingManagementServer
                                                                     }
                                                                     else if (tableDetail.idDishes.Length == 22 && tableDetail.idDishes.StartsWith("-"))
                                                                     {
-                                                                        string key = tableDetail.idWedding.Substring(0, 2);
-                                                                        long idl = long.Parse(tableDetail.idWedding.Substring(2));
-                                                                        if (key.Equals("WE") && check_existed_id(idl, key))
+                                                                        string key = tableDetail.idDishes.Substring(1, 2);
+                                                                        long idl = long.Parse(tableDetail.idDishes.Substring(3));
+                                                                        tableDetail.idDishes = tableDetail.idDishes.Substring(1);
+                                                                        if (key.Equals("MN") && check_existed_id(idl, key))
                                                                         {
                                                                             using (SqlCommand command = new SqlCommand("delete from TABLE_DETAIL where idWedding = @idWedding and idDishes = @idDishes", sql))
                                                                             {
@@ -1414,6 +1424,7 @@ namespace WeddingManagementServer
                                                                     {
                                                                         string key = serviceDetail.idService.Substring(1, 2);
                                                                         long idl = long.Parse(serviceDetail.idService.Substring(3));
+                                                                        serviceDetail.idService = serviceDetail.idService.Substring(1);
                                                                         if (key.Equals("SE") && check_existed_id(idl, key))
                                                                         {
                                                                             using (SqlCommand command = new SqlCommand("insert into SERVICE_DETAIL (idWedding, idService, @AmountOfService, @TotalServicePrice, @Note) values (@idWedding, @idService, @AmountOfService, @TotalServicePrice, @Note)", sql))
@@ -1458,6 +1469,7 @@ namespace WeddingManagementServer
                                                                     {
                                                                         string key = serviceDetail.idService.Substring(1, 2);
                                                                         long idl = long.Parse(serviceDetail.idService.Substring(3));
+                                                                        serviceDetail.idService = serviceDetail.idService.Substring(1);
                                                                         if (key.Equals("SE") && check_existed_id(idl, key))
                                                                         {
                                                                             using (SqlCommand command = new SqlCommand("delete from SERVICE_DETAIL where idWedding = @idWedding and idService = @idService", sql))
@@ -1657,47 +1669,47 @@ namespace WeddingManagementServer
                 {
                     case "LT":
                         {
-                            string idStr = key + randomid.ToString();
+                            string idStr = key + randomid.ToString().PadLeft(19, '0');
                             return check_existed_id("LOBBY_TYPE", "idLobbyType", idStr);
                         }
                     case "LO":
                         {
-                            string idStr = key + randomid.ToString();
+                            string idStr = key + randomid.ToString().PadLeft(19, '0');
                             return check_existed_id("LOBBY", "idLobby", idStr);
                         }
                     case "SH":
                         {
-                            string idStr = key + randomid.ToString();
+                            string idStr = key + randomid.ToString().PadLeft(19, '0');
                             return check_existed_id("SHIFT", "idShift", idStr);
                         }
                     case "WD":
                         {
-                            string idStr = key + randomid.ToString();
+                            string idStr = key + randomid.ToString().PadLeft(19, '0');
                             return check_existed_id("WEDDING_INFOR", "idWedding", idStr);
                         }
                     case "MN":
                         {
-                            string idStr = key + randomid.ToString();
+                            string idStr = key + randomid.ToString().PadLeft(19, '0');
                             return check_existed_id("MENU", "idDishes", idStr);
                         }
                     case "SV":
                         {
-                            string idStr = key + randomid.ToString();
+                            string idStr = key + randomid.ToString().PadLeft(19, '0');
                             return check_existed_id("SERVICE", "idService", idStr);
                         }
                     case "BI":
                         {
-                            string idStr = key + randomid.ToString();
+                            string idStr = key + randomid.ToString().PadLeft(19, '0');
                             return check_existed_id("BILL", "idBill", idStr);
                         }
                     case "RR":
                         {
-                            string idStr = key + randomid.ToString();
+                            string idStr = key + randomid.ToString().PadLeft(19, '0');
                             return check_existed_id("REVENUE_REPORT", "idReport", idStr);
                         }
                     case "PA":
                         {
-                            string idStr = key + randomid.ToString();
+                            string idStr = key + randomid.ToString().PadLeft(19, '0');
                             return check_existed_id("PARAMETER", "idParameter", idStr);
                         }
                     default:
@@ -1712,13 +1724,15 @@ namespace WeddingManagementServer
 
         private static bool check_existed_id(string table, string idColumn, string key)
         {
+            Console.WriteLine(key);
+            Console.WriteLine(key.PadLeft(19, '0'));
             string commandtext = "select top 1 * from " + table + " where " + idColumn +"=@id";
             using (SqlConnection sql = new SqlConnection(sqlConnectionString))
             {
                 sql.Open();
                 using (SqlCommand command = new SqlCommand(commandtext, sql))
                 {
-                    command.Parameters.AddWithValue("@id", key);
+                    command.Parameters.AddWithValue("@id", key.PadLeft(19, '0'));
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
                         if (reader.Read())

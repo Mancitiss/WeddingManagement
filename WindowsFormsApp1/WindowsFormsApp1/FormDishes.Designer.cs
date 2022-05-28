@@ -1,4 +1,7 @@
-﻿namespace WindowsFormsApp1
+﻿using System;
+using System.Windows.Forms;
+
+namespace WindowsFormsApp1
 {
     partial class FormDishes
     {
@@ -144,6 +147,7 @@
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(198, 22);
             this.textBox2.TabIndex = 3;
+            this.textBox2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox2_KeyPress);
             // 
             // textBox1
             // 
@@ -160,6 +164,7 @@
             this.btnRemove.TabIndex = 1;
             this.btnRemove.Text = "Xóa";
             this.btnRemove.UseVisualStyleBackColor = true;
+            this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
             // 
             // btnAdd
             // 

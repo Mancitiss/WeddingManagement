@@ -14,21 +14,39 @@ namespace WindowsFormsApp1
 {
     public partial class Dishes : UserControl
     {
+        public Menu menu;
+        public string id = "";
         public Dishes()
         {
             InitializeComponent();
+        }
+        public Dishes(Menu menu)
+        {
+            this.menu = menu;
+            this.id = menu.idDishes;
+            InitializeComponent();
+            this._lbNameText = menu.DishesName;
+            this._lbPriceText = menu.DishesPrice.ToString();
+            this._btnClick = false;
         }
         public string _lbNameText
         {
             get { return this.lbName.Text; }
 
-            set { this.lbName.Text = value; }
+            set 
+            { 
+                this.lbName.Text = value ;
+            }
         }
         public string _lbPriceText
         {
             get { return this.lbCost.Text; }
 
-            set { this.lbCost.Text = value; }
+            set 
+            { 
+                this.lbCost.Text = value + "VND";
+                this.menu.DishesPrice = Int64.Parse(value);
+            }
         }
 
         public bool _btnClick
@@ -53,10 +71,12 @@ namespace WindowsFormsApp1
             if(this.btnClick.Visible==true)
             {
                 this.btnClick.Visible=false;
+                FormDishes.selectedDishesIDs.TryRemove(this.id, out byte _);
             }    
             else
             {
                 this.btnClick.Visible=true;
+                FormDishes.selectedDishesIDs.AddOrUpdate(this.id, 0, (key, oldValue) => 0);
             }    
         }
     }
