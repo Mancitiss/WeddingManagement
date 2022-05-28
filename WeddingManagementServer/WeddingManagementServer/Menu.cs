@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace WeddingManagementServer
 {
-    internal class Menu
+    public class Menu
     {
-        internal string idDishes;
-        internal string DishesName;
-        internal long DishesPrice;
-        internal string Note;
+        public string idDishes;
+        public string DishesName;
+        public long DishesPrice;
+        public string Note;
 
-        internal Menu(string idDishes, string DishesName, long DishesPrice, string Note)
+        public Menu(string idDishes, string DishesName, long DishesPrice, string Note)
         {
             this.idDishes = idDishes;
             this.DishesName = DishesName;
@@ -21,7 +21,7 @@ namespace WeddingManagementServer
             this.Note = Note;
         }
 
-        internal Menu()
+        public Menu()
         {
         }
     }

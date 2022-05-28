@@ -1035,17 +1035,23 @@ namespace WeddingManagementServer
                                         try
                                         {
                                             Tools.Receive_data_automatically(s, out string json);
+                                            Console.WriteLine(json);
                                             Menu menu = Jil.JSON.Deserialize<Menu>(json);
+                                            menu.Note = "";
+                                            Console.WriteLine(menu.idDishes);
                                             using (var sql = new SqlConnection(sqlConnectionString))
                                             {
                                                 sql.Open();
+                                                Console.WriteLine("Checking");
                                                 if (menu.idDishes != null)
                                                 {
+                                                    Console.WriteLine("Passed");
                                                     if (menu.idDishes.Length == 21)
                                                     {
+                                                        Console.WriteLine("Updating");
                                                         string key = menu.idDishes.Substring(0, 2);
                                                         long idl = long.Parse(menu.idDishes.Substring(2));
-                                                        if (key.Equals("ME") && check_existed_id(idl, key))
+                                                        if (key.Equals("MN") && check_existed_id(idl, key))
                                                         {
                                                             using (SqlCommand command = new SqlCommand("update MENU set DishesName = @DishesName, DishesPrice = @DishesPrice, Note = @Note where idDishes = @idDishes", sql))
                                                             {
@@ -1066,6 +1072,7 @@ namespace WeddingManagementServer
                                                     }
                                                     if (menu.idDishes.Length == 0)
                                                     {
+                                                        Console.WriteLine("Adding");
                                                         string idDish = "MN" + GetNewIdFromTable("MN").ToString();
                                                         using (SqlCommand command = new SqlCommand("insert into MENU (idDishes, DishesName, DishesPrice, Note) values (@idDishes, @DishesName, @DishesPrice, @Note)", sql))
                                                         {
@@ -1076,11 +1083,12 @@ namespace WeddingManagementServer
                                                             if (command.ExecuteNonQuery() > 0)
                                                             {
                                                                 sessions[id].Queue_command(Encoding.Unicode.GetBytes("0324" + Wrap_data_with_byte(Jil.JSON.Serialize<Menu>(menu)))); // Menu added
-
+                                                                Console.WriteLine("Added");
                                                             }
                                                             else
                                                             {
                                                                 sessions[id].Queue_command(Encoding.Unicode.GetBytes("0224")); // Menu not added
+                                                                Console.WriteLine("Not added");
                                                             }
                                                         }
                                                     }
@@ -1107,9 +1115,10 @@ namespace WeddingManagementServer
                                                 }
                                             }
                                         }
-                                        catch (Exception)
+                                        catch (Exception e)
                                         {
                                             sessions[id].Queue_command(Encoding.Unicode.GetBytes("0224"));
+                                            Console.WriteLine(e.ToString());
                                         }
                                     }
                                     break;
@@ -1703,7 +1712,7 @@ namespace WeddingManagementServer
 
         private static bool check_existed_id(string table, string idColumn, string key)
         {
-            string commandtext = "select top 1 id from " + table + " where " + idColumn +"=@id";
+            string commandtext = "select top 1 * from " + table + " where " + idColumn +"=@id";
             using (SqlConnection sql = new SqlConnection(sqlConnectionString))
             {
                 sql.Open();
