@@ -44,6 +44,11 @@ namespace WindowsFormsApp1
                 Dishes d= new Dishes();
                 d._lbNameText=this.textBox1.Text;
                 d._lbPriceText=this.textBox2.Text;
+                Menu m = new Menu();
+                m.idDishes = "";
+                m.DishesName = d._lbNameText;
+                m.DishesPrice = int.Parse(d._lbPriceText);
+                WeddingClient.Queue_command(Encoding.Unicode.GetBytes("0124" + Tools.data_with_byte(Jil.JSON.Serialize<Menu>(m))));
                 //this.AddDishes(d); don't add from here
             }    
             
@@ -74,7 +79,7 @@ namespace WindowsFormsApp1
             foreach (Menu m in menus)
             {
                 Dishes d = new Dishes();
-
+                MessageBox.Show(m.DishesName);
                 d._btnClick = false;
                 //d._imgPath = m.Note;
                 d._lbNameText = m.DishesName;
