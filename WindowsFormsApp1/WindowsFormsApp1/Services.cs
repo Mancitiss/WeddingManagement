@@ -16,5 +16,17 @@ namespace WindowsFormsApp1
         {
             InitializeComponent();
         }
+
+        private void Services_Click(object sender, EventArgs e)
+        {
+            if(button1.Visible==true)
+            {
+                button1.Visible = false;
+            }    
+            else
+            {
+                button1.Visible = true;
+            }    
+        }
     }
 }

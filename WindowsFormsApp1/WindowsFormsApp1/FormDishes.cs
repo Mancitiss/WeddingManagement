@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -60,22 +61,35 @@ namespace WindowsFormsApp1
         private void FormDishes_Load(object sender, EventArgs e)
         {
         }
-    
-
+        [STAThread]
         private void btnUpFile_Click(object sender, EventArgs e)
         {
-           
-            var t = new System.Threading.Thread((System.Threading.ThreadStart)(() => {
-                OpenFileDialog dlg = new OpenFileDialog(); 
+            string filename = "";
+            var t = new System.Threading.Thread((() =>
+            {
+             OpenFileDialog dlg = new OpenFileDialog();
+            dlg.ShowHelp = true;
+                dlg.Filter = "All files (*.*)|*.*";
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
-                    this.tbImage.Text = dlg.FileName;
+                    filename = dlg.FileName;
+                    //Thread.Sleep(10000);
+                   // this.label1.Text = dlg.FileName;
                 }
-            }));
+                
+        }));
+            
+                t.SetApartmentState(ApartmentState.STA);
+                t.Start();
+                t.Join();
+            if (filename != "")
+            {
+                string endOfFile = filename.Split('\\')[filename.Split('\\').Length - 1];
+                string targetFile = System.AppDomain.CurrentDomain.BaseDirectory + @"images\" + endOfFile;
+                System.IO.File.Copy(filename, System.AppDomain.CurrentDomain.BaseDirectory + @"images\" + endOfFile);
+                tbImage.Text = targetFile;
+            }
 
-            t.SetApartmentState(System.Threading.ApartmentState.STA);
-            t.Start();
-            t.Join();
         }
         internal void AddDishes(List<Menu> menus)
         {

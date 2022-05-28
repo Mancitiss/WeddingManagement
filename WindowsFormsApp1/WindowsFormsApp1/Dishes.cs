@@ -57,6 +57,7 @@ namespace WindowsFormsApp1
             else
             {
                 this.btnClick.Visible=true;
+                this.BorderStyle = BorderStyle.FixedSingle;
             }    
         }
     }

@@ -54,7 +54,7 @@
             this.lbCost.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lbCost.Font = new System.Drawing.Font("Century Gothic", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbCost.ForeColor = System.Drawing.SystemColors.Control;
-            this.lbCost.Location = new System.Drawing.Point(198, 1);
+            this.lbCost.Location = new System.Drawing.Point(165, -1);
             this.lbCost.Name = "lbCost";
             this.lbCost.Size = new System.Drawing.Size(51, 27);
             this.lbCost.TabIndex = 1;
@@ -66,7 +66,7 @@
             this.btnClick.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnClick.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnClick.ForeColor = System.Drawing.Color.White;
-            this.btnClick.Location = new System.Drawing.Point(194, 216);
+            this.btnClick.Location = new System.Drawing.Point(162, 188);
             this.btnClick.Name = "btnClick";
             this.btnClick.Size = new System.Drawing.Size(54, 42);
             this.btnClick.TabIndex = 2;
@@ -84,7 +84,7 @@
             this.Controls.Add(this.lbName);
             this.DoubleBuffered = true;
             this.Name = "Dishes";
-            this.Size = new System.Drawing.Size(251, 259);
+            this.Size = new System.Drawing.Size(216, 230);
             this.Click += new System.EventHandler(this.Dishes_Click);
             this.ResumeLayout(false);
             this.PerformLayout();
