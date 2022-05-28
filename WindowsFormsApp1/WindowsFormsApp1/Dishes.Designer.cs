@@ -49,6 +49,7 @@
             // 
             // lbCost
             // 
+            this.lbCost.Dock = System.Windows.Forms.DockStyle.Right;
             this.lbCost.AutoSize = true;
             this.lbCost.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(106)))), ((int)(((byte)(101)))));
             this.lbCost.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
