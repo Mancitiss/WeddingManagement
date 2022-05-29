@@ -38,7 +38,6 @@
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.lbPrice = new System.Windows.Forms.Label();
             this.tbPrice = new System.Windows.Forms.TextBox();
-            this.services1 = new WeddingManagementApplication.Services();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.panel2.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
@@ -118,7 +117,6 @@
             // 
             // flowLayoutPanel1
             // 
-            this.flowLayoutPanel1.Controls.Add(this.services1);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
@@ -144,14 +142,14 @@
             // 
             // services1
             // 
-            this.services1._tbDetail = "";
-            this.services1._tbName = "";
-            this.services1._tbPrice = "";
-            this.services1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(204)))), ((int)(((byte)(176)))));
-            this.services1.Location = new System.Drawing.Point(3, 3);
-            this.services1.Name = "services1";
-            this.services1.Size = new System.Drawing.Size(850, 137);
-            this.services1.TabIndex = 0;
+            //this.services1._tbDetail = "";
+            //this.services1._tbName = "";
+            //this.services1._tbPrice = "";
+            //this.services1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(204)))), ((int)(((byte)(176)))));
+            //this.services1.Location = new System.Drawing.Point(3, 3);
+            //this.services1.Name = "services1";
+            //this.services1.Size = new System.Drawing.Size(850, 137);
+            //this.services1.TabIndex = 0;
             // 
             // btnUpdate
             // 
@@ -191,7 +189,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.RichTextBox tbDetail;
         private System.Windows.Forms.TextBox tbName;
-        private WeddingManagementApplication.Services services1;
         private System.Windows.Forms.TextBox tbPrice;
         private System.Windows.Forms.Label lbPrice;
         private System.Windows.Forms.Button btnUpdate;
