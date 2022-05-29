@@ -9,6 +9,7 @@ namespace WeddingManagementApplication
 {
     internal class Program
     {
+        
         internal static FormHome mainform;
 
         static void Main()

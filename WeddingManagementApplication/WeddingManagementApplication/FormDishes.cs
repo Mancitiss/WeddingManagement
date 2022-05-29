@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -21,8 +22,6 @@ namespace WeddingManagementApplication
 
         internal delegate void AddOneMenu(Menu menu);
         internal AddOneMenu AddOneMenuDelegate;
-        internal delegate void RemoveOneMenu(Menu menu);
-        internal RemoveOneMenu RemoveOneMenuDelegate;
         internal delegate void UpdateOneMenu(Menu menu);
         internal UpdateOneMenu UpdateOneMenuDelegate;
 
@@ -34,7 +33,6 @@ namespace WeddingManagementApplication
             AddMenuDelegate = new AddMenu(AddDishes);
             AddOneMenuDelegate = new AddOneMenu(AddOneDishes);
             UpdateOneMenuDelegate = new UpdateOneMenu(UpdateOneDishes);
-            RemoveOneMenuDelegate = new RemoveOneMenu(RemoveOneDishes);
         }
 
         private void UpdateOneDishes(Menu menu)
@@ -66,30 +64,71 @@ namespace WeddingManagementApplication
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            if (this.textBox1.Text == "" || this.textBox2.Text == "")
+            try
             {
-                MessageBox.Show("Vui lòng điền đủ thông tin");
+                if (this.textBox1.Text == "" || this.textBox2.Text == "")
+                {
+                    MessageBox.Show("Vui lòng điền đủ thông tin");
+                }
+                else
+                {
+                    Menu m = new Menu();
+                    m.idDishes = "";
+                    m.DishesName = this.textBox1.Text;
+                    m.DishesPrice = int.Parse(this.textBox2.Text);
+                    //m.Note = this.textBox3.Text;
+                    m.Note = "";
+                    using (var sql = new SqlConnection(WeddingClient.sqlConnectionString))
+                    {
+                        sql.Open();
+                        // add menu to database
+                        // if success add menu to list
+                        m.idDishes = "MN" + WeddingClient.GetNewIdFromTable("MN").ToString().PadLeft(19, '0');
+                        using (SqlCommand command = new SqlCommand("insert into MENU (idDishes, DishesName, DishesPrice, Note) values (@idDishes, @DishesName, @DishesPrice, @Note)", sql))
+                        {
+                            command.Parameters.AddWithValue("@idDishes", m.idDishes);
+                            command.Parameters.AddWithValue("@DishesName", m.DishesName);
+                            command.Parameters.AddWithValue("@DishesPrice", m.DishesPrice);
+                            command.Parameters.AddWithValue("@Note", m.Note);
+                            if (command.ExecuteNonQuery() > 0)
+                            {
+                                this.AddOneDishes(m);
+                            }
+                            else
+                            {
+                            }
+                        }
+                    }
+                }
             }
-            else
+            catch (Exception ex)
             {
-                Menu m = new Menu();
-                m.idDishes = "";
-                m.DishesName = this.textBox1.Text;
-                m.DishesPrice = int.Parse(this.textBox2.Text);
-                //WeddingClient.Queue_command(Encoding.Unicode.GetBytes("0124" + Tools.data_with_byte(Jil.JSON.Serialize<Menu>(m))));
-                // add menu to database
-                // if success add menu to list
-                //this.AddDishes(d); // add menu to list
+                MessageBox.Show(ex.Message);
             }
-
         }
 
         private void FormDishes_Load(object sender, EventArgs e)
         {
             //WeddingClient.Queue_command(Encoding.Unicode.GetBytes("0024"));
             // load menu from database
+            List<Menu> menus = new List<Menu>();
+            using (var sql = new SqlConnection(WeddingClient.sqlConnectionString))
+            {
+                sql.Open();
+                using (SqlCommand command = new SqlCommand("select * from MENU where available > 0", sql))
+                {
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            menus.Add(new Menu(reader["idDishes"].ToString(), reader["DishesName"].ToString(), (long)reader["DishesPrice"], reader["Note"].ToString()));
+                        }
+                    }
+                }
+            }
+            AddDishes(menus);
         }
-        [STAThread]
+        //[STAThread]
         private void btnUpFile_Click(object sender, EventArgs e)
         {
             string filename = "";
@@ -142,16 +181,6 @@ namespace WeddingManagementApplication
             Console.WriteLine(d.menu.idDishes);
         }
 
-        private void RemoveOneDishes(Menu menu)
-        {
-            Dishes d;
-            if (FormDishes.dishes.TryGetValue(menu.idDishes, out d))
-            {
-                this.flowLayoutPanel1.Controls.Remove(d);
-                FormDishes.dishes.TryRemove(menu.idDishes, out Dishes _);
-            }
-        }
-
         private void btnRemove_Click(object sender, EventArgs e)
         {
             foreach (string id in FormDishes.selectedDishesIDs.Keys)
@@ -160,9 +189,25 @@ namespace WeddingManagementApplication
                 if (FormDishes.dishes.TryGetValue(id, out d))
                 {
                     Console.WriteLine(d.id);
-                    //WeddingClient.Queue_command(Encoding.Unicode.GetBytes("0124" + Tools.data_with_byte(Jil.JSON.Serialize<Menu>(d.menu))));
+                    var menu = d.menu;
                     // delete from database, if success delete from list
-                    // RemoveOnedishes(d.menu);
+                    using (var sql = new SqlConnection(WeddingClient.sqlConnectionString))
+                    {
+                        sql.Open();
+                        using (SqlCommand command = new SqlCommand("update MENU set available = 0 where idDishes = @idDishes", sql))
+                        {
+                            command.Parameters.AddWithValue("@idDishes", menu.idDishes);
+                            if (command.ExecuteNonQuery() > 0)
+                            {
+                                this.flowLayoutPanel1.Controls.Remove(d);
+                                FormDishes.dishes.TryRemove(menu.idDishes, out Dishes _);
+                            }
+                            else
+                            {
+                                MessageBox.Show("Có lỗi xảy ra");
+                            }
+                        }
+                    }
                 }
             }
             selectedDishesIDs.Clear();
