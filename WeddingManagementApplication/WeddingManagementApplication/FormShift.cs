@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace WeddingManagementApplication
-{ 
-    public partial class MenuItem : UserControl
+{
+    public partial class FormShift : Form
     {
-        public MenuItem()
+        public FormShift()
         {
             InitializeComponent();
         }

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormBooking));
             this.textBox_bookingdate = new WeddingManagementApplication.CustomeBorderTextbox();
             this.textBox_phone = new WeddingManagementApplication.CustomeBorderTextbox();
             this.textBox_representative = new WeddingManagementApplication.CustomeBorderTextbox();
@@ -74,21 +75,21 @@
             // 
             // textBox_bookingdate
             // 
-            this.textBox_bookingdate.Location = new System.Drawing.Point(226, 154);
+            this.textBox_bookingdate.Location = new System.Drawing.Point(388, 154);
             this.textBox_bookingdate.Name = "textBox_bookingdate";
             this.textBox_bookingdate.Size = new System.Drawing.Size(139, 22);
             this.textBox_bookingdate.TabIndex = 19;
             // 
             // textBox_phone
             // 
-            this.textBox_phone.Location = new System.Drawing.Point(227, 111);
+            this.textBox_phone.Location = new System.Drawing.Point(389, 111);
             this.textBox_phone.Name = "textBox_phone";
             this.textBox_phone.Size = new System.Drawing.Size(139, 22);
             this.textBox_phone.TabIndex = 18;
             // 
             // textBox_representative
             // 
-            this.textBox_representative.Location = new System.Drawing.Point(227, 72);
+            this.textBox_representative.Location = new System.Drawing.Point(389, 72);
             this.textBox_representative.Name = "textBox_representative";
             this.textBox_representative.Size = new System.Drawing.Size(139, 22);
             this.textBox_representative.TabIndex = 17;
@@ -98,7 +99,7 @@
             this.label_bookdate.AutoSize = true;
             this.label_bookdate.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_bookdate.ForeColor = System.Drawing.Color.Crimson;
-            this.label_bookdate.Location = new System.Drawing.Point(91, 154);
+            this.label_bookdate.Location = new System.Drawing.Point(253, 154);
             this.label_bookdate.Name = "label_bookdate";
             this.label_bookdate.Size = new System.Drawing.Size(116, 23);
             this.label_bookdate.TabIndex = 16;
@@ -109,7 +110,7 @@
             this.label_tittle_wedding_in4.AutoSize = true;
             this.label_tittle_wedding_in4.Font = new System.Drawing.Font("Segoe Print", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_tittle_wedding_in4.ForeColor = System.Drawing.Color.Crimson;
-            this.label_tittle_wedding_in4.Location = new System.Drawing.Point(193, 12);
+            this.label_tittle_wedding_in4.Location = new System.Drawing.Point(355, 12);
             this.label_tittle_wedding_in4.Margin = new System.Windows.Forms.Padding(0);
             this.label_tittle_wedding_in4.Name = "label_tittle_wedding_in4";
             this.label_tittle_wedding_in4.Size = new System.Drawing.Size(414, 54);
@@ -121,7 +122,7 @@
             this.label_phone.AutoSize = true;
             this.label_phone.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_phone.ForeColor = System.Drawing.Color.Crimson;
-            this.label_phone.Location = new System.Drawing.Point(91, 110);
+            this.label_phone.Location = new System.Drawing.Point(253, 110);
             this.label_phone.Name = "label_phone";
             this.label_phone.Size = new System.Drawing.Size(129, 23);
             this.label_phone.TabIndex = 14;
@@ -132,7 +133,7 @@
             this.label_representative.AutoSize = true;
             this.label_representative.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_representative.ForeColor = System.Drawing.Color.Crimson;
-            this.label_representative.Location = new System.Drawing.Point(91, 68);
+            this.label_representative.Location = new System.Drawing.Point(253, 68);
             this.label_representative.Name = "label_representative";
             this.label_representative.Size = new System.Drawing.Size(128, 23);
             this.label_representative.TabIndex = 13;
@@ -140,21 +141,21 @@
             // 
             // textBox_bride
             // 
-            this.textBox_bride.Location = new System.Drawing.Point(520, 154);
+            this.textBox_bride.Location = new System.Drawing.Point(682, 154);
             this.textBox_bride.Name = "textBox_bride";
             this.textBox_bride.Size = new System.Drawing.Size(144, 22);
             this.textBox_bride.TabIndex = 25;
             // 
             // textBox_groom
             // 
-            this.textBox_groom.Location = new System.Drawing.Point(520, 112);
+            this.textBox_groom.Location = new System.Drawing.Point(682, 112);
             this.textBox_groom.Name = "textBox_groom";
             this.textBox_groom.Size = new System.Drawing.Size(144, 22);
             this.textBox_groom.TabIndex = 24;
             // 
             // textBox_weddingdate
             // 
-            this.textBox_weddingdate.Location = new System.Drawing.Point(520, 72);
+            this.textBox_weddingdate.Location = new System.Drawing.Point(682, 72);
             this.textBox_weddingdate.Name = "textBox_weddingdate";
             this.textBox_weddingdate.Size = new System.Drawing.Size(144, 22);
             this.textBox_weddingdate.TabIndex = 23;
@@ -164,7 +165,7 @@
             this.label_bride.AutoSize = true;
             this.label_bride.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_bride.ForeColor = System.Drawing.Color.Crimson;
-            this.label_bride.Location = new System.Drawing.Point(384, 152);
+            this.label_bride.Location = new System.Drawing.Point(546, 152);
             this.label_bride.Name = "label_bride";
             this.label_bride.Size = new System.Drawing.Size(101, 23);
             this.label_bride.TabIndex = 22;
@@ -175,7 +176,7 @@
             this.label_groom.AutoSize = true;
             this.label_groom.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_groom.ForeColor = System.Drawing.Color.Crimson;
-            this.label_groom.Location = new System.Drawing.Point(384, 112);
+            this.label_groom.Location = new System.Drawing.Point(546, 112);
             this.label_groom.Name = "label_groom";
             this.label_groom.Size = new System.Drawing.Size(115, 23);
             this.label_groom.TabIndex = 21;
@@ -186,7 +187,7 @@
             this.label_weddingdate.AutoSize = true;
             this.label_weddingdate.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_weddingdate.ForeColor = System.Drawing.Color.Crimson;
-            this.label_weddingdate.Location = new System.Drawing.Point(384, 70);
+            this.label_weddingdate.Location = new System.Drawing.Point(546, 70);
             this.label_weddingdate.Name = "label_weddingdate";
             this.label_weddingdate.Size = new System.Drawing.Size(122, 23);
             this.label_weddingdate.TabIndex = 20;
@@ -194,21 +195,21 @@
             // 
             // customBorderTextBox5
             // 
-            this.customBorderTextBox5.Location = new System.Drawing.Point(521, 234);
+            this.customBorderTextBox5.Location = new System.Drawing.Point(683, 234);
             this.customBorderTextBox5.Name = "customBorderTextBox5";
             this.customBorderTextBox5.Size = new System.Drawing.Size(144, 22);
             this.customBorderTextBox5.TabIndex = 33;
             // 
             // textBox_table_price
             // 
-            this.textBox_table_price.Location = new System.Drawing.Point(521, 195);
+            this.textBox_table_price.Location = new System.Drawing.Point(683, 195);
             this.textBox_table_price.Name = "textBox_table_price";
             this.textBox_table_price.Size = new System.Drawing.Size(144, 22);
             this.textBox_table_price.TabIndex = 32;
             // 
             // customBorderTextBox7
             // 
-            this.customBorderTextBox7.Location = new System.Drawing.Point(227, 232);
+            this.customBorderTextBox7.Location = new System.Drawing.Point(389, 232);
             this.customBorderTextBox7.Name = "customBorderTextBox7";
             this.customBorderTextBox7.Size = new System.Drawing.Size(140, 22);
             this.customBorderTextBox7.TabIndex = 31;
@@ -218,7 +219,7 @@
             this.label_deposit.AutoSize = true;
             this.label_deposit.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_deposit.ForeColor = System.Drawing.Color.Crimson;
-            this.label_deposit.Location = new System.Drawing.Point(384, 233);
+            this.label_deposit.Location = new System.Drawing.Point(546, 233);
             this.label_deposit.Name = "label_deposit";
             this.label_deposit.Size = new System.Drawing.Size(72, 23);
             this.label_deposit.TabIndex = 30;
@@ -229,7 +230,7 @@
             this.label_table_price.AutoSize = true;
             this.label_table_price.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_table_price.ForeColor = System.Drawing.Color.Crimson;
-            this.label_table_price.Location = new System.Drawing.Point(384, 193);
+            this.label_table_price.Location = new System.Drawing.Point(546, 193);
             this.label_table_price.Name = "label_table_price";
             this.label_table_price.Size = new System.Drawing.Size(95, 23);
             this.label_table_price.TabIndex = 29;
@@ -240,7 +241,7 @@
             this.label_contingency.AutoSize = true;
             this.label_contingency.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_contingency.ForeColor = System.Drawing.Color.Crimson;
-            this.label_contingency.Location = new System.Drawing.Point(93, 232);
+            this.label_contingency.Location = new System.Drawing.Point(255, 232);
             this.label_contingency.Name = "label_contingency";
             this.label_contingency.Size = new System.Drawing.Size(111, 23);
             this.label_contingency.TabIndex = 28;
@@ -248,7 +249,7 @@
             // 
             // textBox_table
             // 
-            this.textBox_table.Location = new System.Drawing.Point(228, 194);
+            this.textBox_table.Location = new System.Drawing.Point(390, 194);
             this.textBox_table.Name = "textBox_table";
             this.textBox_table.Size = new System.Drawing.Size(138, 22);
             this.textBox_table.TabIndex = 27;
@@ -258,7 +259,7 @@
             this.label_table.AutoSize = true;
             this.label_table.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_table.ForeColor = System.Drawing.Color.Crimson;
-            this.label_table.Location = new System.Drawing.Point(93, 194);
+            this.label_table.Location = new System.Drawing.Point(255, 194);
             this.label_table.Name = "label_table";
             this.label_table.Size = new System.Drawing.Size(53, 23);
             this.label_table.TabIndex = 26;
@@ -282,7 +283,7 @@
             this.Column8,
             this.Column9,
             this.Column10});
-            this.dataGridView1.Location = new System.Drawing.Point(-5, 288);
+            this.dataGridView1.Location = new System.Drawing.Point(157, 288);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 24;
@@ -382,19 +383,23 @@
             // 
             // pictureBox_insert_wd
             // 
-            this.pictureBox_insert_wd.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox_insert_wd.Location = new System.Drawing.Point(680, 248);
+            this.pictureBox_insert_wd.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pictureBox_insert_wd.Image = global::WeddingManagementApplication.Properties.Resources.icons8_plus_50;
+            this.pictureBox_insert_wd.Location = new System.Drawing.Point(842, 248);
             this.pictureBox_insert_wd.Name = "pictureBox_insert_wd";
             this.pictureBox_insert_wd.Size = new System.Drawing.Size(36, 34);
+            this.pictureBox_insert_wd.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox_insert_wd.TabIndex = 41;
             this.pictureBox_insert_wd.TabStop = false;
             // 
             // pictureBox_edit_wd
             // 
             this.pictureBox_edit_wd.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox_edit_wd.Location = new System.Drawing.Point(722, 247);
+            this.pictureBox_edit_wd.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox_edit_wd.Image")));
+            this.pictureBox_edit_wd.Location = new System.Drawing.Point(884, 247);
             this.pictureBox_edit_wd.Name = "pictureBox_edit_wd";
             this.pictureBox_edit_wd.Size = new System.Drawing.Size(31, 35);
+            this.pictureBox_edit_wd.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox_edit_wd.TabIndex = 40;
             this.pictureBox_edit_wd.TabStop = false;
             // 
@@ -402,9 +407,11 @@
             // 
             this.pictureBox_delete_wd.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox_delete_wd.ErrorImage = null;
-            this.pictureBox_delete_wd.Location = new System.Drawing.Point(759, 247);
+            this.pictureBox_delete_wd.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox_delete_wd.Image")));
+            this.pictureBox_delete_wd.Location = new System.Drawing.Point(921, 247);
             this.pictureBox_delete_wd.Name = "pictureBox_delete_wd";
             this.pictureBox_delete_wd.Size = new System.Drawing.Size(29, 35);
+            this.pictureBox_delete_wd.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox_delete_wd.TabIndex = 39;
             this.pictureBox_delete_wd.TabStop = false;
             // 
@@ -413,7 +420,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(204)))), ((int)(((byte)(176)))));
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1153, 654);
             this.Controls.Add(this.pictureBox_insert_wd);
             this.Controls.Add(this.pictureBox_edit_wd);
             this.Controls.Add(this.pictureBox_delete_wd);
@@ -440,6 +447,8 @@
             this.Controls.Add(this.label_phone);
             this.Controls.Add(this.label_representative);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.MaximumSize = new System.Drawing.Size(1153, 654);
+            this.MinimumSize = new System.Drawing.Size(1153, 654);
             this.Name = "FormBooking";
             this.Text = "NhanTiec";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
