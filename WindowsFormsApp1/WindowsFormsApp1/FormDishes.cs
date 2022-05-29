@@ -60,7 +60,7 @@ namespace WindowsFormsApp1
 
         private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) )
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
                 e.Handled = true;
             }
@@ -68,7 +68,7 @@ namespace WindowsFormsApp1
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            if(this.textBox1.Text == "" || this.textBox2.Text == "" )
+            if (this.textBox1.Text == "" || this.textBox2.Text == "")
             {
                 MessageBox.Show("Vui lòng điền đủ thông tin");
             }
@@ -80,8 +80,8 @@ namespace WindowsFormsApp1
                 m.DishesPrice = int.Parse(this.textBox2.Text);
                 WeddingClient.Queue_command(Encoding.Unicode.GetBytes("0124" + Tools.data_with_byte(Jil.JSON.Serialize<Menu>(m))));
                 //this.AddDishes(d); don't add from here
-            }    
-            
+            }
+
         }
 
         private void FormDishes_Load(object sender, EventArgs e)
@@ -94,26 +94,20 @@ namespace WindowsFormsApp1
             string filename = "";
             var t = new System.Threading.Thread((() =>
             {
-             OpenFileDialog dlg = new OpenFileDialog();
-            dlg.ShowHelp = true;
+                OpenFileDialog dlg = new OpenFileDialog();
+                dlg.ShowHelp = true;
                 dlg.Filter = "All files (*.*)|*.*";
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
                     filename = dlg.FileName;
                     //Thread.Sleep(10000);
-                   // this.label1.Text = dlg.FileName;
+                    // this.label1.Text = dlg.FileName;
                 }
             }));
-            
+
             t.SetApartmentState(System.Threading.ApartmentState.STA);
             t.Start();
             t.Join();
-                
-        }));
-            
-                t.SetApartmentState(ApartmentState.STA);
-                t.Start();
-                t.Join();
             if (filename != "")
             {
                 string endOfFile = filename.Split('\\')[filename.Split('\\').Length - 1];
@@ -127,7 +121,7 @@ namespace WindowsFormsApp1
         {
             foreach (Menu m in menus)
             {
-                Dishes d = new Dishes(m); 
+                Dishes d = new Dishes(m);
                 if (!dishes.ContainsKey(m.idDishes))
                 {
                     this.flowLayoutPanel1.Controls.Add(d);
@@ -137,7 +131,7 @@ namespace WindowsFormsApp1
         }
         private void AddOneDishes(Menu menu)
         {
-            Dishes d = new Dishes(menu); 
+            Dishes d = new Dishes(menu);
             if (!dishes.ContainsKey(menu.idDishes))
             {
                 this.flowLayoutPanel1.Controls.Add(d);
@@ -146,17 +140,17 @@ namespace WindowsFormsApp1
             Console.WriteLine(d.id);
             Console.WriteLine(d.menu.idDishes);
         }
-        
+
         private void RemoveOneDishes(Menu menu)
         {
             Dishes d;
-            if(FormDishes.dishes.TryGetValue(menu.idDishes, out d))
+            if (FormDishes.dishes.TryGetValue(menu.idDishes, out d))
             {
                 this.flowLayoutPanel1.Controls.Remove(d);
                 FormDishes.dishes.TryRemove(menu.idDishes, out Dishes _);
             }
         }
-        
+
         private void btnRemove_Click(object sender, EventArgs e)
         {
             foreach (string id in FormDishes.selectedDishesIDs.Keys)
@@ -171,6 +165,12 @@ namespace WindowsFormsApp1
                 }
             }
             selectedDishesIDs.Clear();
-        }  
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
+

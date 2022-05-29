@@ -76,8 +76,8 @@ namespace WindowsFormsApp1
             else
             {
                 this.btnClick.Visible=true;
-                FormDishes.selectedDishesIDs.AddOrUpdate(this.id, 0, (key, oldValue) => 0);
                 this.BorderStyle = BorderStyle.FixedSingle;
+                FormDishes.selectedDishesIDs.AddOrUpdate(this.id, 0, (key, oldValue) => 0);
             }    
         }
     }
