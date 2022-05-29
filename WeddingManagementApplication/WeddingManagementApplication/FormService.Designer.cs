@@ -173,6 +173,7 @@
             this.MinimumSize = new System.Drawing.Size(1153, 654);
             this.Name = "FormServices";
             this.Text = "FormServices";
+            this.Load += new System.EventHandler(this.Services_Load);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
