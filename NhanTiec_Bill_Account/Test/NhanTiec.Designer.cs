@@ -44,6 +44,13 @@ namespace Test
             this.label1 = new System.Windows.Forms.Label();
             this.cbb_shift = new System.Windows.Forms.ComboBox();
             this.label_shift = new System.Windows.Forms.Label();
+            this.tb_deposit = new Test.CustomBorderTextBox();
+            this.tb_representative = new Test.CustomBorderTextBox();
+            this.tb_phone = new Test.CustomBorderTextBox();
+            this.tb_contigency = new Test.CustomBorderTextBox();
+            this.tb_table = new Test.CustomBorderTextBox();
+            this.tb_groom = new Test.CustomBorderTextBox();
+            this.tb_bride = new Test.CustomBorderTextBox();
             this.date_booking = new System.Windows.Forms.DateTimePicker();
             this.date_wedding = new System.Windows.Forms.DateTimePicker();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -52,6 +59,8 @@ namespace Test
             this.btn_delete_wedding = new System.Windows.Forms.Button();
             this.groupBox_menu = new System.Windows.Forms.GroupBox();
             this.btn_detail_dishes = new System.Windows.Forms.Button();
+            this.tb_dishes_price = new Test.CustomBorderTextBox();
+            this.tb_price_dishes = new Test.CustomBorderTextBox();
             this.btn_add_menu = new System.Windows.Forms.Button();
             this.label_dishes_price = new System.Windows.Forms.Label();
             this.label_amount_dishes = new System.Windows.Forms.Label();
@@ -59,23 +68,14 @@ namespace Test
             this.label_menu = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btn_detail_service = new System.Windows.Forms.Button();
+            this.tb_service_price = new Test.CustomBorderTextBox();
+            this.cbb_price_service = new Test.CustomBorderTextBox();
             this.btn_add_service = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.cbb_service = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.dataWedding = new System.Windows.Forms.DataGridView();
-            this.tb_service_price = new Test.CustomBorderTextBox();
-            this.cbb_price_service = new Test.CustomBorderTextBox();
-            this.tb_dishes_price = new Test.CustomBorderTextBox();
-            this.tb_price_dishes = new Test.CustomBorderTextBox();
-            this.tb_deposit = new Test.CustomBorderTextBox();
-            this.tb_representative = new Test.CustomBorderTextBox();
-            this.tb_phone = new Test.CustomBorderTextBox();
-            this.tb_contigency = new Test.CustomBorderTextBox();
-            this.tb_table = new Test.CustomBorderTextBox();
-            this.tb_groom = new Test.CustomBorderTextBox();
-            this.tb_bride = new Test.CustomBorderTextBox();
             this.wedding.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox_menu.SuspendLayout();
@@ -225,6 +225,7 @@ namespace Test
             // 
             // cbb_lobby
             // 
+            this.cbb_lobby.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbb_lobby.FormattingEnabled = true;
             this.cbb_lobby.Location = new System.Drawing.Point(512, 151);
             this.cbb_lobby.Name = "cbb_lobby";
@@ -244,6 +245,8 @@ namespace Test
             // 
             // cbb_shift
             // 
+            this.cbb_shift.BackColor = System.Drawing.Color.White;
+            this.cbb_shift.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbb_shift.FormattingEnabled = true;
             this.cbb_shift.Location = new System.Drawing.Point(363, 152);
             this.cbb_shift.Name = "cbb_shift";
@@ -260,6 +263,55 @@ namespace Test
             this.label_shift.Size = new System.Drawing.Size(49, 23);
             this.label_shift.TabIndex = 34;
             this.label_shift.Text = "Shift:";
+            // 
+            // tb_deposit
+            // 
+            this.tb_deposit.Location = new System.Drawing.Point(472, 115);
+            this.tb_deposit.Name = "tb_deposit";
+            this.tb_deposit.Size = new System.Drawing.Size(144, 22);
+            this.tb_deposit.TabIndex = 33;
+            // 
+            // tb_representative
+            // 
+            this.tb_representative.Location = new System.Drawing.Point(152, 33);
+            this.tb_representative.Name = "tb_representative";
+            this.tb_representative.Size = new System.Drawing.Size(139, 22);
+            this.tb_representative.TabIndex = 17;
+            // 
+            // tb_phone
+            // 
+            this.tb_phone.Location = new System.Drawing.Point(151, 75);
+            this.tb_phone.Name = "tb_phone";
+            this.tb_phone.Size = new System.Drawing.Size(139, 22);
+            this.tb_phone.TabIndex = 18;
+            // 
+            // tb_contigency
+            // 
+            this.tb_contigency.Location = new System.Drawing.Point(151, 153);
+            this.tb_contigency.Name = "tb_contigency";
+            this.tb_contigency.Size = new System.Drawing.Size(140, 22);
+            this.tb_contigency.TabIndex = 31;
+            // 
+            // tb_table
+            // 
+            this.tb_table.Location = new System.Drawing.Point(152, 115);
+            this.tb_table.Name = "tb_table";
+            this.tb_table.Size = new System.Drawing.Size(138, 22);
+            this.tb_table.TabIndex = 27;
+            // 
+            // tb_groom
+            // 
+            this.tb_groom.Location = new System.Drawing.Point(472, 29);
+            this.tb_groom.Name = "tb_groom";
+            this.tb_groom.Size = new System.Drawing.Size(144, 22);
+            this.tb_groom.TabIndex = 24;
+            // 
+            // tb_bride
+            // 
+            this.tb_bride.Location = new System.Drawing.Point(472, 71);
+            this.tb_bride.Name = "tb_bride";
+            this.tb_bride.Size = new System.Drawing.Size(144, 22);
+            this.tb_bride.TabIndex = 25;
             // 
             // date_booking
             // 
@@ -357,6 +409,23 @@ namespace Test
             this.btn_detail_dishes.UseVisualStyleBackColor = false;
             this.btn_detail_dishes.Click += new System.EventHandler(this.btn_detail_dishes_Click);
             // 
+            // tb_dishes_price
+            // 
+            this.tb_dishes_price.BackColor = System.Drawing.Color.White;
+            this.tb_dishes_price.Location = new System.Drawing.Point(101, 71);
+            this.tb_dishes_price.Name = "tb_dishes_price";
+            this.tb_dishes_price.Size = new System.Drawing.Size(127, 22);
+            this.tb_dishes_price.TabIndex = 60;
+            // 
+            // tb_price_dishes
+            // 
+            this.tb_price_dishes.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.tb_price_dishes.Location = new System.Drawing.Point(101, 112);
+            this.tb_price_dishes.Name = "tb_price_dishes";
+            this.tb_price_dishes.ReadOnly = true;
+            this.tb_price_dishes.Size = new System.Drawing.Size(127, 22);
+            this.tb_price_dishes.TabIndex = 38;
+            // 
             // btn_add_menu
             // 
             this.btn_add_menu.BackColor = System.Drawing.SystemColors.ControlLightLight;
@@ -391,6 +460,7 @@ namespace Test
             // 
             // cbb_dishes
             // 
+            this.cbb_dishes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbb_dishes.FormattingEnabled = true;
             this.cbb_dishes.Location = new System.Drawing.Point(101, 26);
             this.cbb_dishes.Name = "cbb_dishes";
@@ -437,6 +507,23 @@ namespace Test
             this.btn_detail_service.UseVisualStyleBackColor = false;
             this.btn_detail_service.Click += new System.EventHandler(this.btn_detail_service_Click);
             // 
+            // tb_service_price
+            // 
+            this.tb_service_price.BackColor = System.Drawing.Color.White;
+            this.tb_service_price.Location = new System.Drawing.Point(101, 70);
+            this.tb_service_price.Name = "tb_service_price";
+            this.tb_service_price.Size = new System.Drawing.Size(127, 22);
+            this.tb_service_price.TabIndex = 61;
+            // 
+            // cbb_price_service
+            // 
+            this.cbb_price_service.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.cbb_price_service.Location = new System.Drawing.Point(101, 112);
+            this.cbb_price_service.Name = "cbb_price_service";
+            this.cbb_price_service.ReadOnly = true;
+            this.cbb_price_service.Size = new System.Drawing.Size(127, 22);
+            this.cbb_price_service.TabIndex = 60;
+            // 
             // btn_add_service
             // 
             this.btn_add_service.BackColor = System.Drawing.SystemColors.ControlLightLight;
@@ -471,6 +558,7 @@ namespace Test
             // 
             // cbb_service
             // 
+            this.cbb_service.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbb_service.FormattingEnabled = true;
             this.cbb_service.Location = new System.Drawing.Point(101, 27);
             this.cbb_service.Name = "cbb_service";
@@ -498,91 +586,6 @@ namespace Test
             this.dataWedding.RowTemplate.Height = 24;
             this.dataWedding.Size = new System.Drawing.Size(616, 199);
             this.dataWedding.TabIndex = 57;
-            // 
-            // tb_service_price
-            // 
-            this.tb_service_price.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.tb_service_price.Location = new System.Drawing.Point(101, 70);
-            this.tb_service_price.Name = "tb_service_price";
-            this.tb_service_price.ReadOnly = true;
-            this.tb_service_price.Size = new System.Drawing.Size(127, 22);
-            this.tb_service_price.TabIndex = 61;
-            // 
-            // cbb_price_service
-            // 
-            this.cbb_price_service.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.cbb_price_service.Location = new System.Drawing.Point(101, 112);
-            this.cbb_price_service.Name = "cbb_price_service";
-            this.cbb_price_service.ReadOnly = true;
-            this.cbb_price_service.Size = new System.Drawing.Size(127, 22);
-            this.cbb_price_service.TabIndex = 60;
-            // 
-            // tb_dishes_price
-            // 
-            this.tb_dishes_price.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.tb_dishes_price.Location = new System.Drawing.Point(101, 71);
-            this.tb_dishes_price.Name = "tb_dishes_price";
-            this.tb_dishes_price.ReadOnly = true;
-            this.tb_dishes_price.Size = new System.Drawing.Size(127, 22);
-            this.tb_dishes_price.TabIndex = 60;
-            // 
-            // tb_price_dishes
-            // 
-            this.tb_price_dishes.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.tb_price_dishes.Location = new System.Drawing.Point(101, 112);
-            this.tb_price_dishes.Name = "tb_price_dishes";
-            this.tb_price_dishes.ReadOnly = true;
-            this.tb_price_dishes.Size = new System.Drawing.Size(127, 22);
-            this.tb_price_dishes.TabIndex = 38;
-            // 
-            // tb_deposit
-            // 
-            this.tb_deposit.Location = new System.Drawing.Point(472, 115);
-            this.tb_deposit.Name = "tb_deposit";
-            this.tb_deposit.Size = new System.Drawing.Size(144, 22);
-            this.tb_deposit.TabIndex = 33;
-            // 
-            // tb_representative
-            // 
-            this.tb_representative.Location = new System.Drawing.Point(152, 33);
-            this.tb_representative.Name = "tb_representative";
-            this.tb_representative.Size = new System.Drawing.Size(139, 22);
-            this.tb_representative.TabIndex = 17;
-            // 
-            // tb_phone
-            // 
-            this.tb_phone.Location = new System.Drawing.Point(151, 75);
-            this.tb_phone.Name = "tb_phone";
-            this.tb_phone.Size = new System.Drawing.Size(139, 22);
-            this.tb_phone.TabIndex = 18;
-            // 
-            // tb_contigency
-            // 
-            this.tb_contigency.Location = new System.Drawing.Point(151, 153);
-            this.tb_contigency.Name = "tb_contigency";
-            this.tb_contigency.Size = new System.Drawing.Size(140, 22);
-            this.tb_contigency.TabIndex = 31;
-            // 
-            // tb_table
-            // 
-            this.tb_table.Location = new System.Drawing.Point(152, 115);
-            this.tb_table.Name = "tb_table";
-            this.tb_table.Size = new System.Drawing.Size(138, 22);
-            this.tb_table.TabIndex = 27;
-            // 
-            // tb_groom
-            // 
-            this.tb_groom.Location = new System.Drawing.Point(472, 29);
-            this.tb_groom.Name = "tb_groom";
-            this.tb_groom.Size = new System.Drawing.Size(144, 22);
-            this.tb_groom.TabIndex = 24;
-            // 
-            // tb_bride
-            // 
-            this.tb_bride.Location = new System.Drawing.Point(472, 71);
-            this.tb_bride.Name = "tb_bride";
-            this.tb_bride.Size = new System.Drawing.Size(144, 22);
-            this.tb_bride.TabIndex = 25;
             // 
             // NhanTiec
             // 
