@@ -23,6 +23,12 @@ namespace WeddingManagementApplication
 
         public Service()
         {
+            // make all fiels non-null
+            idService = "";
+            ServiceName = "";
+            ServicePrice = 0;
+            Note = "";
+            
         }
 
         public bool Equals(Service other)

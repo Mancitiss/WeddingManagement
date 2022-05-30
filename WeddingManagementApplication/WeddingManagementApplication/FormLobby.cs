@@ -35,10 +35,8 @@ namespace WeddingManagementApplication
         private Button button1;
         private Panel panel3;
         private Panel panel2;
-        private Button button3;
         private Panel panel1;
         private Label label9;
-        private DataGridView dataGridView1;
         private Label label7;
         private TableLayoutPanel tableLayoutPanel1;
         private Label header_lobby;
