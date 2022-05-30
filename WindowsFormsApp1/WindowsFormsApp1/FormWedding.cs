@@ -23,7 +23,7 @@ namespace WindowsFormsApp1
         {
             cmd = connection.CreateCommand();
 
-            cmd.CommandText = "SELECT LT.LobbyName, L.LobbyName, MaxTable, MinTablePrice, Note FROM LOBBY LB, LOBBY_TYPE LT  WHERE LB.idLobbyType = LT.idLobbyType ";
+            cmd.CommandText = "SELECT LT.LobbyName, LB.LobbyName, MaxTable, MinTablePrice, Note FROM LOBBY LB, LOBBY_TYPE LT  WHERE LB.idLobbyType = LT.idLobbyType ";
 
             adapter.SelectCommand = cmd;
             table.Clear();
@@ -58,11 +58,11 @@ namespace WindowsFormsApp1
         {
             int i;
             i = dataGridViewLobby.CurrentRow.Index;
-            comboBox_IDLobby.Text = dataGridViewLobby.Rows[i].Cells[0].Value.ToString();
-            comboBox_NameLobby.Text = dataGridViewLobby.Rows[i].Cells[1].Value.ToString();
-            textBox_maxtable.Text = dataGridViewLobby.Rows[i].Cells[2].Value.ToString();
-            textBox_minprice.Text = dataGridViewLobby.Rows[i].Cells[3].Value.ToString();
-            textBox1.Text = dataGridViewLobby.Rows[i].Cells[4].Value.ToString();
+            textBox2.Text = dataGridViewLobby.Rows[i].Cells[0].Value.ToString();
+            comboBox1.Text = dataGridViewLobby.Rows[i].Cells[1].Value.ToString();
+            textBox3.Text = dataGridViewLobby.Rows[i].Cells[2].Value.ToString();
+            textBox4.Text = dataGridViewLobby.Rows[i].Cells[3].Value.ToString();
+            textBox5.Text = dataGridViewLobby.Rows[i].Cells[4].Value.ToString();
         }
         private void FormLobby_Load(object sender, EventArgs e)
         {
@@ -71,11 +71,7 @@ namespace WindowsFormsApp1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            cmd = connection.CreateCommand();
-            cmd.CommandText = "insert into LOBBY (idLobby,idLobbyType,LobbyName, MaxTable, Note) values ('" + comboBox_IDLobby.Text + "','" + comboBox_IDLobbyType.Text + "','" + comboBox_NameLobby.Text + "','" + textBox1.Text + "','" + textBox_maxtable.Text + "','" + textBox1.Text + "')";
-            cmd.ExecuteNonQuery();
-            load_data_Lobby();
-
+            
 
         }
     }
