@@ -35,11 +35,9 @@ namespace Test
             this.checkedListBox_level = new System.Windows.Forms.CheckedListBox();
             this.label_cccd = new System.Windows.Forms.Label();
             this.label_level = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.customBorderTextBox3 = new Test.CustomBorderTextBox();
-            this.customBorderTextBox2 = new Test.CustomBorderTextBox();
-            this.customBorderTextBox1 = new Test.CustomBorderTextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.tb_iden = new Test.CustomBorderTextBox();
+            this.tb_pass = new Test.CustomBorderTextBox();
+            this.tb_user = new Test.CustomBorderTextBox();
             this.SuspendLayout();
             // 
             // label_user
@@ -47,7 +45,7 @@ namespace Test
             this.label_user.AutoSize = true;
             this.label_user.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_user.ForeColor = System.Drawing.Color.Crimson;
-            this.label_user.Location = new System.Drawing.Point(406, 200);
+            this.label_user.Location = new System.Drawing.Point(36, 90);
             this.label_user.Name = "label_user";
             this.label_user.Size = new System.Drawing.Size(91, 23);
             this.label_user.TabIndex = 3;
@@ -58,7 +56,7 @@ namespace Test
             this.label_sdt.AutoSize = true;
             this.label_sdt.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_sdt.ForeColor = System.Drawing.Color.Crimson;
-            this.label_sdt.Location = new System.Drawing.Point(406, 246);
+            this.label_sdt.Location = new System.Drawing.Point(36, 136);
             this.label_sdt.Name = "label_sdt";
             this.label_sdt.Size = new System.Drawing.Size(129, 23);
             this.label_sdt.TabIndex = 4;
@@ -69,7 +67,7 @@ namespace Test
             this.label_create_acc.AutoSize = true;
             this.label_create_acc.Font = new System.Drawing.Font("Segoe Print", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_create_acc.ForeColor = System.Drawing.Color.Crimson;
-            this.label_create_acc.Location = new System.Drawing.Point(399, 117);
+            this.label_create_acc.Location = new System.Drawing.Point(29, 7);
             this.label_create_acc.Margin = new System.Windows.Forms.Padding(0);
             this.label_create_acc.Name = "label_create_acc";
             this.label_create_acc.Size = new System.Drawing.Size(333, 43);
@@ -87,7 +85,7 @@ namespace Test
             "Nhân viên",
             "Quản lý",
             "Giám đốc"});
-            this.checkedListBox_level.Location = new System.Drawing.Point(541, 332);
+            this.checkedListBox_level.Location = new System.Drawing.Point(171, 222);
             this.checkedListBox_level.Name = "checkedListBox_level";
             this.checkedListBox_level.Size = new System.Drawing.Size(120, 66);
             this.checkedListBox_level.TabIndex = 6;
@@ -97,7 +95,7 @@ namespace Test
             this.label_cccd.AutoSize = true;
             this.label_cccd.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_cccd.ForeColor = System.Drawing.Color.Crimson;
-            this.label_cccd.Location = new System.Drawing.Point(406, 290);
+            this.label_cccd.Location = new System.Drawing.Point(36, 180);
             this.label_cccd.Name = "label_cccd";
             this.label_cccd.Size = new System.Drawing.Size(115, 23);
             this.label_cccd.TabIndex = 8;
@@ -108,83 +106,67 @@ namespace Test
             this.label_level.AutoSize = true;
             this.label_level.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_level.ForeColor = System.Drawing.Color.Crimson;
-            this.label_level.Location = new System.Drawing.Point(406, 332);
+            this.label_level.Location = new System.Drawing.Point(36, 222);
             this.label_level.Name = "label_level";
             this.label_level.Size = new System.Drawing.Size(53, 23);
             this.label_level.TabIndex = 9;
             this.label_level.Text = "Level:";
             // 
-            // pictureBox1
+            // tb_iden
             // 
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox1.Image = global::Test.Properties.Resources.img3;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(374, 491);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
+            this.tb_iden.Location = new System.Drawing.Point(171, 180);
+            this.tb_iden.Name = "tb_iden";
+            this.tb_iden.Size = new System.Drawing.Size(171, 22);
+            this.tb_iden.TabIndex = 12;
             // 
-            // customBorderTextBox3
+            // tb_pass
             // 
-            this.customBorderTextBox3.Location = new System.Drawing.Point(541, 290);
-            this.customBorderTextBox3.Name = "customBorderTextBox3";
-            this.customBorderTextBox3.Size = new System.Drawing.Size(171, 22);
-            this.customBorderTextBox3.TabIndex = 12;
+            this.tb_pass.Location = new System.Drawing.Point(171, 136);
+            this.tb_pass.Name = "tb_pass";
+            this.tb_pass.Size = new System.Drawing.Size(171, 22);
+            this.tb_pass.TabIndex = 11;
             // 
-            // customBorderTextBox2
+            // tb_user
             // 
-            this.customBorderTextBox2.Location = new System.Drawing.Point(541, 246);
-            this.customBorderTextBox2.Name = "customBorderTextBox2";
-            this.customBorderTextBox2.Size = new System.Drawing.Size(171, 22);
-            this.customBorderTextBox2.TabIndex = 11;
-            // 
-            // customBorderTextBox1
-            // 
-            this.customBorderTextBox1.Location = new System.Drawing.Point(541, 200);
-            this.customBorderTextBox1.Name = "customBorderTextBox1";
-            this.customBorderTextBox1.Size = new System.Drawing.Size(171, 22);
-            this.customBorderTextBox1.TabIndex = 10;
+            this.tb_user.Location = new System.Drawing.Point(171, 90);
+            this.tb_user.Name = "tb_user";
+            this.tb_user.Size = new System.Drawing.Size(171, 22);
+            this.tb_user.TabIndex = 10;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(204)))), ((int)(((byte)(176)))));
-            this.ClientSize = new System.Drawing.Size(768, 490);
-            this.Controls.Add(this.customBorderTextBox3);
-            this.Controls.Add(this.customBorderTextBox2);
-            this.Controls.Add(this.customBorderTextBox1);
+            this.ClientSize = new System.Drawing.Size(402, 298);
+            this.Controls.Add(this.tb_iden);
+            this.Controls.Add(this.tb_pass);
+            this.Controls.Add(this.tb_user);
             this.Controls.Add(this.label_level);
             this.Controls.Add(this.label_cccd);
             this.Controls.Add(this.checkedListBox_level);
             this.Controls.Add(this.label_create_acc);
             this.Controls.Add(this.label_sdt);
             this.Controls.Add(this.label_user);
-            this.Controls.Add(this.pictureBox1);
             this.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Form1";
             this.Text = "Form1";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label_user;
         private System.Windows.Forms.Label label_sdt;
         private System.Windows.Forms.Label label_create_acc;
         private System.Windows.Forms.CheckedListBox checkedListBox_level;
         private System.Windows.Forms.Label label_cccd;
         private System.Windows.Forms.Label label_level;
-        private CustomBorderTextBox customBorderTextBox1;
-        private CustomBorderTextBox customBorderTextBox2;
-        private CustomBorderTextBox customBorderTextBox3;
+        private CustomBorderTextBox tb_user;
+        private CustomBorderTextBox tb_pass;
+        private CustomBorderTextBox tb_iden;
     }
 }
 
