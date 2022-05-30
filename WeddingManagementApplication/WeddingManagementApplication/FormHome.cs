@@ -73,5 +73,11 @@ namespace WeddingManagementApplication
         {
             this.Close();
         }
+
+        private void btnShift_Click(object sender, EventArgs e)
+        {
+            this.panelNavigate.Top = this.btnShift.Top;
+            openChildForm(new FormShift());
+        }
     }
 }

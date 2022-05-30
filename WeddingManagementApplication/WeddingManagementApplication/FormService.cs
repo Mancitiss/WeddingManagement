@@ -29,7 +29,7 @@ namespace WeddingManagementApplication
             using (var sql = new SqlConnection(WeddingClient.sqlConnectionString))
             {
                 sql.Open();
-                using (SqlCommand command = new SqlCommand("select * from SERVICE where available > 0", sql))
+                using (SqlCommand command = new SqlCommand("select * from SERVICE where availiable > 0", sql))
                 {
                     using (SqlDataReader reader = command.ExecuteReader())
                     {

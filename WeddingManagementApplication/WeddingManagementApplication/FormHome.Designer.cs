@@ -109,6 +109,7 @@
             this.btnShift.TabIndex = 8;
             this.btnShift.Text = "Shift";
             this.btnShift.UseVisualStyleBackColor = false;
+            this.btnShift.Click += new System.EventHandler(this.btnShift_Click);
             // 
             // panelNavigate
             // 

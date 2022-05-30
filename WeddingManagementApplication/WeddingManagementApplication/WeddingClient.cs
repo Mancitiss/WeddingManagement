@@ -13,7 +13,7 @@ namespace WeddingManagementApplication
     internal class WeddingClient
     {
         internal static Random rand = new Random();
-        internal static string sqlConnectionString = ConfigurationManager.AppSettings.Get("conString");
+        internal static string sqlConnectionString = /*@"Data Source=DESKTOP-673E813\OSBORN;Initial Catalog=WEDDINGMANAGEMENT;integrated security=true";*/ConfigurationManager.AppSettings.Get("conString");
         public static string client_id;
         public static short client_priority;
         public static bool Logged_in(string tk, string mk)
@@ -40,6 +40,7 @@ namespace WeddingManagementApplication
                                     {
                                         changepass.Parameters.AddWithValue("@pw", Crypter.Blowfish.Crypt(mk));
                                         changepass.Parameters.AddWithValue("@id", reader["id"].ToString());
+                                        reader.Close();
                                         changepass.ExecuteNonQuery();
                                         skip = true;
                                         return false;

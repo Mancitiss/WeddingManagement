@@ -42,9 +42,8 @@
             this.lbName.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbName.Location = new System.Drawing.Point(91, 46);
             this.lbName.Name = "lbName";
-            this.lbName.Size = new System.Drawing.Size(70, 25);
+            this.lbName.Size = new System.Drawing.Size(0, 25);
             this.lbName.TabIndex = 0;
-            this.lbName.Text = "label1";
             // 
             // label2
             // 
@@ -72,9 +71,8 @@
             this.lbStart.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbStart.Location = new System.Drawing.Point(123, 141);
             this.lbStart.Name = "lbStart";
-            this.lbStart.Size = new System.Drawing.Size(70, 25);
+            this.lbStart.Size = new System.Drawing.Size(0, 25);
             this.lbStart.TabIndex = 3;
-            this.lbStart.Text = "label4";
             // 
             // lbEnd
             // 
@@ -82,9 +80,8 @@
             this.lbEnd.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbEnd.Location = new System.Drawing.Point(124, 297);
             this.lbEnd.Name = "lbEnd";
-            this.lbEnd.Size = new System.Drawing.Size(70, 25);
+            this.lbEnd.Size = new System.Drawing.Size(0, 25);
             this.lbEnd.TabIndex = 4;
-            this.lbEnd.Text = "label5";
             // 
             // lbStatus
             // 

@@ -16,7 +16,7 @@ namespace WeddingManagementApplication
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormServices());
+            Application.Run(new FormLogin());
         }
     }
 }

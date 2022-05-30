@@ -12,6 +12,26 @@ namespace WeddingManagementApplication
 {
     public partial class Shift : UserControl
     {
+        public string _lbName
+        {
+            get { return this.lbName.Text; }
+            set { this.lbName.Text = value; }    
+        }
+        public string _lbStart
+        {
+            get { return this.lbStart.Text; }
+            set { this.lbStart.Text = value; }
+        }
+        public string _lbEnd
+        {
+            get { return this.lbEnd.Text; }
+            set { this.lbEnd.Text = value; }
+        }
+        public string _lbStatus
+        {
+            get { return this.lbStatus.Text; }
+            set { this.lbStatus.Text = value; }
+        }
         public Shift()
         {
             InitializeComponent();
