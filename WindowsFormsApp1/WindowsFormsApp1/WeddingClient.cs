@@ -57,7 +57,7 @@ namespace WindowsFormsApp1
             }
         }
 
-        private static void Receive_from_id(TcpClient self)
+        private static async void Receive_from_id(TcpClient self)
         {
             try
             {
@@ -366,8 +366,9 @@ namespace WindowsFormsApp1
                                 if (receive_data_automatically(stream, out string json))
                                 {
                                     Menu menu = Jil.JSON.Deserialize<Menu>(json);
+                                    (Program.mainform.GetCurrentChildForm() as FormDishes).Invoke((Program.mainform.GetCurrentChildForm() as FormDishes).UpdateOneMenuDelegate, new object[] { menu });
                                     // inform user that menu has been updated and update menu list
-                                    //listOfMenu[listOfMenu.IndexOf(menu)]=menu;
+
                                 }
                             }
                             break;
@@ -385,7 +386,7 @@ namespace WindowsFormsApp1
                                 if (receive_data_automatically(stream, out string json))
                                 {
                                     Menu menu = Jil.JSON.Deserialize<Menu>(json);
-                                    //listOfMenu.Add(menu);
+                                    (Program.mainform.GetCurrentChildForm() as FormDishes).Invoke((Program.mainform.GetCurrentChildForm() as FormDishes).AddOneMenuDelegate, new object[] { menu });
                                 }
                             }
                             break;
@@ -396,8 +397,7 @@ namespace WindowsFormsApp1
                                 if (receive_data_automatically(stream, out string json))
                                 {
                                     Menu menu = Jil.JSON.Deserialize<Menu>(json);
-                                    // remove menu from list if it exists and equals to this menu object
-                                    //listOfMenu.Remove(menu);
+                                    (Program.mainform.GetCurrentChildForm() as FormDishes).Invoke((Program.mainform.GetCurrentChildForm() as FormDishes).RemoveOneMenuDelegate, new object[] { menu });
                                 }
                             }
                             break;

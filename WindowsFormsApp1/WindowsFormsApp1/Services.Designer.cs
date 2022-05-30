@@ -28,48 +28,82 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Services));
+            this.lbName = new System.Windows.Forms.Label();
+            this.lbPrice = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.tbName = new System.Windows.Forms.TextBox();
+            this.tbPrice = new System.Windows.Forms.TextBox();
+            this.tbDetail = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
-            // label1
+            // lbName
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(37, 18);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(76, 16);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Tên dịch vụ";
+            this.lbName.AutoSize = true;
+            this.lbName.Location = new System.Drawing.Point(37, 18);
+            this.lbName.Name = "lbName";
+            this.lbName.Size = new System.Drawing.Size(76, 16);
+            this.lbName.TabIndex = 0;
+            this.lbName.Text = "Tên dịch vụ";
             // 
-            // label2
+            // lbPrice
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(37, 55);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(28, 16);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Giá";
+            this.lbPrice.AutoSize = true;
+            this.lbPrice.Location = new System.Drawing.Point(37, 55);
+            this.lbPrice.Name = "lbPrice";
+            this.lbPrice.Size = new System.Drawing.Size(28, 16);
+            this.lbPrice.TabIndex = 1;
+            this.lbPrice.Text = "Giá";
             // 
-            // label3
+            // button1
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(37, 92);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(32, 16);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Hạn";
+            this.button1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button1.BackgroundImage")));
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(204)))), ((int)(((byte)(176)))));
+            this.button1.Location = new System.Drawing.Point(772, 84);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(59, 43);
+            this.button1.TabIndex = 2;
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Visible = false;
+            // 
+            // tbName
+            // 
+            this.tbName.Location = new System.Drawing.Point(133, 19);
+            this.tbName.Name = "tbName";
+            this.tbName.Size = new System.Drawing.Size(286, 22);
+            this.tbName.TabIndex = 3;
+            // 
+            // tbPrice
+            // 
+            this.tbPrice.Location = new System.Drawing.Point(133, 55);
+            this.tbPrice.Name = "tbPrice";
+            this.tbPrice.Size = new System.Drawing.Size(72, 22);
+            this.tbPrice.TabIndex = 4;
+            // 
+            // tbDetail
+            // 
+            this.tbDetail.Location = new System.Drawing.Point(445, 15);
+            this.tbDetail.Name = "tbDetail";
+            this.tbDetail.Size = new System.Drawing.Size(288, 99);
+            this.tbDetail.TabIndex = 5;
+            this.tbDetail.Text = "";
             // 
             // Services
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(204)))), ((int)(((byte)(176)))));
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.tbDetail);
+            this.Controls.Add(this.tbPrice);
+            this.Controls.Add(this.tbName);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.lbPrice);
+            this.Controls.Add(this.lbName);
             this.Name = "Services";
             this.Size = new System.Drawing.Size(832, 128);
+            this.Click += new System.EventHandler(this.Services_Click);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -77,8 +111,11 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lbName;
+        private System.Windows.Forms.Label lbPrice;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox tbName;
+        private System.Windows.Forms.TextBox tbPrice;
+        private System.Windows.Forms.RichTextBox tbDetail;
     }
 }
