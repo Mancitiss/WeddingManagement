@@ -7,40 +7,76 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
 
 namespace WindowsFormsApp1
 {
     public partial class FormLobby : Form
     {
+        SqlCommand cmd;
+        SqlConnection connection;
+        string str = @"Data Source=DESKTOP-IEL0IE1;Initial Catalog=WEDDINGMANAGEMENT;Integrated Security=True";
+        SqlDataAdapter adapter = new SqlDataAdapter();
+        DataTable table = new DataTable();
+
+        void load_data_Lobby()
+        {
+            cmd = connection.CreateCommand();
+
+            cmd.CommandText = "SELECT LT.LobbyName, L.LobbyName, MaxTable, MinTablePrice, Note FROM LOBBY LB, LOBBY_TYPE LT  WHERE LB.idLobbyType = LT.idLobbyType ";
+
+            adapter.SelectCommand = cmd;
+            table.Clear();
+            adapter.Fill(table);
+            dataGridViewLobby.DataSource = table;
+        }
         public FormLobby()
         {
             InitializeComponent();
         }
-        private Label label1;
+        private Label label_idLobby;
         private Label label2;
         private LinkLabel linkLabel1;
-        private DateTimePicker dateTimePicker1;
         private GroupBox groupBox1;
-        private Label label6;
-        private NumericUpDown numericUpDown1;
-        private Label label5;
-        private TextBox textBox1;
-        private Label label4;
-        private ComboBox comboBox1;
-        private Label label3;
-        private RadioButton radioButton3;
-        private RadioButton radioButton1;
-        private ComboBox comboBox2;
+        private Label label_MinPrice;
+        private Label label_MaxTable;
+        private Label label_NameLobby;
+        private ComboBox comboBox_IDLobbyType;
+        private Label label_IDLobbyType;
         private Button button2;
         private Button button1;
         private Panel panel3;
         private Panel panel2;
-        private Button button3;
         private Panel panel1;
         private Label label9;
-        private DataGridView dataGridView1;
-        private Label label7;
+        private DataGridView dataGridViewLobby;
         private TableLayoutPanel tableLayoutPanel1;
         private Label header_lobby;
+
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int i;
+            i = dataGridViewLobby.CurrentRow.Index;
+            comboBox_IDLobby.Text = dataGridViewLobby.Rows[i].Cells[0].Value.ToString();
+            comboBox_NameLobby.Text = dataGridViewLobby.Rows[i].Cells[1].Value.ToString();
+            textBox_maxtable.Text = dataGridViewLobby.Rows[i].Cells[2].Value.ToString();
+            textBox_minprice.Text = dataGridViewLobby.Rows[i].Cells[3].Value.ToString();
+            textBox1.Text = dataGridViewLobby.Rows[i].Cells[4].Value.ToString();
+        }
+        private void FormLobby_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            cmd = connection.CreateCommand();
+            cmd.CommandText = "insert into LOBBY (idLobby,idLobbyType,LobbyName, MaxTable, Note) values ('" + comboBox_IDLobby.Text + "','" + comboBox_IDLobbyType.Text + "','" + comboBox_NameLobby.Text + "','" + textBox1.Text + "','" + textBox_maxtable.Text + "','" + textBox1.Text + "')";
+            cmd.ExecuteNonQuery();
+            load_data_Lobby();
+
+
+        }
     }
 }
