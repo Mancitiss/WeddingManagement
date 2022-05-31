@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Configuration;
 
-namespace Test
+namespace WeddingManagementApplication
 {
     public partial class searchWedding : Form
     {

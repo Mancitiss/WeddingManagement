@@ -1,5 +1,5 @@
 ﻿
-namespace Test
+namespace WeddingManagementApplication
 {
     partial class searchWedding
     {
@@ -35,8 +35,8 @@ namespace Test
             this.label1 = new System.Windows.Forms.Label();
             this.rBtn_name = new System.Windows.Forms.RadioButton();
             this.rBtn_date = new System.Windows.Forms.RadioButton();
-            this.tb_search_bill = new Test.CustomBorderTextBox();
-            this.tb_search_wd = new Test.CustomBorderTextBox();
+            this.tb_search_bill = new WeddingManagementApplication.CustomeBorderTextbox();
+            this.tb_search_wd = new WeddingManagementApplication.CustomeBorderTextbox();
             ((System.ComponentModel.ISupportInitialize)(this.dataWedding)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataBill)).BeginInit();
             this.SuspendLayout();
@@ -90,9 +90,10 @@ namespace Test
             // rBtn_name
             // 
             this.rBtn_name.AutoSize = true;
-            this.rBtn_name.Location = new System.Drawing.Point(311, 113);
+            this.rBtn_name.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rBtn_name.Location = new System.Drawing.Point(240, 112);
             this.rBtn_name.Name = "rBtn_name";
-            this.rBtn_name.Size = new System.Drawing.Size(289, 21);
+            this.rBtn_name.Size = new System.Drawing.Size(345, 27);
             this.rBtn_name.TabIndex = 20;
             this.rBtn_name.TabStop = true;
             this.rBtn_name.Text = "Groom name, bride name, representative";
@@ -101,9 +102,10 @@ namespace Test
             // rBtn_date
             // 
             this.rBtn_date.AutoSize = true;
-            this.rBtn_date.Location = new System.Drawing.Point(617, 113);
+            this.rBtn_date.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rBtn_date.Location = new System.Drawing.Point(633, 112);
             this.rBtn_date.Name = "rBtn_date";
-            this.rBtn_date.Size = new System.Drawing.Size(117, 21);
+            this.rBtn_date.Size = new System.Drawing.Size(138, 27);
             this.rBtn_date.TabIndex = 21;
             this.rBtn_date.TabStop = true;
             this.rBtn_date.Text = "Wedding date";
@@ -150,11 +152,11 @@ namespace Test
 
         #endregion
 
-        private CustomBorderTextBox tb_search_wd;
+        private CustomeBorderTextbox tb_search_wd;
         private System.Windows.Forms.DataGridView dataWedding;
         private System.Windows.Forms.Label label_search;
         private System.Windows.Forms.DataGridView dataBill;
-        private CustomBorderTextBox tb_search_bill;
+        private CustomeBorderTextbox tb_search_bill;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.RadioButton rBtn_name;
         private System.Windows.Forms.RadioButton rBtn_date;
