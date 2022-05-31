@@ -394,7 +394,7 @@ namespace WeddingManagementApplication
                 // get DishesData from listDishes at index
                 DishesData dishes = WeddingClient.listDishes[index];
                 // check if tb_dishes_price is number
-                if (tb_dishes_price.Text.Length > 0 && long.TryParse(tb_dishes_price.Text, out long count) && count > 0)
+                if (tb_dishes_price.Text.Length > 0 && long.TryParse(tb_dishes_price.Text, out long count))
                 {
                     using(SqlConnection sql = new SqlConnection(WeddingClient.sqlConnectionString))
                     {
@@ -437,7 +437,7 @@ namespace WeddingManagementApplication
                                         if (cmd2.ExecuteNonQuery() > 0)
                                         {
                                             MessageBox.Show("Thêm thành công");
-                                            tb_dishes_price.Text = "";
+                                            tb_dishes_price.Text = ""; 
                                         }
                                         else
                                         {
@@ -464,7 +464,7 @@ namespace WeddingManagementApplication
                                 {
                                     newDishesPrice = dishes.DishesPrice * Convert.ToInt32(tb_dishes_price.Text);
                                     long changes = newDishesPrice - currentDishesPrice;
-                                    using (SqlCommand cmd2 = new SqlCommand("UPDATE BILL SET TablePriceTotal = TablePriceTotal + @tableChanged, Total = Total + @tableChanged WHERE idBill = @idWedding", sql))
+                                    using (SqlCommand cmd2 = new SqlCommand("UPDATE BILL SET TablePriceTotal = TablePriceTotal + @tableChanged, Total = Total + @tableChanged, MoneyLeft = MoneyLeft + @tableChanged WHERE idBill = @idWedding", sql))
                                     {
                                         cmd2.Parameters.AddWithValue("@idWedding", NhanTiec.currentWeddingId);
                                         cmd2.Parameters.AddWithValue("@tableChanged", changes);
@@ -542,15 +542,27 @@ namespace WeddingManagementApplication
                     cmd.Parameters.AddWithValue("@representative", tb_representative.Text);
                     if (cmd.ExecuteNonQuery() > 0)
                     {
+                        long basePrice = 0;
+                        using (SqlCommand cmd2 = new SqlCommand("SELECT MinTablePrice FROM LOBBY_TYPE WHERE idLobbyType = @idLobbyType", sql))
+                        {
+                            cmd2.Parameters.AddWithValue("@idLobbyType", lobby.idLobbyType);
+                            using (SqlDataReader reader = cmd2.ExecuteReader())
+                            {
+                                if (reader.Read())
+                                {
+                                    basePrice = Convert.ToInt64(reader["MinTablePrice"]) * Convert.ToInt32(tb_table.Text);
+                                }
+                            }
+                        }
                         using(SqlCommand cmd2 = new SqlCommand("INSERT INTO BILL (idBill, InvoiceDate, TablePriceTotal, ServicePriceTotal, Total, PaymentDate, MoneyLeft) VALUES (@idBill, @InvoiceDate, @TablePricetotal, @ServicePriceTotal, @Total, @PaymentDate, @MoneyLeft) ", sql))
                         {
                             cmd2.Parameters.AddWithValue("@idBill", newId);
                             cmd2.Parameters.AddWithValue("@InvoiceDate", date_wedding.Value);
                             cmd2.Parameters.AddWithValue("@TablePricetotal", 0);
                             cmd2.Parameters.AddWithValue("@ServicePriceTotal", 0);
-                            cmd2.Parameters.AddWithValue("@Total", 0);
+                            cmd2.Parameters.AddWithValue("@Total", basePrice);
                             cmd2.Parameters.AddWithValue("@PaymentDate", DBNull.Value);
-                            cmd2.Parameters.AddWithValue("@MoneyLeft", 0);
+                            cmd2.Parameters.AddWithValue("@MoneyLeft", basePrice - Convert.ToInt32(tb_deposit.Text));
                             if (cmd2.ExecuteNonQuery() > 0)
                             {
                                 DataRow row = table1.NewRow();
