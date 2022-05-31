@@ -179,6 +179,8 @@ namespace WeddingManagementApplication
             {
                 col.HeaderText = table1.Columns[col.DataPropertyName].Caption;
             }
+            dataWedding.Columns["bookingDate"].DefaultCellStyle.Format = "dd/MM/yyyy";
+            dataWedding.Columns["weddingDate"].DefaultCellStyle.Format = "dd/MM/yyyy";
         }
 
         // đổ dữ liệu từ db lên comboBox shift
