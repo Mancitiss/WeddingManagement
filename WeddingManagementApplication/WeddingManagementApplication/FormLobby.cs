@@ -6,43 +6,68 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.SqlClient;
 using System.Windows.Forms;
+using System.Data;
 
 namespace WeddingManagementApplication
 {
     public partial class FormLobby : Form
     {
+
+        SqlCommand cmd;
+        SqlConnection connection;
+        string str = @"Data Source=DESKTOP-IEL0IE1;Initial Catalog=WEDDINGMANAGEMENT;Integrated Security=True";
+        SqlDataAdapter adapter = new SqlDataAdapter();
+        DataTable table = new DataTable();
+
+        void load_data_Lobby()
+        {
+            cmd = connection.CreateCommand();
+
+            cmd.CommandText = "SELECT LB.LobbyName, MaxTable, available, Note FROM LOBBY LB";
+
+            adapter.SelectCommand = cmd;
+            table.Clear();
+            adapter.Fill(table);
+            dataGridView1.DataSource = table;
+        }  
+
+
         public FormLobby()
         {
             InitializeComponent();
         }
-        private Label label1;
         private Label label2;
         private LinkLabel linkLabel1;
-        private DateTimePicker dateTimePicker1;
         private GroupBox groupBox1;
-        private Label label6;
-        private NumericUpDown numericUpDown1;
-        private Label label5;
         private TextBox textBox1;
-        private Label label4;
         private ComboBox comboBox1;
-        private Label label3;
-        private RadioButton radioButton3;
-        private RadioButton radioButton1;
-        private ComboBox comboBox2;
         private Button btn_delete;
         private Button btn_add;
         private Panel panel3;
         private Panel panel1;
         private Label label9;
-        private Label label7;
         private TableLayoutPanel tableLayoutPanel1;
         private Label header_lobby;
 
-        private void header_lobby_Click(object sender, EventArgs e)
-        {
 
+        private void FormLobby_Load(object sender, EventArgs e)
+        {
+            connection = new SqlConnection(str);
+            connection.Open();
+            load_data_Lobby();
+        }
+
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int i;
+            i = dataGridView1.CurrentRow.Index;
+            comboBox1.Text = dataGridView1.Rows[i].Cells[0].Value.ToString();
+            textBox1.Text = dataGridView1.Rows[i].Cells[1].Value.ToString();
+            textBox2.Text = dataGridView1.Rows[i].Cells[2].Value.ToString();
+            textBox3.Text = dataGridView1.Rows[i].Cells[3].Value.ToString();
         }
     }
 }
