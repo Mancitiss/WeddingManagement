@@ -91,11 +91,11 @@
             // 
             // dateTimePicker1
             // 
-            this.dateTimePicker1.CustomFormat = "dd/MM/yyyy";
+            this.dateTimePicker1.CustomFormat = " dd/MM/yyyy";
             this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePicker1.Location = new System.Drawing.Point(95, 10);
             this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(138, 29);
+            this.dateTimePicker1.Size = new System.Drawing.Size(138, 30);
             this.dateTimePicker1.TabIndex = 7;
             // 
             // groupBox1

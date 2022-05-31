@@ -28,7 +28,6 @@ namespace WeddingManagementApplication
             ServiceName = "";
             ServicePrice = 0;
             Note = "";
-            
         }
 
         public bool Equals(Service other)

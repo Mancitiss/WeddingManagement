@@ -160,6 +160,7 @@
     <Compile Include="Dishes.Designer.cs">
       <DependentUpon>Dishes.cs</DependentUpon>
     </Compile>
+    <Compile Include="DishesData.cs" />
     <Compile Include="FormBooking.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -208,12 +209,32 @@
     <Compile Include="FormShift.Designer.cs">
       <DependentUpon>FormShift.cs</DependentUpon>
     </Compile>
+    <Compile Include="gridView_dishes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="gridView_dishes.Designer.cs">
+      <DependentUpon>gridView_dishes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="gridView_service.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="gridView_service.Designer.cs">
+      <DependentUpon>gridView_service.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LobbyData.cs" />
+    <Compile Include="LobbyTypeData.cs" />
     <Compile Include="Menu.cs" />
     <Compile Include="MenuItem.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="MenuItem.Designer.cs">
       <DependentUpon>MenuItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanTiec.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NhanTiec.Designer.cs">
+      <DependentUpon>NhanTiec.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -237,6 +258,7 @@
     <Compile Include="Shift.Designer.cs">
       <DependentUpon>Shift.cs</DependentUpon>
     </Compile>
+    <Compile Include="ShiftData.cs" />
     <Compile Include="WeddingClient.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -252,12 +274,14 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormHome.resx">
       <DependentUpon>FormHome.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="FormLobby.resx">
       <DependentUpon>FormLobby.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormLogin.resx">
       <DependentUpon>FormLogin.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="FormService.resx">
       <DependentUpon>FormService.cs</DependentUpon>
@@ -265,8 +289,17 @@
     <EmbeddedResource Include="FormShift.resx">
       <DependentUpon>FormShift.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="gridView_dishes.resx">
+      <DependentUpon>gridView_dishes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="gridView_service.resx">
+      <DependentUpon>gridView_service.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MenuItem.resx">
       <DependentUpon>MenuItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanTiec.resx">
+      <DependentUpon>NhanTiec.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

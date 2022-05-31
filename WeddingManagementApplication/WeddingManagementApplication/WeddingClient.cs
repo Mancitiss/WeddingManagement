@@ -12,6 +12,12 @@ namespace WeddingManagementApplication
 {
     internal class WeddingClient
     {
+        internal static List<DishesData> listDishes = new List<DishesData>();
+        internal static List<Service> listServices = new List<Service>();
+        internal static List<ShiftData> listShifts = new List<ShiftData>();
+        internal static List<LobbyTypeData> listLobbyTypes = new List<LobbyTypeData>();
+        internal static List<LobbyData> listLobbies = new List<LobbyData>();
+        
         internal static Random rand = new Random();
         internal static string sqlConnectionString = /*@"Data Source=DESKTOP-673E813\OSBORN;Initial Catalog=WEDDINGMANAGEMENT;integrated security=true";*/ConfigurationManager.AppSettings.Get("conString");
         public static string client_id;

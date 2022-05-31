@@ -17,6 +17,24 @@ namespace WeddingManagementApplication
             InitializeComponent();
         }
 
+        private void TextBoxUserName_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
+        {
+            // check if key is enter
+            if (e.KeyCode == Keys.Enter)
+            {
+                buttonLogin.PerformClick();
+            }
+        }
+
+        private void TextBoxPassWord_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
+        {
+            // check if key is enter
+            if (e.KeyCode == Keys.Enter)
+            {
+                buttonLogin.PerformClick();
+            }
+        }
+
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
 

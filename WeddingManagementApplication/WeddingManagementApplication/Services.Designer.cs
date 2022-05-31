@@ -32,28 +32,30 @@
             this.lbName = new System.Windows.Forms.Label();
             this.lbPrice = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
-            this.tbName = new System.Windows.Forms.TextBox();
-            this.tbPrice = new System.Windows.Forms.TextBox();
-            this.tbDetail = new System.Windows.Forms.RichTextBox();
+            this.tbName = new System.Windows.Forms.Label();
+            this.tbPrice = new System.Windows.Forms.Label();
+            this.tbDetail = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lbName
             // 
             this.lbName.AutoSize = true;
+            this.lbName.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbName.Location = new System.Drawing.Point(37, 18);
             this.lbName.Name = "lbName";
             this.lbName.Size = new System.Drawing.Size(76, 16);
             this.lbName.TabIndex = 0;
-            this.lbName.Text = "Tên dịch vụ";
+            this.lbName.Text = "Tên dịch vụ:";
             // 
             // lbPrice
             // 
             this.lbPrice.AutoSize = true;
+            this.lbPrice.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbPrice.Location = new System.Drawing.Point(37, 55);
             this.lbPrice.Name = "lbPrice";
             this.lbPrice.Size = new System.Drawing.Size(28, 16);
             this.lbPrice.TabIndex = 1;
-            this.lbPrice.Text = "Giá";
+            this.lbPrice.Text = "Giá:";
             // 
             // button1
             // 
@@ -70,20 +72,27 @@
             // 
             // tbName
             // 
-            this.tbName.Location = new System.Drawing.Point(133, 19);
+            this.tbName.AutoSize = true;
+            this.tbName.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbName.Location = new System.Drawing.Point(143, 18);
             this.tbName.Name = "tbName";
             this.tbName.Size = new System.Drawing.Size(286, 22);
             this.tbName.TabIndex = 3;
             // 
             // tbPrice
             // 
-            this.tbPrice.Location = new System.Drawing.Point(133, 55);
+            this.tbPrice.AutoSize = true;
+            this.tbPrice.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbPrice.Location = new System.Drawing.Point(85, 55);
             this.tbPrice.Name = "tbPrice";
             this.tbPrice.Size = new System.Drawing.Size(72, 22);
             this.tbPrice.TabIndex = 4;
             // 
             // tbDetail
             // 
+            this.tbDetail.MaximumSize = new System.Drawing.Size(288, 0);
+            this.tbDetail.AutoSize = true;
+            this.tbDetail.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbDetail.Location = new System.Drawing.Point(445, 15);
             this.tbDetail.Name = "tbDetail";
             this.tbDetail.Size = new System.Drawing.Size(288, 99);
@@ -114,8 +123,8 @@
         private System.Windows.Forms.Label lbName;
         private System.Windows.Forms.Label lbPrice;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox tbName;
-        private System.Windows.Forms.TextBox tbPrice;
-        private System.Windows.Forms.RichTextBox tbDetail;
+        private System.Windows.Forms.Label tbName;
+        private System.Windows.Forms.Label tbPrice;
+        private System.Windows.Forms.Label tbDetail;
     }
 }

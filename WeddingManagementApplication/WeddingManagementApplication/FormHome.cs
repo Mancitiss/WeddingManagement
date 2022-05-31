@@ -31,8 +31,10 @@ namespace WeddingManagementApplication
         private void btnWedding_Click(object sender, EventArgs e)
         {
             this.panelNavigate.Top = this.btnWedding.Top;
-            openChildForm(new FormBooking());
-
+            NhanTiec form = new NhanTiec();
+            // remove title bar
+            form.FormBorderStyle = FormBorderStyle.None;
+            openChildForm(form);
         }
 
         private void btnMenu_Click(object sender, EventArgs e)
