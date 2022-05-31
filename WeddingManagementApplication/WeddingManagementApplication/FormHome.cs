@@ -30,7 +30,7 @@ namespace WeddingManagementApplication
 
         private void btnWedding_Click(object sender, EventArgs e)
         {
-            this.panelNavigate.Top = this.btnWedding.Top;
+            this.panelNavigate.Top = this.btnSearch.Top;
             NhanTiec form = new NhanTiec();
             // remove title bar
             form.FormBorderStyle = FormBorderStyle.None;
@@ -78,7 +78,7 @@ namespace WeddingManagementApplication
 
         private void btnShift_Click(object sender, EventArgs e)
         {
-            this.panelNavigate.Top = this.btnShift.Top;
+            this.panelNavigate.Top = this.btnWedding.Top;
             openChildForm(new FormShift());
         }
     }

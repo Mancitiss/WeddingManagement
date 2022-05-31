@@ -30,16 +30,16 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormHome));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btnAcc = new System.Windows.Forms.Button();
-            this.btnBill = new System.Windows.Forms.Button();
-            this.btnShift = new System.Windows.Forms.Button();
+            this.btnLogout = new System.Windows.Forms.Button();
+            this.btnSettings = new System.Windows.Forms.Button();
+            this.btnWedding = new System.Windows.Forms.Button();
             this.panelNavigate = new System.Windows.Forms.Panel();
             this.btnLobby = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.btnReport = new System.Windows.Forms.Button();
             this.btnService = new System.Windows.Forms.Button();
             this.btnMenu = new System.Windows.Forms.Button();
-            this.btnWedding = new System.Windows.Forms.Button();
+            this.btnSearch = new System.Windows.Forms.Button();
             this.btnHome = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -53,16 +53,16 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.btnAcc);
-            this.panel1.Controls.Add(this.btnBill);
-            this.panel1.Controls.Add(this.btnShift);
+            this.panel1.Controls.Add(this.btnLogout);
+            this.panel1.Controls.Add(this.btnSettings);
+            this.panel1.Controls.Add(this.btnWedding);
             this.panel1.Controls.Add(this.panelNavigate);
             this.panel1.Controls.Add(this.btnLobby);
             this.panel1.Controls.Add(this.pictureBox2);
             this.panel1.Controls.Add(this.btnReport);
             this.panel1.Controls.Add(this.btnService);
             this.panel1.Controls.Add(this.btnMenu);
-            this.panel1.Controls.Add(this.btnWedding);
+            this.panel1.Controls.Add(this.btnSearch);
             this.panel1.Controls.Add(this.btnHome);
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
@@ -71,45 +71,45 @@
             this.panel1.Size = new System.Drawing.Size(231, 786);
             this.panel1.TabIndex = 0;
             // 
-            // btnAcc
+            // btnLogout
             // 
-            this.btnAcc.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(78)))), ((int)(((byte)(77)))));
-            this.btnAcc.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnAcc.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAcc.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnAcc.Location = new System.Drawing.Point(2, 719);
-            this.btnAcc.Name = "btnAcc";
-            this.btnAcc.Size = new System.Drawing.Size(224, 63);
-            this.btnAcc.TabIndex = 10;
-            this.btnAcc.Text = "Account";
-            this.btnAcc.UseVisualStyleBackColor = false;
+            this.btnLogout.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(78)))), ((int)(((byte)(77)))));
+            this.btnLogout.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnLogout.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLogout.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnLogout.Location = new System.Drawing.Point(2, 720);
+            this.btnLogout.Name = "btnLogout";
+            this.btnLogout.Size = new System.Drawing.Size(224, 63);
+            this.btnLogout.TabIndex = 10;
+            this.btnLogout.Text = "Log out";
+            this.btnLogout.UseVisualStyleBackColor = false;
             // 
-            // btnBill
+            // btnSettings
             // 
-            this.btnBill.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(78)))), ((int)(((byte)(77)))));
-            this.btnBill.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnBill.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBill.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnBill.Location = new System.Drawing.Point(2, 655);
-            this.btnBill.Name = "btnBill";
-            this.btnBill.Size = new System.Drawing.Size(224, 63);
-            this.btnBill.TabIndex = 9;
-            this.btnBill.Text = "Bill";
-            this.btnBill.UseVisualStyleBackColor = false;
+            this.btnSettings.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(78)))), ((int)(((byte)(77)))));
+            this.btnSettings.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnSettings.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSettings.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnSettings.Location = new System.Drawing.Point(2, 656);
+            this.btnSettings.Name = "btnSettings";
+            this.btnSettings.Size = new System.Drawing.Size(224, 63);
+            this.btnSettings.TabIndex = 9;
+            this.btnSettings.Text = "Settings";
+            this.btnSettings.UseVisualStyleBackColor = false;
             // 
-            // btnShift
+            // btnWedding
             // 
-            this.btnShift.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(78)))), ((int)(((byte)(77)))));
-            this.btnShift.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnShift.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnShift.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnShift.Location = new System.Drawing.Point(2, 591);
-            this.btnShift.Name = "btnShift";
-            this.btnShift.Size = new System.Drawing.Size(224, 63);
-            this.btnShift.TabIndex = 8;
-            this.btnShift.Text = "Shift";
-            this.btnShift.UseVisualStyleBackColor = false;
-            this.btnShift.Click += new System.EventHandler(this.btnShift_Click);
+            this.btnWedding.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(78)))), ((int)(((byte)(77)))));
+            this.btnWedding.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnWedding.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnWedding.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnWedding.Location = new System.Drawing.Point(2, 528);
+            this.btnWedding.Name = "btnWedding";
+            this.btnWedding.Size = new System.Drawing.Size(224, 63);
+            this.btnWedding.TabIndex = 8;
+            this.btnWedding.Text = "Wedding";
+            this.btnWedding.UseVisualStyleBackColor = false;
+            this.btnWedding.Click += new System.EventHandler(this.btnShift_Click);
             // 
             // panelNavigate
             // 
@@ -125,7 +125,7 @@
             this.btnLobby.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnLobby.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLobby.ForeColor = System.Drawing.Color.White;
-            this.btnLobby.Location = new System.Drawing.Point(1, 527);
+            this.btnLobby.Location = new System.Drawing.Point(0, 336);
             this.btnLobby.Name = "btnLobby";
             this.btnLobby.Size = new System.Drawing.Size(224, 63);
             this.btnLobby.TabIndex = 7;
@@ -150,7 +150,7 @@
             this.btnReport.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnReport.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnReport.ForeColor = System.Drawing.Color.White;
-            this.btnReport.Location = new System.Drawing.Point(1, 463);
+            this.btnReport.Location = new System.Drawing.Point(2, 592);
             this.btnReport.Name = "btnReport";
             this.btnReport.Size = new System.Drawing.Size(224, 63);
             this.btnReport.TabIndex = 5;
@@ -164,7 +164,7 @@
             this.btnService.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnService.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnService.ForeColor = System.Drawing.Color.White;
-            this.btnService.Location = new System.Drawing.Point(0, 399);
+            this.btnService.Location = new System.Drawing.Point(1, 464);
             this.btnService.Name = "btnService";
             this.btnService.Size = new System.Drawing.Size(224, 63);
             this.btnService.TabIndex = 4;
@@ -178,7 +178,7 @@
             this.btnMenu.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnMenu.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMenu.ForeColor = System.Drawing.Color.White;
-            this.btnMenu.Location = new System.Drawing.Point(0, 335);
+            this.btnMenu.Location = new System.Drawing.Point(1, 400);
             this.btnMenu.Name = "btnMenu";
             this.btnMenu.Size = new System.Drawing.Size(224, 63);
             this.btnMenu.TabIndex = 3;
@@ -186,19 +186,19 @@
             this.btnMenu.UseVisualStyleBackColor = false;
             this.btnMenu.Click += new System.EventHandler(this.btnMenu_Click);
             // 
-            // btnWedding
+            // btnSearch
             // 
-            this.btnWedding.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(78)))), ((int)(((byte)(77)))));
-            this.btnWedding.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnWedding.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnWedding.ForeColor = System.Drawing.Color.White;
-            this.btnWedding.Location = new System.Drawing.Point(0, 271);
-            this.btnWedding.Name = "btnWedding";
-            this.btnWedding.Size = new System.Drawing.Size(224, 63);
-            this.btnWedding.TabIndex = 2;
-            this.btnWedding.Text = "Wedding";
-            this.btnWedding.UseVisualStyleBackColor = false;
-            this.btnWedding.Click += new System.EventHandler(this.btnWedding_Click);
+            this.btnSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(78)))), ((int)(((byte)(77)))));
+            this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnSearch.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSearch.ForeColor = System.Drawing.Color.White;
+            this.btnSearch.Location = new System.Drawing.Point(0, 272);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(224, 63);
+            this.btnSearch.TabIndex = 2;
+            this.btnSearch.Text = "Search";
+            this.btnSearch.UseVisualStyleBackColor = false;
+            this.btnSearch.Click += new System.EventHandler(this.btnWedding_Click);
             // 
             // btnHome
             // 
@@ -206,7 +206,7 @@
             this.btnHome.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnHome.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnHome.ForeColor = System.Drawing.Color.White;
-            this.btnHome.Location = new System.Drawing.Point(0, 207);
+            this.btnHome.Location = new System.Drawing.Point(0, 208);
             this.btnHome.Name = "btnHome";
             this.btnHome.Size = new System.Drawing.Size(224, 63);
             this.btnHome.TabIndex = 1;
@@ -277,7 +277,7 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnService;
         private System.Windows.Forms.Button btnMenu;
-        private System.Windows.Forms.Button btnWedding;
+        private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.Button btnHome;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Panel panel2;
@@ -287,8 +287,8 @@
         private System.Windows.Forms.Panel panelNavigate;
         private System.Windows.Forms.Button btnLobby;
         private System.Windows.Forms.Button btnExit;
-        private System.Windows.Forms.Button btnAcc;
-        private System.Windows.Forms.Button btnBill;
-        private System.Windows.Forms.Button btnShift;
+        private System.Windows.Forms.Button btnLogout;
+        private System.Windows.Forms.Button btnSettings;
+        private System.Windows.Forms.Button btnWedding;
     }
 }
