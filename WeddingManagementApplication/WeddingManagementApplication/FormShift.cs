@@ -67,14 +67,14 @@ namespace WeddingManagementApplication
             using (var sql = new SqlConnection(WeddingClient.sqlConnectionString))
             {
                 sql.Open();
-                using (SqlCommand command = new SqlCommand("select * from Shift where available > 0", sql))
+                using (SqlCommand command = new SqlCommand("select * from Shift where Available > 0", sql))
                 {
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())
                         {
                             Shift shift = new Shift();
-                            MessageBox.Show("alo");
+                            //MessageBox.Show("alo");
                             shift._lbName = reader["name"].ToString();
                             shift._lbStart = reader["Starting"].ToString();
                             shift._lbEnd = reader["Ending"].ToString();
