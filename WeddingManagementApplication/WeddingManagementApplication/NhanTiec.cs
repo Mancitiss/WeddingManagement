@@ -1,18 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.Windows.Forms;
 
 namespace WeddingManagementApplication
 {
     public partial class NhanTiec : Form
     {
+        public static string currentWeddingId = "";
         SqlDataAdapter adapter = new SqlDataAdapter();
         DataTable table1 = new DataTable();
         
@@ -174,6 +170,17 @@ namespace WeddingManagementApplication
             column.Unique = false;
             table1.Columns.Add(column);
 
+            // create thirteenth column
+            column = new DataColumn();
+            column.DataType = System.Type.GetType("System.String");
+            column.ColumnName = "idWedding";
+            column.AutoIncrement = false;
+            column.Caption = "idWedding";
+            column.ReadOnly = false;
+            column.Unique = false;
+            column.ColumnMapping = MappingType.Hidden;
+            table1.Columns.Add(column);
+
             dataWedding.DataSource = table1;
             foreach (DataGridViewColumn col in dataWedding.Columns)
             {
@@ -181,7 +188,17 @@ namespace WeddingManagementApplication
             }
             dataWedding.Columns["bookingDate"].DefaultCellStyle.Format = "dd/MM/yyyy";
             dataWedding.Columns["weddingDate"].DefaultCellStyle.Format = "dd/MM/yyyy";
+
+            dataWedding.RowHeaderMouseClick += new DataGridViewCellMouseEventHandler(dataWedding_RowHeaderMouseClick);
         }
+
+        private void dataWedding_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            // select weddingID
+            NhanTiec.currentWeddingId = table1.Rows[e.RowIndex]["idWedding"].ToString();
+            Console.WriteLine(NhanTiec.currentWeddingId);
+        }
+
 
         // đổ dữ liệu từ db lên comboBox shift
         void load_comboBox_shift()
@@ -386,9 +403,10 @@ namespace WeddingManagementApplication
             {
                 sql.Open();
                 // complete command for me
-                using(SqlCommand cmd = new SqlCommand("INSERT INTO WEDDING_INFOR (idWedding, idLobby, idShift, BookingDate, WeddingDate, PhoneNumber, GroomName, BrideName, AmountOfTable, AmountOfContingencyTable, TablePrice, Deposit, representative) VALUES (@idWedding, @idLobby, @idShift, @BookingDate, @WeddingDate, @PhoneNumber, @GroomName, @BrideName, @AmountOfTable, @AmountOfContingencyTable, @TablePrice, @Deposit, @representative )", sql))
+                string newId = "WD" + WeddingClient.GetNewIdFromTable("WD").ToString();
+                using (SqlCommand cmd = new SqlCommand("INSERT INTO WEDDING_INFOR (idWedding, idLobby, idShift, BookingDate, WeddingDate, PhoneNumber, GroomName, BrideName, AmountOfTable, AmountOfContingencyTable, TablePrice, Deposit, representative) VALUES (@idWedding, @idLobby, @idShift, @BookingDate, @WeddingDate, @PhoneNumber, @GroomName, @BrideName, @AmountOfTable, @AmountOfContingencyTable, @TablePrice, @Deposit, @representative )", sql))
                 {
-                    cmd.Parameters.AddWithValue("@idWedding", "WD"+WeddingClient.GetNewIdFromTable("WD").ToString());
+                    cmd.Parameters.AddWithValue("@idWedding", newId);
                     cmd.Parameters.AddWithValue("@idLobby", lobby.idLobby);
                     cmd.Parameters.AddWithValue("@idShift", shift.idShift);
                     cmd.Parameters.AddWithValue("@BookingDate", date_booking.Value);
@@ -408,7 +426,7 @@ namespace WeddingManagementApplication
                         //dataWedding.Rows.Add(lobby.LobbyName, shift.name, tb_representative.Text, tb_phone.Text, date_booking.Value.ToString(), date_wedding.Value.ToString(), tb_groom.Text, tb_bride.Text, tb_table.Text, tb_contigency.Text, tb_deposit.Text);
                         // add the above row to table1
                         DataRow row = table1.NewRow();
-                        row.ItemArray = new object[] { lobby.LobbyName, shift.name, tb_representative.Text, tb_phone.Text, date_booking.Value.ToString(), date_wedding.Value.ToString(), tb_groom.Text, tb_bride.Text, tb_table.Text, tb_contigency.Text, tb_deposit.Text };
+                        row.ItemArray = new object[] { lobby.LobbyName, shift.name, tb_representative.Text, tb_phone.Text, date_booking.Value.ToString(), date_wedding.Value.ToString(), tb_groom.Text, tb_bride.Text, tb_table.Text, tb_contigency.Text, 0, tb_deposit.Text, newId };
                         table1.Rows.Add(row);
                         MessageBox.Show("New wedding created", "SUCCESS", MessageBoxButtons.OK);
                     }
@@ -419,12 +437,32 @@ namespace WeddingManagementApplication
         // set sự kiện cho btn delete wedding
         private void btn_delete_wedding_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void btn_delete_Click(object sender, EventArgs e)
-        {
-
+            // chck if currentWeddingId is not null and length is 21
+            if (currentWeddingId != null && currentWeddingId.Length == 21)
+            {
+                using (SqlConnection sql = new SqlConnection(WeddingClient.sqlConnectionString))
+                {
+                    sql.Open();
+                    // complete command for me
+                    using (SqlCommand cmd = new SqlCommand("UPDATE WEDDING_INFOR set available = 0 WHERE idWedding = @idWedding", sql))
+                    {
+                        cmd.Parameters.AddWithValue("@idWedding", currentWeddingId);
+                        if (cmd.ExecuteNonQuery() > 0)
+                        {
+                            //Load_data_wedding();
+                            // delete row in table1
+                            //dataWedding.Rows.RemoveAt(dataWedding.CurrentRow.Index);
+                            table1.Rows.RemoveAt(dataWedding.CurrentRow.Index);
+                            MessageBox.Show("Wedding deleted", "SUCCESS", MessageBoxButtons.OK);
+                            NhanTiec.currentWeddingId = "";
+                        }
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select a wedding to delete", "ERROR", MessageBoxButtons.OK);
+            }
         }
 
         private void btn_update_Click(object sender, EventArgs e)
