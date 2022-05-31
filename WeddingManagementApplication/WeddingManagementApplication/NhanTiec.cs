@@ -324,7 +324,7 @@ namespace WeddingManagementApplication
                                     Note = row["Note"].ToString()
                                 });
                             }
-                            tb_service_price.Text = WeddingClient.listDishes[0].DishesPrice.ToString() + " VND";
+                            tb_price_service.Text = WeddingClient.listDishes[0].DishesPrice.ToString() + " VND";
                         }
                     }
                 }
@@ -374,9 +374,130 @@ namespace WeddingManagementApplication
         // set sự kiện button xem chi tiết thông tin menu
         private void btn_detail_dishes_Click(object sender, EventArgs e)
         {
-            gridView_dishes show = new gridView_dishes();
-            show.ShowDialog();
+            if (NhanTiec.currentWeddingId != null && NhanTiec.currentWeddingId.Length == 21)
+            {
+                gridView_dishes show = new gridView_dishes(NhanTiec.currentWeddingId);
+                show.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Vui lòng chọn một bữa tiệc để xem chi tiết");
+            }
+        }
+        
+        private void btn_add_menu_Click(object sender, EventArgs e)
+        {
+            if (NhanTiec.currentWeddingId != null && NhanTiec.currentWeddingId.Length == 21)
+            {
+                // get current index of comboBox dishes
+                int index = cbb_dishes.SelectedIndex;
+                // get DishesData from listDishes at index
+                DishesData dishes = WeddingClient.listDishes[index];
+                // check if tb_dishes_price is number
+                if (tb_dishes_price.Text.Length > 0 && long.TryParse(tb_dishes_price.Text, out long count))
+                {
+                    using(SqlConnection sql = new SqlConnection(WeddingClient.sqlConnectionString))
+                    {
+                        sql.Open();
+                        long currentDishesPrice = 0;
+                        // check if (idWedding, idDishes) primary key is exist in table TABLE_DETAIL
+                        using (SqlCommand check = new SqlCommand("SELECT AmountOfDishes FROM TABLE_DETAIL WHERE idWedding = @idWedding AND idDishes = @idDishes", sql))
+                        {
+                            check.Parameters.AddWithValue("@idWedding", NhanTiec.currentWeddingId);
+                            check.Parameters.AddWithValue("@idDishes", dishes.idDishes);
+                            using (SqlDataReader reader = check.ExecuteReader())
+                            {
+                                if (reader.Read())
+                                {
+                                    currentDishesPrice = Convert.ToInt32(reader["AmountOfDishes"]) * dishes.DishesPrice;
+                                }
+                                else
+                                {
+                                    currentDishesPrice = 0;
+                                }
+                            }
+                        }
+                        long newDishesPrice = 0;
+                        if (currentDishesPrice == 0)
+                        {
+                            using (SqlCommand cmd = new SqlCommand("INSERT INTO TABLE_DETAIL (idWedding, idDishes, AmountOfDishes, TotalDishesPrice, Note) VALUES (@idWedding, @idDishes, @AmountOfDishes, @TotalDishesPrice, @Note)", sql))
+                            {
+                                cmd.Parameters.AddWithValue("@idWedding", NhanTiec.currentWeddingId);
+                                cmd.Parameters.AddWithValue("@idDishes", dishes.idDishes);
+                                cmd.Parameters.AddWithValue("@AmountOfDishes", Convert.ToInt32(tb_dishes_price.Text));
+                                cmd.Parameters.AddWithValue("@TotalDishesPrice", dishes.DishesPrice * Convert.ToInt32(tb_dishes_price.Text));
+                                cmd.Parameters.AddWithValue("@Note", "");
+                                if (cmd.ExecuteNonQuery() > 0)
+                                {
+                                    newDishesPrice = dishes.DishesPrice * Convert.ToInt32(tb_dishes_price.Text);
+                                    using (SqlCommand cmd2 = new SqlCommand("UPDATE BILL SET TablePriceTotal = TablePriceTotal + @tableChanged, Total = Total + @tableChanged WHERE idBill = @idWedding", sql))
+                                    {
+                                        cmd2.Parameters.AddWithValue("@idWedding", NhanTiec.currentWeddingId);
+                                        cmd2.Parameters.AddWithValue("@tableChanged", newDishesPrice);
+                                        if (cmd2.ExecuteNonQuery() > 0)
+                                        {
+                                            MessageBox.Show("Thêm thành công");
+                                            tb_dishes_price.Text = ""; 
+                                        }
+                                        else
+                                        {
+                                            MessageBox.Show("Thêm thất bại");
+                                        }
 
+                                    }
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Add dishes failed");
+                                }
+                            }
+                        }
+                        else
+                        {
+                            using (SqlCommand cmd = new SqlCommand("UPDATE TABLE_DETAIL SET AmountOfDishes = @AmountOfDishes, TotalDishesPrice = @TotalDishesPrice WHERE idWedding = @idWedding AND idDishes = @idDishes", sql))
+                            {
+                                cmd.Parameters.AddWithValue("@idWedding", NhanTiec.currentWeddingId);
+                                cmd.Parameters.AddWithValue("@idDishes", dishes.idDishes);
+                                cmd.Parameters.AddWithValue("@AmountOfDishes", Convert.ToInt32(tb_dishes_price.Text));
+                                cmd.Parameters.AddWithValue("@TotalDishesPrice", dishes.DishesPrice * Convert.ToInt32(tb_dishes_price.Text));
+                                if (cmd.ExecuteNonQuery() > 0)
+                                {
+                                    newDishesPrice = dishes.DishesPrice * Convert.ToInt32(tb_dishes_price.Text);
+                                    long changes = newDishesPrice - currentDishesPrice;
+                                    using (SqlCommand cmd2 = new SqlCommand("UPDATE BILL SET TablePriceTotal = TablePriceTotal + @tableChanged, Total = Total + @tableChanged, MoneyLeft = MoneyLeft + @tableChanged WHERE idBill = @idWedding", sql))
+                                    {
+                                        cmd2.Parameters.AddWithValue("@idWedding", NhanTiec.currentWeddingId);
+                                        cmd2.Parameters.AddWithValue("@tableChanged", changes);
+                                        if (cmd2.ExecuteNonQuery() > 0)
+                                        {
+                                            MessageBox.Show("Thêm thành công");
+                                            tb_dishes_price.Text = "";
+                                        }
+                                        else
+                                        {
+                                            MessageBox.Show("Thêm thất bại");
+                                        }
+
+                                    }
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Add dishes failed");
+                                }
+                            }
+                        }
+                        
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Vui lòng nhập số lượng món ăn");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Vui lòng chọn một bữa tiệc để thêm món ăn");
+            }
         }
 
         // sự kiện cho button detail service
@@ -421,14 +542,39 @@ namespace WeddingManagementApplication
                     cmd.Parameters.AddWithValue("@representative", tb_representative.Text);
                     if (cmd.ExecuteNonQuery() > 0)
                     {
-                        //Load_data_wedding();
-                        // add wedding information to table 1
-                        //dataWedding.Rows.Add(lobby.LobbyName, shift.name, tb_representative.Text, tb_phone.Text, date_booking.Value.ToString(), date_wedding.Value.ToString(), tb_groom.Text, tb_bride.Text, tb_table.Text, tb_contigency.Text, tb_deposit.Text);
-                        // add the above row to table1
-                        DataRow row = table1.NewRow();
-                        row.ItemArray = new object[] { lobby.LobbyName, shift.name, tb_representative.Text, tb_phone.Text, date_booking.Value.ToString(), date_wedding.Value.ToString(), tb_groom.Text, tb_bride.Text, tb_table.Text, tb_contigency.Text, 0, tb_deposit.Text, newId };
-                        table1.Rows.Add(row);
-                        MessageBox.Show("New wedding created", "SUCCESS", MessageBoxButtons.OK);
+                        long basePrice = 0;
+                        using (SqlCommand cmd2 = new SqlCommand("SELECT MinTablePrice FROM LOBBY_TYPE WHERE idLobbyType = @idLobbyType", sql))
+                        {
+                            cmd2.Parameters.AddWithValue("@idLobbyType", lobby.idLobbyType);
+                            using (SqlDataReader reader = cmd2.ExecuteReader())
+                            {
+                                if (reader.Read())
+                                {
+                                    basePrice = Convert.ToInt64(reader["MinTablePrice"]) * Convert.ToInt32(tb_table.Text);
+                                }
+                            }
+                        }
+                        using(SqlCommand cmd2 = new SqlCommand("INSERT INTO BILL (idBill, InvoiceDate, TablePriceTotal, ServicePriceTotal, Total, PaymentDate, MoneyLeft) VALUES (@idBill, @InvoiceDate, @TablePricetotal, @ServicePriceTotal, @Total, @PaymentDate, @MoneyLeft) ", sql))
+                        {
+                            cmd2.Parameters.AddWithValue("@idBill", newId);
+                            cmd2.Parameters.AddWithValue("@InvoiceDate", date_wedding.Value);
+                            cmd2.Parameters.AddWithValue("@TablePricetotal", 0);
+                            cmd2.Parameters.AddWithValue("@ServicePriceTotal", 0);
+                            cmd2.Parameters.AddWithValue("@Total", basePrice);
+                            cmd2.Parameters.AddWithValue("@PaymentDate", DBNull.Value);
+                            cmd2.Parameters.AddWithValue("@MoneyLeft", basePrice - Convert.ToInt32(tb_deposit.Text));
+                            if (cmd2.ExecuteNonQuery() > 0)
+                            {
+                                DataRow row = table1.NewRow();
+                                row.ItemArray = new object[] { lobby.LobbyName, shift.name, tb_representative.Text, tb_phone.Text, date_booking.Value.ToString(), date_wedding.Value.ToString(), tb_groom.Text, tb_bride.Text, tb_table.Text, tb_contigency.Text, 0, tb_deposit.Text, newId };
+                                table1.Rows.Add(row);
+                                MessageBox.Show("Wedding Add Successfully");
+                            }
+                            else
+                            {
+                                MessageBox.Show("Wedding Add Failed");
+                            }
+                        }
                     }
                 }
             }
