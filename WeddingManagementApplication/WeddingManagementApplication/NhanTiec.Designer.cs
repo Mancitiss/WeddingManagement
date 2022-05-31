@@ -68,7 +68,7 @@ namespace WeddingManagementApplication
             this.label4 = new System.Windows.Forms.Label();
             this.dataWedding = new System.Windows.Forms.DataGridView();
             this.tb_service_price = new WeddingManagementApplication.CustomeBorderTextbox();
-            this.cbb_price_service = new WeddingManagementApplication.CustomeBorderTextbox();
+            this.tb_price_service = new WeddingManagementApplication.CustomeBorderTextbox();
             this.tb_dishes_price = new WeddingManagementApplication.CustomeBorderTextbox();
             this.tb_price_dishes = new WeddingManagementApplication.CustomeBorderTextbox();
             this.tb_deposit = new WeddingManagementApplication.CustomeBorderTextbox();
@@ -397,6 +397,7 @@ namespace WeddingManagementApplication
             this.btn_add_menu.TabIndex = 59;
             this.btn_add_menu.Text = "ADD";
             this.btn_add_menu.UseVisualStyleBackColor = false;
+            this.btn_add_menu.Click += new System.EventHandler(this.btn_add_menu_Click);
             // 
             // label_dishes_price
             // 
@@ -450,7 +451,7 @@ namespace WeddingManagementApplication
             this.groupBox2.BackColor = System.Drawing.Color.Linen;
             this.groupBox2.Controls.Add(this.btn_detail_service);
             this.groupBox2.Controls.Add(this.tb_service_price);
-            this.groupBox2.Controls.Add(this.cbb_price_service);
+            this.groupBox2.Controls.Add(this.tb_price_service);
             this.groupBox2.Controls.Add(this.btn_add_service);
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.label3);
@@ -554,19 +555,19 @@ namespace WeddingManagementApplication
             this.tb_service_price.Location = new System.Drawing.Point(76, 57);
             this.tb_service_price.Margin = new System.Windows.Forms.Padding(2);
             this.tb_service_price.Name = "tb_service_price";
-            this.tb_service_price.ReadOnly = true;
+            this.tb_service_price.ReadOnly = false;
             this.tb_service_price.Size = new System.Drawing.Size(96, 20);
             this.tb_service_price.TabIndex = 61;
             // 
-            // cbb_price_service
+            // tb_price_service
             // 
-            this.cbb_price_service.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.cbb_price_service.Location = new System.Drawing.Point(76, 91);
-            this.cbb_price_service.Margin = new System.Windows.Forms.Padding(2);
-            this.cbb_price_service.Name = "cbb_price_service";
-            this.cbb_price_service.ReadOnly = true;
-            this.cbb_price_service.Size = new System.Drawing.Size(96, 20);
-            this.cbb_price_service.TabIndex = 60;
+            this.tb_price_service.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.tb_price_service.Location = new System.Drawing.Point(76, 91);
+            this.tb_price_service.Margin = new System.Windows.Forms.Padding(2);
+            this.tb_price_service.Name = "cbb_price_service";
+            this.tb_price_service.ReadOnly = true;
+            this.tb_price_service.Size = new System.Drawing.Size(96, 20);
+            this.tb_price_service.TabIndex = 60;
             // 
             // tb_dishes_price
             // 
@@ -574,7 +575,7 @@ namespace WeddingManagementApplication
             this.tb_dishes_price.Location = new System.Drawing.Point(76, 58);
             this.tb_dishes_price.Margin = new System.Windows.Forms.Padding(2);
             this.tb_dishes_price.Name = "tb_dishes_price";
-            this.tb_dishes_price.ReadOnly = true;
+            this.tb_dishes_price.ReadOnly = false;
             this.tb_dishes_price.Size = new System.Drawing.Size(96, 20);
             this.tb_dishes_price.TabIndex = 60;
             // 
@@ -719,7 +720,7 @@ namespace WeddingManagementApplication
         private System.Windows.Forms.ComboBox cbb_dishes;
         private System.Windows.Forms.Label label_menu;
         private System.Windows.Forms.GroupBox groupBox2;
-        private CustomeBorderTextbox cbb_price_service;
+        private CustomeBorderTextbox tb_price_service;
         private System.Windows.Forms.Button btn_add_service;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
