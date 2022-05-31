@@ -488,6 +488,7 @@ namespace WeddingManagementApplication
             this.btn_add_service.TabIndex = 59;
             this.btn_add_service.Text = "ADD";
             this.btn_add_service.UseVisualStyleBackColor = false;
+            this.btn_add_service.Click += new System.EventHandler(this.btn_add_service_Click);
             // 
             // label2
             // 

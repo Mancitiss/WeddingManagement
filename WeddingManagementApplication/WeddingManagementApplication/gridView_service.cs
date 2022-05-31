@@ -16,9 +16,11 @@ namespace WeddingManagementApplication
     {
         SqlDataAdapter adapter = new SqlDataAdapter();
         DataTable table = new DataTable();
+        string idWedding = "";
 
-        public gridView_service()
+        public gridView_service(string idWedding)
         {
+            this.idWedding = idWedding;
             InitializeComponent();
             load_data_service();
         }
@@ -26,8 +28,9 @@ namespace WeddingManagementApplication
         {
             using(SqlConnection sql = new SqlConnection(WeddingClient.sqlConnectionString)){
                 sql.Open();
-                using (SqlCommand cmd = new SqlCommand("SELECT WD.idWedding, Representative, ServiceName, AmountOfService,TotalServicePrice, SVD.Note FROM WEDDING_INFOR WD, SERVICE SV, SERVICE_DETAIL SVD WHERE WD.idWedding = SVD.idWedding AND SVD.idService = SV.idService", sql))
+                using (SqlCommand cmd = new SqlCommand("SELECT WD.IdWedding, Representative, ServiceName, AmountOfService,TotalServicePrice, SVD.Note FROM WEDDING_INFOR WD, SERVICE SV, SERVICE_DETAIL SVD WHERE WD.IdWedding = SVD.IdWedding AND SVD.IdService = SV.IdService AND WD.IdWedding = @idWedding", sql))
                 {
+                    cmd.Parameters.AddWithValue("@idWedding", idWedding);
                     adapter.SelectCommand = cmd;
                     table.Clear();
                     adapter.Fill(table);

@@ -25,7 +25,7 @@ namespace WeddingManagementApplication
         {
             cmd = connection.CreateCommand();
 
-            cmd.CommandText = "SELECT LB.LobbyName, MaxTable, available, Note FROM LOBBY LB";
+            cmd.CommandText = "SELECT LB.LobbyName, MaxTable, Available, Note FROM LOBBY LB";
 
             adapter.SelectCommand = cmd;
             table.Clear();

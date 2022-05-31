@@ -28,7 +28,7 @@ namespace WeddingManagementApplication
             {
                 sql.Open();
                 using (SqlCommand cmd = new SqlCommand("SELECT LobbyName, ShiftName, Representative, PhoneNumber, BookingDate, WeddingDate, GroomName, BrideName, AmountOfTable, " +
-                "AmountOfContingencyTable, TablePrice, Deposit FROM LOBBY LB, SHIFT S, WEDDING_INFOR WD WHERE WD.idShift = S.idShift AND WD.idLobby = LB.idLobby AND WD.available > 0", sql))
+                "AmountOfContingencyTable, TablePrice, Deposit FROM LOBBY LB, SHIFT S, WEDDING_INFOR WD WHERE WD.IdShift = S.IdShift AND WD.IdLobby = LB.IdLobby AND WD.Available > 0", sql))
                 {
                     adapter.SelectCommand = cmd;
                     table1.Clear();
@@ -206,7 +206,7 @@ namespace WeddingManagementApplication
             using (SqlConnection sql = new SqlConnection(WeddingClient.sqlConnectionString))
             {
                 sql.Open();
-                using (SqlCommand cmd = new SqlCommand("SELECT idShift, ShiftName, Starting, Ending FROM SHIFT where available > 0", sql))
+                using (SqlCommand cmd = new SqlCommand("SELECT IdShift, ShiftName, Starting, Ending FROM SHIFT where Available > 0", sql))
                 {
                     using (var dr = cmd.ExecuteReader())
                     {
@@ -221,7 +221,7 @@ namespace WeddingManagementApplication
                             {
                                 WeddingClient.listShifts.Add(new ShiftData()
                                 {
-                                    idShift = row["idShift"].ToString(),
+                                    idShift = row["IdShift"].ToString(),
                                     name = row["ShiftName"].ToString(),
                                     startingTime = (TimeSpan)row["Starting"],
                                     endingTime = (TimeSpan)row["Ending"]
@@ -239,7 +239,7 @@ namespace WeddingManagementApplication
             using (SqlConnection sql = new SqlConnection(WeddingClient.sqlConnectionString))
             {
                 sql.Open();
-                using (SqlCommand cmd = new SqlCommand("SELECT idLobby, idLobbyType, LobbyName, MaxTable, Note FROM LOBBY WHERE available > 0", sql))
+                using (SqlCommand cmd = new SqlCommand("SELECT IdLobby, IdLobbyType, LobbyName, MaxTable, Note FROM LOBBY WHERE Available > 0", sql))
                 {
                     using (var dr = cmd.ExecuteReader())
                     {
@@ -253,7 +253,7 @@ namespace WeddingManagementApplication
                             cbb_lobby.DisplayMember = "LobbyName";
                             foreach (DataRow row in dt.Rows)
                             {
-                                WeddingClient.listLobbies.Add(new LobbyData(row["idLobby"].ToString(), row["idLobbyType"].ToString(), row["LobbyName"].ToString(), Convert.ToInt32(row["MaxTable"]), row["Note"].ToString()));
+                                WeddingClient.listLobbies.Add(new LobbyData(row["IdLobby"].ToString(), row["IdLobbyType"].ToString(), row["LobbyName"].ToString(), Convert.ToInt32(row["MaxTable"]), row["Note"].ToString()));
                             }
                         }
                     }
@@ -267,7 +267,7 @@ namespace WeddingManagementApplication
             using (SqlConnection sql = new SqlConnection(WeddingClient.sqlConnectionString))
             {
                 sql.Open();
-                using (SqlCommand cmd = new SqlCommand("SELECT idDishes, DishesName, DishesPrice FROM MENU where available > 0", sql))
+                using (SqlCommand cmd = new SqlCommand("SELECT IdDishes, DishesName, DishesPrice FROM MENU where Available > 0", sql))
                 {
                     using (var dr = cmd.ExecuteReader())
                     {
@@ -283,7 +283,7 @@ namespace WeddingManagementApplication
                             {
                                 WeddingClient.listDishes.Add(new DishesData()
                                 {
-                                    idDishes = (row["idDishes"]).ToString(),
+                                    idDishes = (row["IdDishes"]).ToString(),
                                     DishesName = row["DishesName"].ToString(),
                                     DishesPrice = Convert.ToInt64(row["DishesPrice"])
                                 });
@@ -302,7 +302,7 @@ namespace WeddingManagementApplication
             using (SqlConnection sql = new SqlConnection(WeddingClient.sqlConnectionString))
             {
                 sql.Open();
-                using (SqlCommand cmd = new SqlCommand("SELECT idService, ServiceName, ServicePrice, Note FROM SERVICE where available > 0", sql))
+                using (SqlCommand cmd = new SqlCommand("SELECT IdService, ServiceName, ServicePrice, Note FROM SERVICE where Available > 0", sql))
                 {
                     using (var dr = cmd.ExecuteReader())
                     {
@@ -318,7 +318,7 @@ namespace WeddingManagementApplication
                             {
                                 WeddingClient.listServices.Add(new Service()
                                 {
-                                    idService = (row["idService"]).ToString(),
+                                    idService = (row["IdService"]).ToString(),
                                     ServiceName = row["ServiceName"].ToString(),
                                     ServicePrice = Convert.ToInt64(row["ServicePrice"]),
                                     Note = row["Note"].ToString()
@@ -401,7 +401,7 @@ namespace WeddingManagementApplication
                         sql.Open();
                         long currentDishesPrice = 0;
                         // check if (idWedding, idDishes) primary key is exist in table TABLE_DETAIL
-                        using (SqlCommand check = new SqlCommand("SELECT AmountOfDishes FROM TABLE_DETAIL WHERE idWedding = @idWedding AND idDishes = @idDishes", sql))
+                        using (SqlCommand check = new SqlCommand("SELECT AmountOfDishes FROM TABLE_DETAIL WHERE IdWedding = @idWedding AND IdDishes = @idDishes", sql))
                         {
                             check.Parameters.AddWithValue("@idWedding", NhanTiec.currentWeddingId);
                             check.Parameters.AddWithValue("@idDishes", dishes.idDishes);
@@ -420,7 +420,7 @@ namespace WeddingManagementApplication
                         long newDishesPrice = 0;
                         if (currentDishesPrice == 0)
                         {
-                            using (SqlCommand cmd = new SqlCommand("INSERT INTO TABLE_DETAIL (idWedding, idDishes, AmountOfDishes, TotalDishesPrice, Note) VALUES (@idWedding, @idDishes, @AmountOfDishes, @TotalDishesPrice, @Note)", sql))
+                            using (SqlCommand cmd = new SqlCommand("INSERT INTO TABLE_DETAIL (IdWedding, IdDishes, AmountOfDishes, TotalDishesPrice, Note) VALUES (@idWedding, @idDishes, @AmountOfDishes, @TotalDishesPrice, @Note)", sql))
                             {
                                 cmd.Parameters.AddWithValue("@idWedding", NhanTiec.currentWeddingId);
                                 cmd.Parameters.AddWithValue("@idDishes", dishes.idDishes);
@@ -430,7 +430,7 @@ namespace WeddingManagementApplication
                                 if (cmd.ExecuteNonQuery() > 0)
                                 {
                                     newDishesPrice = dishes.DishesPrice * Convert.ToInt32(tb_dishes_price.Text);
-                                    using (SqlCommand cmd2 = new SqlCommand("UPDATE BILL SET TablePriceTotal = TablePriceTotal + @tableChanged, Total = Total + @tableChanged WHERE idBill = @idWedding", sql))
+                                    using (SqlCommand cmd2 = new SqlCommand("UPDATE BILL SET TablePriceTotal = TablePriceTotal + @tableChanged, Total = Total + @tableChanged WHERE IdBill = @idWedding", sql))
                                     {
                                         cmd2.Parameters.AddWithValue("@idWedding", NhanTiec.currentWeddingId);
                                         cmd2.Parameters.AddWithValue("@tableChanged", newDishesPrice);
@@ -454,7 +454,7 @@ namespace WeddingManagementApplication
                         }
                         else
                         {
-                            using (SqlCommand cmd = new SqlCommand("UPDATE TABLE_DETAIL SET AmountOfDishes = @AmountOfDishes, TotalDishesPrice = @TotalDishesPrice WHERE idWedding = @idWedding AND idDishes = @idDishes", sql))
+                            using (SqlCommand cmd = new SqlCommand("UPDATE TABLE_DETAIL SET AmountOfDishes = @AmountOfDishes, TotalDishesPrice = @TotalDishesPrice WHERE IdWedding = @idWedding AND IdDishes = @idDishes", sql))
                             {
                                 cmd.Parameters.AddWithValue("@idWedding", NhanTiec.currentWeddingId);
                                 cmd.Parameters.AddWithValue("@idDishes", dishes.idDishes);
@@ -464,7 +464,7 @@ namespace WeddingManagementApplication
                                 {
                                     newDishesPrice = dishes.DishesPrice * Convert.ToInt32(tb_dishes_price.Text);
                                     long changes = newDishesPrice - currentDishesPrice;
-                                    using (SqlCommand cmd2 = new SqlCommand("UPDATE BILL SET TablePriceTotal = TablePriceTotal + @tableChanged, Total = Total + @tableChanged, MoneyLeft = MoneyLeft + @tableChanged WHERE idBill = @idWedding", sql))
+                                    using (SqlCommand cmd2 = new SqlCommand("UPDATE BILL SET TablePriceTotal = TablePriceTotal + @tableChanged, Total = Total + @tableChanged, MoneyLeft = MoneyLeft + @tableChanged WHERE IdBill = @idWedding", sql))
                                     {
                                         cmd2.Parameters.AddWithValue("@idWedding", NhanTiec.currentWeddingId);
                                         cmd2.Parameters.AddWithValue("@tableChanged", changes);
@@ -503,8 +503,130 @@ namespace WeddingManagementApplication
         // sự kiện cho button detail service
         private void btn_detail_service_Click(object sender, EventArgs e)
         {
-            gridView_service show = new gridView_service();
-            show.ShowDialog();
+            if (NhanTiec.currentWeddingId != null && NhanTiec.currentWeddingId.Length == 21)
+            {
+                gridView_service show = new gridView_service(NhanTiec.currentWeddingId);
+                show.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Vui lòng chọn một bữa tiệc để xem chi tiết");
+            }
+        }
+        
+        private void btn_add_service_Click(object sender, EventArgs e)
+        {
+            if (NhanTiec.currentWeddingId != null && NhanTiec.currentWeddingId.Length == 21)
+            {
+                // get current index of comboBox dishes
+                int index = cbb_service.SelectedIndex;
+                // get DishesData from listDishes at index
+                Service service = WeddingClient.listServices[index];
+                // check if tb_dishes_price is number
+                if (tb_service_price.Text.Length > 0 && long.TryParse(tb_service_price.Text, out long count))
+                {
+                    using (SqlConnection sql = new SqlConnection(WeddingClient.sqlConnectionString))
+                    {
+                        sql.Open();
+                        long currentServicePrice = 0;
+                        // check if (idWedding, idDishes) primary key is exist in table TABLE_DETAIL
+                        using (SqlCommand check = new SqlCommand("SELECT AmountOfService FROM SERVICE_DETAIL WHERE IdWedding = @idWedding AND IdService = @idService", sql))
+                        {
+                            check.Parameters.AddWithValue("@idWedding", NhanTiec.currentWeddingId);
+                            check.Parameters.AddWithValue("@idService", service.idService);
+                            using (SqlDataReader reader = check.ExecuteReader())
+                            {
+                                if (reader.Read())
+                                {
+                                    currentServicePrice = Convert.ToInt32(reader["AmountOfService"]) * service.ServicePrice;
+                                }
+                                else
+                                {
+                                    currentServicePrice = 0;
+                                }
+                            }
+                        }
+                        long newServicePrice = 0;
+                        if (currentServicePrice == 0)
+                        {
+                            using (SqlCommand cmd = new SqlCommand("INSERT INTO SERVICE_DETAIL (IdWedding, IdService, AmountOfService, TotalServicePrice, Note) VALUES (@idWedding, @idDishes, @AmountOfDishes, @TotalDishesPrice, @Note)", sql))
+                            {
+                                cmd.Parameters.AddWithValue("@idWedding", NhanTiec.currentWeddingId);
+                                cmd.Parameters.AddWithValue("@idService", service.idService);
+                                cmd.Parameters.AddWithValue("@AmountOfService", Convert.ToInt32(tb_service_price.Text));
+                                cmd.Parameters.AddWithValue("@TotalServicePrice", service.ServicePrice * Convert.ToInt32(tb_service_price.Text));
+                                cmd.Parameters.AddWithValue("@Note", "");
+                                if (cmd.ExecuteNonQuery() > 0)
+                                {
+                                    newServicePrice = service.ServicePrice * Convert.ToInt32(tb_dishes_price.Text);
+                                    using (SqlCommand cmd2 = new SqlCommand("UPDATE BILL SET ServicePriceTotal = ServicePriceTotal + @serviceChanged, Total = Total + @serviceChanged WHERE IdBill = @idWedding", sql))
+                                    {
+                                        cmd2.Parameters.AddWithValue("@idWedding", NhanTiec.currentWeddingId);
+                                        cmd2.Parameters.AddWithValue("@serviceChanged", newServicePrice);
+                                        if (cmd2.ExecuteNonQuery() > 0)
+                                        {
+                                            MessageBox.Show("Thêm thành công");
+                                            tb_service_price.Text = "";
+                                        }
+                                        else
+                                        {
+                                            MessageBox.Show("Thêm thất bại");
+                                        }
+
+                                    }
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Add dishes failed");
+                                }
+                            }
+                        }
+                        else
+                        {
+                            using (SqlCommand cmd = new SqlCommand("UPDATE SERVICE_DETAIL SET AmountOfService = @AmountOfServide, TotalServicePrice = @TotalServicePrice WHERE IdWedding = @idWedding AND IdDishes = @idDishes", sql))
+                            {
+                                cmd.Parameters.AddWithValue("@idWedding", NhanTiec.currentWeddingId);
+                                cmd.Parameters.AddWithValue("@idDishes", service.idService);
+                                cmd.Parameters.AddWithValue("@AmountOfDishes", Convert.ToInt32(tb_dishes_price.Text));
+                                cmd.Parameters.AddWithValue("@TotalDishesPrice", service.ServicePrice * Convert.ToInt32(tb_service_price.Text));
+                                if (cmd.ExecuteNonQuery() > 0)
+                                {
+                                    newServicePrice = service.ServicePrice * Convert.ToInt32(tb_service_price.Text);
+                                    long changes = newServicePrice - currentServicePrice;
+                                    using (SqlCommand cmd2 = new SqlCommand("UPDATE BILL SET ServicePriceTotal = ServicePriceTotal + @serviceChanged, Total = Total + @serviceChanged, MoneyLeft = MoneyLeft + @serviceChanged WHERE IdBill = @idWedding", sql))
+                                    {
+                                        cmd2.Parameters.AddWithValue("@idWedding", NhanTiec.currentWeddingId);
+                                        cmd2.Parameters.AddWithValue("@tableChanged", changes);
+                                        if (cmd2.ExecuteNonQuery() > 0)
+                                        {
+                                            MessageBox.Show("Thêm thành công");
+                                            tb_dishes_price.Text = "";
+                                        }
+                                        else
+                                        {
+                                            MessageBox.Show("Thêm thất bại");
+                                        }
+
+                                    }
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Add dishes failed");
+                                }
+                            }
+                        }
+
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Vui lòng nhập số lượng món ăn");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Vui lòng chọn một bữa tiệc để thêm món ăn");
+            }
         }
 
 
@@ -525,7 +647,7 @@ namespace WeddingManagementApplication
                 sql.Open();
                 // complete command for me
                 string newId = "WD" + WeddingClient.GetNewIdFromTable("WD").ToString();
-                using (SqlCommand cmd = new SqlCommand("INSERT INTO WEDDING_INFOR (idWedding, idLobby, idShift, BookingDate, WeddingDate, PhoneNumber, GroomName, BrideName, AmountOfTable, AmountOfContingencyTable, TablePrice, Deposit, representative) VALUES (@idWedding, @idLobby, @idShift, @BookingDate, @WeddingDate, @PhoneNumber, @GroomName, @BrideName, @AmountOfTable, @AmountOfContingencyTable, @TablePrice, @Deposit, @representative )", sql))
+                using (SqlCommand cmd = new SqlCommand("INSERT INTO WEDDING_INFOR (IdWedding, IdLobby, IdShift, BookingDate, WeddingDate, PhoneNumber, GroomName, BrideName, AmountOfTable, AmountOfContingencyTable, TablePrice, Deposit, Representative) VALUES (@idWedding, @idLobby, @idShift, @BookingDate, @WeddingDate, @PhoneNumber, @GroomName, @BrideName, @AmountOfTable, @AmountOfContingencyTable, @TablePrice, @Deposit, @representative )", sql))
                 {
                     cmd.Parameters.AddWithValue("@idWedding", newId);
                     cmd.Parameters.AddWithValue("@idLobby", lobby.idLobby);
@@ -543,7 +665,7 @@ namespace WeddingManagementApplication
                     if (cmd.ExecuteNonQuery() > 0)
                     {
                         long basePrice = 0;
-                        using (SqlCommand cmd2 = new SqlCommand("SELECT MinTablePrice FROM LOBBY_TYPE WHERE idLobbyType = @idLobbyType", sql))
+                        using (SqlCommand cmd2 = new SqlCommand("SELECT MinTablePrice FROM LOBBY_TYPE WHERE IdLobbyType = @idLobbyType", sql))
                         {
                             cmd2.Parameters.AddWithValue("@idLobbyType", lobby.idLobbyType);
                             using (SqlDataReader reader = cmd2.ExecuteReader())
@@ -554,7 +676,7 @@ namespace WeddingManagementApplication
                                 }
                             }
                         }
-                        using(SqlCommand cmd2 = new SqlCommand("INSERT INTO BILL (idBill, InvoiceDate, TablePriceTotal, ServicePriceTotal, Total, PaymentDate, MoneyLeft) VALUES (@idBill, @InvoiceDate, @TablePricetotal, @ServicePriceTotal, @Total, @PaymentDate, @MoneyLeft) ", sql))
+                        using(SqlCommand cmd2 = new SqlCommand("INSERT INTO BILL (IdBill, InvoiceDate, TablePriceTotal, ServicePriceTotal, Total, PaymentDate, MoneyLeft) VALUES (@idBill, @InvoiceDate, @TablePricetotal, @ServicePriceTotal, @Total, @PaymentDate, @MoneyLeft) ", sql))
                         {
                             cmd2.Parameters.AddWithValue("@idBill", newId);
                             cmd2.Parameters.AddWithValue("@InvoiceDate", date_wedding.Value);
@@ -590,7 +712,7 @@ namespace WeddingManagementApplication
                 {
                     sql.Open();
                     // complete command for me
-                    using (SqlCommand cmd = new SqlCommand("UPDATE WEDDING_INFOR set available = 0 WHERE idWedding = @idWedding", sql))
+                    using (SqlCommand cmd = new SqlCommand("UPDATE WEDDING_INFOR set Available = 0 WHERE IdWedding = @idWedding", sql))
                     {
                         cmd.Parameters.AddWithValue("@idWedding", currentWeddingId);
                         if (cmd.ExecuteNonQuery() > 0)

@@ -29,7 +29,7 @@ namespace WeddingManagementApplication
             using (var sql = new SqlConnection(WeddingClient.sqlConnectionString))
             {
                 sql.Open();
-                using (SqlCommand command = new SqlCommand("select * from SERVICE where available > 0", sql))
+                using (SqlCommand command = new SqlCommand("select * from SERVICE where Available > 0", sql))
                 {
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
@@ -131,7 +131,7 @@ namespace WeddingManagementApplication
                         using (var sql = new SqlConnection(WeddingClient.sqlConnectionString))
                         {
                             sql.Open();
-                            using (SqlCommand command = new SqlCommand("update SERVICE set available = 0 where idService = @idService", sql))
+                            using (SqlCommand command = new SqlCommand("update SERVICE set Available = 0 where IdService = @idService", sql))
                             {
                                 command.Parameters.AddWithValue("@idService", service.idService);
                                 if (command.ExecuteNonQuery() > 0)
