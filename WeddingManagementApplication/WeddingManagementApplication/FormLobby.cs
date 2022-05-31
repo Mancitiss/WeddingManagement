@@ -31,14 +31,18 @@ namespace WeddingManagementApplication
         private RadioButton radioButton3;
         private RadioButton radioButton1;
         private ComboBox comboBox2;
-        private Button button2;
-        private Button button1;
+        private Button btn_delete;
+        private Button btn_add;
         private Panel panel3;
-        private Panel panel2;
         private Panel panel1;
         private Label label9;
         private Label label7;
         private TableLayoutPanel tableLayoutPanel1;
         private Label header_lobby;
+
+        private void header_lobby_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

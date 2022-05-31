@@ -35,9 +35,8 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.label7 = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btn_add = new System.Windows.Forms.Button();
+            this.btn_delete = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.radioButton3 = new System.Windows.Forms.RadioButton();
@@ -49,13 +48,13 @@
             this.label6 = new System.Windows.Forms.Label();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.header_lobby = new System.Windows.Forms.Label();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.btn_update = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.panel3.SuspendLayout();
-            this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -86,7 +85,7 @@
             this.linkLabel1.AutoSize = true;
             this.linkLabel1.Location = new System.Drawing.Point(347, 231);
             this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(0, 16);
+            this.linkLabel1.Size = new System.Drawing.Size(0, 17);
             this.linkLabel1.TabIndex = 4;
             // 
             // dateTimePicker1
@@ -95,7 +94,7 @@
             this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePicker1.Location = new System.Drawing.Point(95, 10);
             this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(138, 30);
+            this.dateTimePicker1.Size = new System.Drawing.Size(138, 29);
             this.dateTimePicker1.TabIndex = 7;
             // 
             // groupBox1
@@ -112,9 +111,11 @@
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.btn_update);
+            this.panel3.Controls.Add(this.btn_delete);
+            this.panel3.Controls.Add(this.btn_add);
             this.panel3.Controls.Add(this.label7);
             this.panel3.Controls.Add(this.label1);
-            this.panel3.Controls.Add(this.panel2);
             this.panel3.Controls.Add(this.dateTimePicker1);
             this.panel3.Controls.Add(this.label3);
             this.panel3.Controls.Add(this.radioButton1);
@@ -142,34 +143,25 @@
             this.label7.TabIndex = 25;
             this.label7.Text = "Status:";
             // 
-            // panel2
+            // btn_add
             // 
-            this.panel2.Controls.Add(this.button1);
-            this.panel2.Controls.Add(this.button2);
-            this.panel2.Location = new System.Drawing.Point(594, 84);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(376, 34);
-            this.panel2.TabIndex = 24;
+            this.btn_add.ForeColor = System.Drawing.Color.Crimson;
+            this.btn_add.Location = new System.Drawing.Point(646, 83);
+            this.btn_add.Name = "btn_add";
+            this.btn_add.Size = new System.Drawing.Size(86, 31);
+            this.btn_add.TabIndex = 21;
+            this.btn_add.Text = "Add";
+            this.btn_add.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // btn_delete
             // 
-            this.button1.ForeColor = System.Drawing.Color.Crimson;
-            this.button1.Location = new System.Drawing.Point(60, 3);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(86, 31);
-            this.button1.TabIndex = 21;
-            this.button1.Text = "Add";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.ForeColor = System.Drawing.Color.Crimson;
-            this.button2.Location = new System.Drawing.Point(225, 3);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(86, 31);
-            this.button2.TabIndex = 22;
-            this.button2.Text = "Delete";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btn_delete.ForeColor = System.Drawing.Color.Crimson;
+            this.btn_delete.Location = new System.Drawing.Point(830, 84);
+            this.btn_delete.Name = "btn_delete";
+            this.btn_delete.Size = new System.Drawing.Size(86, 31);
+            this.btn_delete.TabIndex = 22;
+            this.btn_delete.Text = "Delete";
+            this.btn_delete.UseVisualStyleBackColor = true;
             // 
             // label3
             // 
@@ -277,8 +269,17 @@
             this.panel1.Controls.Add(this.label9);
             this.panel1.Location = new System.Drawing.Point(7, 154);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(981, 421);
+            this.panel1.Size = new System.Drawing.Size(981, 192);
             this.panel1.TabIndex = 10;
+            // 
+            // comboBox3
+            // 
+            this.comboBox3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.comboBox3.FormattingEnabled = true;
+            this.comboBox3.Location = new System.Drawing.Point(43, 48);
+            this.comboBox3.Name = "comboBox3";
+            this.comboBox3.Size = new System.Drawing.Size(873, 29);
+            this.comboBox3.TabIndex = 2;
             // 
             // label9
             // 
@@ -317,15 +318,17 @@
             this.header_lobby.TabIndex = 0;
             this.header_lobby.Text = "LOBBY LIST";
             this.header_lobby.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.header_lobby.Click += new System.EventHandler(this.header_lobby_Click);
             // 
-            // comboBox3
+            // btn_update
             // 
-            this.comboBox3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(43, 48);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(873, 29);
-            this.comboBox3.TabIndex = 2;
+            this.btn_update.ForeColor = System.Drawing.Color.Crimson;
+            this.btn_update.Location = new System.Drawing.Point(738, 83);
+            this.btn_update.Name = "btn_update";
+            this.btn_update.Size = new System.Drawing.Size(86, 31);
+            this.btn_update.TabIndex = 26;
+            this.btn_update.Text = "Update";
+            this.btn_update.UseVisualStyleBackColor = true;
             // 
             // FormLobby
             // 
@@ -346,7 +349,6 @@
             this.groupBox1.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
-            this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -360,5 +362,6 @@
         #endregion
 
         private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.Button btn_update;
     }
 }

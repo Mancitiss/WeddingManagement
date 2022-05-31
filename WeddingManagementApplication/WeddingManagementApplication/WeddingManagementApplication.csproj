@@ -8,10 +8,11 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>WeddingManagementApplication</RootNamespace>
     <AssemblyName>WeddingManagementApplication</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -161,12 +162,6 @@
       <DependentUpon>Dishes.cs</DependentUpon>
     </Compile>
     <Compile Include="DishesData.cs" />
-    <Compile Include="FormBooking.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormBooking.Designer.cs">
-      <DependentUpon>FormBooking.cs</DependentUpon>
-    </Compile>
     <Compile Include="FormDishes.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -268,9 +263,6 @@
   <ItemGroup>
     <EmbeddedResource Include="Dishes.resx">
       <DependentUpon>Dishes.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormBooking.resx">
-      <DependentUpon>FormBooking.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormHome.resx">
       <DependentUpon>FormHome.cs</DependentUpon>
