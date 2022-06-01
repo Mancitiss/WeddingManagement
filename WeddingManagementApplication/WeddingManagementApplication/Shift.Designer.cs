@@ -28,12 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Shift));
             this.lbName = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.lbStart = new System.Windows.Forms.Label();
             this.lbEnd = new System.Windows.Forms.Label();
             this.lbStatus = new System.Windows.Forms.Label();
+            this.btnCheck = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lbName
@@ -99,11 +101,25 @@
             this.lbStatus.TabIndex = 5;
             this.lbStatus.Text = "label6";
             // 
+            // btnCheck
+            // 
+            this.btnCheck.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnCheck.BackgroundImage")));
+            this.btnCheck.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnCheck.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCheck.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.btnCheck.Location = new System.Drawing.Point(166, 605);
+            this.btnCheck.Name = "btnCheck";
+            this.btnCheck.Size = new System.Drawing.Size(51, 48);
+            this.btnCheck.TabIndex = 6;
+            this.btnCheck.UseVisualStyleBackColor = true;
+            this.btnCheck.Visible = false;
+            // 
             // Shift
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.Controls.Add(this.btnCheck);
             this.Controls.Add(this.lbStatus);
             this.Controls.Add(this.lbEnd);
             this.Controls.Add(this.lbStart);
@@ -112,6 +128,7 @@
             this.Controls.Add(this.lbName);
             this.Name = "Shift";
             this.Size = new System.Drawing.Size(220, 654);
+            this.Click += new System.EventHandler(this.Shift_Click);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -125,5 +142,6 @@
         private System.Windows.Forms.Label lbStart;
         private System.Windows.Forms.Label lbEnd;
         private System.Windows.Forms.Label lbStatus;
+        private System.Windows.Forms.Button btnCheck;
     }
 }

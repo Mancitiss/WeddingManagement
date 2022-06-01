@@ -58,7 +58,17 @@ namespace WeddingManagementApplication
 
         private void btnRemove_Click(object sender, EventArgs e)
         {
-
+            int count = 0;
+            foreach (var s in this.flowLayoutPanel1.Controls)
+            {
+                if (count > 1) break;
+                Shift sh =s as Shift;
+                if (sh != null)
+                {
+                    if (sh._btnCheck==true)
+                        count++;
+                }    
+            }    
         }
 
         private void FormShift_Load(object sender, EventArgs e)
@@ -78,7 +88,7 @@ namespace WeddingManagementApplication
                             shift._lbName = reader["ShiftName"].ToString();
                             shift._lbStart = reader["Starting"].ToString();
                             shift._lbEnd = reader["Ending"].ToString();
-                            shift._lbStatus= reader["available"].ToString();
+                            shift._lbStatus= reader["available"].ToString()=="1"?"Trống" :"Đã được đặt";
                             this.flowLayoutPanel1.Controls.Add(shift);
                         }
                     }
