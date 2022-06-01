@@ -47,7 +47,7 @@
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(161, 205);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(161, 207);
             this.flowLayoutPanel1.TabIndex = 0;
             // 
             // btnShift
@@ -122,7 +122,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(204)))), ((int)(((byte)(176)))));
             this.Controls.Add(this.flowLayoutPanel1);
             this.Name = "SearchDropDown";
-            this.Size = new System.Drawing.Size(161, 205);
+            this.Size = new System.Drawing.Size(161, 207);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 

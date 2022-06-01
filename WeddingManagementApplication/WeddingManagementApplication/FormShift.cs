@@ -61,14 +61,18 @@ namespace WeddingManagementApplication
             int count = 0;
             foreach (var s in this.flowLayoutPanel1.Controls)
             {
-                if (count > 1) break;
+                if (count > 1)
+                {
+                    MessageBox.Show("Chỉ xóa 1 đối tượng");
+                    break;
+                }    
                 Shift sh =s as Shift;
                 if (sh != null)
                 {
                     if (sh._btnCheck==true)
                         count++;
                 }    
-            }    
+            }
         }
 
         private void FormShift_Load(object sender, EventArgs e)
