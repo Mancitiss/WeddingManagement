@@ -43,7 +43,7 @@ namespace WeddingManagementApplication
 
             // third column
             column = new DataColumn();
-            column.DataType = System.Type.GetType("System.Int32");
+            column.DataType = System.Type.GetType("System.Int64");
             column.ColumnName = "MaxTable";
             column.AutoIncrement = false;
             column.Caption = "Max Table";
@@ -60,61 +60,126 @@ namespace WeddingManagementApplication
             column.ReadOnly = true;
             column.Unique = false;
             table.Columns.Add(column);
-            
+
+            // fifth column
+            column = new DataColumn();
+            column.DataType = System.Type.GetType("System.String");
+            column.ColumnName = "IdLobby";
+            column.AutoIncrement = false;
+            column.Caption = "IdLobby";
+            column.ReadOnly = true;
+            column.Unique = true;
+            column.ColumnMapping = MappingType.Hidden;
+            table.Columns.Add(column);
+
+            // sixth column
+            column = new DataColumn();
+            column.DataType = System.Type.GetType("System.String");
+            column.ColumnName = "IdLobbyType";
+            column.AutoIncrement = false;
+            column.Caption = "IdLobbyType";
+            column.ReadOnly = true;
+            column.Unique = false;
+            column.ColumnMapping = MappingType.Hidden;
+            table.Columns.Add(column);
+
+            // set primary key to IdLobby
+            DataColumn[] keys = new DataColumn[1];
+            keys[0] = table.Columns["IdLobby"];
+            table.PrimaryKey = keys;
+
             dataGridView1.DataSource = table;
             // make dataGridView1 autosize
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
-            // check if weddingclient.listlobbytype is empty
-            if (WeddingClient.listLobbyTypes.Count == 0)
-            {
-                // load data from database
-                using (SqlConnection sql = new SqlConnection(WeddingClient.sqlConnectionString))
-                {
-                    sql.Open();
-                    using (SqlCommand cmd = new SqlCommand("SELECT * FROM LOBBY_TYPE WHERE Available > 0", sql))
-                    {
-                        using (SqlDataReader reader = cmd.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                Console.WriteLine(reader["IdLobbyType"].ToString());
-                                WeddingClient.listLobbyTypes.Add(new LobbyTypeData(reader["IdLobbyType"].ToString(), reader["LobbyName"].ToString(), Convert.ToInt32(reader["MinTablePrice"])));
-                            }
-                        }
-                    }
-                }
-            }
-
-            // set combobox data source to listlobbytype
-            lobbyTypeCombobox.DataSource = WeddingClient.listLobbyTypes;
-            // display lobby name
-            lobbyTypeCombobox.DisplayMember = "LobbyName";
-            
+            WeddingClient.listLobbyTypes = new List<LobbyTypeData>();
             // load data from database
             using (SqlConnection sql = new SqlConnection(WeddingClient.sqlConnectionString))
             {
                 sql.Open();
-                using (SqlCommand cmd = new SqlCommand("SELECT LB.IdLobby, LT.LobbyName LobbyType, LB.LobbyName, LB.MaxTable, LB.Note FROM LOBBY LB, LOBBY_TYPE LT WHERE LB.IdLobbyType = LT.IdLobbyType AND LB.Available > 0", sql))
+                using (SqlCommand cmd = new SqlCommand("SELECT * FROM LOBBY_TYPE WHERE Available > 0", sql))
+                {
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Console.WriteLine(reader["IdLobbyType"].ToString());
+                            WeddingClient.listLobbyTypes.Add(new LobbyTypeData(reader["IdLobbyType"].ToString(), reader["LobbyName"].ToString(), Convert.ToInt64(reader["MinTablePrice"])));
+                        }
+                    }
+                }
+            }
+            
+            // display lobby name
+            lobbyTypeCombobox.DisplayMember = "LobbyName";
+            // value is id
+            lobbyTypeCombobox.ValueMember = "idLobbyType";
+            // set combobox data source to listlobbytype
+            lobbyTypeCombobox.DataSource = WeddingClient.listLobbyTypes;
+            // set selected index to 0
+            lobbyTypeCombobox.SelectedIndex = 0;
+
+            WeddingClient.listLobbies = new List<LobbyData>();
+            // load data from database
+            using (SqlConnection sql = new SqlConnection(WeddingClient.sqlConnectionString))
+            {
+                sql.Open();
+                using (SqlCommand cmd = new SqlCommand("SELECT LB.IdLobby, LT.IdLobbyType LobbyTypeId, LT.LobbyName LobbyType, LB.LobbyName, LB.MaxTable, LB.Note FROM LOBBY LB, LOBBY_TYPE LT WHERE LB.IdLobbyType = LT.IdLobbyType AND LB.Available > 0", sql))
                 {
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
                         {
                             Console.WriteLine(reader["IdLobby"].ToString());
-                            WeddingClient.listLobbies.Add(new LobbyData(reader["IdLobby"].ToString(), reader["LobbyType"].ToString(), reader["LobbyName"].ToString(), Convert.ToInt32(reader["MaxTable"]), reader["Note"].ToString()));
+                            WeddingClient.listLobbies.Add(new LobbyData(reader["IdLobby"].ToString(), reader["LobbyTypeId"].ToString(), reader["LobbyName"].ToString(), Convert.ToInt32(reader["MaxTable"]), reader["Note"].ToString()));
                             // add row to table
                             row = table.NewRow();
                             row["LobbyName"] = reader["LobbyName"].ToString();
                             row["LobbyType"] = reader["LobbyType"].ToString();
                             row["MaxTable"] = Convert.ToInt32(reader["MaxTable"]);
                             row["Note"] = reader["Note"].ToString();
+                            row["IdLobby"] = reader["IdLobby"].ToString();
+                            row["IdLobbyType"] = reader["LobbyTypeId"].ToString();
                             table.Rows.Add(row);
                         }
                     }
                 }
             }
-        }  
+        }
+
+        public static string currentLobbyId = "";
+
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // return if row is header
+            if (e.RowIndex < 0)
+            {
+                currentLobbyId = "";
+                return;
+            }
+            // get the row of the cell clicked from dataGridView1
+            var rowItem = (DataRowView)dataGridView1.Rows[e.RowIndex].DataBoundItem;
+            // find the row of the cell clicked in table
+            int index = table.Rows.IndexOf(rowItem.Row);
+
+            // get selected row
+            DataRow row = table.Rows[index];
+            
+            // set currentLobbyId
+            currentLobbyId = row["IdLobby"].ToString();
+
+            // set textbox value
+            nameTextBox.Text = row["LobbyName"].ToString();
+            
+            // set textbox value
+            maxTableTextBox.Text = (row["MaxTable"]).ToString();
+            
+            // set textbox value
+            noteTextBox.Text = row["Note"].ToString();
+
+            // set combobox value
+            lobbyTypeCombobox.SelectedIndex = WeddingClient.listLobbyTypes.FindIndex(x => x.idLobbyType == row["IdLobbyType"].ToString());
+        }
 
 
         public FormLobby()
@@ -140,20 +205,91 @@ namespace WeddingManagementApplication
             Load_data_Lobby();
         }
 
+        private void btn_delete_Click(object sender, EventArgs e)
+        {// check if current type ID is not empty
+            if (currentLobbyId == "")
+            {
+                MessageBox.Show("Please select a lobby!");
+            }
+            else
+            {
+                using (SqlConnection sql = new SqlConnection(WeddingClient.sqlConnectionString))
+                {
+                    sql.Open();
+                    using (SqlCommand cmd = new SqlCommand("UPDATE LOBBY SET Available = 0 WHERE IdLobby = @IdLobby", sql))
+                    {
+                        cmd.Parameters.AddWithValue("@IdLobby", currentLobbyId);
+                        if (cmd.ExecuteNonQuery() > 0)
+                        {
+                            // remove from list
+                            foreach (LobbyData lobby in WeddingClient.listLobbies)
+                            {
+                                if (lobby.idLobby == currentLobbyId)
+                                {
+                                    WeddingClient.listLobbies.Remove(lobby);
+                                    break;
+                                }
+                            }
+                            // remove from table
+                            table.Rows.Remove(table.Rows.Find(currentLobbyId));
+                            MessageBox.Show("Lobby deleted!");
+                        }
+                    }
+                }
+            }
+            FormLobby.currentLobbyId = "";
+        }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void btn_add_Click(object sender, EventArgs e)
         {
-            int i;
-            i = dataGridView1.CurrentRow.Index;
-            lobbyTypeCombobox.Text = dataGridView1.Rows[i].Cells[0].Value.ToString();
-            maxTableTextBox.Text = dataGridView1.Rows[i].Cells[1].Value.ToString();
-            nameTextBox.Text = dataGridView1.Rows[i].Cells[2].Value.ToString();
-            noteTextBox.Text = dataGridView1.Rows[i].Cells[3].Value.ToString();
+            if (nameTextBox.Text == "" || maxTableTextBox.Text == "" || !int.TryParse(maxTableTextBox.Text, out int maxTable))
+            {
+                MessageBox.Show("Please fill all the fields!");
+            }
+            else if (lobbyTypeCombobox.SelectedIndex == -1)
+            {
+                MessageBox.Show("Please select a lobby type!");
+            }
+            else
+            {
+                using (SqlConnection sql = new SqlConnection(WeddingClient.sqlConnectionString))
+                {
+                    sql.Open();
+                    using (SqlCommand cmd = new SqlCommand("INSERT INTO LOBBY (IdLobby, IdLobbyType, LobbyName, MaxTable, Note, Available) VALUES (@IdLobby, @IdLobbyType, @LobbyName, @MaxTable, @Note, 1)", sql))
+                    {
+                        string idLobbyType = ((LobbyTypeData)lobbyTypeCombobox.SelectedItem).idLobbyType;
+                        //lobbyTypeCombobox.SelectedValue.ToString()
+                        string newTypeId = "LO" + WeddingClient.GetNewIdFromTable("LO").ToString().PadLeft(19, '0');
+                        cmd.Parameters.AddWithValue("@IdLobby", newTypeId);
+                        cmd.Parameters.AddWithValue("@IdLobbyType", idLobbyType);
+                        cmd.Parameters.AddWithValue("@LobbyName", nameTextBox.Text);
+                        cmd.Parameters.AddWithValue("@MaxTable", maxTable);
+                        cmd.Parameters.AddWithValue("@Note", noteTextBox.Text);
+                        if (cmd.ExecuteNonQuery() > 0)
+                        {
+                            // add to table
+                            row = table.NewRow();
+                            row["LobbyName"] = nameTextBox.Text;
+                            row["LobbyType"] = WeddingClient.listLobbyTypes.Find(x => { if (x.idLobbyType == idLobbyType) return true; else return false; }).LobbyName;
+                            row["MaxTable"] = maxTable;
+                            row["Note"] = noteTextBox.Text;
+                            row["IdLobby"] = newTypeId;
+                            row["IdLobbyType"] = idLobbyType;
+                            table.Rows.Add(row);
+                            MessageBox.Show("New type added!");
+                            // add to list
+                            WeddingClient.listLobbies.Add(new LobbyData(newTypeId, idLobbyType, nameTextBox.Text, maxTable, noteTextBox.Text));
+                        }
+                    }
+                }
+            }
         }
 
         private void label6_Click(object sender, EventArgs e)
         {
+            // close and dispose form
             this.Close();
+            this.Dispose();
         }
     }
 }

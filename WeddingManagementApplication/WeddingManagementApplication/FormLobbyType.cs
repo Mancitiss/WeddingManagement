@@ -40,9 +40,27 @@ namespace WeddingManagementApplication
             column.ReadOnly = true;
             column.Unique = false;
             table.Columns.Add(column);
+
+            // third column
+            column = new DataColumn();
+            column.DataType = System.Type.GetType("System.String");
+            column.ColumnName = "IdLobbyType";
+            column.AutoIncrement = false;
+            column.Caption = "IdLobbyType";
+            column.ReadOnly = true;
+            column.Unique = true;
+            column.ColumnMapping = MappingType.Hidden;
+            table.Columns.Add(column);
             
+            DataColumn[] keys = new DataColumn[1];
+            keys[0] = table.Columns["IdLobbyType"];
+            table.PrimaryKey = keys;
+
             dataGridView1.DataSource = table;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            // prevent user from adding new row
+            dataGridView1.AllowUserToAddRows = false;
+
 
             List<LobbyTypeData> lobbyTypes = new List<LobbyTypeData>();
             using (SqlConnection sql = new SqlConnection(WeddingClient.sqlConnectionString)) { 
@@ -53,7 +71,7 @@ namespace WeddingManagementApplication
                     {
                         while (reader.Read())
                         {
-                            lobbyTypes.Add(new LobbyTypeData(reader["IdLobbyType"].ToString(), reader["LobbyName"].ToString(), Convert.ToInt32(reader["MinTablePrice"])));
+                            lobbyTypes.Add(new LobbyTypeData(reader["IdLobbyType"].ToString(), reader["LobbyName"].ToString(), Convert.ToInt64(reader["MinTablePrice"])));
                         }
                     }
                 }
@@ -65,6 +83,7 @@ namespace WeddingManagementApplication
                 row = table.NewRow();
                 row["lobbyTypeName"] = lobbyType.LobbyName;
                 row["MinTablePrice"] = lobbyType.MinTablePrice;
+                row["IdLobbyType"] = lobbyType.idLobbyType;
                 table.Rows.Add(row);
             }
         }
@@ -80,10 +99,18 @@ namespace WeddingManagementApplication
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            int i;
-            i = dataGridView1.CurrentRow.Index;
-            comboBox1.Text = dataGridView1.Rows[i].Cells[0].Value.ToString();
-            textBox1.Text = dataGridView1.Rows[i].Cells[1].Value.ToString();
+            if (e.RowIndex < 0 || e.RowIndex >= table.Rows.Count)
+            {
+                currentTypeId = "";
+                return;
+            }
+            // get the row of the cell clicked from dataGridView1
+            var rowItem = (DataRowView)dataGridView1.Rows[e.RowIndex].DataBoundItem;
+            // find the row of the cell clicked in table
+            int i = table.Rows.IndexOf(rowItem.Row);
+            DataRow row = table.Rows[i];
+            comboBox1.Text = row[0].ToString();
+            textBox1.Text = row[1].ToString();
             //textBox2.Text = dataGridView1.Rows[i].Cells[2].Value.ToString();
             if (i < WeddingClient.listLobbyTypes.Count)
             {
@@ -118,6 +145,7 @@ namespace WeddingManagementApplication
                             row = table.NewRow();
                             row["lobbyTypeName"] = comboBox1.Text;
                             row["MinTablePrice"] = price;
+                            row["IdLobbyType"] = newTypeId;
                             table.Rows.Add(row);
                             MessageBox.Show("New type added!");
                             // add to list
@@ -146,22 +174,16 @@ namespace WeddingManagementApplication
                         if (cmd.ExecuteNonQuery() > 0)
                         {
                             // remove from list
-                            int index = -1;
                             foreach (LobbyTypeData lobbyType in WeddingClient.listLobbyTypes)
                             {
                                 if (lobbyType.idLobbyType == currentTypeId)
                                 {
-                                    // get current index
-                                    index = WeddingClient.listLobbyTypes.IndexOf(lobbyType);
                                     WeddingClient.listLobbyTypes.Remove(lobbyType);
                                     break;
                                 }
                             }
                             // remove from table
-                            if (index < table.Rows.Count && index > 0)
-                            {
-                                table.Rows.RemoveAt(index);
-                            }
+                            table.Rows.Remove(table.Rows.Find(currentTypeId));
                             MessageBox.Show("Type deleted!");
                         }
                     }

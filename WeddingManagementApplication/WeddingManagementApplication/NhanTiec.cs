@@ -635,11 +635,21 @@ namespace WeddingManagementApplication
         {
             // get index of selected item from shift combobox
             int index = cbb_shift.SelectedIndex;
+            if (index < 0 || index > WeddingClient.listShifts.Count)
+            {
+                MessageBox.Show("Please choose a shift");
+                return;
+            }
             // get shift from listShift at index
             ShiftData shift = WeddingClient.listShifts[index];
             // get index of selected item from lobby combobox
             int indexLobby = cbb_lobby.SelectedIndex;
             // get lobbyType in listLobbyType at index
+            if (indexLobby < 0 || indexLobby > WeddingClient.listLobbies.Count)
+            {
+                MessageBox.Show("Please choose a Lobby");
+                return;
+            }
             LobbyData lobby = WeddingClient.listLobbies[indexLobby];
             
             using(SqlConnection sql = new SqlConnection(WeddingClient.sqlConnectionString))
