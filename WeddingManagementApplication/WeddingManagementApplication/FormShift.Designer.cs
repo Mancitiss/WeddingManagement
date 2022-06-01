@@ -40,12 +40,14 @@
             this.tbName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.label4 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.LightCoral;
+            this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.rdbU);
             this.panel1.Controls.Add(this.rbtA);
             this.panel1.Controls.Add(this.btnRemove);
@@ -169,6 +171,16 @@
             this.flowLayoutPanel1.Size = new System.Drawing.Size(700, 654);
             this.flowLayoutPanel1.TabIndex = 1;
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(432, 6);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(15, 16);
+            this.label4.TabIndex = 16;
+            this.label4.Text = "X";
+            this.label4.Click += new System.EventHandler(this.label4_Click);
+            // 
             // FormShift
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -202,5 +214,6 @@
         private System.Windows.Forms.TextBox tbEnd;
         private System.Windows.Forms.TextBox tbStart;
         private System.Windows.Forms.TextBox tbName;
+        private System.Windows.Forms.Label label4;
     }
 }
