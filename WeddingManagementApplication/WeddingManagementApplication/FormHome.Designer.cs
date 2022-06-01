@@ -35,20 +35,24 @@
             this.btnWedding = new System.Windows.Forms.Button();
             this.panelNavigate = new System.Windows.Forms.Panel();
             this.btnLobby = new System.Windows.Forms.Button();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.btnReport = new System.Windows.Forms.Button();
             this.btnService = new System.Windows.Forms.Button();
             this.btnMenu = new System.Windows.Forms.Button();
             this.btnSearch = new System.Windows.Forms.Button();
             this.btnHome = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnExit = new System.Windows.Forms.Button();
             this.MainForm = new System.Windows.Forms.Panel();
+            this.reportDropDown1 = new WeddingManagementApplication.ReportDropDown();
+            this.lobbyDropDown1 = new WeddingManagementApplication.LobbyDropDown();
+            this.searchDropDown1 = new WeddingManagementApplication.SearchDropDown();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
+            this.MainForm.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -83,6 +87,8 @@
             this.btnLogout.TabIndex = 10;
             this.btnLogout.Text = "Log out";
             this.btnLogout.UseVisualStyleBackColor = false;
+            this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
+            this.btnLogout.MouseHover += new System.EventHandler(this.btnLogout_MouseHover);
             // 
             // btnSettings
             // 
@@ -96,6 +102,8 @@
             this.btnSettings.TabIndex = 9;
             this.btnSettings.Text = "Settings";
             this.btnSettings.UseVisualStyleBackColor = false;
+            this.btnSettings.Click += new System.EventHandler(this.btnSettings_Click);
+            this.btnSettings.MouseHover += new System.EventHandler(this.btnSettings_MouseHover);
             // 
             // btnWedding
             // 
@@ -109,7 +117,8 @@
             this.btnWedding.TabIndex = 8;
             this.btnWedding.Text = "Wedding";
             this.btnWedding.UseVisualStyleBackColor = false;
-            this.btnWedding.Click += new System.EventHandler(this.btnShift_Click);
+            this.btnWedding.Click += new System.EventHandler(this.btnWedding_Click_1);
+            this.btnWedding.MouseHover += new System.EventHandler(this.btnWedding_MouseHover);
             // 
             // panelNavigate
             // 
@@ -132,17 +141,7 @@
             this.btnLobby.Text = "Lobby";
             this.btnLobby.UseVisualStyleBackColor = false;
             this.btnLobby.Click += new System.EventHandler(this.btnLobby_Click);
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(231, 206);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox2.TabIndex = 6;
-            this.pictureBox2.TabStop = false;
+            this.btnLobby.MouseHover += new System.EventHandler(this.btnLobby_MouseHover);
             // 
             // btnReport
             // 
@@ -157,6 +156,7 @@
             this.btnReport.Text = "Report";
             this.btnReport.UseVisualStyleBackColor = false;
             this.btnReport.Click += new System.EventHandler(this.btnReport_Click);
+            this.btnReport.MouseHover += new System.EventHandler(this.btnReport_MouseHover);
             // 
             // btnService
             // 
@@ -171,6 +171,7 @@
             this.btnService.Text = "Service";
             this.btnService.UseVisualStyleBackColor = false;
             this.btnService.Click += new System.EventHandler(this.btnService_Click);
+            this.btnService.MouseHover += new System.EventHandler(this.btnService_MouseHover);
             // 
             // btnMenu
             // 
@@ -185,6 +186,7 @@
             this.btnMenu.Text = "Menu";
             this.btnMenu.UseVisualStyleBackColor = false;
             this.btnMenu.Click += new System.EventHandler(this.btnMenu_Click);
+            this.btnMenu.MouseHover += new System.EventHandler(this.btnMenu_MouseHover);
             // 
             // btnSearch
             // 
@@ -198,7 +200,8 @@
             this.btnSearch.TabIndex = 2;
             this.btnSearch.Text = "Search";
             this.btnSearch.UseVisualStyleBackColor = false;
-            this.btnSearch.Click += new System.EventHandler(this.btnWedding_Click);
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            this.btnSearch.MouseHover += new System.EventHandler(this.btnSearch_MouseHover);
             // 
             // btnHome
             // 
@@ -213,14 +216,7 @@
             this.btnHome.Text = "Home";
             this.btnHome.UseVisualStyleBackColor = false;
             this.btnHome.Click += new System.EventHandler(this.btnHome_Click);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Location = new System.Drawing.Point(0, 2);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(230, 204);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
+            this.btnHome.MouseHover += new System.EventHandler(this.btnHome_MouseHover);
             // 
             // panel2
             // 
@@ -245,13 +241,66 @@
             // 
             // MainForm
             // 
+            this.MainForm.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("MainForm.BackgroundImage")));
+            this.MainForm.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.MainForm.Controls.Add(this.reportDropDown1);
+            this.MainForm.Controls.Add(this.lobbyDropDown1);
+            this.MainForm.Controls.Add(this.searchDropDown1);
             this.MainForm.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MainForm.Location = new System.Drawing.Point(231, 108);
-            this.MainForm.MaximumSize = new System.Drawing.Size(1153, 654);
-            this.MainForm.MinimumSize = new System.Drawing.Size(1153, 654);
+            this.MainForm.MaximumSize = new System.Drawing.Size(1153, 786);
+            this.MainForm.MinimumSize = new System.Drawing.Size(1153, 786);
             this.MainForm.Name = "MainForm";
-            this.MainForm.Size = new System.Drawing.Size(1153, 654);
+            this.MainForm.Size = new System.Drawing.Size(1153, 786);
             this.MainForm.TabIndex = 2;
+            this.MainForm.MouseHover += new System.EventHandler(this.MainForm_MouseHover);
+            // 
+            // reportDropDown1
+            // 
+            this.reportDropDown1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(204)))), ((int)(((byte)(176)))));
+            this.reportDropDown1.Location = new System.Drawing.Point(-1, 484);
+            this.reportDropDown1.Name = "reportDropDown1";
+            this.reportDropDown1.Size = new System.Drawing.Size(147, 91);
+            this.reportDropDown1.TabIndex = 2;
+            this.reportDropDown1.Visible = false;
+            // 
+            // lobbyDropDown1
+            // 
+            this.lobbyDropDown1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(204)))), ((int)(((byte)(176)))));
+            this.lobbyDropDown1.Location = new System.Drawing.Point(0, 228);
+            this.lobbyDropDown1.Name = "lobbyDropDown1";
+            this.lobbyDropDown1.Size = new System.Drawing.Size(150, 97);
+            this.lobbyDropDown1.TabIndex = 1;
+            this.lobbyDropDown1.Visible = false;
+            this.lobbyDropDown1.Load += new System.EventHandler(this.lobbyDropDown1_Load);
+            // 
+            // searchDropDown1
+            // 
+            this.searchDropDown1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(204)))), ((int)(((byte)(176)))));
+            this.searchDropDown1.Location = new System.Drawing.Point(-1, 164);
+            this.searchDropDown1.Name = "searchDropDown1";
+            this.searchDropDown1.Size = new System.Drawing.Size(161, 285);
+            this.searchDropDown1.TabIndex = 0;
+            this.searchDropDown1.Visible = false;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
+            this.pictureBox2.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(231, 206);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox2.TabIndex = 6;
+            this.pictureBox2.TabStop = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(0, 2);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(230, 204);
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
             // 
             // FormHome
             // 
@@ -265,9 +314,10 @@
             this.Name = "FormHome";
             this.Text = "FormHome";
             this.panel1.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.MainForm.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -290,5 +340,8 @@
         private System.Windows.Forms.Button btnLogout;
         private System.Windows.Forms.Button btnSettings;
         private System.Windows.Forms.Button btnWedding;
+        private SearchDropDown searchDropDown1;
+        private LobbyDropDown lobbyDropDown1;
+        private ReportDropDown reportDropDown1;
     }
 }

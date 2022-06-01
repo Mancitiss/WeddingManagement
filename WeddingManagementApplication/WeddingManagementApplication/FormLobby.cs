@@ -69,5 +69,10 @@ namespace WeddingManagementApplication
             textBox2.Text = dataGridView1.Rows[i].Cells[2].Value.ToString();
             textBox3.Text = dataGridView1.Rows[i].Cells[3].Value.ToString();
         }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

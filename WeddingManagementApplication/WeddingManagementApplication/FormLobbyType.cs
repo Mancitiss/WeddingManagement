@@ -21,7 +21,7 @@ namespace WeddingManagementApplication
 
         SqlCommand cmd;
         SqlConnection connection;
-        string str = @"Data Source=DESKTOP-IEL0IE1;Initial Catalog=WEDDINGMANAGEMENT;Integrated Security=True";
+        string str = WeddingManagementApplication.WeddingClient.sqlConnectionString;
         SqlDataAdapter adapter = new SqlDataAdapter();
         DataTable table = new DataTable();
 

@@ -119,7 +119,7 @@
             this.checkboxRemPW.Location = new System.Drawing.Point(127, 386);
             this.checkboxRemPW.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.checkboxRemPW.Name = "checkboxRemPW";
-            this.checkboxRemPW.Size = new System.Drawing.Size(133, 23);
+            this.checkboxRemPW.Size = new System.Drawing.Size(126, 21);
             this.checkboxRemPW.TabIndex = 5;
             this.checkboxRemPW.Text = "Remember me";
             this.checkboxRemPW.UseVisualStyleBackColor = true;
