@@ -8,29 +8,112 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Windows.Forms;
-using System.Data;
 
 namespace WeddingManagementApplication
 {
     public partial class FormLobby : Form
     {
-
-        SqlCommand cmd;
-        SqlConnection connection;
-        string str = @"Data Source=DESKTOP-IEL0IE1;Initial Catalog=WEDDINGMANAGEMENT;Integrated Security=True";
-        SqlDataAdapter adapter = new SqlDataAdapter();
         DataTable table = new DataTable();
+        DataColumn column;
+        DataRow row;
 
-        void load_data_Lobby()
+        void Load_data_Lobby()
         {
-            cmd = connection.CreateCommand();
+            // create table
+            table = new DataTable();
+            // first column
+            column = new DataColumn();
+            column.DataType = System.Type.GetType("System.String");
+            column.ColumnName = "LobbyName";
+            column.AutoIncrement = false;
+            column.Caption = "Lobby Name";
+            column.ReadOnly = true;
+            column.Unique = false;
+            table.Columns.Add(column);
 
-            cmd.CommandText = "SELECT LB.LobbyName, MaxTable, Available, Note FROM LOBBY LB";
+            // second column
+            column = new DataColumn();
+            column.DataType = System.Type.GetType("System.String");
+            column.ColumnName = "LobbyType";
+            column.AutoIncrement = false;
+            column.Caption = "Lobby Type";
+            column.ReadOnly = true;
+            column.Unique = false;
+            table.Columns.Add(column);
 
-            adapter.SelectCommand = cmd;
-            table.Clear();
-            adapter.Fill(table);
+            // third column
+            column = new DataColumn();
+            column.DataType = System.Type.GetType("System.Int32");
+            column.ColumnName = "MaxTable";
+            column.AutoIncrement = false;
+            column.Caption = "Max Table";
+            column.ReadOnly = true;
+            column.Unique = false;
+            table.Columns.Add(column);
+
+            // fourth column
+            column = new DataColumn();
+            column.DataType = System.Type.GetType("System.String");
+            column.ColumnName = "Note";
+            column.AutoIncrement = false;
+            column.Caption = "Note";
+            column.ReadOnly = true;
+            column.Unique = false;
+            table.Columns.Add(column);
+            
             dataGridView1.DataSource = table;
+            // make dataGridView1 autosize
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+            // check if weddingclient.listlobbytype is empty
+            if (WeddingClient.listLobbyTypes.Count == 0)
+            {
+                // load data from database
+                using (SqlConnection sql = new SqlConnection(WeddingClient.sqlConnectionString))
+                {
+                    sql.Open();
+                    using (SqlCommand cmd = new SqlCommand("SELECT * FROM LOBBY_TYPE WHERE Available > 0", sql))
+                    {
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                Console.WriteLine(reader["IdLobbyType"].ToString());
+                                WeddingClient.listLobbyTypes.Add(new LobbyTypeData(reader["IdLobbyType"].ToString(), reader["LobbyName"].ToString(), Convert.ToInt32(reader["MinTablePrice"])));
+                            }
+                        }
+                    }
+                }
+            }
+
+            // set combobox data source to listlobbytype
+            lobbyTypeCombobox.DataSource = WeddingClient.listLobbyTypes;
+            // display lobby name
+            lobbyTypeCombobox.DisplayMember = "LobbyName";
+            
+            // load data from database
+            using (SqlConnection sql = new SqlConnection(WeddingClient.sqlConnectionString))
+            {
+                sql.Open();
+                using (SqlCommand cmd = new SqlCommand("SELECT LB.IdLobby, LT.LobbyName LobbyType, LB.LobbyName, LB.MaxTable, LB.Note FROM LOBBY LB, LOBBY_TYPE LT WHERE LB.IdLobbyType = LT.IdLobbyType AND LB.Available > 0", sql))
+                {
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Console.WriteLine(reader["IdLobby"].ToString());
+                            WeddingClient.listLobbies.Add(new LobbyData(reader["IdLobby"].ToString(), reader["LobbyType"].ToString(), reader["LobbyName"].ToString(), Convert.ToInt32(reader["MaxTable"]), reader["Note"].ToString()));
+                            // add row to table
+                            row = table.NewRow();
+                            row["LobbyName"] = reader["LobbyName"].ToString();
+                            row["LobbyType"] = reader["LobbyType"].ToString();
+                            row["MaxTable"] = Convert.ToInt32(reader["MaxTable"]);
+                            row["Note"] = reader["Note"].ToString();
+                            table.Rows.Add(row);
+                        }
+                    }
+                }
+            }
         }  
 
 
@@ -41,8 +124,8 @@ namespace WeddingManagementApplication
         private Label label2;
         private LinkLabel linkLabel1;
         private GroupBox groupBox1;
-        private TextBox textBox1;
-        private ComboBox comboBox1;
+        private TextBox maxTableTextBox;
+        private ComboBox lobbyTypeCombobox;
         private Button btn_delete;
         private Button btn_add;
         private Panel panel3;
@@ -50,13 +133,11 @@ namespace WeddingManagementApplication
         private Label label9;
         private TableLayoutPanel tableLayoutPanel1;
         private Label header_lobby;
-
+        
 
         private void FormLobby_Load(object sender, EventArgs e)
         {
-            connection = new SqlConnection(str);
-            connection.Open();
-            load_data_Lobby();
+            Load_data_Lobby();
         }
 
 
@@ -64,10 +145,10 @@ namespace WeddingManagementApplication
         {
             int i;
             i = dataGridView1.CurrentRow.Index;
-            comboBox1.Text = dataGridView1.Rows[i].Cells[0].Value.ToString();
-            textBox1.Text = dataGridView1.Rows[i].Cells[1].Value.ToString();
-            textBox2.Text = dataGridView1.Rows[i].Cells[2].Value.ToString();
-            textBox3.Text = dataGridView1.Rows[i].Cells[3].Value.ToString();
+            lobbyTypeCombobox.Text = dataGridView1.Rows[i].Cells[0].Value.ToString();
+            maxTableTextBox.Text = dataGridView1.Rows[i].Cells[1].Value.ToString();
+            nameTextBox.Text = dataGridView1.Rows[i].Cells[2].Value.ToString();
+            noteTextBox.Text = dataGridView1.Rows[i].Cells[3].Value.ToString();
         }
 
         private void label6_Click(object sender, EventArgs e)

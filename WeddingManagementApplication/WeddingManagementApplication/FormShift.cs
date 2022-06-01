@@ -75,7 +75,7 @@ namespace WeddingManagementApplication
                         {
                             Shift shift = new Shift();
                             //MessageBox.Show("alo");
-                            shift._lbName = reader["name"].ToString();
+                            shift._lbName = reader["ShiftName"].ToString();
                             shift._lbStart = reader["Starting"].ToString();
                             shift._lbEnd = reader["Ending"].ToString();
                             shift._lbStatus= reader["available"].ToString();

@@ -348,7 +348,7 @@ namespace WeddingManagementApplication
             // get DishesData from listDishes at index
             Service service = WeddingClient.listServices[index];
             // set textbox price
-            tb_service_price.Text = service.ServicePrice.ToString() + " VND";
+            tb_price_service.Text = service.ServicePrice.ToString() + " VND";
         }
 
 
@@ -549,7 +549,7 @@ namespace WeddingManagementApplication
                         long newServicePrice = 0;
                         if (currentServicePrice == 0)
                         {
-                            using (SqlCommand cmd = new SqlCommand("INSERT INTO SERVICE_DETAIL (IdWedding, IdService, AmountOfService, TotalServicePrice, Note) VALUES (@idWedding, @idDishes, @AmountOfDishes, @TotalDishesPrice, @Note)", sql))
+                            using (SqlCommand cmd = new SqlCommand("INSERT INTO SERVICE_DETAIL (IdWedding, IdService, AmountOfService, TotalServicePrice, Note) VALUES (@idWedding, @idService, @AmountOfService, @TotalServicePrice, @Note)", sql))
                             {
                                 cmd.Parameters.AddWithValue("@idWedding", NhanTiec.currentWeddingId);
                                 cmd.Parameters.AddWithValue("@idService", service.idService);
@@ -558,8 +558,8 @@ namespace WeddingManagementApplication
                                 cmd.Parameters.AddWithValue("@Note", "");
                                 if (cmd.ExecuteNonQuery() > 0)
                                 {
-                                    newServicePrice = service.ServicePrice * Convert.ToInt32(tb_dishes_price.Text);
-                                    using (SqlCommand cmd2 = new SqlCommand("UPDATE BILL SET ServicePriceTotal = ServicePriceTotal + @serviceChanged, Total = Total + @serviceChanged WHERE IdBill = @idWedding", sql))
+                                    newServicePrice = service.ServicePrice * Convert.ToInt32(tb_service_price.Text);
+                                    using (SqlCommand cmd2 = new SqlCommand("UPDATE BILL SET ServicePriceTotal = ServicePriceTotal + @serviceChanged, Total = Total + @serviceChanged, MoneyLeft = MoneyLeft + @serviceChanged WHERE IdBill = @idWedding", sql))
                                     {
                                         cmd2.Parameters.AddWithValue("@idWedding", NhanTiec.currentWeddingId);
                                         cmd2.Parameters.AddWithValue("@serviceChanged", newServicePrice);
@@ -588,7 +588,7 @@ namespace WeddingManagementApplication
                                 cmd.Parameters.AddWithValue("@idWedding", NhanTiec.currentWeddingId);
                                 cmd.Parameters.AddWithValue("@idDishes", service.idService);
                                 cmd.Parameters.AddWithValue("@AmountOfDishes", Convert.ToInt32(tb_dishes_price.Text));
-                                cmd.Parameters.AddWithValue("@TotalDishesPrice", service.ServicePrice * Convert.ToInt32(tb_service_price.Text));
+                                cmd.Parameters.AddWithValue("@TotalServicePrice", service.ServicePrice * Convert.ToInt32(tb_service_price.Text));
                                 if (cmd.ExecuteNonQuery() > 0)
                                 {
                                     newServicePrice = service.ServicePrice * Convert.ToInt32(tb_service_price.Text);
@@ -600,7 +600,7 @@ namespace WeddingManagementApplication
                                         if (cmd2.ExecuteNonQuery() > 0)
                                         {
                                             MessageBox.Show("Thêm thành công");
-                                            tb_dishes_price.Text = "";
+                                            tb_service_price.Text = "";
                                         }
                                         else
                                         {
