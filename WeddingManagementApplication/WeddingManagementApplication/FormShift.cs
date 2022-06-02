@@ -39,7 +39,9 @@ namespace WeddingManagementApplication
                     // if success add menu to list
                     using (SqlCommand command = new SqlCommand("insert into Shift  values (@idShift, @available, @Name, @Start,@End)", sql))
                     {
-                        command.Parameters.AddWithValue("@idShift", "SH" + WeddingClient.GetNewIdFromTable("SH").ToString().PadLeft(19, '0'));
+                        string id = "SH" + WeddingClient.GetNewIdFromTable("SH").ToString().PadLeft(19, '0');
+                        s._id = id;
+                        command.Parameters.AddWithValue("@idShift",id );
                         command.Parameters.AddWithValue("@available", state);
                         command.Parameters.AddWithValue("@Name", s._lbName);
                         command.Parameters.AddWithValue("@Start", s._lbStart);
@@ -59,19 +61,48 @@ namespace WeddingManagementApplication
         private void btnRemove_Click(object sender, EventArgs e)
         {
             int count = 0;
+            Shift selectedShift = new Shift();
+            Shift pre = new Shift();
             foreach (var s in this.flowLayoutPanel1.Controls)
             {
+                selectedShift = s as Shift;
+                if (selectedShift != null)
+                {
+                    
+                    if (selectedShift._btnCheck == true)
+                    {
+                        pre = selectedShift;
+                        count++;
+                    }    
+                }
                 if (count > 1)
                 {
                     MessageBox.Show("Chỉ xóa 1 đối tượng");
                     break;
                 }    
-                Shift sh =s as Shift;
-                if (sh != null)
+            }
+            if (count == 1)
+            {
+                using (var sql = new SqlConnection(WeddingClient.sqlConnectionString))
                 {
-                    if (sh._btnCheck==true)
-                        count++;
-                }    
+                    sql.Open();
+                    using (SqlCommand command = new SqlCommand("delete from Shift where IdShift=@id", sql))
+                    {
+                        command.Parameters.AddWithValue("@id", pre._id);
+                        if (command.ExecuteNonQuery() > 0)
+                        {
+                            foreach (var s in this.flowLayoutPanel1.Controls)
+                            {
+                                if ((s as Shift)._id == pre._id)
+                                {
+                                    this.flowLayoutPanel1.Controls.Remove(s as Control);
+                                    MessageBox.Show("Xóa thành công");
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
 
@@ -93,6 +124,7 @@ namespace WeddingManagementApplication
                             shift._lbStart = reader["Starting"].ToString();
                             shift._lbEnd = reader["Ending"].ToString();
                             shift._lbStatus= reader["available"].ToString()=="1"?"Trống" :"Đã được đặt";
+                            shift._id = reader["IdShift"].ToString();
                             this.flowLayoutPanel1.Controls.Add(shift);
                         }
                     }
