@@ -22,6 +22,9 @@ namespace WeddingManagementApplication
             InitializeComponent();
             load_gridView_wedding();
             load_gridView_bill();
+
+            dataWedding.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            dataBill.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
         }
      
         void load_gridView_wedding()
@@ -31,13 +34,24 @@ namespace WeddingManagementApplication
                 conn.Open();
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = "SELECT IdWedding, WD.IdLobby, WD.IdShift, LobbyName, ShiftName, Representative, PhoneNumber, BookingDate, WeddingDate, GroomName, BrideName, AmountOfTable, " +
-                        "AmountOfContingencyTable, TablePrice, Deposit FROM LOBBY LB, SHIFT S, WEDDING_INFOR WD WHERE WD.IdShift = S.IdShift AND WD.IdLobby = LB.IdLobby ";
+                    cmd.CommandText = "SELECT IdWedding, WD.IdLobby, WD.IdShift, BookingDate bDate, WeddingDate wDate, LobbyName, ShiftName, Representative, PhoneNumber, FORMAT(BookingDate, 'dd/MM/yyyy') BookingDate, FORMAT(WeddingDate, 'dd/MM/yyyy') WeddingDate, GroomName, BrideName, AmountOfTable, AmountOfContingencyTable, TablePrice, Deposit FROM LOBBY LB, SHIFT S, WEDDING_INFOR WD WHERE WD.IdShift = S.IdShift AND WD.IdLobby = LB.IdLobby ";
                     using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
                     {
                         table = new DataTable();
                         adapter.Fill(table);
+                        table.Columns["IdWedding"].ColumnMapping = MappingType.Hidden;
+                        table.Columns["IdLobby"].ColumnMapping = MappingType.Hidden;
+                        table.Columns["IdShift"].ColumnMapping = MappingType.Hidden;
+                        table.Columns["bDate"].ColumnMapping = MappingType.Hidden;
+                        table.Columns["wDate"].ColumnMapping = MappingType.Hidden;
+                        table.Columns["ShiftName"].Caption = "Shift";
+                        table.Columns["AmountOfTable"].Caption = "Table";
+                        table.Columns["AmountOfContingencyTable"].Caption = "Contingency";
                         dataWedding.DataSource = table;
+                        foreach (DataGridViewColumn col in dataWedding.Columns)
+                        {
+                            col.HeaderText = table.Columns[col.DataPropertyName].Caption;
+                        }
                     }
                 }
             }
@@ -49,13 +63,23 @@ namespace WeddingManagementApplication
                 conn.Open();
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = "SELECT IdWedding, W.IdShift, IdBill, W.IdLobby, Representative, GroomName, BrideName, PhoneNumber, LobbyName, ShiftName, InvoiceDate, TablePriceTotal, ServicePriceTotal, Total, PaymentDate, MoneyLeft from WEDDING_INFOR W, BILL B, LOBBY LB, SHIFT S WHERE B.IdBill = W.IdWedding AND W.IdLobby = LB.IdLobby AND W.IdShift = S.IdShift";
+                    cmd.CommandText = "SELECT IdWedding, W.IdShift, IdBill, W.IdLobby, InvoiceDate iDate, PaymentDate pDate, Representative, GroomName, BrideName, PhoneNumber, LobbyName, ShiftName, FORMAT(InvoiceDate, 'dd/MM/yyyy') InvoiceDate, TablePriceTotal, ServicePriceTotal, Total, FORMAT(PaymentDate, 'dd/MM/yyyy') PaymentDate, MoneyLeft from WEDDING_INFOR W, BILL B, LOBBY LB, SHIFT S WHERE B.IdBill = W.IdWedding AND W.IdLobby = LB.IdLobby AND W.IdShift = S.IdShift ";
                     // cmd.CommandText = "SELECT * FROM BILL";
                     using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
                     {
                         table1 = new DataTable();
                         adapter.Fill(table1);
-                        dataBill.DataSource = table1;
+                        table1.Columns["IdWedding"].ColumnMapping = MappingType.Hidden;
+                        table1.Columns["IdShift"].ColumnMapping = MappingType.Hidden;
+                        table1.Columns["IdBill"].ColumnMapping = MappingType.Hidden;
+                        table1.Columns["IdLobby"].ColumnMapping = MappingType.Hidden;
+                        table1.Columns["iDate"].ColumnMapping = MappingType.Hidden;
+                        table1.Columns["pDate"].ColumnMapping = MappingType.Hidden;
+                        dataBill.DataSource = table1; 
+                        foreach (DataGridViewColumn col in dataBill.Columns)
+                        {
+                            col.HeaderText = table1.Columns[col.DataPropertyName].Caption;
+                        }
                     }
                 }
             }
@@ -75,8 +99,7 @@ namespace WeddingManagementApplication
                 Console.WriteLine(tb_search_wd.Text);
                 using (SqlConnection sql = new SqlConnection(WeddingClient.sqlConnectionString))
                 {
-                    string sqlquery = "select Representative, GroomName, BrideName, InvoiceDate, TablePriceTotal, ServicePriceTotal, Total, PaymentDate, MoneyLeft " +
-                        "from WEDDING_INFOR W, BILL B where B.IdBill = W.IdWedding and GroomName like @searchWD OR BrideName like @searchWD OR Representative like @searchWD";
+                    string sqlquery = "SELECT IdWedding, WD.IdLobby, WD.IdShift, BookingDate bDate, WeddingDate wDate, LobbyName, ShiftName, Representative, PhoneNumber, FORMAT(BookingDate, 'dd/MM/yyyy') BookingDate, FORMAT(WeddingDate, 'dd/MM/yyyy') WeddingDate, GroomName, BrideName, AmountOfTable, AmountOfContingencyTable, TablePrice, Deposit FROM LOBBY LB, SHIFT S, WEDDING_INFOR WD WHERE WD.IdShift = S.IdShift AND WD.IdLobby = LB.IdLobby AND (GroomName LIKE @searchWD OR BrideName LIKE @searchWD OR Representative LIKE @searchWD)";
                     sql.Open();
                     using (SqlCommand sqlcomm = sql.CreateCommand())
                     {
@@ -87,7 +110,20 @@ namespace WeddingManagementApplication
                         {
                             table = new DataTable();
                             sqlDataAdapter.Fill(table);
+                            table.Columns["IdWedding"].ColumnMapping = MappingType.Hidden;
+                            table.Columns["IdLobby"].ColumnMapping = MappingType.Hidden;
+                            table.Columns["IdShift"].ColumnMapping = MappingType.Hidden;
+                            table.Columns["bDate"].ColumnMapping = MappingType.Hidden;
+                            table.Columns["wDate"].ColumnMapping = MappingType.Hidden;
+                            table.Columns["ShiftName"].Caption = "Shift";
+                            table.Columns["AmountOfTable"].Caption = "Table";
+                            table.Columns["AmountOfContingencyTable"].Caption = "Contingency";
                             dataWedding.DataSource = table;
+                            foreach (DataGridViewColumn col in dataWedding.Columns)
+                            {
+                                col.HeaderText = table.Columns[col.DataPropertyName].Caption;
+                            }
+                            
                         }
                     }
                 }
@@ -96,8 +132,7 @@ namespace WeddingManagementApplication
             {
                 using (SqlConnection sqlconn = new SqlConnection(WeddingClient.sqlConnectionString))
                 {
-                    string sqlquery = "select Representative, GroomName, BrideName, InvoiceDate, TablePriceTotal, ServicePriceTotal, Total, PaymentDate, MoneyLeft" +
-                        " from WEDDING_INFOR W, BILL B where B.IdBill = W.IdWedding and WeddingDate like @searchWD";
+                    string sqlquery = "SELECT IdWedding, WD.IdLobby, WD.IdShift, BookingDate bDate, WeddingDate wDate, LobbyName, ShiftName, Representative, PhoneNumber, FORMAT(BookingDate, 'dd/MM/yyyy') BookingDate, FORMAT(WeddingDate, 'dd/MM/yyyy') WeddingDate, GroomName, BrideName, AmountOfTable, AmountOfContingencyTable, TablePrice, Deposit FROM LOBBY LB, SHIFT S, WEDDING_INFOR WD WHERE WD.IdShift = S.IdShift AND WD.IdLobby = LB.IdLobby AND (CONVERT(NVARCHAR(MAX), BookingDate, 103) LIKE @searchWD OR CONVERT(NVARCHAR(MAX), WeddingDate, 103) LIKE @searchWD)";
                     sqlconn.Open();
                     using (SqlCommand sqlcomm = new SqlCommand(sqlquery, sqlconn))
                     {
@@ -106,7 +141,19 @@ namespace WeddingManagementApplication
                         {
                             table = new DataTable();
                             sqlDataAdapter.Fill(table);
+                            table.Columns["IdWedding"].ColumnMapping = MappingType.Hidden;
+                            table.Columns["IdLobby"].ColumnMapping = MappingType.Hidden;
+                            table.Columns["IdShift"].ColumnMapping = MappingType.Hidden;
+                            table.Columns["bDate"].ColumnMapping = MappingType.Hidden;
+                            table.Columns["wDate"].ColumnMapping = MappingType.Hidden;
+                            table.Columns["ShiftName"].Caption = "Shift";
+                            table.Columns["AmountOfTable"].Caption = "Table";
+                            table.Columns["AmountOfContingencyTable"].Caption = "Contingency";
                             dataWedding.DataSource = table;
+                            foreach (DataGridViewColumn col in dataWedding.Columns)
+                            {
+                                col.HeaderText = table.Columns[col.DataPropertyName].Caption;
+                            }
                         }
                     }
                 }
@@ -126,7 +173,7 @@ namespace WeddingManagementApplication
             {
                 using (SqlConnection sqlconn = new SqlConnection(WeddingClient.sqlConnectionString))
                 {
-                    string sqlquery = "select * from WEDDING_INFOR where GroomName like @searchB OR BrideName like @searchB OR Representative like @searchB";
+                    string sqlquery = "SELECT IdWedding, W.IdShift, IdBill, W.IdLobby, InvoiceDate iDate, PaymentDate pDate, Representative, GroomName, BrideName, PhoneNumber, LobbyName, ShiftName, FORMAT(InvoiceDate, 'dd/MM/yyyy') InvoiceDate, TablePriceTotal, ServicePriceTotal, Total, FORMAT(PaymentDate, 'dd/MM/yyyy') PaymentDate, MoneyLeft from WEDDING_INFOR W, BILL B, LOBBY LB, SHIFT S WHERE B.IdBill = W.IdWedding AND W.IdLobby = LB.IdLobby AND W.IdShift = S.IdShift AND (GroomName LIKE @searchB OR BrideName LIKE @searchB OR Representative LIKE @searchB)";
                     sqlconn.Open();
                     using (SqlCommand sqlcomm = new SqlCommand(sqlquery, sqlconn))
                     {
@@ -135,7 +182,17 @@ namespace WeddingManagementApplication
                         {
                             table1 = new DataTable();
                             sqlDataAdapter.Fill(table1);
-                            dataBill.DataSource = table1;
+                            table1.Columns["IdWedding"].ColumnMapping = MappingType.Hidden;
+                            table1.Columns["IdShift"].ColumnMapping = MappingType.Hidden;
+                            table1.Columns["IdBill"].ColumnMapping = MappingType.Hidden;
+                            table1.Columns["IdLobby"].ColumnMapping = MappingType.Hidden;
+                            table1.Columns["iDate"].ColumnMapping = MappingType.Hidden;
+                            table1.Columns["pDate"].ColumnMapping = MappingType.Hidden;
+                            dataBill.DataSource = table1; 
+                            foreach (DataGridViewColumn col in dataBill.Columns)
+                            {
+                                col.HeaderText = table1.Columns[col.DataPropertyName].Caption;
+                            }
                         }
                     }
                 }
@@ -145,7 +202,7 @@ namespace WeddingManagementApplication
                 using (
                 SqlConnection sqlconn = new SqlConnection(WeddingClient.sqlConnectionString))
                 {
-                    string sqlquery = "select * from WEDDING_INFOR where WeddingDate like @searchB";
+                    string sqlquery = "SELECT IdWedding, W.IdShift, IdBill, W.IdLobby, InvoiceDate iDate, PaymentDate pDate, Representative, GroomName, BrideName, PhoneNumber, LobbyName, ShiftName, FORMAT(InvoiceDate, 'dd/MM/yyyy') InvoiceDate, TablePriceTotal, ServicePriceTotal, Total, FORMAT(PaymentDate, 'dd/MM/yyyy') PaymentDate, MoneyLeft from WEDDING_INFOR W, BILL B, LOBBY LB, SHIFT S WHERE B.IdBill = W.IdWedding AND W.IdLobby = LB.IdLobby AND W.IdShift = S.IdShift AND (CONVERT(NVARCHAR(MAX), BookingDate, 103) LIKE @searchB OR CONVERT(NVARCHAR(MAX), PaymentDate, 103) LIKE @searchB)";
                     sqlconn.Open();
                     using (SqlCommand sqlcomm = new SqlCommand(sqlquery, sqlconn))
                     {
@@ -154,7 +211,17 @@ namespace WeddingManagementApplication
                         {
                             table1 = new DataTable();
                             sqlDataAdapter.Fill(table1);
+                            table1.Columns["IdWedding"].ColumnMapping = MappingType.Hidden;
+                            table1.Columns["IdShift"].ColumnMapping = MappingType.Hidden;
+                            table1.Columns["IdBill"].ColumnMapping = MappingType.Hidden;
+                            table1.Columns["IdLobby"].ColumnMapping = MappingType.Hidden;
+                            table1.Columns["iDate"].ColumnMapping = MappingType.Hidden;
+                            table1.Columns["pDate"].ColumnMapping = MappingType.Hidden;
                             dataBill.DataSource = table1;
+                            foreach (DataGridViewColumn col in dataBill.Columns)
+                            {
+                                col.HeaderText = table1.Columns[col.DataPropertyName].Caption;
+                            }
                         }
                     }
                 }

@@ -43,12 +43,14 @@ namespace WeddingManagementApplication
             // 
             // dataWedding
             // 
+            this.dataWedding.AllowUserToAddRows = false;
             this.dataWedding.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.dataWedding.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataWedding.Location = new System.Drawing.Point(9, 118);
             this.dataWedding.Margin = new System.Windows.Forms.Padding(2);
             this.dataWedding.Name = "dataWedding";
+            this.dataWedding.ReadOnly = true;
             this.dataWedding.RowHeadersWidth = 51;
             this.dataWedding.RowTemplate.Height = 24;
             this.dataWedding.Size = new System.Drawing.Size(403, 263);
@@ -68,12 +70,14 @@ namespace WeddingManagementApplication
             // 
             // dataBill
             // 
+            this.dataBill.AllowUserToAddRows = false;
             this.dataBill.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataBill.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataBill.Location = new System.Drawing.Point(430, 118);
             this.dataBill.Margin = new System.Windows.Forms.Padding(2);
             this.dataBill.Name = "dataBill";
+            this.dataBill.ReadOnly = true;
             this.dataBill.RowHeadersWidth = 51;
             this.dataBill.RowTemplate.Height = 24;
             this.dataBill.Size = new System.Drawing.Size(403, 263);
@@ -95,6 +99,7 @@ namespace WeddingManagementApplication
             // rBtn_name
             // 
             this.rBtn_name.AutoSize = true;
+            this.rBtn_name.Checked = true;
             this.rBtn_name.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rBtn_name.Location = new System.Drawing.Point(180, 91);
             this.rBtn_name.Margin = new System.Windows.Forms.Padding(2);
