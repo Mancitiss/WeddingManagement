@@ -32,7 +32,7 @@ namespace WeddingManagementApplication
         private void btnWedding_Click(object sender, EventArgs e)
         {
             this.Visible = false;
-            NhanTiec frmS = new NhanTiec();
+            searchWedding frmS = new searchWedding();
             frmS.ShowDialog();
         }
 

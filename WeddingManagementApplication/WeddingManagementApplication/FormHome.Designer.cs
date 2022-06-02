@@ -71,8 +71,9 @@
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(231, 786);
+            this.panel1.Size = new System.Drawing.Size(173, 639);
             this.panel1.TabIndex = 0;
             // 
             // btnLogout
@@ -81,9 +82,10 @@
             this.btnLogout.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnLogout.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogout.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnLogout.Location = new System.Drawing.Point(2, 720);
+            this.btnLogout.Location = new System.Drawing.Point(2, 585);
+            this.btnLogout.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnLogout.Name = "btnLogout";
-            this.btnLogout.Size = new System.Drawing.Size(224, 63);
+            this.btnLogout.Size = new System.Drawing.Size(168, 51);
             this.btnLogout.TabIndex = 10;
             this.btnLogout.Text = "Log out";
             this.btnLogout.UseVisualStyleBackColor = false;
@@ -96,9 +98,10 @@
             this.btnSettings.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnSettings.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSettings.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnSettings.Location = new System.Drawing.Point(2, 656);
+            this.btnSettings.Location = new System.Drawing.Point(2, 533);
+            this.btnSettings.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnSettings.Name = "btnSettings";
-            this.btnSettings.Size = new System.Drawing.Size(224, 63);
+            this.btnSettings.Size = new System.Drawing.Size(168, 51);
             this.btnSettings.TabIndex = 9;
             this.btnSettings.Text = "Settings";
             this.btnSettings.UseVisualStyleBackColor = false;
@@ -111,9 +114,10 @@
             this.btnWedding.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnWedding.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnWedding.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnWedding.Location = new System.Drawing.Point(2, 528);
+            this.btnWedding.Location = new System.Drawing.Point(2, 429);
+            this.btnWedding.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnWedding.Name = "btnWedding";
-            this.btnWedding.Size = new System.Drawing.Size(224, 63);
+            this.btnWedding.Size = new System.Drawing.Size(168, 51);
             this.btnWedding.TabIndex = 8;
             this.btnWedding.Text = "Wedding";
             this.btnWedding.UseVisualStyleBackColor = false;
@@ -123,9 +127,10 @@
             // panelNavigate
             // 
             this.panelNavigate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(214)))), ((int)(((byte)(102)))));
-            this.panelNavigate.Location = new System.Drawing.Point(221, 205);
+            this.panelNavigate.Location = new System.Drawing.Point(166, 167);
+            this.panelNavigate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panelNavigate.Name = "panelNavigate";
-            this.panelNavigate.Size = new System.Drawing.Size(10, 65);
+            this.panelNavigate.Size = new System.Drawing.Size(8, 53);
             this.panelNavigate.TabIndex = 0;
             // 
             // btnLobby
@@ -134,9 +139,10 @@
             this.btnLobby.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnLobby.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLobby.ForeColor = System.Drawing.Color.White;
-            this.btnLobby.Location = new System.Drawing.Point(0, 336);
+            this.btnLobby.Location = new System.Drawing.Point(0, 273);
+            this.btnLobby.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnLobby.Name = "btnLobby";
-            this.btnLobby.Size = new System.Drawing.Size(224, 63);
+            this.btnLobby.Size = new System.Drawing.Size(168, 51);
             this.btnLobby.TabIndex = 7;
             this.btnLobby.Text = "Lobby";
             this.btnLobby.UseVisualStyleBackColor = false;
@@ -148,8 +154,9 @@
             this.pictureBox2.Dock = System.Windows.Forms.DockStyle.Top;
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
             this.pictureBox2.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(231, 206);
+            this.pictureBox2.Size = new System.Drawing.Size(173, 167);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox2.TabIndex = 6;
             this.pictureBox2.TabStop = false;
@@ -160,9 +167,10 @@
             this.btnReport.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnReport.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnReport.ForeColor = System.Drawing.Color.White;
-            this.btnReport.Location = new System.Drawing.Point(2, 592);
+            this.btnReport.Location = new System.Drawing.Point(2, 481);
+            this.btnReport.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnReport.Name = "btnReport";
-            this.btnReport.Size = new System.Drawing.Size(224, 63);
+            this.btnReport.Size = new System.Drawing.Size(168, 51);
             this.btnReport.TabIndex = 5;
             this.btnReport.Text = "Report";
             this.btnReport.UseVisualStyleBackColor = false;
@@ -175,9 +183,10 @@
             this.btnService.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnService.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnService.ForeColor = System.Drawing.Color.White;
-            this.btnService.Location = new System.Drawing.Point(1, 464);
+            this.btnService.Location = new System.Drawing.Point(1, 377);
+            this.btnService.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnService.Name = "btnService";
-            this.btnService.Size = new System.Drawing.Size(224, 63);
+            this.btnService.Size = new System.Drawing.Size(168, 51);
             this.btnService.TabIndex = 4;
             this.btnService.Text = "Service";
             this.btnService.UseVisualStyleBackColor = false;
@@ -190,9 +199,10 @@
             this.btnMenu.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnMenu.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMenu.ForeColor = System.Drawing.Color.White;
-            this.btnMenu.Location = new System.Drawing.Point(1, 400);
+            this.btnMenu.Location = new System.Drawing.Point(1, 325);
+            this.btnMenu.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnMenu.Name = "btnMenu";
-            this.btnMenu.Size = new System.Drawing.Size(224, 63);
+            this.btnMenu.Size = new System.Drawing.Size(168, 51);
             this.btnMenu.TabIndex = 3;
             this.btnMenu.Text = "Menu";
             this.btnMenu.UseVisualStyleBackColor = false;
@@ -205,9 +215,10 @@
             this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnSearch.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSearch.ForeColor = System.Drawing.Color.White;
-            this.btnSearch.Location = new System.Drawing.Point(0, 272);
+            this.btnSearch.Location = new System.Drawing.Point(0, 221);
+            this.btnSearch.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(224, 63);
+            this.btnSearch.Size = new System.Drawing.Size(168, 51);
             this.btnSearch.TabIndex = 2;
             this.btnSearch.Text = "Search";
             this.btnSearch.UseVisualStyleBackColor = false;
@@ -220,9 +231,10 @@
             this.btnHome.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnHome.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnHome.ForeColor = System.Drawing.Color.White;
-            this.btnHome.Location = new System.Drawing.Point(0, 208);
+            this.btnHome.Location = new System.Drawing.Point(0, 169);
+            this.btnHome.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnHome.Name = "btnHome";
-            this.btnHome.Size = new System.Drawing.Size(224, 63);
+            this.btnHome.Size = new System.Drawing.Size(168, 51);
             this.btnHome.TabIndex = 1;
             this.btnHome.Text = "Home";
             this.btnHome.UseVisualStyleBackColor = false;
@@ -232,8 +244,9 @@
             // pictureBox1
             // 
             this.pictureBox1.Location = new System.Drawing.Point(0, 2);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(230, 204);
+            this.pictureBox1.Size = new System.Drawing.Size(172, 166);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
@@ -242,17 +255,19 @@
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(106)))), ((int)(((byte)(101)))));
             this.panel2.Controls.Add(this.btnExit);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(231, 0);
+            this.panel2.Location = new System.Drawing.Point(173, 0);
+            this.panel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1164, 108);
+            this.panel2.Size = new System.Drawing.Size(873, 88);
             this.panel2.TabIndex = 1;
             // 
             // btnExit
             // 
             this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnExit.Location = new System.Drawing.Point(1134, 3);
+            this.btnExit.Location = new System.Drawing.Point(850, 2);
+            this.btnExit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(27, 25);
+            this.btnExit.Size = new System.Drawing.Size(20, 20);
             this.btnExit.TabIndex = 0;
             this.btnExit.Text = "x";
             this.btnExit.UseVisualStyleBackColor = true;
@@ -266,29 +281,32 @@
             this.MainForm.Controls.Add(this.lobbyDropDown1);
             this.MainForm.Controls.Add(this.searchDropDown1);
             this.MainForm.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.MainForm.Location = new System.Drawing.Point(231, 108);
-            this.MainForm.MaximumSize = new System.Drawing.Size(1153, 786);
-            this.MainForm.MinimumSize = new System.Drawing.Size(1153, 786);
+            this.MainForm.Location = new System.Drawing.Point(173, 88);
+            this.MainForm.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.MainForm.MaximumSize = new System.Drawing.Size(865, 639);
+            this.MainForm.MinimumSize = new System.Drawing.Size(865, 639);
             this.MainForm.Name = "MainForm";
-            this.MainForm.Size = new System.Drawing.Size(1153, 786);
+            this.MainForm.Size = new System.Drawing.Size(865, 639);
             this.MainForm.TabIndex = 2;
             this.MainForm.MouseHover += new System.EventHandler(this.MainForm_MouseHover);
             // 
             // reportDropDown1
             // 
             this.reportDropDown1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(204)))), ((int)(((byte)(176)))));
-            this.reportDropDown1.Location = new System.Drawing.Point(-1, 484);
+            this.reportDropDown1.Location = new System.Drawing.Point(-1, 393);
+            this.reportDropDown1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.reportDropDown1.Name = "reportDropDown1";
-            this.reportDropDown1.Size = new System.Drawing.Size(147, 91);
+            this.reportDropDown1.Size = new System.Drawing.Size(110, 74);
             this.reportDropDown1.TabIndex = 2;
             this.reportDropDown1.Visible = false;
             // 
             // lobbyDropDown1
             // 
             this.lobbyDropDown1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(204)))), ((int)(((byte)(176)))));
-            this.lobbyDropDown1.Location = new System.Drawing.Point(0, 228);
+            this.lobbyDropDown1.Location = new System.Drawing.Point(0, 185);
+            this.lobbyDropDown1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.lobbyDropDown1.Name = "lobbyDropDown1";
-            this.lobbyDropDown1.Size = new System.Drawing.Size(150, 97);
+            this.lobbyDropDown1.Size = new System.Drawing.Size(112, 79);
             this.lobbyDropDown1.TabIndex = 1;
             this.lobbyDropDown1.Visible = false;
             this.lobbyDropDown1.Load += new System.EventHandler(this.lobbyDropDown1_Load);
@@ -296,21 +314,23 @@
             // searchDropDown1
             // 
             this.searchDropDown1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(204)))), ((int)(((byte)(176)))));
-            this.searchDropDown1.Location = new System.Drawing.Point(-1, 164);
+            this.searchDropDown1.Location = new System.Drawing.Point(-1, 133);
+            this.searchDropDown1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.searchDropDown1.Name = "searchDropDown1";
-            this.searchDropDown1.Size = new System.Drawing.Size(161, 209);
+            this.searchDropDown1.Size = new System.Drawing.Size(121, 170);
             this.searchDropDown1.TabIndex = 0;
             this.searchDropDown1.Visible = false;
             // 
             // FormHome
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1395, 786);
+            this.ClientSize = new System.Drawing.Size(1046, 639);
             this.Controls.Add(this.MainForm);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "FormHome";
             this.Text = "FormHome";
             this.panel1.ResumeLayout(false);

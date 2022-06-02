@@ -262,6 +262,10 @@
     <Compile Include="ReportDropDown.Designer.cs">
       <DependentUpon>ReportDropDown.cs</DependentUpon>
     </Compile>
+    <Compile Include="RevenueReportDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RevenueReportDetail.Designer.cs" />
     <Compile Include="SearchDropDown.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -348,6 +352,7 @@
     <EmbeddedResource Include="ReportDropDown.resx">
       <DependentUpon>ReportDropDown.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="RevenueReportDetail.resx" />
     <EmbeddedResource Include="SearchDropDown.resx">
       <DependentUpon>SearchDropDown.cs</DependentUpon>
     </EmbeddedResource>

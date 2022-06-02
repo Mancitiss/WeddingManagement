@@ -30,6 +30,7 @@ namespace WeddingManagementApplication
                 using (SqlCommand cmd = new SqlCommand("SELECT LobbyName, ShiftName, Representative, PhoneNumber, BookingDate, WeddingDate, GroomName, BrideName, AmountOfTable, " +
                 "AmountOfContingencyTable, TablePrice, Deposit FROM LOBBY LB, SHIFT S, WEDDING_INFOR WD WHERE WD.IdShift = S.IdShift AND WD.IdLobby = LB.IdLobby AND WD.Available > 0", sql))
                 {
+                    //LobbyName, ShiftName, Representative,  honeNumber, BookingDate, WeddingDate, GroomName, BrideName, AmountOfTable, AmountOfContingencyTable, TablePrice, Deposit
                     adapter.SelectCommand = cmd;
                     table1.Clear();
                     adapter.Fill(table1);
