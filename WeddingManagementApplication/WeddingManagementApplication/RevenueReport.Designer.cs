@@ -30,20 +30,21 @@
         {
             this.labelRReport = new System.Windows.Forms.Label();
             this.panel4khung = new System.Windows.Forms.Panel();
-            this.labelMonth = new System.Windows.Forms.Label();
-            this.labelRTotal = new System.Windows.Forms.Label();
-            this.comboBoxMonth = new System.Windows.Forms.ComboBox();
-            this.textBoxRTotal = new System.Windows.Forms.TextBox();
-            this.labelYear = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.comboBoxMadeBy = new System.Windows.Forms.ComboBox();
             this.labelMadeBy = new System.Windows.Forms.Label();
+            this.comboBoxMadeBy = new System.Windows.Forms.ComboBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.labelYear = new System.Windows.Forms.Label();
+            this.textBoxRTotal = new System.Windows.Forms.TextBox();
+            this.comboBoxMonth = new System.Windows.Forms.ComboBox();
+            this.labelRTotal = new System.Windows.Forms.Label();
+            this.labelMonth = new System.Windows.Forms.Label();
             this.dataGridViewRReport = new System.Windows.Forms.DataGridView();
             this.buttonDelete = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.buttonSave = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
+            this.labelWDRestaurant = new System.Windows.Forms.Label();
             this.panel4khung.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRReport)).BeginInit();
             this.SuspendLayout();
@@ -76,77 +77,15 @@
             this.panel4khung.Size = new System.Drawing.Size(679, 64);
             this.panel4khung.TabIndex = 2;
             // 
-            // labelMonth
+            // labelMadeBy
             // 
-            this.labelMonth.AutoSize = true;
-            this.labelMonth.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F);
-            this.labelMonth.Location = new System.Drawing.Point(68, 2);
-            this.labelMonth.Name = "labelMonth";
-            this.labelMonth.Size = new System.Drawing.Size(68, 24);
-            this.labelMonth.TabIndex = 0;
-            this.labelMonth.Text = "Month:";
-            // 
-            // labelRTotal
-            // 
-            this.labelRTotal.AutoSize = true;
-            this.labelRTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F);
-            this.labelRTotal.Location = new System.Drawing.Point(3, 37);
-            this.labelRTotal.Name = "labelRTotal";
-            this.labelRTotal.Size = new System.Drawing.Size(138, 24);
-            this.labelRTotal.TabIndex = 1;
-            this.labelRTotal.Text = "Revenue Total:";
-            // 
-            // comboBoxMonth
-            // 
-            this.comboBoxMonth.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.comboBoxMonth.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.comboBoxMonth.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxMonth.DropDownWidth = 133;
-            this.comboBoxMonth.FormattingEnabled = true;
-            this.comboBoxMonth.Items.AddRange(new object[] {
-            "Jan",
-            "Feb",
-            "Mar",
-            "Apr",
-            "May",
-            "Jun ",
-            "Jul",
-            "Aug",
-            "Sep",
-            "Oct",
-            "Nov",
-            "Dec"});
-            this.comboBoxMonth.Location = new System.Drawing.Point(189, 2);
-            this.comboBoxMonth.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.comboBoxMonth.Name = "comboBoxMonth";
-            this.comboBoxMonth.Size = new System.Drawing.Size(133, 23);
-            this.comboBoxMonth.TabIndex = 6;
-            // 
-            // textBoxRTotal
-            // 
-            this.textBoxRTotal.Location = new System.Drawing.Point(189, 37);
-            this.textBoxRTotal.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textBoxRTotal.Name = "textBoxRTotal";
-            this.textBoxRTotal.Size = new System.Drawing.Size(133, 23);
-            this.textBoxRTotal.TabIndex = 3;
-            // 
-            // labelYear
-            // 
-            this.labelYear.AutoSize = true;
-            this.labelYear.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F);
-            this.labelYear.Location = new System.Drawing.Point(427, 2);
-            this.labelYear.Name = "labelYear";
-            this.labelYear.Size = new System.Drawing.Size(54, 24);
-            this.labelYear.TabIndex = 4;
-            this.labelYear.Text = "Year:";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(544, 2);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(133, 23);
-            this.textBox1.TabIndex = 7;
+            this.labelMadeBy.AutoSize = true;
+            this.labelMadeBy.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F);
+            this.labelMadeBy.Location = new System.Drawing.Point(394, 37);
+            this.labelMadeBy.Name = "labelMadeBy";
+            this.labelMadeBy.Size = new System.Drawing.Size(88, 24);
+            this.labelMadeBy.TabIndex = 8;
+            this.labelMadeBy.Text = "Made by:";
             // 
             // comboBoxMadeBy
             // 
@@ -174,15 +113,77 @@
             this.comboBoxMadeBy.Size = new System.Drawing.Size(133, 23);
             this.comboBoxMadeBy.TabIndex = 8;
             // 
-            // labelMadeBy
+            // textBox1
             // 
-            this.labelMadeBy.AutoSize = true;
-            this.labelMadeBy.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F);
-            this.labelMadeBy.Location = new System.Drawing.Point(394, 37);
-            this.labelMadeBy.Name = "labelMadeBy";
-            this.labelMadeBy.Size = new System.Drawing.Size(88, 24);
-            this.labelMadeBy.TabIndex = 8;
-            this.labelMadeBy.Text = "Made by:";
+            this.textBox1.Location = new System.Drawing.Point(544, 2);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(133, 23);
+            this.textBox1.TabIndex = 7;
+            // 
+            // labelYear
+            // 
+            this.labelYear.AutoSize = true;
+            this.labelYear.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F);
+            this.labelYear.Location = new System.Drawing.Point(427, 2);
+            this.labelYear.Name = "labelYear";
+            this.labelYear.Size = new System.Drawing.Size(54, 24);
+            this.labelYear.TabIndex = 4;
+            this.labelYear.Text = "Year:";
+            // 
+            // textBoxRTotal
+            // 
+            this.textBoxRTotal.Location = new System.Drawing.Point(189, 37);
+            this.textBoxRTotal.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBoxRTotal.Name = "textBoxRTotal";
+            this.textBoxRTotal.Size = new System.Drawing.Size(133, 23);
+            this.textBoxRTotal.TabIndex = 3;
+            // 
+            // comboBoxMonth
+            // 
+            this.comboBoxMonth.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.comboBoxMonth.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.comboBoxMonth.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxMonth.DropDownWidth = 133;
+            this.comboBoxMonth.FormattingEnabled = true;
+            this.comboBoxMonth.Items.AddRange(new object[] {
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "May",
+            "Jun ",
+            "Jul",
+            "Aug",
+            "Sep",
+            "Oct",
+            "Nov",
+            "Dec"});
+            this.comboBoxMonth.Location = new System.Drawing.Point(189, 2);
+            this.comboBoxMonth.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.comboBoxMonth.Name = "comboBoxMonth";
+            this.comboBoxMonth.Size = new System.Drawing.Size(133, 23);
+            this.comboBoxMonth.TabIndex = 6;
+            // 
+            // labelRTotal
+            // 
+            this.labelRTotal.AutoSize = true;
+            this.labelRTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F);
+            this.labelRTotal.Location = new System.Drawing.Point(3, 37);
+            this.labelRTotal.Name = "labelRTotal";
+            this.labelRTotal.Size = new System.Drawing.Size(138, 24);
+            this.labelRTotal.TabIndex = 1;
+            this.labelRTotal.Text = "Revenue Total:";
+            // 
+            // labelMonth
+            // 
+            this.labelMonth.AutoSize = true;
+            this.labelMonth.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F);
+            this.labelMonth.Location = new System.Drawing.Point(68, 2);
+            this.labelMonth.Name = "labelMonth";
+            this.labelMonth.Size = new System.Drawing.Size(68, 24);
+            this.labelMonth.TabIndex = 0;
+            this.labelMonth.Text = "Month:";
             // 
             // dataGridViewRReport
             // 
@@ -254,12 +255,24 @@
             this.button3.Text = "EXIT";
             this.button3.UseVisualStyleBackColor = false;
             // 
+            // labelWDRestaurant
+            // 
+            this.labelWDRestaurant.AutoSize = true;
+            this.labelWDRestaurant.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Italic);
+            this.labelWDRestaurant.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.labelWDRestaurant.Location = new System.Drawing.Point(573, 0);
+            this.labelWDRestaurant.Name = "labelWDRestaurant";
+            this.labelWDRestaurant.Size = new System.Drawing.Size(247, 24);
+            this.labelWDRestaurant.TabIndex = 1;
+            this.labelWDRestaurant.Text = "Wedding Restaurant HALTT";
+            // 
             // RevenueReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(821, 340);
+            this.Controls.Add(this.labelWDRestaurant);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.button2);
@@ -298,5 +311,6 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Label labelWDRestaurant;
     }
 }

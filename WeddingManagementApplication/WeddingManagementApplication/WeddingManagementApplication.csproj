@@ -162,12 +162,6 @@
       <DependentUpon>Dishes.cs</DependentUpon>
     </Compile>
     <Compile Include="DishesData.cs" />
-    <Compile Include="FormBill.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormBill.Designer.cs">
-      <DependentUpon>FormBill.cs</DependentUpon>
-    </Compile>
     <Compile Include="FormDishes.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -183,7 +177,7 @@
     <Compile Include="FormLobby.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormLobby.designer.cs">
+    <Compile Include="FormLobby.Designer.cs">
       <DependentUpon>FormLobby.cs</DependentUpon>
     </Compile>
     <Compile Include="FormLobbyType.cs">
@@ -229,12 +223,6 @@
       <DependentUpon>gridView_service.cs</DependentUpon>
     </Compile>
     <Compile Include="LobbyData.cs" />
-    <Compile Include="LobbyDropDown.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="LobbyDropDown.Designer.cs">
-      <DependentUpon>LobbyDropDown.cs</DependentUpon>
-    </Compile>
     <Compile Include="LobbyTypeData.cs" />
     <Compile Include="Menu.cs" />
     <Compile Include="MenuItem.cs">
@@ -256,27 +244,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="ReportDropDown.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="ReportDropDown.Designer.cs">
-      <DependentUpon>ReportDropDown.cs</DependentUpon>
-    </Compile>
-    <Compile Include="RevenueReportDetail.cs">
+    <Compile Include="RevenueReport.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="RevenueReportDetail.Designer.cs" />
-    <Compile Include="SearchDropDown.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="SearchDropDown.Designer.cs">
-      <DependentUpon>SearchDropDown.cs</DependentUpon>
-    </Compile>
-    <Compile Include="searchWedding.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="searchWedding.Designer.cs">
-      <DependentUpon>searchWedding.cs</DependentUpon>
+    <Compile Include="RevenueReport.Designer.cs">
+      <DependentUpon>RevenueReport.cs</DependentUpon>
     </Compile>
     <Compile Include="Service.cs" />
     <Compile Include="Services.cs">
@@ -304,12 +276,6 @@
     <EmbeddedResource Include="Dishes.resx">
       <DependentUpon>Dishes.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormBill.resx">
-      <DependentUpon>FormBill.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormDishes.resx">
-      <DependentUpon>FormDishes.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="FormHome.resx">
       <DependentUpon>FormHome.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -336,9 +302,6 @@
     <EmbeddedResource Include="gridView_service.resx">
       <DependentUpon>gridView_service.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="LobbyDropDown.resx">
-      <DependentUpon>LobbyDropDown.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="MenuItem.resx">
       <DependentUpon>MenuItem.cs</DependentUpon>
     </EmbeddedResource>
@@ -349,15 +312,8 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="ReportDropDown.resx">
-      <DependentUpon>ReportDropDown.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="RevenueReportDetail.resx" />
-    <EmbeddedResource Include="SearchDropDown.resx">
-      <DependentUpon>SearchDropDown.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="searchWedding.resx">
-      <DependentUpon>searchWedding.cs</DependentUpon>
+    <EmbeddedResource Include="RevenueReport.resx">
+      <DependentUpon>RevenueReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Services.resx">
       <DependentUpon>Services.cs</DependentUpon>
