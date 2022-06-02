@@ -243,6 +243,7 @@
     <Compile Include="MenuItem.Designer.cs">
       <DependentUpon>MenuItem.cs</DependentUpon>
     </Compile>
+    <Compile Include="MessageBoxManager.cs" />
     <Compile Include="NhanTiec.cs">
       <SubType>Form</SubType>
     </Compile>

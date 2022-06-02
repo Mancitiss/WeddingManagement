@@ -11,7 +11,7 @@ namespace WeddingManagementApplication
         public static string currentWeddingId = "";
         SqlDataAdapter adapter = new SqlDataAdapter();
         DataTable table1 = new DataTable();
-        
+
         public NhanTiec()
         {
             InitializeComponent();
@@ -22,19 +22,42 @@ namespace WeddingManagementApplication
             load_comboBox_service();
         }
 
-        void Load_data_wedding()
+        public NhanTiec(string id): this()
+        {
+            NhanTiec.currentWeddingId = id;
+            Load_data_wedding(id);
+        }
+
+        void Load_data_wedding(string id)
         {
             using(SqlConnection sql = new SqlConnection(WeddingClient.sqlConnectionString))
             {
                 sql.Open();
                 using (SqlCommand cmd = new SqlCommand("SELECT LobbyName, ShiftName, Representative, PhoneNumber, BookingDate, WeddingDate, GroomName, BrideName, AmountOfTable, " +
-                "AmountOfContingencyTable, TablePrice, Deposit FROM LOBBY LB, SHIFT S, WEDDING_INFOR WD WHERE WD.IdShift = S.IdShift AND WD.IdLobby = LB.IdLobby AND WD.Available > 0", sql))
+                "AmountOfContingencyTable, TablePrice, Deposit, WD.IdLobby, S.IdShift FROM LOBBY LB, SHIFT S, WEDDING_INFOR WD WHERE WD.IdShift = S.IdShift AND WD.IdLobby = LB.IdLobby AND WD.IdWedding = @id", sql))
                 {
-                    //LobbyName, ShiftName, Representative,  honeNumber, BookingDate, WeddingDate, GroomName, BrideName, AmountOfTable, AmountOfContingencyTable, TablePrice, Deposit
-                    adapter.SelectCommand = cmd;
-                    table1.Clear();
-                    adapter.Fill(table1);
-                    dataWedding.DataSource = table1;
+                    cmd.Parameters.AddWithValue("@id", id);
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            cbb_lobby.SelectedIndex = WeddingClient.listLobbies.FindIndex(x => x.idLobby == reader["IdLobby"].ToString());
+                            cbb_shift.SelectedIndex = WeddingClient.listShifts.FindIndex(x => x.idShift == reader["IdShift"].ToString());
+                            tb_representative.Text = reader.GetString(2);
+                            tb_phone.Text = reader.GetString(3);
+                            date_booking.Value = reader.GetDateTime(4);
+                            date_wedding.Value = reader.GetDateTime(5);
+                            tb_groom.Text = reader.GetString(6);
+                            tb_bride.Text = reader.GetString(7);
+                            tb_table.Text = reader.GetInt32(8).ToString();
+                            tb_contigency.Text = reader.GetInt32(9).ToString();
+                            tb_deposit.Text = reader.GetInt64(11).ToString();
+                            
+                            DataRow row = table1.NewRow();
+                            row.ItemArray = new object[] { reader["LobbyName"].ToString(), reader["ShiftName"].ToString(), tb_representative.Text, tb_phone.Text, date_booking.Value.ToString(), date_wedding.Value.ToString(), tb_groom.Text, tb_bride.Text, tb_table.Text, tb_contigency.Text, 0, tb_deposit.Text, id };
+                            table1.Rows.Add(row);
+                        }
+                    }
                 }
             }
         }
@@ -195,8 +218,14 @@ namespace WeddingManagementApplication
 
         private void dataWedding_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
+            // get the row of the cell clicked from dataGridView1
+            var rowItem = (DataRowView)dataWedding.Rows[e.RowIndex].DataBoundItem;
+            // find the row of the cell clicked in table
+            int index = table1.Rows.IndexOf(rowItem.Row);
+            // get selected row
+            DataRow row = table1.Rows[index];
             // select weddingID
-            NhanTiec.currentWeddingId = table1.Rows[e.RowIndex]["idWedding"].ToString();
+            NhanTiec.currentWeddingId = row["idWedding"].ToString();
             Console.WriteLine(NhanTiec.currentWeddingId);
         }
 
@@ -657,7 +686,7 @@ namespace WeddingManagementApplication
             {
                 sql.Open();
                 // complete command for me
-                string newId = "WD" + WeddingClient.GetNewIdFromTable("WD").ToString();
+                string newId = "WD" + WeddingClient.GetNewIdFromTable("WD").ToString().PadLeft(19, '0');
                 using (SqlCommand cmd = new SqlCommand("INSERT INTO WEDDING_INFOR (IdWedding, IdLobby, IdShift, BookingDate, WeddingDate, PhoneNumber, GroomName, BrideName, AmountOfTable, AmountOfContingencyTable, TablePrice, Deposit, Representative) VALUES (@idWedding, @idLobby, @idShift, @BookingDate, @WeddingDate, @PhoneNumber, @GroomName, @BrideName, @AmountOfTable, @AmountOfContingencyTable, @TablePrice, @Deposit, @representative )", sql))
                 {
                     cmd.Parameters.AddWithValue("@idWedding", newId);

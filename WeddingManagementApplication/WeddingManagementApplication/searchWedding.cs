@@ -228,6 +228,46 @@ namespace WeddingManagementApplication
             }
         }
 
+        private void dataWedding_CellDouBleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // check if clicked row is not header 
+            if (e.RowIndex > -1 && e.RowIndex < dataWedding.Rows.Count)
+            {
+                // get the row of the cell clicked from dataGridView1
+                var rowItem = (DataRowView)dataWedding.Rows[e.RowIndex].DataBoundItem;
+                // find the row of the cell clicked in table
+                int index = table.Rows.IndexOf(rowItem.Row);
+                // get selected row
+                DataRow row = table.Rows[index];
+
+                // get id of selected row
+                string id = row["IdWedding"].ToString();
+
+                // open dialog and ask if user want to edit wedding informations or pay for wedding
+                DialogResult dialogResult = MessageBox.Show("Do you want to edit wedding informations or pay for wedding?", "Edit", MessageBoxButtons.YesNoCancel);
+                if (dialogResult == DialogResult.No)
+                {
+                    // open form edit wedding informations
+                    NhanTiec nt = new NhanTiec(id);
+                    nt.ShowDialog();
+                }
+                else if (dialogResult == DialogResult.Yes)
+                {
+                    // open form pay for wedding
+                    FormBill b = new FormBill(id);
+                    b.ShowDialog();
+                }
+                else if (dialogResult == DialogResult.Cancel)
+                {
+                    return;
+                }
+                else
+                {
+                    return;
+                }
+            }
+        }
+
         private void searchWedding_SizeChangedEvent(object sender, EventArgs e)
         {
             // get size of form

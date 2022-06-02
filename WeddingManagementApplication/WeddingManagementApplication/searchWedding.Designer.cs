@@ -1,4 +1,6 @@
 ﻿
+using System;
+
 namespace WeddingManagementApplication
 {
     partial class searchWedding
@@ -55,6 +57,7 @@ namespace WeddingManagementApplication
             this.dataWedding.RowTemplate.Height = 24;
             this.dataWedding.Size = new System.Drawing.Size(403, 263);
             this.dataWedding.TabIndex = 1;
+            this.dataWedding.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataWedding_CellDouBleClick);
             // 
             // label_search
             // 
