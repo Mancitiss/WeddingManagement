@@ -24,7 +24,7 @@ namespace WeddingManagementApplication
         public static short client_priority;
         public static bool Logged_in(string tk, string mk)
         {
-            string commandtext = "select top 1 id, pw, priority from ACCOUNTS where username=@username";
+            string commandtext = "select top 1 Id, Pw, Priority from ACCOUNT where Username=@username";
             using (SqlConnection sql = new SqlConnection(sqlConnectionString))
             {
                 sql.Open();
@@ -42,7 +42,7 @@ namespace WeddingManagementApplication
                                 bool skip = false;
                                 if (mk == reader["pw"].ToString())
                                 {
-                                    using (SqlCommand changepass = new SqlCommand("update top (1) ACCOUNTS set pw = @pw where id = @id", sql))
+                                    using (SqlCommand changepass = new SqlCommand("update top (1) ACCOUNT set Pw = @pw where Id = @id", sql))
                                     {
                                         changepass.Parameters.AddWithValue("@pw", Crypter.Blowfish.Crypt(mk));
                                         changepass.Parameters.AddWithValue("@id", reader["id"].ToString());
@@ -89,7 +89,7 @@ namespace WeddingManagementApplication
 
         private static bool check_existed_username(string v)
         {
-            string commandtext = "select top 1 id from ACCOUNTS where username=@username";
+            string commandtext = "select top 1 Id from ACCOUNT where Username=@username";
             using (SqlConnection sql = new SqlConnection(sqlConnectionString))
             {
                 sql.Open();
@@ -138,47 +138,47 @@ namespace WeddingManagementApplication
                     case "LT":
                         {
                             string idStr = key + randomid.ToString().PadLeft(19, '0');
-                            return check_existed_id("LOBBY_TYPE", "idLobbyType", idStr);
+                            return check_existed_id("LOBBY_TYPE", "IdLobbyType", idStr);
                         }
                     case "LO":
                         {
                             string idStr = key + randomid.ToString().PadLeft(19, '0');
-                            return check_existed_id("LOBBY", "idLobby", idStr);
+                            return check_existed_id("LOBBY", "IdLobby", idStr);
                         }
                     case "SH":
                         {
                             string idStr = key + randomid.ToString().PadLeft(19, '0');
-                            return check_existed_id("SHIFT", "idShift", idStr);
+                            return check_existed_id("SHIFT", "IdShift", idStr);
                         }
                     case "WD":
                         {
                             string idStr = key + randomid.ToString().PadLeft(19, '0');
-                            return check_existed_id("WEDDING_INFOR", "idWedding", idStr);
+                            return check_existed_id("WEDDING_INFOR", "IdWedding", idStr);
                         }
                     case "MN":
                         {
                             string idStr = key + randomid.ToString().PadLeft(19, '0');
-                            return check_existed_id("MENU", "idDishes", idStr);
+                            return check_existed_id("MENU", "IdDishes", idStr);
                         }
                     case "SV":
                         {
                             string idStr = key + randomid.ToString().PadLeft(19, '0');
-                            return check_existed_id("SERVICE", "idService", idStr);
+                            return check_existed_id("SERVICE", "IdService", idStr);
                         }
                     case "BI":
                         {
                             string idStr = key + randomid.ToString().PadLeft(19, '0');
-                            return check_existed_id("BILL", "idBill", idStr);
+                            return check_existed_id("BILL", "IdBill", idStr);
                         }
                     case "RR":
                         {
                             string idStr = key + randomid.ToString().PadLeft(19, '0');
-                            return check_existed_id("REVENUE_REPORT", "idReport", idStr);
+                            return check_existed_id("REVENUE_REPORT", "IdReport", idStr);
                         }
                     case "PA":
                         {
                             string idStr = key + randomid.ToString().PadLeft(19, '0');
-                            return check_existed_id("PARAMETER", "idParameter", idStr);
+                            return check_existed_id("PARAMETER", "IdParameter", idStr);
                         }
                     default:
                         throw new Exception("Unknown table key");
@@ -217,7 +217,7 @@ namespace WeddingManagementApplication
         {
             if (randomid > 0)
             {
-                string commandtext = "select top 1 id from ACCOUNTS where id=@id";
+                string commandtext = "select top 1 Id from ACCOUNT where Id=@id";
                 using (SqlConnection sql = new SqlConnection(sqlConnectionString))
                 {
                     sql.Open();

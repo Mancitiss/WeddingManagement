@@ -39,12 +39,14 @@
             this.tbDetail = new System.Windows.Forms.RichTextBox();
             this.tbName = new System.Windows.Forms.TextBox();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.label2 = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.LightCoral;
+            this.panel2.Controls.Add(this.label2);
             this.panel2.Controls.Add(this.btnUpdate);
             this.panel2.Controls.Add(this.tbPrice);
             this.panel2.Controls.Add(this.lbPrice);
@@ -151,6 +153,16 @@
             this.flowLayoutPanel1.Size = new System.Drawing.Size(853, 654);
             this.flowLayoutPanel1.TabIndex = 3;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(280, 6);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(15, 16);
+            this.label2.TabIndex = 11;
+            this.label2.Text = "X";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
+            // 
             // FormServices
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -182,5 +194,6 @@
         private System.Windows.Forms.TextBox tbPrice;
         private System.Windows.Forms.Label lbPrice;
         private System.Windows.Forms.Button btnUpdate;
+        private System.Windows.Forms.Label label2;
     }
 }

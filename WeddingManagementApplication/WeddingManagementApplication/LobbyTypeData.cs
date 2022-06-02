@@ -8,9 +8,9 @@ namespace WeddingManagementApplication
 {
     internal class LobbyTypeData
     {
-        public string idLobbyType;
-        public string LobbyName;
-        public long MinTablePrice;
+        public string idLobbyType { get; set; }
+        public string LobbyName { get; set; }
+        public long MinTablePrice { get; set; }
 
         public LobbyTypeData(string idLobbyType, string LobbyName, long MinTablePrice)
         {

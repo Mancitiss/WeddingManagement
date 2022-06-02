@@ -58,7 +58,21 @@ namespace WeddingManagementApplication
 
         private void btnRemove_Click(object sender, EventArgs e)
         {
-
+            int count = 0;
+            foreach (var s in this.flowLayoutPanel1.Controls)
+            {
+                if (count > 1)
+                {
+                    MessageBox.Show("Chỉ xóa 1 đối tượng");
+                    break;
+                }    
+                Shift sh =s as Shift;
+                if (sh != null)
+                {
+                    if (sh._btnCheck==true)
+                        count++;
+                }    
+            }
         }
 
         private void FormShift_Load(object sender, EventArgs e)
@@ -67,23 +81,28 @@ namespace WeddingManagementApplication
             using (var sql = new SqlConnection(WeddingClient.sqlConnectionString))
             {
                 sql.Open();
-                using (SqlCommand command = new SqlCommand("select * from Shift where available > 0", sql))
+                using (SqlCommand command = new SqlCommand("select * from Shift where Available > 0", sql))
                 {
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())
                         {
                             Shift shift = new Shift();
-                            MessageBox.Show("alo");
-                            shift._lbName = reader["name"].ToString();
+                            //MessageBox.Show("alo");
+                            shift._lbName = reader["ShiftName"].ToString();
                             shift._lbStart = reader["Starting"].ToString();
                             shift._lbEnd = reader["Ending"].ToString();
-                            shift._lbStatus= reader["available"].ToString();
+                            shift._lbStatus= reader["available"].ToString()=="1"?"Trống" :"Đã được đặt";
                             this.flowLayoutPanel1.Controls.Add(shift);
                         }
                     }
                 }
             }
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

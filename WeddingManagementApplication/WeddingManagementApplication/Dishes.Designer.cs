@@ -42,6 +42,7 @@
             this.lbName.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.lbName.Location = new System.Drawing.Point(2, 2);
             this.lbName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbName.MaximumSize = new System.Drawing.Size(158, 0);
             this.lbName.Name = "lbName";
             this.lbName.Size = new System.Drawing.Size(87, 19);
             this.lbName.TabIndex = 0;
@@ -49,21 +50,25 @@
             // 
             // lbCost
             // 
+            this.lbCost.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lbCost.AutoEllipsis = true;
             this.lbCost.AutoSize = true;
             this.lbCost.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(106)))), ((int)(((byte)(101)))));
-            this.lbCost.Dock = System.Windows.Forms.DockStyle.Right;
             this.lbCost.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lbCost.Font = new System.Drawing.Font("Century Gothic", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbCost.ForeColor = System.Drawing.SystemColors.Control;
-            this.lbCost.Location = new System.Drawing.Point(119, 0);
+            this.lbCost.Location = new System.Drawing.Point(1, 165);
             this.lbCost.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbCost.MaximumSize = new System.Drawing.Size(118, 0);
             this.lbCost.Name = "lbCost";
             this.lbCost.Size = new System.Drawing.Size(43, 23);
             this.lbCost.TabIndex = 1;
             this.lbCost.Text = "30$";
+            this.lbCost.Click += new System.EventHandler(this.lbCost_Click);
             // 
             // btnClick
             // 
+            this.btnClick.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnClick.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnClick.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnClick.ForeColor = System.Drawing.Color.White;

@@ -32,9 +32,19 @@ namespace WeddingManagementApplication
             get { return this.lbStatus.Text; }
             set { this.lbStatus.Text = value; }
         }
+        public bool _btnCheck
+        {
+            get { return this.btnCheck.Visible; }
+            set { this.btnCheck.Visible = value; }
+        }
         public Shift()
         {
             InitializeComponent();
+        }
+
+        private void Shift_Click(object sender, EventArgs e)
+        {
+            this.btnCheck.Visible = !this.btnCheck.Visible;
         }
     }
 }

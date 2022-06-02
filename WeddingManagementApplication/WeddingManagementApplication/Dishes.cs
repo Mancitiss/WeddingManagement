@@ -78,5 +78,10 @@ namespace WeddingManagementApplication
                 FormDishes.selectedDishesIDs.AddOrUpdate(this.id, 0, (key, oldValue) => 0);
             }
         }
+
+        private void lbCost_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

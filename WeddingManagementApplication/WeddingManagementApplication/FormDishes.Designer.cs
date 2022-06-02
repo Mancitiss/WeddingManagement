@@ -44,11 +44,14 @@
             this.btnRemove = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.label1 = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel2
             // 
+            this.panel2.BackColor = System.Drawing.Color.LightCoral;
+            this.panel2.Controls.Add(this.label1);
             this.panel2.Controls.Add(this.btnUpdate);
             this.panel2.Controls.Add(this.btnUpFile);
             this.panel2.Controls.Add(this.btnExit);
@@ -132,7 +135,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(5, 278);
+            this.label3.Location = new System.Drawing.Point(4, 278);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(79, 18);
             this.label3.TabIndex = 7;
@@ -152,7 +155,7 @@
             // 
             this.lbNameDishes.AutoSize = true;
             this.lbNameDishes.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbNameDishes.Location = new System.Drawing.Point(13, 118);
+            this.lbNameDishes.Location = new System.Drawing.Point(6, 118);
             this.lbNameDishes.Name = "lbNameDishes";
             this.lbNameDishes.Size = new System.Drawing.Size(74, 20);
             this.lbNameDishes.TabIndex = 5;
@@ -210,6 +213,17 @@
             this.flowLayoutPanel1.Size = new System.Drawing.Size(816, 654);
             this.flowLayoutPanel1.TabIndex = 2;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.LightCoral;
+            this.label1.Location = new System.Drawing.Point(317, 5);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(15, 16);
+            this.label1.TabIndex = 14;
+            this.label1.Text = "X";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
+            // 
             // FormDishes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -246,5 +260,6 @@
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Button btnUpFile;
         private System.Windows.Forms.Button btnUpdate;
+        private System.Windows.Forms.Label label1;
     }
 }

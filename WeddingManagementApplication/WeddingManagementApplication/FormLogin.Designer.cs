@@ -34,7 +34,6 @@
             this.textBoxUserName = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.signupLinkLabel = new System.Windows.Forms.LinkLabel();
             this.buttonLogin = new System.Windows.Forms.Button();
             this.checkboxRemPW = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -51,7 +50,6 @@
             this.panel1.Controls.Add(this.textBoxUserName);
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.signupLinkLabel);
             this.panel1.Controls.Add(this.buttonLogin);
             this.panel1.Controls.Add(this.checkboxRemPW);
             this.panel1.Controls.Add(this.label2);
@@ -71,7 +69,7 @@
             this.textBoxPassWord.Size = new System.Drawing.Size(206, 22);
             this.textBoxPassWord.TabIndex = 11;
             this.textBoxPassWord.UseSystemPasswordChar = true;
-            this.textBoxPassWord.KeyDown += TextBoxPassWord_KeyDown;
+            this.textBoxPassWord.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBoxPassWord_KeyDown);
             // 
             // textBoxUserName
             // 
@@ -79,7 +77,7 @@
             this.textBoxUserName.Name = "textBoxUserName";
             this.textBoxUserName.Size = new System.Drawing.Size(206, 22);
             this.textBoxUserName.TabIndex = 10;
-            this.textBoxUserName.KeyDown += TextBoxUserName_KeyDown;
+            this.textBoxUserName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBoxUserName_KeyDown);
             // 
             // label4
             // 
@@ -103,18 +101,6 @@
             this.label3.TabIndex = 8;
             this.label3.Text = "User Login";
             // 
-            // signupLinkLabel
-            // 
-            this.signupLinkLabel.AutoSize = true;
-            this.signupLinkLabel.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.signupLinkLabel.LinkColor = System.Drawing.Color.DarkSlateGray;
-            this.signupLinkLabel.Location = new System.Drawing.Point(120, 485);
-            this.signupLinkLabel.Name = "signupLinkLabel";
-            this.signupLinkLabel.Size = new System.Drawing.Size(247, 20);
-            this.signupLinkLabel.TabIndex = 7;
-            this.signupLinkLabel.TabStop = true;
-            this.signupLinkLabel.Text = "Have no account ? Sign Up now";
-            // 
             // buttonLogin
             // 
             this.buttonLogin.BackColor = System.Drawing.Color.IndianRed;
@@ -132,12 +118,12 @@
             // 
             this.checkboxRemPW.AutoSize = true;
             this.checkboxRemPW.Font = new System.Drawing.Font("Century Gothic", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkboxRemPW.Location = new System.Drawing.Point(125, 396);
+            this.checkboxRemPW.Location = new System.Drawing.Point(127, 386);
             this.checkboxRemPW.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.checkboxRemPW.Name = "checkboxRemPW";
-            this.checkboxRemPW.Size = new System.Drawing.Size(113, 21);
+            this.checkboxRemPW.Size = new System.Drawing.Size(126, 21);
             this.checkboxRemPW.TabIndex = 5;
-            this.checkboxRemPW.Text = "Remember ?";
+            this.checkboxRemPW.Text = "Remember me";
             this.checkboxRemPW.UseVisualStyleBackColor = true;
             // 
             // label2
@@ -194,7 +180,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.LinkLabel signupLinkLabel;
         private System.Windows.Forms.Button buttonLogin;
         private System.Windows.Forms.CheckBox checkboxRemPW;
         private System.Windows.Forms.Label label3;

@@ -115,7 +115,7 @@ namespace WeddingManagementApplication
             using (var sql = new SqlConnection(WeddingClient.sqlConnectionString))
             {
                 sql.Open();
-                using (SqlCommand command = new SqlCommand("select * from MENU where available > 0", sql))
+                using (SqlCommand command = new SqlCommand("select * from MENU where Available > 0", sql))
                 {
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
@@ -194,7 +194,7 @@ namespace WeddingManagementApplication
                     using (var sql = new SqlConnection(WeddingClient.sqlConnectionString))
                     {
                         sql.Open();
-                        using (SqlCommand command = new SqlCommand("update MENU set available = 0 where idDishes = @idDishes", sql))
+                        using (SqlCommand command = new SqlCommand("update MENU set Available = 0 where IdDishes = @idDishes", sql))
                         {
                             command.Parameters.AddWithValue("@idDishes", menu.idDishes);
                             if (command.ExecuteNonQuery() > 0)
@@ -216,6 +216,11 @@ namespace WeddingManagementApplication
         private void btnUpdate_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
