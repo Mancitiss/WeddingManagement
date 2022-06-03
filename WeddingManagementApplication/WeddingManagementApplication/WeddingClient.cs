@@ -19,7 +19,7 @@ namespace WeddingManagementApplication
         internal static List<LobbyData> listLobbies = new List<LobbyData>();
         
         internal static Random rand = new Random();
-        internal static string sqlConnectionString = ConfigurationManager.AppSettings.Get("conString");
+        internal static string sqlConnectionString = ConfigurationManager.AppSettings.Get("Huyen");
         public static string client_id;
         public static short client_priority;
         public static bool Logged_in(string tk, string mk)

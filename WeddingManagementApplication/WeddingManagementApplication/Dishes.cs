@@ -69,13 +69,13 @@ namespace WeddingManagementApplication
             if (this.btnClick.Visible == true)
             {
                 this.btnClick.Visible = false;
-                FormDishes.selectedDishesIDs.TryRemove(this.id, out byte _);
+            //    FormDishes.selectedDishesIDs.TryRemove(this.id, out byte _);
             }
             else
             {
                 this.btnClick.Visible = true;
                 this.BorderStyle = BorderStyle.FixedSingle;
-                FormDishes.selectedDishesIDs.AddOrUpdate(this.id, 0, (key, oldValue) => 0);
+             //   FormDishes.selectedDishesIDs.AddOrUpdate(this.id, 0, (key, oldValue) => 0);
             }
         }
 
