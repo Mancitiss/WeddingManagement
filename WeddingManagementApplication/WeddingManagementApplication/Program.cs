@@ -9,9 +9,8 @@ namespace WeddingManagementApplication
 {
     internal class Program
     {
-        
         internal static FormHome mainform;
-
+        [STAThread]
         static void Main()
         {
             MessageBoxManager.OK = "Alright";

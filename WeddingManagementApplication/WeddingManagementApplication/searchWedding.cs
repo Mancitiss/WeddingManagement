@@ -23,8 +23,8 @@ namespace WeddingManagementApplication
             load_gridView_wedding();
             load_gridView_bill();
 
-            dataWedding.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            dataBill.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            dataWedding.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dataBill.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
         }
      
         void load_gridView_wedding()

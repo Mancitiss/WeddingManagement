@@ -685,7 +685,20 @@ namespace WeddingManagementApplication
             using(SqlConnection sql = new SqlConnection(WeddingClient.sqlConnectionString))
             {
                 sql.Open();
-                // complete command for me
+                // get price of the Type of Lobby that has IdLobby
+                long typePrice = 0;
+                using (SqlCommand cmd = new SqlCommand("SELECT MinTablePrice FROM LOBBY_TYPE WHERE IdLobbyType = @IdLobbyType", sql))
+                {
+                    cmd.Parameters.AddWithValue("@IdLobbyType", lobby.idLobbyType);
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            typePrice = Convert.ToInt64(reader["MinTablePrice"]);
+                        }
+                    }
+                }
+                long basePrice = typePrice * (Convert.ToInt32(tb_table.Text) + Convert.ToInt32(tb_contigency.Text));
                 string newId = "WD" + WeddingClient.GetNewIdFromTable("WD").ToString().PadLeft(19, '0');
                 using (SqlCommand cmd = new SqlCommand("INSERT INTO WEDDING_INFOR (IdWedding, IdLobby, IdShift, BookingDate, WeddingDate, PhoneNumber, GroomName, BrideName, AmountOfTable, AmountOfContingencyTable, TablePrice, Deposit, Representative) VALUES (@idWedding, @idLobby, @idShift, @BookingDate, @WeddingDate, @PhoneNumber, @GroomName, @BrideName, @AmountOfTable, @AmountOfContingencyTable, @TablePrice, @Deposit, @representative )", sql))
                 {
@@ -699,23 +712,11 @@ namespace WeddingManagementApplication
                     cmd.Parameters.AddWithValue("@BrideName", tb_bride.Text);
                     cmd.Parameters.AddWithValue("@AmountOfTable", Convert.ToInt32(tb_table.Text));
                     cmd.Parameters.AddWithValue("@AmountOfContingencyTable", Convert.ToInt32(tb_contigency.Text));
-                    cmd.Parameters.AddWithValue("@TablePrice", 0);
-                    cmd.Parameters.AddWithValue("@Deposit", Convert.ToInt32(tb_deposit.Text));
+                    cmd.Parameters.AddWithValue("@TablePrice", basePrice);
+                    cmd.Parameters.AddWithValue("@Deposit", Convert.ToInt64(tb_deposit.Text));
                     cmd.Parameters.AddWithValue("@representative", tb_representative.Text);
                     if (cmd.ExecuteNonQuery() > 0)
                     {
-                        long basePrice = 0;
-                        using (SqlCommand cmd2 = new SqlCommand("SELECT MinTablePrice FROM LOBBY_TYPE WHERE IdLobbyType = @idLobbyType", sql))
-                        {
-                            cmd2.Parameters.AddWithValue("@idLobbyType", lobby.idLobbyType);
-                            using (SqlDataReader reader = cmd2.ExecuteReader())
-                            {
-                                if (reader.Read())
-                                {
-                                    basePrice = Convert.ToInt64(reader["MinTablePrice"]) * Convert.ToInt32(tb_table.Text);
-                                }
-                            }
-                        }
                         using(SqlCommand cmd2 = new SqlCommand("INSERT INTO BILL (IdBill, InvoiceDate, TablePriceTotal, ServicePriceTotal, Total, PaymentDate, MoneyLeft) VALUES (@idBill, @InvoiceDate, @TablePricetotal, @ServicePriceTotal, @Total, @PaymentDate, @MoneyLeft) ", sql))
                         {
                             cmd2.Parameters.AddWithValue("@idBill", newId);
@@ -724,11 +725,11 @@ namespace WeddingManagementApplication
                             cmd2.Parameters.AddWithValue("@ServicePriceTotal", 0);
                             cmd2.Parameters.AddWithValue("@Total", basePrice);
                             cmd2.Parameters.AddWithValue("@PaymentDate", DBNull.Value);
-                            cmd2.Parameters.AddWithValue("@MoneyLeft", basePrice - Convert.ToInt32(tb_deposit.Text));
+                            cmd2.Parameters.AddWithValue("@MoneyLeft", basePrice - Convert.ToInt64(tb_deposit.Text));
                             if (cmd2.ExecuteNonQuery() > 0)
                             {
                                 DataRow row = table1.NewRow();
-                                row.ItemArray = new object[] { lobby.LobbyName, shift.name, tb_representative.Text, tb_phone.Text, date_booking.Value.ToString(), date_wedding.Value.ToString(), tb_groom.Text, tb_bride.Text, tb_table.Text, tb_contigency.Text, 0, tb_deposit.Text, newId };
+                                row.ItemArray = new object[] { lobby.LobbyName, shift.name, tb_representative.Text, tb_phone.Text, date_booking.Value.ToString(), date_wedding.Value.ToString(), tb_groom.Text, tb_bride.Text, tb_table.Text, tb_contigency.Text, basePrice, tb_deposit.Text, newId };
                                 table1.Rows.Add(row);
                                 MessageBox.Show("Wedding Add Successfully");
                             }
