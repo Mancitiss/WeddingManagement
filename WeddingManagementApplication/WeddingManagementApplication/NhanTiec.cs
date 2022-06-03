@@ -748,5 +748,10 @@ namespace WeddingManagementApplication
         {
 
         }
+
+        private void NhanTiec_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

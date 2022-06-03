@@ -1,4 +1,5 @@
-﻿namespace WeddingManagementApplication
+﻿using System.Threading;
+namespace WeddingManagementApplication
 {
     partial class RevenueReport
     {
@@ -41,9 +42,6 @@
             this.dataGridViewRReport = new System.Windows.Forms.DataGridView();
             this.buttonDelete = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.buttonSave = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
             this.labelWDRestaurant = new System.Windows.Forms.Label();
             this.panel4khung.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRReport)).BeginInit();
@@ -57,7 +55,7 @@
             this.labelRReport.Location = new System.Drawing.Point(216, 28);
             this.labelRReport.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelRReport.Name = "labelRReport";
-            this.labelRReport.Size = new System.Drawing.Size(351, 39);
+            this.labelRReport.Size = new System.Drawing.Size(435, 51);
             this.labelRReport.TabIndex = 0;
             this.labelRReport.Text = "REVENUE REPORT";
             // 
@@ -81,15 +79,14 @@
             // 
             this.labelMadeBy.AutoSize = true;
             this.labelMadeBy.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F);
-            this.labelMadeBy.Location = new System.Drawing.Point(394, 37);
+            this.labelMadeBy.Location = new System.Drawing.Point(394, 30);
             this.labelMadeBy.Name = "labelMadeBy";
-            this.labelMadeBy.Size = new System.Drawing.Size(88, 24);
+            this.labelMadeBy.Size = new System.Drawing.Size(111, 29);
             this.labelMadeBy.TabIndex = 8;
             this.labelMadeBy.Text = "Made by:";
             // 
             // comboBoxMadeBy
             // 
-            this.comboBoxMadeBy.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.comboBoxMadeBy.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.comboBoxMadeBy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxMadeBy.DropDownWidth = 133;
@@ -110,7 +107,7 @@
             this.comboBoxMadeBy.Location = new System.Drawing.Point(543, 37);
             this.comboBoxMadeBy.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.comboBoxMadeBy.Name = "comboBoxMadeBy";
-            this.comboBoxMadeBy.Size = new System.Drawing.Size(133, 23);
+            this.comboBoxMadeBy.Size = new System.Drawing.Size(133, 28);
             this.comboBoxMadeBy.TabIndex = 8;
             // 
             // textBox1
@@ -118,16 +115,16 @@
             this.textBox1.Location = new System.Drawing.Point(544, 2);
             this.textBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(133, 23);
+            this.textBox1.Size = new System.Drawing.Size(133, 27);
             this.textBox1.TabIndex = 7;
             // 
             // labelYear
             // 
             this.labelYear.AutoSize = true;
             this.labelYear.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F);
-            this.labelYear.Location = new System.Drawing.Point(427, 2);
+            this.labelYear.Location = new System.Drawing.Point(427, 5);
             this.labelYear.Name = "labelYear";
-            this.labelYear.Size = new System.Drawing.Size(54, 24);
+            this.labelYear.Size = new System.Drawing.Size(70, 29);
             this.labelYear.TabIndex = 4;
             this.labelYear.Text = "Year:";
             // 
@@ -136,7 +133,7 @@
             this.textBoxRTotal.Location = new System.Drawing.Point(189, 37);
             this.textBoxRTotal.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxRTotal.Name = "textBoxRTotal";
-            this.textBoxRTotal.Size = new System.Drawing.Size(133, 23);
+            this.textBoxRTotal.Size = new System.Drawing.Size(133, 27);
             this.textBoxRTotal.TabIndex = 3;
             // 
             // comboBoxMonth
@@ -147,22 +144,22 @@
             this.comboBoxMonth.DropDownWidth = 133;
             this.comboBoxMonth.FormattingEnabled = true;
             this.comboBoxMonth.Items.AddRange(new object[] {
-            "Jan",
-            "Feb",
-            "Mar",
-            "Apr",
-            "May",
-            "Jun ",
-            "Jul",
-            "Aug",
-            "Sep",
-            "Oct",
-            "Nov",
-            "Dec"});
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12"});
             this.comboBoxMonth.Location = new System.Drawing.Point(189, 2);
             this.comboBoxMonth.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.comboBoxMonth.Name = "comboBoxMonth";
-            this.comboBoxMonth.Size = new System.Drawing.Size(133, 23);
+            this.comboBoxMonth.Size = new System.Drawing.Size(133, 28);
             this.comboBoxMonth.TabIndex = 6;
             // 
             // labelRTotal
@@ -171,7 +168,7 @@
             this.labelRTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F);
             this.labelRTotal.Location = new System.Drawing.Point(3, 37);
             this.labelRTotal.Name = "labelRTotal";
-            this.labelRTotal.Size = new System.Drawing.Size(138, 24);
+            this.labelRTotal.Size = new System.Drawing.Size(176, 29);
             this.labelRTotal.TabIndex = 1;
             this.labelRTotal.Text = "Revenue Total:";
             // 
@@ -181,12 +178,13 @@
             this.labelMonth.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F);
             this.labelMonth.Location = new System.Drawing.Point(68, 2);
             this.labelMonth.Name = "labelMonth";
-            this.labelMonth.Size = new System.Drawing.Size(68, 24);
+            this.labelMonth.Size = new System.Drawing.Size(85, 29);
             this.labelMonth.TabIndex = 0;
             this.labelMonth.Text = "Month:";
             // 
             // dataGridViewRReport
             // 
+            this.dataGridViewRReport.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewRReport.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewRReport.Location = new System.Drawing.Point(10, 154);
             this.dataGridViewRReport.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -199,83 +197,46 @@
             // 
             this.buttonDelete.BackColor = System.Drawing.Color.DarkGray;
             this.buttonDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.buttonDelete.Location = new System.Drawing.Point(682, 175);
+            this.buttonDelete.Location = new System.Drawing.Point(682, 250);
             this.buttonDelete.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(61, 25);
             this.buttonDelete.TabIndex = 6;
             this.buttonDelete.Text = "Delete";
             this.buttonDelete.UseVisualStyleBackColor = false;
+            this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
             // 
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.DarkGray;
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.button1.Location = new System.Drawing.Point(683, 210);
+            this.button1.Location = new System.Drawing.Point(682, 207);
             this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(61, 25);
             this.button1.TabIndex = 7;
             this.button1.Text = "Add";
             this.button1.UseVisualStyleBackColor = false;
-            // 
-            // button2
-            // 
-            this.button2.BackColor = System.Drawing.Color.DarkGray;
-            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.button2.Location = new System.Drawing.Point(682, 246);
-            this.button2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(61, 25);
-            this.button2.TabIndex = 8;
-            this.button2.Text = "Update";
-            this.button2.UseVisualStyleBackColor = false;
-            // 
-            // buttonSave
-            // 
-            this.buttonSave.BackColor = System.Drawing.Color.Yellow;
-            this.buttonSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
-            this.buttonSave.Location = new System.Drawing.Point(573, 309);
-            this.buttonSave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.buttonSave.Name = "buttonSave";
-            this.buttonSave.Size = new System.Drawing.Size(82, 25);
-            this.buttonSave.TabIndex = 9;
-            this.buttonSave.Text = "SAVE";
-            this.buttonSave.UseVisualStyleBackColor = false;
-            // 
-            // button3
-            // 
-            this.button3.BackColor = System.Drawing.Color.Red;
-            this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
-            this.button3.Location = new System.Drawing.Point(682, 309);
-            this.button3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(82, 25);
-            this.button3.TabIndex = 10;
-            this.button3.Text = "EXIT";
-            this.button3.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // labelWDRestaurant
             // 
             this.labelWDRestaurant.AutoSize = true;
             this.labelWDRestaurant.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Italic);
             this.labelWDRestaurant.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            this.labelWDRestaurant.Location = new System.Drawing.Point(573, 0);
+            this.labelWDRestaurant.Location = new System.Drawing.Point(254, -1);
             this.labelWDRestaurant.Name = "labelWDRestaurant";
-            this.labelWDRestaurant.Size = new System.Drawing.Size(247, 24);
+            this.labelWDRestaurant.Size = new System.Drawing.Size(314, 29);
             this.labelWDRestaurant.TabIndex = 1;
             this.labelWDRestaurant.Text = "Wedding Restaurant HALTT";
             // 
             // RevenueReport
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(821, 340);
+            this.ClientSize = new System.Drawing.Size(821, 351);
             this.Controls.Add(this.labelWDRestaurant);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.buttonSave);
-            this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.dataGridViewRReport);
@@ -285,6 +246,7 @@
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "RevenueReport";
             this.Text = "RevenueReport";
+            this.Load += new System.EventHandler(this.RevenueReport_Load);
             this.panel4khung.ResumeLayout(false);
             this.panel4khung.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRReport)).EndInit();
@@ -308,9 +270,6 @@
         private System.Windows.Forms.DataGridView dataGridViewRReport;
         private System.Windows.Forms.Button buttonDelete;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button buttonSave;
-        private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Label labelWDRestaurant;
     }
 }

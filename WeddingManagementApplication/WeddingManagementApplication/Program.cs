@@ -12,6 +12,7 @@ namespace WeddingManagementApplication
         
         internal static FormHome mainform;
 
+        [STAThread]
         static void Main()
         {
             Application.EnableVisualStyles();

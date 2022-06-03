@@ -30,20 +30,18 @@
         {
             this.labelRReport = new System.Windows.Forms.Label();
             this.panelAll = new System.Windows.Forms.Panel();
-            this.labelDay = new System.Windows.Forms.Label();
-            this.labelDayRevenue = new System.Windows.Forms.Label();
-            this.comboBoxDay = new System.Windows.Forms.ComboBox();
-            this.textBoxDayRevenue = new System.Windows.Forms.TextBox();
-            this.labelRatio = new System.Windows.Forms.Label();
-            this.labelAOW = new System.Windows.Forms.Label();
-            this.textBoxRatio = new System.Windows.Forms.TextBox();
+            this.comboBoxMonth = new System.Windows.Forms.ComboBox();
+            this.labelmonth = new System.Windows.Forms.Label();
             this.textBoxAOW = new System.Windows.Forms.TextBox();
+            this.textBoxYear = new System.Windows.Forms.TextBox();
+            this.labelAOW = new System.Windows.Forms.Label();
+            this.labelYear = new System.Windows.Forms.Label();
+            this.textBoxDayRevenue = new System.Windows.Forms.TextBox();
+            this.comboBoxDay = new System.Windows.Forms.ComboBox();
+            this.labelDayRevenue = new System.Windows.Forms.Label();
+            this.labelDay = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.buttonDelete = new System.Windows.Forms.Button();
             this.buttonAdd = new System.Windows.Forms.Button();
-            this.ButtonUpdate = new System.Windows.Forms.Button();
-            this.ButtonSAVE = new System.Windows.Forms.Button();
-            this.buttonEXIT = new System.Windows.Forms.Button();
             this.labelWDRestaurant = new System.Windows.Forms.Label();
             this.panelAll.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -56,16 +54,18 @@
             this.labelRReport.ForeColor = System.Drawing.Color.Firebrick;
             this.labelRReport.Location = new System.Drawing.Point(149, 42);
             this.labelRReport.Name = "labelRReport";
-            this.labelRReport.Size = new System.Drawing.Size(487, 39);
+            this.labelRReport.Size = new System.Drawing.Size(604, 51);
             this.labelRReport.TabIndex = 2;
             this.labelRReport.Text = "REVENUE REPORT DETAIL";
             // 
             // panelAll
             // 
+            this.panelAll.Controls.Add(this.comboBoxMonth);
+            this.panelAll.Controls.Add(this.labelmonth);
             this.panelAll.Controls.Add(this.textBoxAOW);
-            this.panelAll.Controls.Add(this.textBoxRatio);
+            this.panelAll.Controls.Add(this.textBoxYear);
             this.panelAll.Controls.Add(this.labelAOW);
-            this.panelAll.Controls.Add(this.labelRatio);
+            this.panelAll.Controls.Add(this.labelYear);
             this.panelAll.Controls.Add(this.textBoxDayRevenue);
             this.panelAll.Controls.Add(this.comboBoxDay);
             this.panelAll.Controls.Add(this.labelDayRevenue);
@@ -76,25 +76,80 @@
             this.panelAll.Size = new System.Drawing.Size(780, 64);
             this.panelAll.TabIndex = 3;
             // 
-            // labelDay
+            // comboBoxMonth
             // 
-            this.labelDay.AutoSize = true;
-            this.labelDay.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F);
-            this.labelDay.Location = new System.Drawing.Point(10, 3);
-            this.labelDay.Name = "labelDay";
-            this.labelDay.Size = new System.Drawing.Size(47, 24);
-            this.labelDay.TabIndex = 0;
-            this.labelDay.Text = "Day:";
+            this.comboBoxMonth.FormattingEnabled = true;
+            this.comboBoxMonth.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12"});
+            this.comboBoxMonth.Location = new System.Drawing.Point(388, 6);
+            this.comboBoxMonth.Name = "comboBoxMonth";
+            this.comboBoxMonth.Size = new System.Drawing.Size(112, 28);
+            this.comboBoxMonth.TabIndex = 10;
             // 
-            // labelDayRevenue
+            // labelmonth
             // 
-            this.labelDayRevenue.AutoSize = true;
-            this.labelDayRevenue.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F);
-            this.labelDayRevenue.Location = new System.Drawing.Point(10, 34);
-            this.labelDayRevenue.Name = "labelDayRevenue";
-            this.labelDayRevenue.Size = new System.Drawing.Size(129, 24);
-            this.labelDayRevenue.TabIndex = 1;
-            this.labelDayRevenue.Text = "Day Revenue:";
+            this.labelmonth.AutoSize = true;
+            this.labelmonth.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F);
+            this.labelmonth.Location = new System.Drawing.Point(309, 7);
+            this.labelmonth.Name = "labelmonth";
+            this.labelmonth.Size = new System.Drawing.Size(82, 29);
+            this.labelmonth.TabIndex = 9;
+            this.labelmonth.Text = "Tháng";
+            // 
+            // textBoxAOW
+            // 
+            this.textBoxAOW.Location = new System.Drawing.Point(652, 34);
+            this.textBoxAOW.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBoxAOW.Name = "textBoxAOW";
+            this.textBoxAOW.Size = new System.Drawing.Size(110, 27);
+            this.textBoxAOW.TabIndex = 7;
+            // 
+            // textBoxYear
+            // 
+            this.textBoxYear.Location = new System.Drawing.Point(652, 3);
+            this.textBoxYear.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBoxYear.Name = "textBoxYear";
+            this.textBoxYear.Size = new System.Drawing.Size(110, 27);
+            this.textBoxYear.TabIndex = 6;
+            // 
+            // labelAOW
+            // 
+            this.labelAOW.AutoSize = true;
+            this.labelAOW.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F);
+            this.labelAOW.Location = new System.Drawing.Point(420, 34);
+            this.labelAOW.Name = "labelAOW";
+            this.labelAOW.Size = new System.Drawing.Size(234, 29);
+            this.labelAOW.TabIndex = 5;
+            this.labelAOW.Text = "Amount Of Wedding:";
+            // 
+            // labelYear
+            // 
+            this.labelYear.AutoSize = true;
+            this.labelYear.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F);
+            this.labelYear.Location = new System.Drawing.Point(549, 4);
+            this.labelYear.Name = "labelYear";
+            this.labelYear.Size = new System.Drawing.Size(64, 29);
+            this.labelYear.TabIndex = 4;
+            this.labelYear.Text = "Year";
+            // 
+            // textBoxDayRevenue
+            // 
+            this.textBoxDayRevenue.Location = new System.Drawing.Point(182, 34);
+            this.textBoxDayRevenue.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBoxDayRevenue.Name = "textBoxDayRevenue";
+            this.textBoxDayRevenue.Size = new System.Drawing.Size(110, 27);
+            this.textBoxDayRevenue.TabIndex = 3;
             // 
             // comboBoxDay
             // 
@@ -135,74 +190,40 @@
             this.comboBoxDay.Location = new System.Drawing.Point(182, 2);
             this.comboBoxDay.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.comboBoxDay.Name = "comboBoxDay";
-            this.comboBoxDay.Size = new System.Drawing.Size(110, 23);
+            this.comboBoxDay.Size = new System.Drawing.Size(110, 28);
             this.comboBoxDay.TabIndex = 8;
             // 
-            // textBoxDayRevenue
+            // labelDayRevenue
             // 
-            this.textBoxDayRevenue.Location = new System.Drawing.Point(182, 34);
-            this.textBoxDayRevenue.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textBoxDayRevenue.Name = "textBoxDayRevenue";
-            this.textBoxDayRevenue.Size = new System.Drawing.Size(110, 23);
-            this.textBoxDayRevenue.TabIndex = 3;
+            this.labelDayRevenue.AutoSize = true;
+            this.labelDayRevenue.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F);
+            this.labelDayRevenue.Location = new System.Drawing.Point(10, 34);
+            this.labelDayRevenue.Name = "labelDayRevenue";
+            this.labelDayRevenue.Size = new System.Drawing.Size(162, 29);
+            this.labelDayRevenue.TabIndex = 1;
+            this.labelDayRevenue.Text = "Day Revenue:";
             // 
-            // labelRatio
+            // labelDay
             // 
-            this.labelRatio.AutoSize = true;
-            this.labelRatio.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F);
-            this.labelRatio.Location = new System.Drawing.Point(549, 4);
-            this.labelRatio.Name = "labelRatio";
-            this.labelRatio.Size = new System.Drawing.Size(57, 24);
-            this.labelRatio.TabIndex = 4;
-            this.labelRatio.Text = "Ratio:";
-            // 
-            // labelAOW
-            // 
-            this.labelAOW.AutoSize = true;
-            this.labelAOW.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F);
-            this.labelAOW.Location = new System.Drawing.Point(420, 34);
-            this.labelAOW.Name = "labelAOW";
-            this.labelAOW.Size = new System.Drawing.Size(187, 24);
-            this.labelAOW.TabIndex = 5;
-            this.labelAOW.Text = "Amount Of Wedding:";
-            // 
-            // textBoxRatio
-            // 
-            this.textBoxRatio.Location = new System.Drawing.Point(652, 3);
-            this.textBoxRatio.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textBoxRatio.Name = "textBoxRatio";
-            this.textBoxRatio.Size = new System.Drawing.Size(110, 23);
-            this.textBoxRatio.TabIndex = 6;
-            // 
-            // textBoxAOW
-            // 
-            this.textBoxAOW.Location = new System.Drawing.Point(652, 34);
-            this.textBoxAOW.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textBoxAOW.Name = "textBoxAOW";
-            this.textBoxAOW.Size = new System.Drawing.Size(110, 23);
-            this.textBoxAOW.TabIndex = 7;
+            this.labelDay.AutoSize = true;
+            this.labelDay.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F);
+            this.labelDay.Location = new System.Drawing.Point(10, 3);
+            this.labelDay.Name = "labelDay";
+            this.labelDay.Size = new System.Drawing.Size(60, 29);
+            this.labelDay.TabIndex = 0;
+            this.labelDay.Text = "Day:";
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.BackgroundColor = System.Drawing.Color.DarkGray;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(10, 181);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.Size = new System.Drawing.Size(665, 141);
             this.dataGridView1.TabIndex = 4;
-            // 
-            // buttonDelete
-            // 
-            this.buttonDelete.BackColor = System.Drawing.Color.Silver;
-            this.buttonDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.buttonDelete.Location = new System.Drawing.Point(685, 200);
-            this.buttonDelete.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.buttonDelete.Name = "buttonDelete";
-            this.buttonDelete.Size = new System.Drawing.Size(62, 25);
-            this.buttonDelete.TabIndex = 7;
-            this.buttonDelete.Text = "Delete";
-            this.buttonDelete.UseVisualStyleBackColor = false;
             // 
             // buttonAdd
             // 
@@ -215,65 +236,26 @@
             this.buttonAdd.TabIndex = 8;
             this.buttonAdd.Text = "Add";
             this.buttonAdd.UseVisualStyleBackColor = false;
-            // 
-            // ButtonUpdate
-            // 
-            this.ButtonUpdate.BackColor = System.Drawing.Color.Silver;
-            this.ButtonUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.ButtonUpdate.Location = new System.Drawing.Point(685, 274);
-            this.ButtonUpdate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.ButtonUpdate.Name = "ButtonUpdate";
-            this.ButtonUpdate.Size = new System.Drawing.Size(62, 25);
-            this.ButtonUpdate.TabIndex = 9;
-            this.ButtonUpdate.Text = "Update";
-            this.ButtonUpdate.UseVisualStyleBackColor = false;
-            // 
-            // ButtonSAVE
-            // 
-            this.ButtonSAVE.BackColor = System.Drawing.Color.Yellow;
-            this.ButtonSAVE.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
-            this.ButtonSAVE.Location = new System.Drawing.Point(593, 337);
-            this.ButtonSAVE.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.ButtonSAVE.Name = "ButtonSAVE";
-            this.ButtonSAVE.Size = new System.Drawing.Size(82, 25);
-            this.ButtonSAVE.TabIndex = 10;
-            this.ButtonSAVE.Text = "SAVE";
-            this.ButtonSAVE.UseVisualStyleBackColor = false;
-            // 
-            // buttonEXIT
-            // 
-            this.buttonEXIT.BackColor = System.Drawing.Color.Red;
-            this.buttonEXIT.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
-            this.buttonEXIT.Location = new System.Drawing.Point(711, 337);
-            this.buttonEXIT.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.buttonEXIT.Name = "buttonEXIT";
-            this.buttonEXIT.Size = new System.Drawing.Size(82, 25);
-            this.buttonEXIT.TabIndex = 11;
-            this.buttonEXIT.Text = "EXIT";
-            this.buttonEXIT.UseVisualStyleBackColor = false;
+            this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
             // 
             // labelWDRestaurant
             // 
             this.labelWDRestaurant.AutoSize = true;
             this.labelWDRestaurant.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Italic);
             this.labelWDRestaurant.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            this.labelWDRestaurant.Location = new System.Drawing.Point(616, 0);
+            this.labelWDRestaurant.Location = new System.Drawing.Point(243, 9);
             this.labelWDRestaurant.Name = "labelWDRestaurant";
-            this.labelWDRestaurant.Size = new System.Drawing.Size(247, 24);
+            this.labelWDRestaurant.Size = new System.Drawing.Size(314, 29);
             this.labelWDRestaurant.TabIndex = 1;
             this.labelWDRestaurant.Text = "Wedding Restaurant HALTT";
             // 
             // ReportDay
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(862, 368);
+            this.ClientSize = new System.Drawing.Size(862, 375);
             this.Controls.Add(this.labelWDRestaurant);
-            this.Controls.Add(this.buttonEXIT);
-            this.Controls.Add(this.ButtonSAVE);
-            this.Controls.Add(this.ButtonUpdate);
             this.Controls.Add(this.buttonAdd);
-            this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.panelAll);
             this.Controls.Add(this.labelRReport);
@@ -281,6 +263,7 @@
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "ReportDay";
             this.Text = "ReportDay";
+            this.Load += new System.EventHandler(this.ReportDay_Load);
             this.panelAll.ResumeLayout(false);
             this.panelAll.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
@@ -294,19 +277,17 @@
         private System.Windows.Forms.Label labelRReport;
         private System.Windows.Forms.Panel panelAll;
         private System.Windows.Forms.TextBox textBoxAOW;
-        private System.Windows.Forms.TextBox textBoxRatio;
+        private System.Windows.Forms.TextBox textBoxYear;
         private System.Windows.Forms.Label labelAOW;
-        private System.Windows.Forms.Label labelRatio;
+        private System.Windows.Forms.Label labelYear;
         private System.Windows.Forms.TextBox textBoxDayRevenue;
         private System.Windows.Forms.ComboBox comboBoxDay;
         private System.Windows.Forms.Label labelDayRevenue;
         private System.Windows.Forms.Label labelDay;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button buttonDelete;
         private System.Windows.Forms.Button buttonAdd;
-        private System.Windows.Forms.Button ButtonUpdate;
-        private System.Windows.Forms.Button ButtonSAVE;
-        private System.Windows.Forms.Button buttonEXIT;
         private System.Windows.Forms.Label labelWDRestaurant;
+        private System.Windows.Forms.ComboBox comboBoxMonth;
+        private System.Windows.Forms.Label labelmonth;
     }
 }

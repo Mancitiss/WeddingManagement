@@ -35,24 +35,24 @@
             this.btnWedding = new System.Windows.Forms.Button();
             this.panelNavigate = new System.Windows.Forms.Panel();
             this.btnLobby = new System.Windows.Forms.Button();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.btnReport = new System.Windows.Forms.Button();
             this.btnService = new System.Windows.Forms.Button();
             this.btnMenu = new System.Windows.Forms.Button();
             this.btnSearch = new System.Windows.Forms.Button();
             this.btnHome = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnExit = new System.Windows.Forms.Button();
             this.MainForm = new System.Windows.Forms.Panel();
+            this.reportDropDown1 = new WeddingManagementApplication.ReportDropDown();
             this.lobbyDropDown1 = new WeddingManagementApplication.LobbyDropDown();
             this.searchDropDown1 = new WeddingManagementApplication.SearchDropDown();
-            this.reportDropDown1 = new WeddingManagementApplication.ReportDropDown();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
             this.MainForm.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -149,18 +149,6 @@
             this.btnLobby.Click += new System.EventHandler(this.btnLobby_Click);
             this.btnLobby.MouseHover += new System.EventHandler(this.btnLobby_MouseHover);
             // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(231, 206);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox2.TabIndex = 6;
-            this.pictureBox2.TabStop = false;
-            // 
             // btnReport
             // 
             this.btnReport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(78)))), ((int)(((byte)(77)))));
@@ -241,15 +229,6 @@
             this.btnHome.Click += new System.EventHandler(this.btnHome_Click);
             this.btnHome.MouseHover += new System.EventHandler(this.btnHome_MouseHover);
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Location = new System.Drawing.Point(0, 2);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(229, 204);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(106)))), ((int)(((byte)(101)))));
@@ -290,6 +269,15 @@
             this.MainForm.TabIndex = 2;
             this.MainForm.MouseHover += new System.EventHandler(this.MainForm_MouseHover);
             // 
+            // reportDropDown1
+            // 
+            this.reportDropDown1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(204)))), ((int)(((byte)(176)))));
+            this.reportDropDown1.Location = new System.Drawing.Point(-1, 484);
+            this.reportDropDown1.Name = "reportDropDown1";
+            this.reportDropDown1.Size = new System.Drawing.Size(147, 91);
+            this.reportDropDown1.TabIndex = 2;
+            this.reportDropDown1.Visible = false;
+            // 
             // lobbyDropDown1
             // 
             this.lobbyDropDown1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(204)))), ((int)(((byte)(176)))));
@@ -311,13 +299,26 @@
             this.searchDropDown1.TabIndex = 0;
             this.searchDropDown1.Visible = false;
             // 
-            // reportDropDown1
+            // pictureBox2
             // 
-            this.reportDropDown1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(204)))), ((int)(((byte)(176)))));
-            this.reportDropDown1.Location = new System.Drawing.Point(-1, 484);
-            this.reportDropDown1.Name = "reportDropDown1";
-            this.reportDropDown1.Size = new System.Drawing.Size(147, 91);
-            this.reportDropDown1.TabIndex = 2;
+            this.pictureBox2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
+            this.pictureBox2.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(231, 206);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox2.TabIndex = 6;
+            this.pictureBox2.TabStop = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(0, 2);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(229, 204);
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
             // 
             // FormHome
             // 
@@ -332,10 +333,10 @@
             this.Name = "FormHome";
             this.Text = "FormHome";
             this.panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel2.ResumeLayout(false);
             this.MainForm.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
