@@ -440,7 +440,7 @@ namespace WeddingManagementApplication
             // 
             // tb_dishes_price
             // 
-            this.tb_dishes_price.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.tb_dishes_price.BackColor = System.Drawing.Color.LightSalmon;
             this.tb_dishes_price.Location = new System.Drawing.Point(101, 71);
             this.tb_dishes_price.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tb_dishes_price.Name = "tb_dishes_price";
@@ -547,7 +547,8 @@ namespace WeddingManagementApplication
             // 
             // tb_service_price
             // 
-            this.tb_service_price.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.tb_service_price.BackColor = System.Drawing.Color.LightSalmon;
+            this.tb_service_price.ForeColor = System.Drawing.SystemColors.Window;
             this.tb_service_price.Location = new System.Drawing.Point(101, 70);
             this.tb_service_price.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tb_service_price.Name = "tb_service_price";

@@ -196,8 +196,6 @@ namespace WeddingManagementApplication
         private Panel panel3;
         private Panel panel1;
         private Label label9;
-        private TableLayoutPanel tableLayoutPanel1;
-        private Label header_lobby;
         
 
         private void FormLobby_Load(object sender, EventArgs e)

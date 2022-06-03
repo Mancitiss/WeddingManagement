@@ -78,7 +78,8 @@ namespace WeddingManagementApplication
 
         private void btnExit_Click(object sender, EventArgs e)
         {
-            this.Close();
+            // close the app completely
+            Application.Exit();
         }
 
         private void btnShift_Click(object sender, EventArgs e)

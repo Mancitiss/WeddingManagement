@@ -42,7 +42,7 @@ namespace WeddingManagementApplication
             }
             AddServices(services);
         }
-        
+
         private void AddServices(List<Service> services)
         {
             foreach (Service s in services)
@@ -50,37 +50,38 @@ namespace WeddingManagementApplication
                 Services ss = new Services(s);
                 if (!knownServices.ContainsKey(s.idService))
                 {
-                    this.flowLayoutPanel1.Controls.Add(ss);
+                    this.dataService.Controls.Add(ss);
                 }
                 FormServices.knownServices.AddOrUpdate(s.idService, ss, (key, oldValue) => ss);
             }
         }
-        
+
         private void AddOneService(Service service)
         {
             Services ss = new Services(service);
             if (!knownServices.ContainsKey(ss.service.idService))
             {
-                this.flowLayoutPanel1.Controls.Add(ss);
+                this.dataService.Controls.Add(ss);
             }
             FormServices.knownServices.AddOrUpdate(ss.service.idService, ss, (key, oldValue) => ss);
         }
-        
-        private void btnAdd_Click(object sender, EventArgs e)
+
+        // set listener when click button add
+        private void btn_add_service_Click(object sender, EventArgs e)
         {
             try
             {
-                if (tbName.Text == "" || tbPrice.Text == "")
+                if (tb_service_name.Text == "" || tb_service_price.Text == "")
                 {
-                    MessageBox.Show("Nội dung bị thiếu");
+                    MessageBox.Show("Please write full information");
                 }
                 else
                 {
                     Service s = new Service();
                     s.idService = "";
-                    s.ServiceName = this.tbName.Text;
-                    s.ServicePrice = int.Parse(this.tbPrice.Text);
-                    s.Note = (tbDetail.Text != null) ? tbDetail.Text : "";
+                    s.ServiceName = this.tb_service_name.Text;
+                    s.ServicePrice = int.Parse(this.tb_service_price.Text);
+                    s.Note = (tb_service_note.Text != null) ? tb_service_note.Text : "";
                     using (var sql = new SqlConnection(WeddingClient.sqlConnectionString))
                     {
                         sql.Open();
@@ -99,7 +100,7 @@ namespace WeddingManagementApplication
                             }
                             else
                             {
-                                MessageBox.Show("Thêm dịch vụ thất bại");
+                                MessageBox.Show("Fail to add service");
                             }
                         }
                     }
@@ -111,12 +112,14 @@ namespace WeddingManagementApplication
             }
         }
 
-        private void btnUpdate_Click(object sender, EventArgs e)
+        // set listener when click img close
+        private void img_close_service_Click(object sender, EventArgs e)
         {
-
+            this.Close();
         }
 
-        private void btnDelete_Click(object sender, EventArgs e)
+        // set listener when click button delete
+        private void btn_delete_service_Click(object sender, EventArgs e)
         {
             foreach (string id in FormServices.selectedServiceIDs.Keys)
             {
@@ -136,12 +139,12 @@ namespace WeddingManagementApplication
                                 command.Parameters.AddWithValue("@idService", service.idService);
                                 if (command.ExecuteNonQuery() > 0)
                                 {
-                                    this.flowLayoutPanel1.Controls.Remove(s);
+                                    this.dataService.Controls.Remove(s);
                                     FormServices.knownServices.TryRemove(service.idService, out Services _);
                                 }
                                 else
                                 {
-                                    MessageBox.Show("Có lỗi xảy ra");
+                                    MessageBox.Show("There are some errors");
                                 }
                             }
                         }
@@ -152,12 +155,6 @@ namespace WeddingManagementApplication
                     MessageBox.Show(ex.Message);
                 }
             }
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-            this.Close();
         }
     }
 }

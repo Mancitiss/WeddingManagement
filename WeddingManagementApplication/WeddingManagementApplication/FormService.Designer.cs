@@ -28,172 +28,205 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.btnUpdate = new System.Windows.Forms.Button();
-            this.tbPrice = new System.Windows.Forms.TextBox();
-            this.lbPrice = new System.Windows.Forms.Label();
-            this.btnDelete = new System.Windows.Forms.Button();
-            this.btnAdd = new System.Windows.Forms.Button();
+            this.btn_delete_service = new System.Windows.Forms.Button();
+            this.btn_add_service = new System.Windows.Forms.Button();
+            this.btn_update_service = new System.Windows.Forms.Button();
+            this.label = new System.Windows.Forms.Label();
+            this.dataService = new System.Windows.Forms.DataGridView();
+            this.img_close_service = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.tb_search_service = new WeddingManagementApplication.CustomeBorderTextbox();
             this.label3 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.tbDetail = new System.Windows.Forms.RichTextBox();
-            this.tbName = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.tb_service_note = new WeddingManagementApplication.CustomeBorderTextbox();
             this.label2 = new System.Windows.Forms.Label();
-            this.panel2.SuspendLayout();
+            this.tb_service_price = new WeddingManagementApplication.CustomeBorderTextbox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.tb_service_name = new WeddingManagementApplication.CustomeBorderTextbox();
+            ((System.ComponentModel.ISupportInitialize)(this.dataService)).BeginInit();
             this.SuspendLayout();
             // 
-            // panel2
+            // btn_delete_service
             // 
-            this.panel2.BackColor = System.Drawing.Color.LightCoral;
-            this.panel2.Controls.Add(this.label2);
-            this.panel2.Controls.Add(this.btnUpdate);
-            this.panel2.Controls.Add(this.tbPrice);
-            this.panel2.Controls.Add(this.lbPrice);
-            this.panel2.Controls.Add(this.btnDelete);
-            this.panel2.Controls.Add(this.btnAdd);
-            this.panel2.Controls.Add(this.label3);
-            this.panel2.Controls.Add(this.label1);
-            this.panel2.Controls.Add(this.tbDetail);
-            this.panel2.Controls.Add(this.tbName);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel2.Location = new System.Drawing.Point(853, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(300, 654);
-            this.panel2.TabIndex = 2;
+            this.btn_delete_service.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btn_delete_service.Location = new System.Drawing.Point(658, 332);
+            this.btn_delete_service.Name = "btn_delete_service";
+            this.btn_delete_service.Size = new System.Drawing.Size(85, 39);
+            this.btn_delete_service.TabIndex = 86;
+            this.btn_delete_service.Text = "DELETE";
+            this.btn_delete_service.UseVisualStyleBackColor = false;
+            this.btn_delete_service.Click += new System.EventHandler(this.btn_delete_service_Click);
             // 
-            // btnUpdate
+            // btn_add_service
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(78, 552);
-            this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(116, 30);
-            this.btnUpdate.TabIndex = 10;
-            this.btnUpdate.Text = "Sửa";
-            this.btnUpdate.UseVisualStyleBackColor = true;
-            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+            this.btn_add_service.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btn_add_service.Location = new System.Drawing.Point(476, 332);
+            this.btn_add_service.Name = "btn_add_service";
+            this.btn_add_service.Size = new System.Drawing.Size(85, 39);
+            this.btn_add_service.TabIndex = 85;
+            this.btn_add_service.Text = "ADD";
+            this.btn_add_service.UseVisualStyleBackColor = false;
+            this.btn_add_service.Click += new System.EventHandler(this.btn_add_service_Click);
             // 
-            // tbPrice
+            // btn_update_service
             // 
-            this.tbPrice.Location = new System.Drawing.Point(64, 232);
-            this.tbPrice.Name = "tbPrice";
-            this.tbPrice.Size = new System.Drawing.Size(187, 22);
-            this.tbPrice.TabIndex = 9;
+            this.btn_update_service.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btn_update_service.Location = new System.Drawing.Point(567, 332);
+            this.btn_update_service.Name = "btn_update_service";
+            this.btn_update_service.Size = new System.Drawing.Size(85, 39);
+            this.btn_update_service.TabIndex = 84;
+            this.btn_update_service.Text = "UPDATE";
+            this.btn_update_service.UseVisualStyleBackColor = false;
             // 
-            // lbPrice
+            // label
             // 
-            this.lbPrice.AutoSize = true;
-            this.lbPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbPrice.Location = new System.Drawing.Point(19, 234);
-            this.lbPrice.Name = "lbPrice";
-            this.lbPrice.Size = new System.Drawing.Size(35, 20);
-            this.lbPrice.TabIndex = 8;
-            this.lbPrice.Text = "Giá";
+            this.label.AutoSize = true;
+            this.label.Font = new System.Drawing.Font("Segoe Print", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label.ForeColor = System.Drawing.Color.Crimson;
+            this.label.Location = new System.Drawing.Point(305, 3);
+            this.label.Margin = new System.Windows.Forms.Padding(0);
+            this.label.Name = "label";
+            this.label.Size = new System.Drawing.Size(155, 54);
+            this.label.TabIndex = 77;
+            this.label.Text = "SERVICE";
             // 
-            // btnDelete
+            // dataService
             // 
-            this.btnDelete.Location = new System.Drawing.Point(78, 519);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(116, 27);
-            this.btnDelete.TabIndex = 7;
-            this.btnDelete.Text = "Xóa";
-            this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            this.dataService.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataService.Location = new System.Drawing.Point(12, 60);
+            this.dataService.Name = "dataService";
+            this.dataService.RowHeadersWidth = 51;
+            this.dataService.RowTemplate.Height = 24;
+            this.dataService.Size = new System.Drawing.Size(454, 372);
+            this.dataService.TabIndex = 76;
             // 
-            // btnAdd
+            // img_close_service
             // 
-            this.btnAdd.Location = new System.Drawing.Point(78, 486);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(116, 27);
-            this.btnAdd.TabIndex = 6;
-            this.btnAdd.Text = "Thêm";
-            this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            this.img_close_service.AutoSize = true;
+            this.img_close_service.Location = new System.Drawing.Point(725, 9);
+            this.img_close_service.Name = "img_close_service";
+            this.img_close_service.Size = new System.Drawing.Size(17, 17);
+            this.img_close_service.TabIndex = 87;
+            this.img_close_service.Text = "X";
+            this.img_close_service.Click += new System.EventHandler(this.img_close_service_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.Crimson;
+            this.label4.Location = new System.Drawing.Point(570, 60);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(63, 23);
+            this.label4.TabIndex = 95;
+            this.label4.Text = "Search";
+            // 
+            // tb_search_service
+            // 
+            this.tb_search_service.Location = new System.Drawing.Point(493, 86);
+            this.tb_search_service.Name = "tb_search_service";
+            this.tb_search_service.Size = new System.Drawing.Size(238, 22);
+            this.tb_search_service.TabIndex = 94;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(6, 286);
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.Crimson;
+            this.label3.Location = new System.Drawing.Point(507, 262);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(51, 20);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "Mô tả";
+            this.label3.Size = new System.Drawing.Size(49, 23);
+            this.label3.TabIndex = 93;
+            this.label3.Text = "Note";
             // 
-            // label1
+            // tb_service_note
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(11, 183);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(47, 25);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Tên";
-            // 
-            // tbDetail
-            // 
-            this.tbDetail.Location = new System.Drawing.Point(64, 286);
-            this.tbDetail.Name = "tbDetail";
-            this.tbDetail.Size = new System.Drawing.Size(187, 170);
-            this.tbDetail.TabIndex = 2;
-            this.tbDetail.Text = "";
-            // 
-            // tbName
-            // 
-            this.tbName.Location = new System.Drawing.Point(64, 187);
-            this.tbName.Name = "tbName";
-            this.tbName.Size = new System.Drawing.Size(187, 22);
-            this.tbName.TabIndex = 0;
-            // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.AutoScroll = true;
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(853, 654);
-            this.flowLayoutPanel1.TabIndex = 3;
+            this.tb_service_note.Location = new System.Drawing.Point(508, 288);
+            this.tb_service_note.Name = "tb_service_note";
+            this.tb_service_note.Size = new System.Drawing.Size(205, 22);
+            this.tb_service_note.TabIndex = 92;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(280, 6);
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.Crimson;
+            this.label2.Location = new System.Drawing.Point(508, 203);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(15, 16);
-            this.label2.TabIndex = 11;
-            this.label2.Text = "X";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
+            this.label2.Size = new System.Drawing.Size(49, 23);
+            this.label2.TabIndex = 91;
+            this.label2.Text = "Price";
+            // 
+            // tb_service_price
+            // 
+            this.tb_service_price.Location = new System.Drawing.Point(508, 229);
+            this.tb_service_price.Name = "tb_service_price";
+            this.tb_service_price.Size = new System.Drawing.Size(205, 22);
+            this.tb_service_price.TabIndex = 90;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.Crimson;
+            this.label1.Location = new System.Drawing.Point(508, 140);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(57, 23);
+            this.label1.TabIndex = 89;
+            this.label1.Text = "Name";
+            // 
+            // tb_service_name
+            // 
+            this.tb_service_name.Location = new System.Drawing.Point(508, 166);
+            this.tb_service_name.Name = "tb_service_name";
+            this.tb_service_name.Size = new System.Drawing.Size(205, 22);
+            this.tb_service_name.TabIndex = 88;
             // 
             // FormServices
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1153, 654);
-            this.Controls.Add(this.flowLayoutPanel1);
-            this.Controls.Add(this.panel2);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(204)))), ((int)(((byte)(176)))));
+            this.ClientSize = new System.Drawing.Size(754, 443);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.tb_search_service);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.tb_service_note);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.tb_service_price);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.tb_service_name);
+            this.Controls.Add(this.img_close_service);
+            this.Controls.Add(this.btn_delete_service);
+            this.Controls.Add(this.btn_add_service);
+            this.Controls.Add(this.btn_update_service);
+            this.Controls.Add(this.label);
+            this.Controls.Add(this.dataService);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.MaximumSize = new System.Drawing.Size(1153, 654);
-            this.MinimumSize = new System.Drawing.Size(1153, 654);
+            this.MaximumSize = new System.Drawing.Size(754, 443);
             this.Name = "FormServices";
             this.Text = "FormServices";
             this.Load += new System.EventHandler(this.Services_Load);
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataService)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.Button btnDelete;
-        private System.Windows.Forms.Button btnAdd;
+
+        private System.Windows.Forms.Button btn_delete_service;
+        private System.Windows.Forms.Button btn_add_service;
+        private System.Windows.Forms.Button btn_update_service;
+        private System.Windows.Forms.Label label;
+        private System.Windows.Forms.DataGridView dataService;
+        private System.Windows.Forms.Label img_close_service;
+        private System.Windows.Forms.Label label4;
+        private CustomeBorderTextbox tb_search_service;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.RichTextBox tbDetail;
-        private System.Windows.Forms.TextBox tbName;
-        private System.Windows.Forms.TextBox tbPrice;
-        private System.Windows.Forms.Label lbPrice;
-        private System.Windows.Forms.Button btnUpdate;
+        private CustomeBorderTextbox tb_service_note;
         private System.Windows.Forms.Label label2;
+        private CustomeBorderTextbox tb_service_price;
+        private System.Windows.Forms.Label label1;
+        private CustomeBorderTextbox tb_service_name;
     }
 }

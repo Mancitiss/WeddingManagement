@@ -1,226 +1,228 @@
 ﻿using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
 
 namespace WeddingManagementApplication
 {
     public partial class FormDishes : Form
     {
-        public static ConcurrentDictionary<string, Dishes> dishes = new ConcurrentDictionary<string, Dishes>();
-        public static ConcurrentDictionary<string, byte> selectedDishesIDs = new System.Collections.Concurrent.ConcurrentDictionary<string, byte>();
-
-        internal delegate void AddMenu(List<Menu> menus);
-        internal AddMenu AddMenuDelegate;
-
-        internal delegate void AddOneMenu(Menu menu);
-        internal AddOneMenu AddOneMenuDelegate;
-        internal delegate void UpdateOneMenu(Menu menu);
-        internal UpdateOneMenu UpdateOneMenuDelegate;
+        public static string currentTypeId = "";
+        DataTable table = new DataTable();
+        DataColumn column;
+        DataRow row;
 
         public FormDishes()
         {
-            dishes = new ConcurrentDictionary<string, Dishes>();
-            selectedDishesIDs = new ConcurrentDictionary<string, byte>();
             InitializeComponent();
-            AddMenuDelegate = new AddMenu(AddDishes);
-            AddOneMenuDelegate = new AddOneMenu(AddOneDishes);
-            UpdateOneMenuDelegate = new UpdateOneMenu(UpdateOneDishes);
         }
-
-        private void UpdateOneDishes(Menu menu)
+        void load_data_Dishes()
         {
-            dishes[menu.idDishes].menu = menu;
-            dishes[menu.idDishes].id = menu.idDishes;
-            dishes[menu.idDishes]._lbNameText = menu.DishesName;
-            dishes[menu.idDishes]._lbPriceText = menu.DishesPrice.ToString();
-        }
+            table = new DataTable();
+            // first column
+            column = new DataColumn();
+            column.DataType = System.Type.GetType("System.String");
+            column.ColumnName = "DishesName";
+            column.AutoIncrement = false;
+            column.Caption = "Dishes name";
+            column.ReadOnly = true;
+            column.Unique = false;
+            table.Columns.Add(column);
 
-        private void btnCMenu_Click(object sender, EventArgs e)
-        {
-            Form tempMenu = new FormMenu();
-            tempMenu.ShowDialog();
-        }
+            // second column
+            column = new DataColumn();
+            column.DataType = System.Type.GetType("System.String");
+            column.ColumnName = "DishesPrice";
+            column.AutoIncrement = false;
+            column.Caption = "Dishes price";
+            column.ReadOnly = true;
+            column.Unique = false;
+            table.Columns.Add(column);
 
-        private void btnExit_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
+            // third column
+            column = new DataColumn();
+            column.DataType = System.Type.GetType("System.String");
+            column.ColumnName = "Note";
+            column.AutoIncrement = false;
+            column.Caption = "Note";
+            column.ReadOnly = true;
+            column.Unique = false;
+            table.Columns.Add(column);
 
-        private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            // forth column
+            column = new DataColumn();
+            column.DataType = System.Type.GetType("System.String");
+            column.ColumnName = "IdDishes";
+            column.AutoIncrement = false;
+            column.Caption = "IdDishes";
+            column.ReadOnly = true;
+            column.Unique = true;
+            column.ColumnMapping = MappingType.Hidden;
+            table.Columns.Add(column);
+
+            DataColumn[] keys = new DataColumn[1];
+            keys[0] = table.Columns["IdDishes"];
+            table.PrimaryKey = keys;
+
+            data_gv_dishes.DataSource = table;
+            data_gv_dishes.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            // prevent user from adding new row
+            data_gv_dishes.AllowUserToAddRows = false;
+            foreach (DataGridViewColumn col in data_gv_dishes.Columns)
             {
-                e.Handled = true;
+                col.HeaderText = table.Columns[col.DataPropertyName].Caption;
             }
-        }
 
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (this.textBox1.Text == "" || this.textBox2.Text == "")
-                {
-                    MessageBox.Show("Vui lòng điền đủ thông tin");
-                }
-                else
-                {
-                    Menu m = new Menu();
-                    m.idDishes = "";
-                    m.DishesName = this.textBox1.Text;
-                    m.DishesPrice = int.Parse(this.textBox2.Text);
-                    //m.Note = this.textBox3.Text;
-                    m.Note = "";
-                    using (var sql = new SqlConnection(WeddingClient.sqlConnectionString))
-                    {
-                        sql.Open();
-                        // add menu to database
-                        // if success add menu to list
-                        m.idDishes = "MN" + WeddingClient.GetNewIdFromTable("MN").ToString().PadLeft(19, '0');
-                        using (SqlCommand command = new SqlCommand("insert into MENU (idDishes, DishesName, DishesPrice, Note) values (@idDishes, @DishesName, @DishesPrice, @Note)", sql))
-                        {
-                            command.Parameters.AddWithValue("@idDishes", m.idDishes);
-                            command.Parameters.AddWithValue("@DishesName", m.DishesName);
-                            command.Parameters.AddWithValue("@DishesPrice", m.DishesPrice);
-                            command.Parameters.AddWithValue("@Note", m.Note);
-                            if (command.ExecuteNonQuery() > 0)
-                            {
-                                this.AddOneDishes(m);
-                            }
-                            else
-                            {
-                            }
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
 
-        private void FormDishes_Load(object sender, EventArgs e)
-        {
-            //WeddingClient.Queue_command(Encoding.Unicode.GetBytes("0024"));
-            // load menu from database
-            List<Menu> menus = new List<Menu>();
-            using (var sql = new SqlConnection(WeddingClient.sqlConnectionString))
+            List<DishesData> dishes = new List<DishesData>();
+            using (SqlConnection sql = new SqlConnection(WeddingClient.sqlConnectionString))
             {
                 sql.Open();
-                using (SqlCommand command = new SqlCommand("select * from MENU where Available > 0", sql))
+                using (SqlCommand cmd = new SqlCommand("SELECT * FROM MENU WHERE Available > 0", sql))
                 {
-                    using (SqlDataReader reader = command.ExecuteReader())
+                    using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
                         {
-                            menus.Add(new Menu(reader["idDishes"].ToString(), reader["DishesName"].ToString(), (long)reader["DishesPrice"], reader["Note"].ToString()));
+                            dishes.Add(new DishesData(reader["IdDishes"].ToString(), reader["DishesName"].ToString(), Convert.ToInt64(reader["DishesPrice"]), reader["Note"].ToString()));
                         }
                     }
                 }
             }
-            AddDishes(menus);
-        }
-        //[STAThread]
-        private void btnUpFile_Click(object sender, EventArgs e)
-        {
-            string filename = "";
-            var t = new System.Threading.Thread((() =>
+            WeddingClient.listDishes = dishes;
+            // add rows to table
+            foreach (DishesData dishesData in dishes)
             {
-                OpenFileDialog dlg = new OpenFileDialog();
-                dlg.ShowHelp = true;
-                dlg.Filter = "All files (*.*)|*.*";
-                if (dlg.ShowDialog() == DialogResult.OK)
-                {
-                    filename = dlg.FileName;
-                    //Thread.Sleep(10000);
-                    // this.label1.Text = dlg.FileName;
-                }
-            }));
-
-            t.SetApartmentState(System.Threading.ApartmentState.STA);
-            t.Start();
-            t.Join();
-            if (filename != "")
-            {
-                string endOfFile = filename.Split('\\')[filename.Split('\\').Length - 1];
-                string targetFile = System.AppDomain.CurrentDomain.BaseDirectory + @"images\" + endOfFile;
-                System.IO.File.Copy(filename, System.AppDomain.CurrentDomain.BaseDirectory + @"images\" + endOfFile);
-                tbImage.Text = targetFile;
-            }
-
-        }
-        private void AddDishes(List<Menu> menus)
-        {
-            foreach (Menu m in menus)
-            {
-                Dishes d = new Dishes(m);
-                if (!dishes.ContainsKey(m.idDishes))
-                {
-                    this.flowLayoutPanel1.Controls.Add(d);
-                }
-                FormDishes.dishes.AddOrUpdate(d.id, d, (key, oldValue) => d);
+                row = table.NewRow();
+                row["IdDishes"] = dishesData.idDishes;
+                row["DishesName"] = dishesData.DishesName;
+                row["DishesPrice"] = dishesData.DishesPrice;
+                row["Note"] = dishesData.Note;
+                table.Rows.Add(row);
             }
         }
-        private void AddOneDishes(Menu menu)
+
+        private void form_dishes_load(object sender, EventArgs e)
         {
-            Dishes d = new Dishes(menu);
-            if (!dishes.ContainsKey(menu.idDishes))
+            load_data_Dishes();
+        }
+
+        private void data_gv_dishes_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0 || e.RowIndex >= table.Rows.Count)
             {
-                this.flowLayoutPanel1.Controls.Add(d);
+                currentTypeId = "";
+                return;
             }
-            FormDishes.dishes.AddOrUpdate(d.id, d, (key, oldValue) => d);
-            Console.WriteLine(d.id);
-            Console.WriteLine(d.menu.idDishes);
-        }
-
-        private void btnRemove_Click(object sender, EventArgs e)
-        {
-            foreach (string id in FormDishes.selectedDishesIDs.Keys)
+            // get the row of the cell clicked from dataGridView1
+            var rowItem = (DataRowView)data_gv_dishes.Rows[e.RowIndex].DataBoundItem;
+            // find the row of the cell clicked in table
+            int i = table.Rows.IndexOf(rowItem.Row);
+            DataRow row = table.Rows[i];
+            tb_dishes_name.Text = row[0].ToString();
+            tb_dishes_price.Text = row[1].ToString();
+            tb_dishes_note.Text = row[2].ToString();
+            //textBox2.Text = dataGridView1.Rows[i].Cells[2].Value.ToString();
+            if (i < WeddingClient.listDishes.Count)
             {
-                Dishes d;
-                if (FormDishes.dishes.TryGetValue(id, out d))
-                {
-                    Console.WriteLine(d.id);
-                    var menu = d.menu;
-                    // delete from database, if success delete from list
-                    using (var sql = new SqlConnection(WeddingClient.sqlConnectionString))
-                    {
-                        sql.Open();
-                        using (SqlCommand command = new SqlCommand("update MENU set Available = 0 where IdDishes = @idDishes", sql))
-                        {
-                            command.Parameters.AddWithValue("@idDishes", menu.idDishes);
-                            if (command.ExecuteNonQuery() > 0)
-                            {
-                                this.flowLayoutPanel1.Controls.Remove(d);
-                                FormDishes.dishes.TryRemove(menu.idDishes, out Dishes _);
-                            }
-                            else
-                            {
-                                MessageBox.Show("Có lỗi xảy ra");
-                            }
-                        }
-                    }
-                }
+                currentTypeId = WeddingClient.listDishes[i].idDishes;
             }
-            selectedDishesIDs.Clear();
+            else
+            {
+                currentTypeId = "";
+            }
         }
-
-        private void btnUpdate_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
+            
+            
+        private void label6_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void btn_add_dishes_Click_1(object sender, EventArgs e)
+        {
+            if (tb_dishes_name.Text == "" || tb_dishes_price.Text == "")
+            {
+                MessageBox.Show("Please fill all the fields!");
+            }
+
+            else
+            {
+                using (SqlConnection sql = new SqlConnection(WeddingClient.sqlConnectionString))
+                {
+                    sql.Open();
+                    using (SqlCommand cmd = new SqlCommand("INSERT INTO MENU (IdDishes, DishesName, DishesPrice,Note, Available) VALUES (@IdDishes, @DishesName, @DishesPrice,@Note,1)", sql))
+                    {
+                        string newDishesId = "MN" + WeddingClient.GetNewIdFromTable("MN").ToString().PadLeft(19, '0');
+                        cmd.Parameters.AddWithValue("@IdDishes", newDishesId);
+                        cmd.Parameters.AddWithValue("@DishesName", tb_dishes_name.Text);
+                        cmd.Parameters.AddWithValue("@DishesPrice", tb_dishes_price.Text);
+                        cmd.Parameters.AddWithValue("@Note", tb_dishes_note.Text);
+
+                        if (cmd.ExecuteNonQuery() > 0)
+                        {
+                            // add to table
+                            row = table.NewRow();
+                            row["DishesName"] = tb_dishes_name.Text;
+                            row["DishesPrice"] = tb_dishes_price.Text;
+                            row["Note"] = tb_dishes_note.Text;
+                            row["IdDishes"] = newDishesId;
+                            table.Rows.Add(row);
+                            MessageBox.Show("New dishes added!");
+                            // add to list
+                            WeddingClient.listDishes.Add(new DishesData(newDishesId, tb_dishes_name.Text, Convert.ToInt64(tb_dishes_price.Text), tb_dishes_note.Text));
+                        }
+                    }
+                }
+            }
+        }
+
+        private void btn_update_dishes_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("abc");
+        }
+
+        private void btn_delete_dishes_Click(object sender, EventArgs e)
+        {
+            // check if current type ID is not empty
+            if (currentTypeId == "")
+            {
+                MessageBox.Show("Please select a type!");
+            }
+            else
+            {
+                using (SqlConnection sql = new SqlConnection(WeddingClient.sqlConnectionString))
+                {
+                    sql.Open();
+                    using (SqlCommand cmd = new SqlCommand("UPDATE MENU SET Available = 0 WHERE IdDishes = @IdDishes", sql))
+                    {
+                        cmd.Parameters.AddWithValue("@IdDishes", currentTypeId);
+                        if (cmd.ExecuteNonQuery() > 0)
+                        {
+                            // remove from list
+                            foreach (LobbyTypeData lobbyType in WeddingClient.listLobbyTypes)
+                            {
+                                if (lobbyType.idLobbyType == currentTypeId)
+                                {
+                                    WeddingClient.listLobbyTypes.Remove(lobbyType);
+                                    break;
+                                }
+                            }
+                            // remove from table
+                            table.Rows.Remove(table.Rows.Find(currentTypeId));
+                            MessageBox.Show("Type deleted!");
+                        }
+                    }
+                }
+            }
+            FormLobbyType.currentTypeId = "";
+
         }
     }
 }

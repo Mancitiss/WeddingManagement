@@ -27,6 +27,8 @@ namespace WeddingManagementApplication
         private void btnAccount_Click(object sender, EventArgs e)
         {
             this.Visible = false;
+            FormAccount a = new FormAccount();
+            a.ShowDialog();
         }
 
         private void btnWedding_Click(object sender, EventArgs e)
@@ -38,9 +40,9 @@ namespace WeddingManagementApplication
 
         private void bill_Click(object sender, EventArgs e)
         {
-            FormBill frm = new FormBill();
-            frm.ShowDialog();
             this.Visible = false;
+            searchWedding frmS = new searchWedding();
+            frmS.ShowDialog();
         }
 
         private void btnReport_Click(object sender, EventArgs e)
