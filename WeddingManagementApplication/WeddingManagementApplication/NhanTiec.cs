@@ -338,7 +338,7 @@ namespace WeddingManagementApplication
                     {
                         if (dr != null)
                         {
-                            WeddingClient.listServices = new List<Service>();
+                            WeddingClient.listServices = new List<ServicesData>();
                             var dt = new DataTable();
                             dt.Load(dr);
                             cbb_service.DataSource = dt;
@@ -346,7 +346,7 @@ namespace WeddingManagementApplication
                             // create list dishes from dt
                             foreach (DataRow row in dt.Rows)
                             {
-                                WeddingClient.listServices.Add(new Service()
+                                WeddingClient.listServices.Add(new ServicesData()
                                 {
                                     idService = (row["IdService"]).ToString(),
                                     ServiceName = row["ServiceName"].ToString(),
@@ -376,7 +376,7 @@ namespace WeddingManagementApplication
             // get index of selected item
             int index = cbb_service.SelectedIndex;
             // get DishesData from listDishes at index
-            Service service = WeddingClient.listServices[index];
+            ServicesData service = WeddingClient.listServices[index];
             // set textbox price
             tb_price_service.Text = service.ServicePrice.ToString() + " VND";
         }
@@ -411,7 +411,7 @@ namespace WeddingManagementApplication
             }
             else
             {
-                MessageBox.Show("Vui lòng chọn một bữa tiệc để xem chi tiết");
+                MessageBox.Show("Please select a wedding!", "LACK", MessageBoxButtons.OK);
             }
         }
         
@@ -466,19 +466,19 @@ namespace WeddingManagementApplication
                                         cmd2.Parameters.AddWithValue("@tableChanged", newDishesPrice);
                                         if (cmd2.ExecuteNonQuery() > 0)
                                         {
-                                            MessageBox.Show("Thêm thành công");
+                                            MessageBox.Show("Add successfully!", "SUCCESS", MessageBoxButtons.OK);
                                             tb_dishes_price.Text = ""; 
                                         }
                                         else
                                         {
-                                            MessageBox.Show("Thêm thất bại");
+                                            MessageBox.Show("Fail to add!", "FAIL", MessageBoxButtons.OK);
                                         }
 
                                     }
                                 }
                                 else
                                 {
-                                    MessageBox.Show("Add dishes failed");
+                                    MessageBox.Show("Fail to add!", "FAIL", MessageBoxButtons.OK);
                                 }
                             }
                         }
@@ -500,19 +500,19 @@ namespace WeddingManagementApplication
                                         cmd2.Parameters.AddWithValue("@tableChanged", changes);
                                         if (cmd2.ExecuteNonQuery() > 0)
                                         {
-                                            MessageBox.Show("Thêm thành công");
+                                            MessageBox.Show("Add successfully!", "SUCCESS", MessageBoxButtons.OK);
                                             tb_dishes_price.Text = "";
                                         }
                                         else
                                         {
-                                            MessageBox.Show("Thêm thất bại");
+                                            MessageBox.Show("Fail to add!", "FAIL", MessageBoxButtons.OK);
                                         }
 
                                     }
                                 }
                                 else
                                 {
-                                    MessageBox.Show("Add dishes failed");
+                                    MessageBox.Show("Fail to add!", "FAIL", MessageBoxButtons.OK);
                                 }
                             }
                         }
@@ -521,12 +521,12 @@ namespace WeddingManagementApplication
                 }
                 else
                 {
-                    MessageBox.Show("Vui lòng nhập số lượng món ăn");
+                    MessageBox.Show("Please type amount of dish!", "LACK", MessageBoxButtons.OK);
                 }
             }
             else
-            {
-                MessageBox.Show("Vui lòng chọn một bữa tiệc để thêm món ăn");
+            {            
+                MessageBox.Show("Please add a wedding to choose dishes!", "LACK", MessageBoxButtons.OK);
             }
         }
 
@@ -540,7 +540,7 @@ namespace WeddingManagementApplication
             }
             else
             {
-                MessageBox.Show("Vui lòng chọn một bữa tiệc để xem chi tiết");
+                MessageBox.Show("Please select a wedding!", "LACK", MessageBoxButtons.OK);
             }
         }
         
@@ -551,7 +551,7 @@ namespace WeddingManagementApplication
                 // get current index of comboBox dishes
                 int index = cbb_service.SelectedIndex;
                 // get DishesData from listDishes at index
-                Service service = WeddingClient.listServices[index];
+                ServicesData service = WeddingClient.listServices[index];
                 // check if tb_dishes_price is number
                 if (tb_service_price.Text.Length > 0 && long.TryParse(tb_service_price.Text, out long count))
                 {
@@ -595,19 +595,19 @@ namespace WeddingManagementApplication
                                         cmd2.Parameters.AddWithValue("@serviceChanged", newServicePrice);
                                         if (cmd2.ExecuteNonQuery() > 0)
                                         {
-                                            MessageBox.Show("Thêm thành công");
+                                            MessageBox.Show("Add successfully!", "SUCCESS", MessageBoxButtons.OK);
                                             tb_service_price.Text = "";
                                         }
                                         else
                                         {
-                                            MessageBox.Show("Thêm thất bại");
+                                            MessageBox.Show("Fail to add!", "FAIL", MessageBoxButtons.OK);
                                         }
 
                                     }
                                 }
                                 else
                                 {
-                                    MessageBox.Show("Add dishes failed");
+                                    MessageBox.Show("Fail to add!", "FAIL", MessageBoxButtons.OK);
                                 }
                             }
                         }
@@ -629,19 +629,19 @@ namespace WeddingManagementApplication
                                         cmd2.Parameters.AddWithValue("@tableChanged", changes);
                                         if (cmd2.ExecuteNonQuery() > 0)
                                         {
-                                            MessageBox.Show("Thêm thành công");
+                                            MessageBox.Show("Add successfully!", "SUCCESS", MessageBoxButtons.OK);
                                             tb_service_price.Text = "";
                                         }
                                         else
                                         {
-                                            MessageBox.Show("Thêm thất bại");
+                                            MessageBox.Show("Fail to add!", "FAIL", MessageBoxButtons.OK);
                                         }
 
                                     }
                                 }
                                 else
                                 {
-                                    MessageBox.Show("Add dishes failed");
+                                    MessageBox.Show("Fail to add!", "FAIL", MessageBoxButtons.OK);
                                 }
                             }
                         }
@@ -650,12 +650,12 @@ namespace WeddingManagementApplication
                 }
                 else
                 {
-                    MessageBox.Show("Vui lòng nhập số lượng món ăn");
+                    MessageBox.Show("Please type amount of dish!", "LACK", MessageBoxButtons.OK);
                 }
             }
             else
             {
-                MessageBox.Show("Vui lòng chọn một bữa tiệc để thêm món ăn");
+                MessageBox.Show("Please add a wedding to choose services!", "LACK", MessageBoxButtons.OK);
             }
         }
 
@@ -667,7 +667,7 @@ namespace WeddingManagementApplication
             int index = cbb_shift.SelectedIndex;
             if (index < 0 || index > WeddingClient.listShifts.Count)
             {
-                MessageBox.Show("Please choose a shift");
+                MessageBox.Show("Please choose a shift!", "LACK", MessageBoxButtons.OK);
                 return;
             }
             // get shift from listShift at index
@@ -677,7 +677,7 @@ namespace WeddingManagementApplication
             // get lobbyType in listLobbyType at index
             if (indexLobby < 0 || indexLobby > WeddingClient.listLobbies.Count)
             {
-                MessageBox.Show("Please choose a Lobby");
+                MessageBox.Show("Please choose a lobby!", "LACK", MessageBoxButtons.OK);
                 return;
             }
             LobbyData lobby = WeddingClient.listLobbies[indexLobby];
@@ -731,11 +731,11 @@ namespace WeddingManagementApplication
                                 DataRow row = table1.NewRow();
                                 row.ItemArray = new object[] { lobby.LobbyName, shift.name, tb_representative.Text, tb_phone.Text, date_booking.Value.ToString(), date_wedding.Value.ToString(), tb_groom.Text, tb_bride.Text, tb_table.Text, tb_contigency.Text, basePrice, tb_deposit.Text, newId };
                                 table1.Rows.Add(row);
-                                MessageBox.Show("Wedding Add Successfully");
+                                MessageBox.Show("Add wedding successfully!", "SUCCESS", MessageBoxButtons.OK);
                             }
                             else
                             {
-                                MessageBox.Show("Wedding Add Failed");
+                                MessageBox.Show("Fail to add wedding!", "FAIL", MessageBoxButtons.OK);
                             }
                         }
                     }
@@ -762,7 +762,7 @@ namespace WeddingManagementApplication
                             // delete row in table1
                             //dataWedding.Rows.RemoveAt(dataWedding.CurrentRow.Index);
                             table1.Rows.RemoveAt(dataWedding.CurrentRow.Index);
-                            MessageBox.Show("Wedding deleted", "SUCCESS", MessageBoxButtons.OK);
+                            MessageBox.Show("Wedding deleted!", "SUCCESS", MessageBoxButtons.OK);
                             NhanTiec.currentWeddingId = "";
                         }
                     }
@@ -770,7 +770,7 @@ namespace WeddingManagementApplication
             }
             else
             {
-                MessageBox.Show("Please select a wedding to delete", "ERROR", MessageBoxButtons.OK);
+                MessageBox.Show("Please select a wedding to delete!", "ERROR", MessageBoxButtons.OK);
             }
         }
 

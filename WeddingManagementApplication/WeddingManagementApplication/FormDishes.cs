@@ -113,8 +113,9 @@ namespace WeddingManagementApplication
             load_data_Dishes();
         }
 
-        private void data_gv_dishes_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void data_gv_dishes_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            Console.WriteLine("Clicked");
             if (e.RowIndex < 0 || e.RowIndex >= table.Rows.Count)
             {
                 currentTypeId = "";
@@ -149,51 +150,53 @@ namespace WeddingManagementApplication
         {
             if (tb_dishes_name.Text == "" || tb_dishes_price.Text == "")
             {
-                MessageBox.Show("Please fill all the fields!");
+                MessageBox.Show("Please fill out all the fields!", "LACK", MessageBoxButtons.OK);
             }
-
             else
             {
                 using (SqlConnection sql = new SqlConnection(WeddingClient.sqlConnectionString))
                 {
                     sql.Open();
-                    using (SqlCommand cmd = new SqlCommand("INSERT INTO MENU (IdDishes, DishesName, DishesPrice,Note, Available) VALUES (@IdDishes, @DishesName, @DishesPrice,@Note,1)", sql))
+                    try
                     {
-                        string newDishesId = "MN" + WeddingClient.GetNewIdFromTable("MN").ToString().PadLeft(19, '0');
-                        cmd.Parameters.AddWithValue("@IdDishes", newDishesId);
-                        cmd.Parameters.AddWithValue("@DishesName", tb_dishes_name.Text);
-                        cmd.Parameters.AddWithValue("@DishesPrice", tb_dishes_price.Text);
-                        cmd.Parameters.AddWithValue("@Note", tb_dishes_note.Text);
-
-                        if (cmd.ExecuteNonQuery() > 0)
+                        using (SqlCommand cmd = new SqlCommand("INSERT INTO MENU (IdDishes, DishesName, DishesPrice,Note, Available) VALUES (@IdDishes, @DishesName, @DishesPrice,@Note,1)", sql))
                         {
-                            // add to table
-                            row = table.NewRow();
-                            row["DishesName"] = tb_dishes_name.Text;
-                            row["DishesPrice"] = tb_dishes_price.Text;
-                            row["Note"] = tb_dishes_note.Text;
-                            row["IdDishes"] = newDishesId;
-                            table.Rows.Add(row);
-                            MessageBox.Show("New dishes added!");
-                            // add to list
-                            WeddingClient.listDishes.Add(new DishesData(newDishesId, tb_dishes_name.Text, Convert.ToInt64(tb_dishes_price.Text), tb_dishes_note.Text));
+                            string newDishesId = "MN" + WeddingClient.GetNewIdFromTable("MN").ToString().PadLeft(19, '0');
+                            cmd.Parameters.AddWithValue("@IdDishes", newDishesId);
+                            cmd.Parameters.AddWithValue("@DishesName", tb_dishes_name.Text);
+                            cmd.Parameters.AddWithValue("@DishesPrice", tb_dishes_price.Text);
+                            cmd.Parameters.AddWithValue("@Note", tb_dishes_note.Text);
+
+                            if (cmd.ExecuteNonQuery() > 0)
+                            {
+                                // add to table
+                                row = table.NewRow();
+                                row["DishesName"] = tb_dishes_name.Text;
+                                row["DishesPrice"] = tb_dishes_price.Text;
+                                row["Note"] = tb_dishes_note.Text;
+                                row["IdDishes"] = newDishesId;
+                                table.Rows.Add(row);
+                                MessageBox.Show("A service added", "SUCCESS", MessageBoxButtons.OK);
+                                // add to list
+                                WeddingClient.listDishes.Add(new DishesData(newDishesId, tb_dishes_name.Text, Convert.ToInt64(tb_dishes_price.Text), tb_dishes_note.Text));
+                            }
                         }
+
                     }
-                }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Price must be number", "Error", MessageBoxButtons.OK);
+                    }
+                }                 
             }
         }
 
-        private void btn_update_dishes_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("abc");
-        }
-
+        // listener button delete
         private void btn_delete_dishes_Click(object sender, EventArgs e)
         {
-            // check if current type ID is not empty
             if (currentTypeId == "")
             {
-                MessageBox.Show("Please select a type!");
+                MessageBox.Show("Please select a dish to delete!");
             }
             else
             {
@@ -206,23 +209,46 @@ namespace WeddingManagementApplication
                         if (cmd.ExecuteNonQuery() > 0)
                         {
                             // remove from list
-                            foreach (LobbyTypeData lobbyType in WeddingClient.listLobbyTypes)
+                            foreach (DishesData dishes in WeddingClient.listDishes)
                             {
-                                if (lobbyType.idLobbyType == currentTypeId)
+                                if (dishes.idDishes == currentTypeId)
                                 {
-                                    WeddingClient.listLobbyTypes.Remove(lobbyType);
+                                    WeddingClient.listDishes.Remove(dishes);
                                     break;
                                 }
                             }
                             // remove from table
                             table.Rows.Remove(table.Rows.Find(currentTypeId));
-                            MessageBox.Show("Type deleted!");
+                            MessageBox.Show("A dish deleted!");
                         }
                     }
                 }
             }
-            FormLobbyType.currentTypeId = "";
+            FormDishes.currentTypeId = "";
+        }
 
+        private void btn_search_Click(object sender, EventArgs e)
+        {
+            using (SqlConnection sqlconn = new SqlConnection(WeddingClient.sqlConnectionString))
+            {
+                string sqlquery = "SELECT DishesName, DishesPrice, Note FROM MENU WHERE DishesName LIKE @searchMN OR DishesPrice LIKE @searchMN OR Note LIKE @searchMN";
+                sqlconn.Open();
+                using (SqlCommand sqlcomm = new SqlCommand(sqlquery, sqlconn))
+                {
+                    sqlcomm.Parameters.AddWithValue("@searchMN", "%" + tb_search_dishes.Text + "%");
+                    using (SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlcomm))
+                    {
+                        table = new DataTable();
+                        sqlDataAdapter.Fill(table);
+                       // table.Columns["IdDishes"].ColumnMapping = MappingType.Hidden;
+                        data_gv_dishes.DataSource = table;
+                        foreach (DataGridViewColumn col in data_gv_dishes.Columns)
+                        {
+                            col.HeaderText = table.Columns[col.DataPropertyName].Caption;
+                        }
+                    }
+                }
+            }
         }
     }
 }

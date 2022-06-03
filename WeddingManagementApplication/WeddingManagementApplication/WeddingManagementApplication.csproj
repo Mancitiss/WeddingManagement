@@ -8,7 +8,7 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>WeddingManagementApplication</RootNamespace>
     <AssemblyName>WeddingManagementApplication</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
@@ -296,15 +296,7 @@
     <Compile Include="searchWedding.Designer.cs">
       <DependentUpon>searchWedding.cs</DependentUpon>
     </Compile>
-    <Compile Include="Service.cs" />
-    <Compile Include="Services.cs">
-      <SubType>UserControl</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Compile>
-    <Compile Include="Services.Designer.cs">
-      <DependentUpon>Services.cs</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Compile>
+    <Compile Include="ServicesData.cs" />
     <Compile Include="Shift.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -384,9 +376,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="searchWedding.resx">
       <DependentUpon>searchWedding.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Services.resx">
-      <DependentUpon>Services.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Shift.resx">
       <DependentUpon>Shift.cs</DependentUpon>

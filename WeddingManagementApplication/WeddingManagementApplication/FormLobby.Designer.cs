@@ -49,7 +49,6 @@ namespace WeddingManagementApplication
             this.label9 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.header_lobby = new System.Windows.Forms.Label();
-            this.btn_update = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -89,7 +88,6 @@ namespace WeddingManagementApplication
             // 
             // panel3
             // 
-            this.panel3.Controls.Add(this.btn_update);
             this.panel3.Controls.Add(this.noteTextBox);
             this.panel3.Controls.Add(this.nameTextBox);
             this.panel3.Controls.Add(this.label5);
@@ -181,7 +179,7 @@ namespace WeddingManagementApplication
             // btn_add
             // 
             this.btn_add.ForeColor = System.Drawing.Color.Crimson;
-            this.btn_add.Location = new System.Drawing.Point(687, 84);
+            this.btn_add.Location = new System.Drawing.Point(760, 84);
             this.btn_add.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btn_add.Name = "btn_add";
             this.btn_add.Size = new System.Drawing.Size(85, 31);
@@ -222,7 +220,7 @@ namespace WeddingManagementApplication
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(35, 52);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.Size = new System.Drawing.Size(919, 220);
@@ -265,17 +263,6 @@ namespace WeddingManagementApplication
             this.header_lobby.Text = "LOBBY LIST";
             this.header_lobby.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // btn_update
-            // 
-            this.btn_update.ForeColor = System.Drawing.Color.Crimson;
-            this.btn_update.Location = new System.Drawing.Point(778, 84);
-            this.btn_update.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btn_update.Name = "btn_update";
-            this.btn_update.Size = new System.Drawing.Size(85, 31);
-            this.btn_update.TabIndex = 29;
-            this.btn_update.Text = "UPDATE";
-            this.btn_update.UseVisualStyleBackColor = true;
-            // 
             // FormLobby
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -314,7 +301,6 @@ namespace WeddingManagementApplication
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Button btn_update;
         private System.Windows.Forms.Label header_lobby;
     }
 }

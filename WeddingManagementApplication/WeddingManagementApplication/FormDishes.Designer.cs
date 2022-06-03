@@ -33,7 +33,6 @@
             this.label = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.btn_update_dishes = new System.Windows.Forms.Button();
             this.btn_add_dishes = new System.Windows.Forms.Button();
             this.btn_delete_dishes = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -42,6 +41,7 @@
             this.tb_dishes_note = new WeddingManagementApplication.CustomeBorderTextbox();
             this.tb_dishes_price = new WeddingManagementApplication.CustomeBorderTextbox();
             this.tb_dishes_name = new WeddingManagementApplication.CustomeBorderTextbox();
+            this.btn_search = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.data_gv_dishes)).BeginInit();
             this.SuspendLayout();
             // 
@@ -64,7 +64,7 @@
             this.data_gv_dishes.RowTemplate.Height = 24;
             this.data_gv_dishes.Size = new System.Drawing.Size(454, 372);
             this.data_gv_dishes.TabIndex = 13;
-            this.data_gv_dishes.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.data_gv_dishes_CellContentClick);
+            this.data_gv_dishes.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.data_gv_dishes_CellClick);
             // 
             // label
             // 
@@ -83,7 +83,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.Crimson;
-            this.label2.Location = new System.Drawing.Point(501, 206);
+            this.label2.Location = new System.Drawing.Point(513, 238);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(49, 23);
             this.label2.TabIndex = 70;
@@ -94,27 +94,16 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.Crimson;
-            this.label3.Location = new System.Drawing.Point(500, 265);
+            this.label3.Location = new System.Drawing.Point(512, 297);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(49, 23);
             this.label3.TabIndex = 72;
             this.label3.Text = "Note";
             // 
-            // btn_update_dishes
-            // 
-            this.btn_update_dishes.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btn_update_dishes.Location = new System.Drawing.Point(567, 338);
-            this.btn_update_dishes.Name = "btn_update_dishes";
-            this.btn_update_dishes.Size = new System.Drawing.Size(85, 39);
-            this.btn_update_dishes.TabIndex = 73;
-            this.btn_update_dishes.Text = "UPDATE";
-            this.btn_update_dishes.UseVisualStyleBackColor = false;
-            this.btn_update_dishes.Click += new System.EventHandler(this.btn_update_dishes_Click);
-            // 
             // btn_add_dishes
             // 
             this.btn_add_dishes.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btn_add_dishes.Location = new System.Drawing.Point(476, 338);
+            this.btn_add_dishes.Location = new System.Drawing.Point(513, 370);
             this.btn_add_dishes.Name = "btn_add_dishes";
             this.btn_add_dishes.Size = new System.Drawing.Size(85, 39);
             this.btn_add_dishes.TabIndex = 74;
@@ -125,7 +114,7 @@
             // btn_delete_dishes
             // 
             this.btn_delete_dishes.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btn_delete_dishes.Location = new System.Drawing.Point(658, 338);
+            this.btn_delete_dishes.Location = new System.Drawing.Point(633, 370);
             this.btn_delete_dishes.Name = "btn_delete_dishes";
             this.btn_delete_dishes.Size = new System.Drawing.Size(85, 39);
             this.btn_delete_dishes.TabIndex = 75;
@@ -138,7 +127,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Crimson;
-            this.label1.Location = new System.Drawing.Point(501, 143);
+            this.label1.Location = new System.Drawing.Point(513, 175);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(57, 23);
             this.label1.TabIndex = 68;
@@ -164,24 +153,35 @@
             // 
             // tb_dishes_note
             // 
-            this.tb_dishes_note.Location = new System.Drawing.Point(501, 291);
+            this.tb_dishes_note.Location = new System.Drawing.Point(513, 323);
             this.tb_dishes_note.Name = "tb_dishes_note";
             this.tb_dishes_note.Size = new System.Drawing.Size(205, 22);
             this.tb_dishes_note.TabIndex = 71;
             // 
             // tb_dishes_price
             // 
-            this.tb_dishes_price.Location = new System.Drawing.Point(501, 232);
+            this.tb_dishes_price.Location = new System.Drawing.Point(513, 264);
             this.tb_dishes_price.Name = "tb_dishes_price";
             this.tb_dishes_price.Size = new System.Drawing.Size(205, 22);
             this.tb_dishes_price.TabIndex = 69;
             // 
             // tb_dishes_name
             // 
-            this.tb_dishes_name.Location = new System.Drawing.Point(501, 169);
+            this.tb_dishes_name.Location = new System.Drawing.Point(513, 201);
             this.tb_dishes_name.Name = "tb_dishes_name";
             this.tb_dishes_name.Size = new System.Drawing.Size(205, 22);
             this.tb_dishes_name.TabIndex = 67;
+            // 
+            // btn_search
+            // 
+            this.btn_search.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btn_search.Location = new System.Drawing.Point(639, 117);
+            this.btn_search.Name = "btn_search";
+            this.btn_search.Size = new System.Drawing.Size(85, 39);
+            this.btn_search.TabIndex = 78;
+            this.btn_search.Text = "SEARCH";
+            this.btn_search.UseVisualStyleBackColor = false;
+            this.btn_search.Click += new System.EventHandler(this.btn_search_Click);
             // 
             // FormDishes
             // 
@@ -190,11 +190,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(204)))), ((int)(((byte)(176)))));
             this.ClientSize = new System.Drawing.Size(754, 443);
+            this.Controls.Add(this.btn_search);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.tb_search_dishes);
             this.Controls.Add(this.btn_delete_dishes);
             this.Controls.Add(this.btn_add_dishes);
-            this.Controls.Add(this.btn_update_dishes);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.tb_dishes_note);
             this.Controls.Add(this.label2);
@@ -224,12 +224,12 @@
         private CustomeBorderTextbox tb_dishes_price;
         private System.Windows.Forms.Label label3;
         private CustomeBorderTextbox tb_dishes_note;
-        private System.Windows.Forms.Button btn_update_dishes;
         private System.Windows.Forms.Button btn_add_dishes;
         private System.Windows.Forms.Button btn_delete_dishes;
         private CustomeBorderTextbox tb_dishes_name;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label4;
         private CustomeBorderTextbox tb_search_dishes;
+        private System.Windows.Forms.Button btn_search;
     }
 }
