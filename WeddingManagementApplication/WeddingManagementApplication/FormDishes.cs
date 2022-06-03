@@ -138,46 +138,8 @@ namespace WeddingManagementApplication
                 currentTypeId = "";
             }
         }
-
-       
-        private void button2_Click(object sender, EventArgs e)
-        {
-            // check if current type ID is not empty
-            if (currentTypeId == "")
-            {
-                MessageBox.Show("Please select a type!");
-            }
-            else
-            {
-                using (SqlConnection sql = new SqlConnection(WeddingClient.sqlConnectionString))
-                {
-                    sql.Open();
-                    using (SqlCommand cmd = new SqlCommand("UPDATE LOBBY_TYPE SET Available = 0 WHERE IdLobbyType = @IdLobbyType", sql))
-                    {
-                        cmd.Parameters.AddWithValue("@IdDishes", currentTypeId);
-                        if (cmd.ExecuteNonQuery() > 0)
-                        {
-                            // remove from list
-                            foreach (LobbyTypeData lobbyType in WeddingClient.listLobbyTypes)
-                            {
-                                if (lobbyType.idLobbyType == currentTypeId)
-                                {
-                                    WeddingClient.listLobbyTypes.Remove(lobbyType);
-                                    break;
-                                }
-                            }
-                            // remove from table
-                            table.Rows.Remove(table.Rows.Find(currentTypeId));
-                            MessageBox.Show("Type deleted!");
-                        }
-                    }
-                }
-            }
-            FormLobbyType.currentTypeId = "";
-        }
-
-     
-
+            
+            
         private void label6_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -224,6 +186,43 @@ namespace WeddingManagementApplication
         private void btn_update_dishes_Click(object sender, EventArgs e)
         {
             MessageBox.Show("abc");
+        }
+
+        private void btn_delete_dishes_Click(object sender, EventArgs e)
+        {
+            // check if current type ID is not empty
+            if (currentTypeId == "")
+            {
+                MessageBox.Show("Please select a type!");
+            }
+            else
+            {
+                using (SqlConnection sql = new SqlConnection(WeddingClient.sqlConnectionString))
+                {
+                    sql.Open();
+                    using (SqlCommand cmd = new SqlCommand("UPDATE MENU SET Available = 0 WHERE IdDishes = @IdDishes", sql))
+                    {
+                        cmd.Parameters.AddWithValue("@IdDishes", currentTypeId);
+                        if (cmd.ExecuteNonQuery() > 0)
+                        {
+                            // remove from list
+                            foreach (LobbyTypeData lobbyType in WeddingClient.listLobbyTypes)
+                            {
+                                if (lobbyType.idLobbyType == currentTypeId)
+                                {
+                                    WeddingClient.listLobbyTypes.Remove(lobbyType);
+                                    break;
+                                }
+                            }
+                            // remove from table
+                            table.Rows.Remove(table.Rows.Find(currentTypeId));
+                            MessageBox.Show("Type deleted!");
+                        }
+                    }
+                }
+            }
+            FormLobbyType.currentTypeId = "";
+
         }
     }
 }

@@ -27,6 +27,8 @@ namespace WeddingManagementApplication
         private void btnAccount_Click(object sender, EventArgs e)
         {
             this.Visible = false;
+            FormAccount a = new FormAccount();
+            a.ShowDialog();
         }
 
         private void btnWedding_Click(object sender, EventArgs e)

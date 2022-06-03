@@ -131,6 +131,7 @@
             this.btn_delete_dishes.TabIndex = 75;
             this.btn_delete_dishes.Text = "DELETE";
             this.btn_delete_dishes.UseVisualStyleBackColor = false;
+            this.btn_delete_dishes.Click += new System.EventHandler(this.btn_delete_dishes_Click);
             // 
             // label1
             // 
