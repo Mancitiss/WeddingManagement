@@ -43,6 +43,7 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.buttonAdd = new System.Windows.Forms.Button();
             this.labelWDRestaurant = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.panelAll.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -249,17 +250,29 @@
             this.labelWDRestaurant.TabIndex = 1;
             this.labelWDRestaurant.Text = "Wedding Restaurant HALTT";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(840, 4);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(18, 20);
+            this.label1.TabIndex = 9;
+            this.label1.Text = "X";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
+            // 
             // ReportDay
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(862, 375);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.labelWDRestaurant);
             this.Controls.Add(this.buttonAdd);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.panelAll);
             this.Controls.Add(this.labelRReport);
             this.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "ReportDay";
             this.Text = "ReportDay";
@@ -289,5 +302,6 @@
         private System.Windows.Forms.Label labelWDRestaurant;
         private System.Windows.Forms.ComboBox comboBoxMonth;
         private System.Windows.Forms.Label labelmonth;
+        private System.Windows.Forms.Label label1;
     }
 }

@@ -124,12 +124,14 @@ namespace WeddingManagementApplication
                         using (SqlCommand cmd3 = new SqlCommand("select * from REVENUE_REPORT_DT WHERE IdReport =@id", sql))
                         {
                             cmd3.Parameters.AddWithValue("@id", ID);
-                            SqlDataReader reader = cmd3.ExecuteReader();
-                            while(reader.Read())
+                            using
+                           (SqlDataReader reader = cmd3.ExecuteReader())
                             {
-                                total+= int.Parse(reader["DayRevenue"].ToString());
+                                while (reader.Read())
+                                {
+                                    total += int.Parse(reader["DayRevenue"].ToString());
+                                }
                             }    
-                            reader.Close();
                             
                         }    
                         using (SqlCommand cmd3 = new SqlCommand("UPDATE REVENUE_REPORT SET RevenueTotal = @total WHERE IdReport =@id", sql))

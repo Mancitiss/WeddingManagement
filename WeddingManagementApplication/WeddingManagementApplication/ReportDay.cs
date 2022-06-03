@@ -202,6 +202,11 @@ namespace WeddingManagementApplication
 
         }
 
+        private void label1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
         //private void buttonDelete_Click(object sender, EventArgs e)
         //{
         //    if (currentReportId != null && currentReportId.Length == 21)
