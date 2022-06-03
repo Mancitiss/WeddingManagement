@@ -37,11 +37,13 @@ namespace WeddingManagementApplication
             this.labelRTotal = new System.Windows.Forms.Label();
             this.labelMonth = new System.Windows.Forms.Label();
             this.dataGridViewRReport = new System.Windows.Forms.DataGridView();
-            this.buttonDelete = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.labelWDRestaurant = new System.Windows.Forms.Label();
             this.img_close_service = new System.Windows.Forms.Label();
-            this.btn_update = new System.Windows.Forms.Button();
+            this.rBtn_date = new System.Windows.Forms.RadioButton();
+            this.rBtn_name = new System.Windows.Forms.RadioButton();
+            this.tb_seacrh_rpDay = new System.Windows.Forms.TextBox();
+            this.btn_search_rpDay = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRReport)).BeginInit();
             this.SuspendLayout();
             // 
@@ -50,16 +52,16 @@ namespace WeddingManagementApplication
             this.labelRReport.AutoSize = true;
             this.labelRReport.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Bold);
             this.labelRReport.ForeColor = System.Drawing.Color.Firebrick;
-            this.labelRReport.Location = new System.Drawing.Point(189, 49);
+            this.labelRReport.Location = new System.Drawing.Point(144, 59);
             this.labelRReport.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelRReport.Name = "labelRReport";
-            this.labelRReport.Size = new System.Drawing.Size(435, 51);
+            this.labelRReport.Size = new System.Drawing.Size(609, 51);
             this.labelRReport.TabIndex = 0;
-            this.labelRReport.Text = "REVENUE REPORT";
+            this.labelRReport.Text = "REVENUE REPORT MONTH";
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(332, 120);
+            this.textBox1.Location = new System.Drawing.Point(342, 233);
             this.textBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(133, 27);
@@ -69,7 +71,7 @@ namespace WeddingManagementApplication
             // 
             this.labelYear.AutoSize = true;
             this.labelYear.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F);
-            this.labelYear.Location = new System.Drawing.Point(256, 120);
+            this.labelYear.Location = new System.Drawing.Point(266, 233);
             this.labelYear.Name = "labelYear";
             this.labelYear.Size = new System.Drawing.Size(70, 29);
             this.labelYear.TabIndex = 4;
@@ -77,11 +79,11 @@ namespace WeddingManagementApplication
             // 
             // textBoxRTotal
             // 
-            this.textBoxRTotal.Location = new System.Drawing.Point(667, 118);
+            this.textBoxRTotal.Location = new System.Drawing.Point(677, 231);
             this.textBoxRTotal.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxRTotal.Name = "textBoxRTotal";
             this.textBoxRTotal.ReadOnly = true;
-            this.textBoxRTotal.Size = new System.Drawing.Size(133, 27);
+            this.textBoxRTotal.Size = new System.Drawing.Size(157, 27);
             this.textBoxRTotal.TabIndex = 3;
             // 
             // comboBoxMonth
@@ -104,7 +106,7 @@ namespace WeddingManagementApplication
             "10",
             "11",
             "12"});
-            this.comboBoxMonth.Location = new System.Drawing.Point(103, 120);
+            this.comboBoxMonth.Location = new System.Drawing.Point(113, 233);
             this.comboBoxMonth.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.comboBoxMonth.Name = "comboBoxMonth";
             this.comboBoxMonth.Size = new System.Drawing.Size(133, 28);
@@ -114,7 +116,7 @@ namespace WeddingManagementApplication
             // 
             this.labelRTotal.AutoSize = true;
             this.labelRTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F);
-            this.labelRTotal.Location = new System.Drawing.Point(481, 118);
+            this.labelRTotal.Location = new System.Drawing.Point(491, 231);
             this.labelRTotal.Name = "labelRTotal";
             this.labelRTotal.Size = new System.Drawing.Size(176, 29);
             this.labelRTotal.TabIndex = 1;
@@ -124,7 +126,7 @@ namespace WeddingManagementApplication
             // 
             this.labelMonth.AutoSize = true;
             this.labelMonth.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F);
-            this.labelMonth.Location = new System.Drawing.Point(12, 120);
+            this.labelMonth.Location = new System.Drawing.Point(22, 233);
             this.labelMonth.Name = "labelMonth";
             this.labelMonth.Size = new System.Drawing.Size(85, 29);
             this.labelMonth.TabIndex = 0;
@@ -135,31 +137,18 @@ namespace WeddingManagementApplication
             this.dataGridViewRReport.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewRReport.BackgroundColor = System.Drawing.SystemColors.Menu;
             this.dataGridViewRReport.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewRReport.Location = new System.Drawing.Point(17, 172);
+            this.dataGridViewRReport.Location = new System.Drawing.Point(27, 329);
             this.dataGridViewRReport.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dataGridViewRReport.Name = "dataGridViewRReport";
             this.dataGridViewRReport.RowHeadersWidth = 51;
-            this.dataGridViewRReport.Size = new System.Drawing.Size(647, 207);
+            this.dataGridViewRReport.Size = new System.Drawing.Size(813, 163);
             this.dataGridViewRReport.TabIndex = 3;
-            // 
-            // buttonDelete
-            // 
-            this.buttonDelete.BackColor = System.Drawing.Color.Transparent;
-            this.buttonDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.buttonDelete.Location = new System.Drawing.Point(692, 312);
-            this.buttonDelete.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.buttonDelete.Name = "buttonDelete";
-            this.buttonDelete.Size = new System.Drawing.Size(80, 35);
-            this.buttonDelete.TabIndex = 6;
-            this.buttonDelete.Text = "DELETE";
-            this.buttonDelete.UseVisualStyleBackColor = false;
-            this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
             // 
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.Transparent;
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.button1.Location = new System.Drawing.Point(692, 206);
+            this.button1.Location = new System.Drawing.Point(760, 283);
             this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(80, 35);
@@ -182,48 +171,83 @@ namespace WeddingManagementApplication
             // img_close_service
             // 
             this.img_close_service.AutoSize = true;
-            this.img_close_service.Location = new System.Drawing.Point(791, 9);
+            this.img_close_service.Location = new System.Drawing.Point(828, 5);
             this.img_close_service.Name = "img_close_service";
             this.img_close_service.Size = new System.Drawing.Size(18, 20);
             this.img_close_service.TabIndex = 88;
             this.img_close_service.Text = "X";
             this.img_close_service.Click += new System.EventHandler(this.img_close_service_Click);
             // 
-            // btn_update
+            // rBtn_date
             // 
-            this.btn_update.BackColor = System.Drawing.Color.Transparent;
-            this.btn_update.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.btn_update.Location = new System.Drawing.Point(692, 260);
-            this.btn_update.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btn_update.Name = "btn_update";
-            this.btn_update.Size = new System.Drawing.Size(80, 35);
-            this.btn_update.TabIndex = 89;
-            this.btn_update.Text = "UPDATE";
-            this.btn_update.UseVisualStyleBackColor = false;
+            this.rBtn_date.AutoSize = true;
+            this.rBtn_date.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rBtn_date.Location = new System.Drawing.Point(680, 167);
+            this.rBtn_date.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.rBtn_date.Name = "rBtn_date";
+            this.rBtn_date.Size = new System.Drawing.Size(138, 27);
+            this.rBtn_date.TabIndex = 93;
+            this.rBtn_date.TabStop = true;
+            this.rBtn_date.Text = "Wedding date";
+            this.rBtn_date.UseVisualStyleBackColor = true;
+            // 
+            // rBtn_name
+            // 
+            this.rBtn_name.AutoSize = true;
+            this.rBtn_name.Checked = true;
+            this.rBtn_name.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rBtn_name.Location = new System.Drawing.Point(425, 167);
+            this.rBtn_name.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.rBtn_name.Name = "rBtn_name";
+            this.rBtn_name.Size = new System.Drawing.Size(249, 27);
+            this.rBtn_name.TabIndex = 92;
+            this.rBtn_name.TabStop = true;
+            this.rBtn_name.Text = "Groom, bride, representative";
+            this.rBtn_name.UseVisualStyleBackColor = true;
+            // 
+            // tb_seacrh_rpDay
+            // 
+            this.tb_seacrh_rpDay.Location = new System.Drawing.Point(479, 129);
+            this.tb_seacrh_rpDay.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tb_seacrh_rpDay.Name = "tb_seacrh_rpDay";
+            this.tb_seacrh_rpDay.Size = new System.Drawing.Size(215, 27);
+            this.tb_seacrh_rpDay.TabIndex = 90;
+            // 
+            // btn_search_rpDay
+            // 
+            this.btn_search_rpDay.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btn_search_rpDay.Location = new System.Drawing.Point(700, 126);
+            this.btn_search_rpDay.Name = "btn_search_rpDay";
+            this.btn_search_rpDay.Size = new System.Drawing.Size(75, 32);
+            this.btn_search_rpDay.TabIndex = 91;
+            this.btn_search_rpDay.Text = "SEARCH";
+            this.btn_search_rpDay.UseVisualStyleBackColor = false;
             // 
             // RevenueReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(821, 390);
+            this.ClientSize = new System.Drawing.Size(852, 503);
+            this.Controls.Add(this.rBtn_date);
+            this.Controls.Add(this.rBtn_name);
+            this.Controls.Add(this.tb_seacrh_rpDay);
+            this.Controls.Add(this.btn_search_rpDay);
             this.Controls.Add(this.textBoxRTotal);
             this.Controls.Add(this.labelRTotal);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.comboBoxMonth);
             this.Controls.Add(this.labelYear);
             this.Controls.Add(this.labelMonth);
-            this.Controls.Add(this.btn_update);
             this.Controls.Add(this.img_close_service);
             this.Controls.Add(this.labelWDRestaurant);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.dataGridViewRReport);
             this.Controls.Add(this.labelRReport);
             this.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.MaximumSize = new System.Drawing.Size(821, 390);
+            this.MaximumSize = new System.Drawing.Size(852, 503);
             this.Name = "RevenueReport";
             this.Text = "RevenueReport";
             this.Load += new System.EventHandler(this.RevenueReport_Load);
@@ -243,10 +267,12 @@ namespace WeddingManagementApplication
         private System.Windows.Forms.Label labelRTotal;
         private System.Windows.Forms.Label labelMonth;
         private System.Windows.Forms.DataGridView dataGridViewRReport;
-        private System.Windows.Forms.Button buttonDelete;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label labelWDRestaurant;
         private System.Windows.Forms.Label img_close_service;
-        private System.Windows.Forms.Button btn_update;
+        private System.Windows.Forms.RadioButton rBtn_date;
+        private System.Windows.Forms.RadioButton rBtn_name;
+        private System.Windows.Forms.TextBox tb_seacrh_rpDay;
+        private System.Windows.Forms.Button btn_search_rpDay;
     }
 }

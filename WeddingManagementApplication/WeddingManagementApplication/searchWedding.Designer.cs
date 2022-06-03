@@ -174,6 +174,7 @@ namespace WeddingManagementApplication
             this.Controls.Add(this.tb_search_wd);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.MaximumSize = new System.Drawing.Size(1129, 487);
             this.Name = "searchWedding";
             this.Text = "searchWedding";
             this.ResizeBegin += new System.EventHandler(this.searchWedding_ResizeBegin);
