@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{035BB3CD-1F96-468E-85D8-41DA82099292}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <RootNamespace>WeddingManagementApplication</RootNamespace>
     <AssemblyName>WeddingManagementApplication</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
@@ -32,6 +32,9 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Bunifu.Licensing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f89b4760ba7dcb6b, processorArchitecture=MSIL">
@@ -183,7 +186,7 @@
     <Compile Include="FormLobby.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormLobby.designer.cs">
+    <Compile Include="FormLobby.Designer.cs">
       <DependentUpon>FormLobby.cs</DependentUpon>
     </Compile>
     <Compile Include="FormLobbyType.cs">
@@ -243,6 +246,7 @@
     <Compile Include="MenuItem.Designer.cs">
       <DependentUpon>MenuItem.cs</DependentUpon>
     </Compile>
+    <Compile Include="MessageBoxManager.cs" />
     <Compile Include="NhanTiec.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -256,16 +260,24 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="ReportDay.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportDay.Designer.cs">
+      <DependentUpon>ReportDay.cs</DependentUpon>
+    </Compile>
     <Compile Include="ReportDropDown.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ReportDropDown.Designer.cs">
       <DependentUpon>ReportDropDown.cs</DependentUpon>
     </Compile>
-    <Compile Include="RevenueReportDetail.cs">
+    <Compile Include="RevenueReport.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="RevenueReportDetail.Designer.cs" />
+    <Compile Include="RevenueReport.Designer.cs">
+      <DependentUpon>RevenueReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="SearchDropDown.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -307,9 +319,6 @@
     <EmbeddedResource Include="FormBill.resx">
       <DependentUpon>FormBill.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormDishes.resx">
-      <DependentUpon>FormDishes.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="FormHome.resx">
       <DependentUpon>FormHome.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -349,10 +358,15 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="ReportDay.resx">
+      <DependentUpon>ReportDay.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ReportDropDown.resx">
       <DependentUpon>ReportDropDown.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="RevenueReportDetail.resx" />
+    <EmbeddedResource Include="RevenueReport.resx">
+      <DependentUpon>RevenueReport.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SearchDropDown.resx">
       <DependentUpon>SearchDropDown.cs</DependentUpon>
     </EmbeddedResource>

@@ -12,6 +12,13 @@ namespace WeddingManagementApplication
 {
     public partial class Shift : UserControl
     {
+        private string id="";
+        
+        public string _id
+        {
+            get { return id; }
+            set { id = value; }
+        }
         public string _lbName
         {
             get { return this.lbName.Text; }

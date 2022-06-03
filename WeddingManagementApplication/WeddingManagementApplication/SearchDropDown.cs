@@ -38,9 +38,9 @@ namespace WeddingManagementApplication
 
         private void bill_Click(object sender, EventArgs e)
         {
-            FormBill frm = new FormBill();
-            frm.ShowDialog();
             this.Visible = false;
+            searchWedding frmS = new searchWedding();
+            frmS.ShowDialog();
         }
 
         private void btnReport_Click(object sender, EventArgs e)
