@@ -126,7 +126,7 @@ namespace WeddingManagementApplication
         {
             if (comboBox1.Text == "" || !long.TryParse(textBox1.Text, out long price))
             {
-                MessageBox.Show("Please fill all the fields!");
+                MessageBox.Show("Please fill all the fields!", "LACK", MessageBoxButtons.OK);
             }
             else
             {
@@ -161,7 +161,7 @@ namespace WeddingManagementApplication
             // check if current type ID is not empty
             if (currentTypeId == "")
             {
-                MessageBox.Show("Please select a type!");
+                MessageBox.Show("Please select a type!", "LACK", MessageBoxButtons.OK);
             }
             else
             {
@@ -184,7 +184,7 @@ namespace WeddingManagementApplication
                             }
                             // remove from table
                             table.Rows.Remove(table.Rows.Find(currentTypeId));
-                            MessageBox.Show("Type deleted!");
+                            MessageBox.Show("Type deleted!", "SUCCESS", MessageBoxButtons.OK);
                         }
                     }
                 }

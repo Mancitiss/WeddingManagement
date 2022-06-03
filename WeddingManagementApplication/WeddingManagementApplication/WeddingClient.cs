@@ -13,7 +13,7 @@ namespace WeddingManagementApplication
     internal class WeddingClient
     {
         internal static List<DishesData> listDishes = new List<DishesData>();
-        internal static List<Service> listServices = new List<Service>();
+        internal static List<ServicesData> listServices = new List<ServicesData>();
         internal static List<ShiftData> listShifts = new List<ShiftData>();
         internal static List<LobbyTypeData> listLobbyTypes = new List<LobbyTypeData>();
         internal static List<LobbyData> listLobbies = new List<LobbyData>();

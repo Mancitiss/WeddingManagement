@@ -13,7 +13,7 @@ namespace WeddingManagementApplication
         [STAThread]
         static void Main()
         {
-            MessageBoxManager.OK = "Alright";
+           // MessageBoxManager.OK = "Alright";
             MessageBoxManager.Yes = "Check bill";
             MessageBoxManager.No = "Wedding Info";
             MessageBoxManager.Cancel = "Cancel";

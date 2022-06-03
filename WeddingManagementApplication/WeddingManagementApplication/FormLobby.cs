@@ -207,7 +207,7 @@ namespace WeddingManagementApplication
         {// check if current type ID is not empty
             if (currentLobbyId == "")
             {
-                MessageBox.Show("Please select a lobby!");
+                MessageBox.Show("Please select a lobby!", "LACK", MessageBoxButtons.OK);
             }
             else
             {
@@ -230,7 +230,7 @@ namespace WeddingManagementApplication
                             }
                             // remove from table
                             table.Rows.Remove(table.Rows.Find(currentLobbyId));
-                            MessageBox.Show("Lobby deleted!");
+                            MessageBox.Show("Lobby deleted!", "SUCESS", MessageBoxButtons.OK);
                         }
                     }
                 }
@@ -240,19 +240,25 @@ namespace WeddingManagementApplication
 
         private void btn_add_Click(object sender, EventArgs e)
         {
-            if (nameTextBox.Text == "" || maxTableTextBox.Text == "" || !int.TryParse(maxTableTextBox.Text, out int maxTable))
+            if (!int.TryParse(maxTableTextBox.Text, out int maxTable))
             {
-                MessageBox.Show("Please fill all the fields!");
+                MessageBox.Show("Max table must be number!", "ERROR", MessageBoxButtons.OK);
+                return; 
+            }
+            if (nameTextBox.Text == "" || maxTableTextBox.Text == "" )
+            {
+                MessageBox.Show("Please fill all the fields!", "LACK", MessageBoxButtons.OK);
             }
             else if (lobbyTypeCombobox.SelectedIndex == -1)
             {
-                MessageBox.Show("Please select a lobby type!");
+                MessageBox.Show("Please select a lobby type!", "LACK", MessageBoxButtons.OK);
             }
             else
             {
                 using (SqlConnection sql = new SqlConnection(WeddingClient.sqlConnectionString))
                 {
                     sql.Open();
+                    
                     using (SqlCommand cmd = new SqlCommand("INSERT INTO LOBBY (IdLobby, IdLobbyType, LobbyName, MaxTable, Note, Available) VALUES (@IdLobby, @IdLobbyType, @LobbyName, @MaxTable, @Note, 1)", sql))
                     {
                         string idLobbyType = ((LobbyTypeData)lobbyTypeCombobox.SelectedItem).idLobbyType;
