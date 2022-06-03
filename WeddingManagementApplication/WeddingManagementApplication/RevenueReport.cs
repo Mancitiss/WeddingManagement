@@ -215,5 +215,10 @@ namespace WeddingManagementApplication
                 MessageBox.Show("Please select a wedding to delete", "ERROR", MessageBoxButtons.OK);
             }
         }
+
+        private void img_close_service_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

@@ -44,6 +44,9 @@
             this.buttonAdd = new System.Windows.Forms.Button();
             this.labelWDRestaurant = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.btn_delete = new System.Windows.Forms.Button();
+            this.btn_update = new System.Windows.Forms.Button();
             this.panelAll.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -53,7 +56,7 @@
             this.labelRReport.AutoSize = true;
             this.labelRReport.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Bold);
             this.labelRReport.ForeColor = System.Drawing.Color.Firebrick;
-            this.labelRReport.Location = new System.Drawing.Point(149, 42);
+            this.labelRReport.Location = new System.Drawing.Point(145, 57);
             this.labelRReport.Name = "labelRReport";
             this.labelRReport.Size = new System.Drawing.Size(604, 51);
             this.labelRReport.TabIndex = 2;
@@ -71,10 +74,10 @@
             this.panelAll.Controls.Add(this.comboBoxDay);
             this.panelAll.Controls.Add(this.labelDayRevenue);
             this.panelAll.Controls.Add(this.labelDay);
-            this.panelAll.Location = new System.Drawing.Point(10, 102);
+            this.panelAll.Location = new System.Drawing.Point(24, 120);
             this.panelAll.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelAll.Name = "panelAll";
-            this.panelAll.Size = new System.Drawing.Size(780, 64);
+            this.panelAll.Size = new System.Drawing.Size(762, 94);
             this.panelAll.TabIndex = 3;
             // 
             // comboBoxMonth
@@ -93,7 +96,7 @@
             "10",
             "11",
             "12"});
-            this.comboBoxMonth.Location = new System.Drawing.Point(388, 6);
+            this.comboBoxMonth.Location = new System.Drawing.Point(407, 2);
             this.comboBoxMonth.Name = "comboBoxMonth";
             this.comboBoxMonth.Size = new System.Drawing.Size(112, 28);
             this.comboBoxMonth.TabIndex = 10;
@@ -102,15 +105,15 @@
             // 
             this.labelmonth.AutoSize = true;
             this.labelmonth.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F);
-            this.labelmonth.Location = new System.Drawing.Point(309, 7);
+            this.labelmonth.Location = new System.Drawing.Point(322, 3);
             this.labelmonth.Name = "labelmonth";
-            this.labelmonth.Size = new System.Drawing.Size(82, 29);
+            this.labelmonth.Size = new System.Drawing.Size(79, 29);
             this.labelmonth.TabIndex = 9;
-            this.labelmonth.Text = "Tháng";
+            this.labelmonth.Text = "Month";
             // 
             // textBoxAOW
             // 
-            this.textBoxAOW.Location = new System.Drawing.Point(652, 34);
+            this.textBoxAOW.Location = new System.Drawing.Point(615, 52);
             this.textBoxAOW.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxAOW.Name = "textBoxAOW";
             this.textBoxAOW.Size = new System.Drawing.Size(110, 27);
@@ -118,7 +121,7 @@
             // 
             // textBoxYear
             // 
-            this.textBoxYear.Location = new System.Drawing.Point(652, 3);
+            this.textBoxYear.Location = new System.Drawing.Point(616, 2);
             this.textBoxYear.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxYear.Name = "textBoxYear";
             this.textBoxYear.Size = new System.Drawing.Size(110, 27);
@@ -128,7 +131,7 @@
             // 
             this.labelAOW.AutoSize = true;
             this.labelAOW.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F);
-            this.labelAOW.Location = new System.Drawing.Point(420, 34);
+            this.labelAOW.Location = new System.Drawing.Point(363, 52);
             this.labelAOW.Name = "labelAOW";
             this.labelAOW.Size = new System.Drawing.Size(234, 29);
             this.labelAOW.TabIndex = 5;
@@ -138,7 +141,7 @@
             // 
             this.labelYear.AutoSize = true;
             this.labelYear.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F);
-            this.labelYear.Location = new System.Drawing.Point(549, 4);
+            this.labelYear.Location = new System.Drawing.Point(544, 1);
             this.labelYear.Name = "labelYear";
             this.labelYear.Size = new System.Drawing.Size(64, 29);
             this.labelYear.TabIndex = 4;
@@ -146,7 +149,7 @@
             // 
             // textBoxDayRevenue
             // 
-            this.textBoxDayRevenue.Location = new System.Drawing.Point(182, 34);
+            this.textBoxDayRevenue.Location = new System.Drawing.Point(182, 50);
             this.textBoxDayRevenue.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxDayRevenue.Name = "textBoxDayRevenue";
             this.textBoxDayRevenue.Size = new System.Drawing.Size(110, 27);
@@ -198,7 +201,7 @@
             // 
             this.labelDayRevenue.AutoSize = true;
             this.labelDayRevenue.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F);
-            this.labelDayRevenue.Location = new System.Drawing.Point(10, 34);
+            this.labelDayRevenue.Location = new System.Drawing.Point(10, 50);
             this.labelDayRevenue.Name = "labelDayRevenue";
             this.labelDayRevenue.Size = new System.Drawing.Size(162, 29);
             this.labelDayRevenue.TabIndex = 1;
@@ -219,7 +222,7 @@
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.BackgroundColor = System.Drawing.Color.DarkGray;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(10, 181);
+            this.dataGridView1.Location = new System.Drawing.Point(12, 234);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
@@ -228,14 +231,14 @@
             // 
             // buttonAdd
             // 
-            this.buttonAdd.BackColor = System.Drawing.Color.Silver;
+            this.buttonAdd.BackColor = System.Drawing.Color.White;
             this.buttonAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.buttonAdd.Location = new System.Drawing.Point(685, 235);
+            this.buttonAdd.Location = new System.Drawing.Point(708, 234);
             this.buttonAdd.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonAdd.Name = "buttonAdd";
-            this.buttonAdd.Size = new System.Drawing.Size(62, 25);
+            this.buttonAdd.Size = new System.Drawing.Size(78, 38);
             this.buttonAdd.TabIndex = 8;
-            this.buttonAdd.Text = "Add";
+            this.buttonAdd.Text = "ADD";
             this.buttonAdd.UseVisualStyleBackColor = false;
             this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
             // 
@@ -244,7 +247,7 @@
             this.labelWDRestaurant.AutoSize = true;
             this.labelWDRestaurant.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Italic);
             this.labelWDRestaurant.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            this.labelWDRestaurant.Location = new System.Drawing.Point(243, 9);
+            this.labelWDRestaurant.Location = new System.Drawing.Point(512, 9);
             this.labelWDRestaurant.Name = "labelWDRestaurant";
             this.labelWDRestaurant.Size = new System.Drawing.Size(314, 29);
             this.labelWDRestaurant.TabIndex = 1;
@@ -259,6 +262,39 @@
             this.label1.TabIndex = 9;
             this.label1.Text = "X";
             this.label1.Click += new System.EventHandler(this.label1_Click);
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(832, 9);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(18, 20);
+            this.label6.TabIndex = 72;
+            this.label6.Text = "X";
+            this.label6.Click += new System.EventHandler(this.label6_Click);
+            // 
+            // btn_delete
+            // 
+            this.btn_delete.BackColor = System.Drawing.Color.White;
+            this.btn_delete.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.btn_delete.Location = new System.Drawing.Point(708, 337);
+            this.btn_delete.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btn_delete.Name = "btn_delete";
+            this.btn_delete.Size = new System.Drawing.Size(78, 38);
+            this.btn_delete.TabIndex = 73;
+            this.btn_delete.Text = "DELETE";
+            this.btn_delete.UseVisualStyleBackColor = false;
+            // 
+            // btn_update
+            // 
+            this.btn_update.BackColor = System.Drawing.Color.White;
+            this.btn_update.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.btn_update.Location = new System.Drawing.Point(708, 287);
+            this.btn_update.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btn_update.Name = "btn_update";
+            this.btn_update.Size = new System.Drawing.Size(78, 38);
+            this.btn_update.TabIndex = 74;
+            this.btn_update.Text = "UPDATE";
+            this.btn_update.UseVisualStyleBackColor = false;
             // 
             // ReportDay
             // 
@@ -266,6 +302,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(862, 375);
             this.Controls.Add(this.label1);
+            this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
+            this.ClientSize = new System.Drawing.Size(862, 385);
+            this.Controls.Add(this.btn_update);
+            this.Controls.Add(this.btn_delete);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.labelWDRestaurant);
             this.Controls.Add(this.buttonAdd);
             this.Controls.Add(this.dataGridView1);
@@ -274,6 +315,7 @@
             this.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.MaximumSize = new System.Drawing.Size(862, 385);
             this.Name = "ReportDay";
             this.Text = "ReportDay";
             this.Load += new System.EventHandler(this.ReportDay_Load);
@@ -303,5 +345,8 @@
         private System.Windows.Forms.ComboBox comboBoxMonth;
         private System.Windows.Forms.Label labelmonth;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button btn_delete;
+        private System.Windows.Forms.Button btn_update;
     }
 }

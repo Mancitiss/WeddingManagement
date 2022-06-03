@@ -276,7 +276,7 @@ namespace WeddingManagementApplication
             this.Controls.Add(this.label2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.MaximumSize = new System.Drawing.Size(1153, 654);
+            this.MaximumSize = new System.Drawing.Size(1021, 515);
             this.Name = "FormLobby";
             this.RightToLeftLayout = true;
             this.Text = "Sảnh ";

@@ -58,6 +58,7 @@ namespace WeddingManagementApplication
             this.label6.Size = new System.Drawing.Size(17, 17);
             this.label6.TabIndex = 13;
             this.label6.Text = "X";
+            this.label6.Click += new System.EventHandler(this.label6_Click);
             // 
             // label4
             // 
@@ -250,6 +251,7 @@ namespace WeddingManagementApplication
             this.Controls.Add(this.data_gv_dishes);
             this.Controls.Add(this.label6);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.MaximumSize = new System.Drawing.Size(783, 450);
             this.Name = "FormAccount";
             this.Text = "FormAccount";
             ((System.ComponentModel.ISupportInitialize)(this.data_gv_dishes)).EndInit();

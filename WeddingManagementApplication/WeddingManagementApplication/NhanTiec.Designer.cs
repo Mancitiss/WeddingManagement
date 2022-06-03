@@ -78,6 +78,7 @@ namespace WeddingManagementApplication
             this.cbb_service = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.dataWedding = new System.Windows.Forms.DataGridView();
+            this.label6 = new System.Windows.Forms.Label();
             this.wedding.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox_menu.SuspendLayout();
@@ -634,12 +635,23 @@ namespace WeddingManagementApplication
             this.dataWedding.Size = new System.Drawing.Size(616, 199);
             this.dataWedding.TabIndex = 57;
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(984, 9);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(17, 17);
+            this.label6.TabIndex = 72;
+            this.label6.Text = "X";
+            this.label6.Click += new System.EventHandler(this.label6_Click);
+            // 
             // NhanTiec
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(204)))), ((int)(((byte)(176)))));
             this.ClientSize = new System.Drawing.Size(1013, 562);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox_menu);
             this.Controls.Add(this.dataWedding);
@@ -649,7 +661,9 @@ namespace WeddingManagementApplication
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.wedding);
             this.Controls.Add(this.label_tittle_wedding_in4);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.MaximumSize = new System.Drawing.Size(1013, 562);
             this.Name = "NhanTiec";
             this.Text = "NhanTiec";
             this.Load += new System.EventHandler(this.NhanTiec_Load);
@@ -715,5 +729,6 @@ namespace WeddingManagementApplication
         private CustomeBorderTextbox tb_service_price;
         private System.Windows.Forms.Button btn_detail_dishes;
         private System.Windows.Forms.Button btn_detail_service;
+        private System.Windows.Forms.Label label6;
     }
 }

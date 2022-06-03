@@ -64,7 +64,7 @@
             // 
             // textBoxPassWord
             // 
-            this.textBoxPassWord.Location = new System.Drawing.Point(124, 341);
+            this.textBoxPassWord.Location = new System.Drawing.Point(158, 323);
             this.textBoxPassWord.Name = "textBoxPassWord";
             this.textBoxPassWord.Size = new System.Drawing.Size(206, 22);
             this.textBoxPassWord.TabIndex = 11;
@@ -73,7 +73,7 @@
             // 
             // textBoxUserName
             // 
-            this.textBoxUserName.Location = new System.Drawing.Point(124, 268);
+            this.textBoxUserName.Location = new System.Drawing.Point(158, 250);
             this.textBoxUserName.Name = "textBoxUserName";
             this.textBoxUserName.Size = new System.Drawing.Size(206, 22);
             this.textBoxUserName.TabIndex = 10;
@@ -121,7 +121,7 @@
             this.checkboxRemPW.Location = new System.Drawing.Point(127, 386);
             this.checkboxRemPW.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.checkboxRemPW.Name = "checkboxRemPW";
-            this.checkboxRemPW.Size = new System.Drawing.Size(126, 21);
+            this.checkboxRemPW.Size = new System.Drawing.Size(133, 23);
             this.checkboxRemPW.TabIndex = 5;
             this.checkboxRemPW.Text = "Remember me";
             this.checkboxRemPW.UseVisualStyleBackColor = true;
@@ -131,7 +131,7 @@
             this.label2.AutoSize = true;
             this.label2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label2.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(8, 338);
+            this.label2.Location = new System.Drawing.Point(42, 320);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(100, 23);
             this.label2.TabIndex = 4;
@@ -143,7 +143,7 @@
             this.label1.AutoSize = true;
             this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label1.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(7, 268);
+            this.label1.Location = new System.Drawing.Point(41, 250);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(108, 23);
             this.label1.TabIndex = 3;
@@ -168,6 +168,7 @@
             this.Controls.Add(this.pictureBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.MaximumSize = new System.Drawing.Size(800, 601);
             this.Name = "FormLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.panel1.ResumeLayout(false);

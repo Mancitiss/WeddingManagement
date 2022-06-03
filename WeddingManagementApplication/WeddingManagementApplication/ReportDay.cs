@@ -77,7 +77,7 @@ namespace WeddingManagementApplication
             column.Unique = false;
             column.ColumnMapping = MappingType.Hidden;
             table1.Columns.Add(column);
-           
+
             dataGridView1.DataSource = table1;
             foreach (DataGridViewColumn col in dataGridView1.Columns)
             {
@@ -105,25 +105,25 @@ namespace WeddingManagementApplication
         {
             // select weddingID
             currentReportId = table1.Rows[e.RowIndex]["idReport"].ToString();
-            currentReportDay= int.Parse(table1.Rows[e.RowIndex]["Day"].ToString());
+            currentReportDay = int.Parse(table1.Rows[e.RowIndex]["Day"].ToString());
             Console.WriteLine(NhanTiec.currentWeddingId);
         }
         private void buttonAdd_Click(object sender, EventArgs e)
         {
             int index = comboBoxDay.SelectedIndex;
             int index2 = comboBoxMonth.SelectedIndex;
-            if (index < 0 ||index2<0)
+            if (index < 0 || index2 < 0)
             {
                 MessageBox.Show("Please fill full infor ");
             }
             else
-            using (SqlConnection sql = new SqlConnection(WeddingClient.sqlConnectionString))
-            {
-                sql.Open();
+                using (SqlConnection sql = new SqlConnection(WeddingClient.sqlConnectionString))
+                {
+                    sql.Open();
                     int total = 0;
-                    int count =0;
-                // complete command for me
-                string Id ="";
+                    int count = 0;
+                    // complete command for me
+                    string Id = "";
                     using (SqlCommand cmd2 = new SqlCommand("SELECT * from BILL where (DAY(PaymentDate)=@day and Month(PaymentDate)=@month and Year(PaymentDate)=@year)", sql))
                     {
                         cmd2.Parameters.AddWithValue("@day", int.Parse(comboBoxDay.SelectedItem.ToString()));
@@ -133,14 +133,14 @@ namespace WeddingManagementApplication
                         {
                             if (reader.HasRows)
                             {
-                                while(reader.Read())
+                                while (reader.Read())
                                 {
                                     total += (int)reader["Total"];
                                     count += 1;
-                                }    
+                                }
                             }
                         }
-                    } 
+                    }
                     using (SqlCommand cmd2 = new SqlCommand("SELECT * from REVENUE_REPORT where (Month =@month)", sql))
                     {
                         cmd2.Parameters.AddWithValue("@month", int.Parse(comboBoxMonth.SelectedItem.ToString()));
@@ -151,22 +151,22 @@ namespace WeddingManagementApplication
                                 while (reader.Read())
                                 {
                                     Id = reader["idReport"].ToString();
-                                    using (SqlCommand cmd =new SqlCommand("INSERT into REVENUE_REPORT(IdReport) Values(@id)",sql))
+                                    using (SqlCommand cmd = new SqlCommand("INSERT into REVENUE_REPORT(IdReport) Values(@id)", sql))
                                     {
                                         cmd.Parameters.AddWithValue("@id", Id);
                                         cmd.ExecuteNonQuery();
-                                    }    
+                                    }
                                 }
                             }
                             else
                             {
-                                Id= "RR" + WeddingClient.GetNewIdFromTable("RR").ToString();
-                            }    
+                                Id = "RR" + WeddingClient.GetNewIdFromTable("RR").ToString();
+                            }
                         }
                     }
                     using (SqlCommand cmd2 = new SqlCommand("INSERT INTO REVENUE_REPORT (IdReport, Month, year) VALUES (@id, @month, @year) ", sql))
                     {
-                        cmd2.Parameters.AddWithValue("@id",Id);
+                        cmd2.Parameters.AddWithValue("@id", Id);
                         cmd2.Parameters.AddWithValue("@month", int.Parse(comboBoxMonth.SelectedItem.ToString()));
                         cmd2.Parameters.AddWithValue("@year", int.Parse(textBoxYear.Text));
                         cmd2.ExecuteNonQuery();
@@ -188,11 +188,11 @@ namespace WeddingManagementApplication
                         }
                         catch
                         {
-                            
+
                         }
                     }
                     DataRow rw = table1.NewRow();
-                    rw.ItemArray = new object[] { int.Parse(comboBoxDay.SelectedItem.ToString()),total, count, Id };
+                    rw.ItemArray = new object[] { int.Parse(comboBoxDay.SelectedItem.ToString()), total, count, Id };
                     table1.Rows.Add(rw);
                 }
         }
@@ -202,7 +202,8 @@ namespace WeddingManagementApplication
 
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void label1_Click(object sender, EventArgs e){}
+        private void label6_Click(object sender, EventArgs e)
         {
             this.Close();
         }

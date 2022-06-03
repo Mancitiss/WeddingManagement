@@ -22,7 +22,7 @@ namespace WeddingManagementApplication
         {
             if(this.tbEnd.Text ==""||this.tbName.Text ==""||this.tbStart.Text =="")
             {
-                MessageBox.Show("Vui lòng điền đủ thông tin");
+                MessageBox.Show("Please fill all the fields!", "LACK", MessageBoxButtons.OK);
             }    
             else
             {
@@ -30,19 +30,19 @@ namespace WeddingManagementApplication
                 s._lbName=this.tbName.Text;
                 s._lbStart=this.tbStart.Text;
                 s._lbEnd=this.tbEnd.Text;
-                s._lbStatus = this.rbtA.Checked ? "Trống" : "Đầy";
-                int state = this.rbtA.Checked ? 1 : 0;
+             //   s._lbStatus = this.rbtA.Checked ? "Trống" : "Đầy";
+              //  int state = this.rbtA.Checked ? 1 : 0;
                 using (var sql = new SqlConnection(WeddingClient.sqlConnectionString))
                 {
                     sql.Open();
                     // add menu to database
                     // if success add menu to list
-                    using (SqlCommand command = new SqlCommand("insert into Shift  values (@idShift, @available, @Name, @Start,@End)", sql))
+                    using (SqlCommand command = new SqlCommand("insert into Shift  values (@idShift, 1, @Name, @Start,@End)", sql))
                     {
                         string id = "SH" + WeddingClient.GetNewIdFromTable("SH").ToString().PadLeft(19, '0');
                         s._id = id;
                         command.Parameters.AddWithValue("@idShift",id );
-                        command.Parameters.AddWithValue("@available", state);
+                     //   command.Parameters.AddWithValue("@available", state);
                         command.Parameters.AddWithValue("@Name", s._lbName);
                         command.Parameters.AddWithValue("@Start", s._lbStart);
                         command.Parameters.AddWithValue("@End", s._lbEnd);
@@ -77,7 +77,7 @@ namespace WeddingManagementApplication
                 }
                 if (count > 1)
                 {
-                    MessageBox.Show("Chỉ xóa 1 đối tượng");
+                    MessageBox.Show("Just delete only one object!", "ERROR", MessageBoxButtons.OK);
                     break;
                 }    
             }
@@ -96,7 +96,7 @@ namespace WeddingManagementApplication
                                 if ((s as Shift)._id == pre._id)
                                 {
                                     this.flowLayoutPanel1.Controls.Remove(s as Control);
-                                    MessageBox.Show("Xóa thành công");
+                                    MessageBox.Show("Delete successfully!", "SUCESS", MessageBoxButtons.OK);
                                     break;
                                 }
                             }

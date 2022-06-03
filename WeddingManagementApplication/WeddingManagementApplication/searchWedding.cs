@@ -298,5 +298,10 @@ namespace WeddingManagementApplication
         private void searchWedding_ResizeEnd(object sender, EventArgs e)
         {
         }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
