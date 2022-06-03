@@ -39,15 +39,15 @@
             this.comboBoxDay = new System.Windows.Forms.ComboBox();
             this.labelDayRevenue = new System.Windows.Forms.Label();
             this.labelDay = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dataRPD = new System.Windows.Forms.DataGridView();
             this.buttonAdd = new System.Windows.Forms.Button();
             this.labelWDRestaurant = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.btn_search_rpDay = new System.Windows.Forms.Button();
             this.tb_seacrh_rpDay = new System.Windows.Forms.TextBox();
-            this.rBtn_date = new System.Windows.Forms.RadioButton();
-            this.rBtn_name = new System.Windows.Forms.RadioButton();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.rBtn_amount = new System.Windows.Forms.RadioButton();
+            this.rBtn_day = new System.Windows.Forms.RadioButton();
+            ((System.ComponentModel.ISupportInitialize)(this.dataRPD)).BeginInit();
             this.SuspendLayout();
             // 
             // labelRReport
@@ -199,17 +199,17 @@
             this.labelDay.TabIndex = 0;
             this.labelDay.Text = "Day:";
             // 
-            // dataGridView1
+            // dataRPD
             // 
-            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridView1.BackgroundColor = System.Drawing.Color.Gainsboro;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(13, 361);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.Size = new System.Drawing.Size(832, 205);
-            this.dataGridView1.TabIndex = 4;
+            this.dataRPD.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataRPD.BackgroundColor = System.Drawing.Color.Gainsboro;
+            this.dataRPD.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataRPD.Location = new System.Drawing.Point(13, 361);
+            this.dataRPD.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dataRPD.Name = "dataRPD";
+            this.dataRPD.RowHeadersWidth = 51;
+            this.dataRPD.Size = new System.Drawing.Size(832, 205);
+            this.dataRPD.TabIndex = 4;
             // 
             // buttonAdd
             // 
@@ -251,47 +251,47 @@
             // btn_search_rpDay
             // 
             this.btn_search_rpDay.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btn_search_rpDay.Location = new System.Drawing.Point(696, 124);
+            this.btn_search_rpDay.Location = new System.Drawing.Point(654, 127);
             this.btn_search_rpDay.Name = "btn_search_rpDay";
             this.btn_search_rpDay.Size = new System.Drawing.Size(75, 32);
             this.btn_search_rpDay.TabIndex = 76;
             this.btn_search_rpDay.Text = "SEARCH";
             this.btn_search_rpDay.UseVisualStyleBackColor = false;
+            this.btn_search_rpDay.Click += new System.EventHandler(this.btn_search_rpDay_Click);
             // 
             // tb_seacrh_rpDay
             // 
-            this.tb_seacrh_rpDay.Location = new System.Drawing.Point(475, 127);
+            this.tb_seacrh_rpDay.Location = new System.Drawing.Point(433, 130);
             this.tb_seacrh_rpDay.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tb_seacrh_rpDay.Name = "tb_seacrh_rpDay";
             this.tb_seacrh_rpDay.Size = new System.Drawing.Size(215, 27);
             this.tb_seacrh_rpDay.TabIndex = 11;
             // 
-            // rBtn_date
+            // rBtn_amount
             // 
-            this.rBtn_date.AutoSize = true;
-            this.rBtn_date.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rBtn_date.Location = new System.Drawing.Point(676, 165);
-            this.rBtn_date.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.rBtn_date.Name = "rBtn_date";
-            this.rBtn_date.Size = new System.Drawing.Size(138, 27);
-            this.rBtn_date.TabIndex = 78;
-            this.rBtn_date.TabStop = true;
-            this.rBtn_date.Text = "Wedding date";
-            this.rBtn_date.UseVisualStyleBackColor = true;
+            this.rBtn_amount.AutoSize = true;
+            this.rBtn_amount.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rBtn_amount.Location = new System.Drawing.Point(519, 165);
+            this.rBtn_amount.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.rBtn_amount.Name = "rBtn_amount";
+            this.rBtn_amount.Size = new System.Drawing.Size(183, 27);
+            this.rBtn_amount.TabIndex = 78;
+            this.rBtn_amount.TabStop = true;
+            this.rBtn_amount.Text = "Amount of wedding";
+            this.rBtn_amount.UseVisualStyleBackColor = true;
             // 
-            // rBtn_name
+            // rBtn_day
             // 
-            this.rBtn_name.AutoSize = true;
-            this.rBtn_name.Checked = true;
-            this.rBtn_name.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rBtn_name.Location = new System.Drawing.Point(421, 165);
-            this.rBtn_name.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.rBtn_name.Name = "rBtn_name";
-            this.rBtn_name.Size = new System.Drawing.Size(249, 27);
-            this.rBtn_name.TabIndex = 77;
-            this.rBtn_name.TabStop = true;
-            this.rBtn_name.Text = "Groom, bride, representative";
-            this.rBtn_name.UseVisualStyleBackColor = true;
+            this.rBtn_day.AutoSize = true;
+            this.rBtn_day.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rBtn_day.Location = new System.Drawing.Point(453, 165);
+            this.rBtn_day.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.rBtn_day.Name = "rBtn_day";
+            this.rBtn_day.Size = new System.Drawing.Size(60, 27);
+            this.rBtn_day.TabIndex = 80;
+            this.rBtn_day.TabStop = true;
+            this.rBtn_day.Text = "Day";
+            this.rBtn_day.UseVisualStyleBackColor = true;
             // 
             // ReportDay
             // 
@@ -300,10 +300,10 @@
             this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(857, 577);
+            this.Controls.Add(this.rBtn_day);
             this.Controls.Add(this.comboBoxMonth);
-            this.Controls.Add(this.rBtn_date);
+            this.Controls.Add(this.rBtn_amount);
             this.Controls.Add(this.labelmonth);
-            this.Controls.Add(this.rBtn_name);
             this.Controls.Add(this.textBoxAOW);
             this.Controls.Add(this.tb_seacrh_rpDay);
             this.Controls.Add(this.textBoxYear);
@@ -317,7 +317,7 @@
             this.Controls.Add(this.labelDayRevenue);
             this.Controls.Add(this.buttonAdd);
             this.Controls.Add(this.labelDay);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dataRPD);
             this.Controls.Add(this.labelRReport);
             this.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -326,7 +326,7 @@
             this.Name = "ReportDay";
             this.Text = "ReportDay";
             this.Load += new System.EventHandler(this.ReportDay_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataRPD)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -343,7 +343,7 @@
         private System.Windows.Forms.ComboBox comboBoxDay;
         private System.Windows.Forms.Label labelDayRevenue;
         private System.Windows.Forms.Label labelDay;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dataRPD;
         private System.Windows.Forms.Button buttonAdd;
         private System.Windows.Forms.Label labelWDRestaurant;
         private System.Windows.Forms.ComboBox comboBoxMonth;
@@ -351,7 +351,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button btn_search_rpDay;
         private System.Windows.Forms.TextBox tb_seacrh_rpDay;
-        private System.Windows.Forms.RadioButton rBtn_date;
-        private System.Windows.Forms.RadioButton rBtn_name;
+        private System.Windows.Forms.RadioButton rBtn_amount;
+        private System.Windows.Forms.RadioButton rBtn_day;
     }
 }

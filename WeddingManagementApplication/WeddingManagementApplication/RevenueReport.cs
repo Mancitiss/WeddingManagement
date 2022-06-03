@@ -66,12 +66,12 @@ namespace WeddingManagementApplication
             column.Unique = false;
             column.ColumnMapping = MappingType.Hidden;
             table1.Columns.Add(column);
-            dataGridViewRReport.DataSource = table1;
-            foreach (DataGridViewColumn col in dataGridViewRReport.Columns)
+            dataRPMonth.DataSource = table1;
+            foreach (DataGridViewColumn col in dataRPMonth.Columns)
             {
                 col.HeaderText = table1.Columns[col.DataPropertyName].Caption;
             }
-            dataGridViewRReport.RowHeaderMouseClick += new DataGridViewCellMouseEventHandler(dataWedding_RowHeaderMouseClick);
+            dataRPMonth.RowHeaderMouseClick += new DataGridViewCellMouseEventHandler(dataWedding_RowHeaderMouseClick);
             using (SqlConnection sql = new SqlConnection(WeddingClient.sqlConnectionString))
             {
                 sql.Open();
@@ -199,7 +199,7 @@ namespace WeddingManagementApplication
                             //Load_data_wedding();
                             // delete row in table1
                             //dataWedding.Rows.RemoveAt(dataWedding.CurrentRow.Index);
-                            table1.Rows.RemoveAt(dataGridViewRReport.CurrentRow.Index);
+                            table1.Rows.RemoveAt(dataRPMonth.CurrentRow.Index);
                             MessageBox.Show("Report deleted", "SUCCESS", MessageBoxButtons.OK);
                             NhanTiec.currentWeddingId = "";
                         }
@@ -219,6 +219,66 @@ namespace WeddingManagementApplication
         private void img_close_service_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void btn_search_rpMonth_Click(object sender, EventArgs e)
+        {
+            if (rBtn_month.Checked)
+            {
+                using (SqlConnection sqlconn = new SqlConnection(WeddingClient.sqlConnectionString))
+                {
+                    string sqlquery = "SELECT Month, Year, RevenueTotal" +
+                        " FROM REVENUE_REPORT RP" +
+                        " WHERE Month LIKE @searchRP";
+                    sqlconn.Open();
+                    using (SqlCommand sqlcomm = new SqlCommand(sqlquery, sqlconn))
+                    {
+                        sqlcomm.Parameters.AddWithValue("@searchRP", "%" + tb_seacrh_rpMonth.Text + "%");
+                        using (SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlcomm))
+                        {
+                            table1 = new DataTable();
+                            sqlDataAdapter.Fill(table1);
+                            DataColumn[] keys = new DataColumn[1];
+                            keys[0] = table1.Columns["IdReport"];
+                            table1.PrimaryKey = keys;
+                            //   table1.Columns["IdReport"].ColumnMapping = MappingType.Hidden;
+                            dataRPMonth.DataSource = table1;
+                            foreach (DataGridViewColumn col in dataRPMonth.Columns)
+                            {
+                                col.HeaderText = table1.Columns[col.DataPropertyName].Caption;
+                            }
+                        }
+                    }
+                }
+            }
+            if (rBtn_year.Checked)
+            {
+                using (SqlConnection sqlconn = new SqlConnection(WeddingClient.sqlConnectionString))
+                {
+                    string sqlquery = "SELECT Month, Year, RevenueTotal" +
+                        " FROM REVENUE_REPORT RP" +
+                        " WHERE Year LIKE @searchRP";
+                    sqlconn.Open();
+                    using (SqlCommand sqlcomm = new SqlCommand(sqlquery, sqlconn))
+                    {
+                        sqlcomm.Parameters.AddWithValue("@searchRP", "%" + tb_seacrh_rpMonth.Text + "%");
+                        using (SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlcomm))
+                        {
+                            table1 = new DataTable();
+                            sqlDataAdapter.Fill(table1);
+                            DataColumn[] keys = new DataColumn[1];
+                            keys[0] = table1.Columns["IdReport"];
+                            table1.PrimaryKey = keys;
+                            //    table1.Columns["IdReport"].ColumnMapping = MappingType.Hidden;
+                            dataRPMonth.DataSource = table1;
+                            foreach (DataGridViewColumn col in dataRPMonth.Columns)
+                            {
+                                col.HeaderText = table1.Columns[col.DataPropertyName].Caption;
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }

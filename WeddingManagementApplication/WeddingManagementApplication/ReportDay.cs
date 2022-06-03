@@ -13,6 +13,7 @@ namespace WeddingManagementApplication
 {
     public partial class ReportDay : Form
     {
+
         public static string currentReportId = "";
         public static int currentReportDay = 0;
         SqlDataAdapter adapter = new SqlDataAdapter();
@@ -78,12 +79,12 @@ namespace WeddingManagementApplication
             column.ColumnMapping = MappingType.Hidden;
             table1.Columns.Add(column);
 
-            dataGridView1.DataSource = table1;
-            foreach (DataGridViewColumn col in dataGridView1.Columns)
+            dataRPD.DataSource = table1;
+            foreach (DataGridViewColumn col in dataRPD.Columns)
             {
                 col.HeaderText = table1.Columns[col.DataPropertyName].Caption;
             }
-            dataGridView1.RowHeaderMouseClick += new DataGridViewCellMouseEventHandler(dataWedding_RowHeaderMouseClick);
+            dataRPD.RowHeaderMouseClick += new DataGridViewCellMouseEventHandler(dataWedding_RowHeaderMouseClick);
             using (SqlConnection sql = new SqlConnection(WeddingClient.sqlConnectionString))
             {
                 sql.Open();
@@ -202,41 +203,70 @@ namespace WeddingManagementApplication
 
         }
 
-        private void label1_Click(object sender, EventArgs e){}
         private void label6_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
-        //private void buttonDelete_Click(object sender, EventArgs e)
-        //{
-        //    if (currentReportId != null && currentReportId.Length == 21)
-        //    {
-        //        using (SqlConnection sql = new SqlConnection(WeddingClient.sqlConnectionString))
-        //        {
-        //            sql.Open();
-        //            // complete command for me
-        //            using (SqlCommand cmd = new SqlCommand("DELETE FROM REVENUE_REPORT_DT  WHERE (IdReport = @id and Day =@day)", sql))
-        //            {
-        //                cmd.Parameters.AddWithValue("@id", currentReportId);
-        //                cmd.Parameters.AddWithValue("@day", currentReportDay);
-        //                MessageBox.Show(currentReportDay.ToString());
-        //                if (cmd.ExecuteNonQuery() > 0)
-        //                {
-        //                    //Load_data_wedding();
-        //                    // delete row in table1
-        //                    //dataWedding.Rows.RemoveAt(dataWedding.CurrentRow.Index);
-        //                    table1.Rows.RemoveAt(dataGridView1.CurrentRow.Index);
-        //                    MessageBox.Show("Report deleted", "SUCCESS", MessageBoxButtons.OK);
-        //                    NhanTiec.currentWeddingId = "";
-        //                }
-        //            }
-        //        }
-        //    }
-        //    else
-        //    {
-        //        MessageBox.Show("Please select a wedding to delete", "ERROR", MessageBoxButtons.OK);
-        //    }
-        //}
+        private void btn_search_rpDay_Click(object sender, EventArgs e)
+        {
+            if(rBtn_day.Checked)
+            {
+                using (SqlConnection sqlconn = new SqlConnection(WeddingClient.sqlConnectionString))
+                {
+                    string sqlquery = "SELECT Day, Month, Year, DayRevenue, Ratio, AmoutOfWedding" +
+                        " FROM REVENUE_REPORT_DT RP_D, REVENUE_REPORT RP" +
+                        " WHERE RP_D. IdReport = RP.IdReport AND Day LIKE @searchRPD";
+                    sqlconn.Open();
+                    using (SqlCommand sqlcomm = new SqlCommand(sqlquery, sqlconn))
+                    {
+                        sqlcomm.Parameters.AddWithValue("@searchRPD", "%" + tb_seacrh_rpDay.Text + "%");
+                        using (SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlcomm))
+                        {
+                            table1 = new DataTable();
+                            sqlDataAdapter.Fill(table1);
+                            DataColumn[] keys = new DataColumn[1];
+                            keys[0] = table1.Columns["IdReport, Day"];
+                            table1.PrimaryKey = keys;
+                         //   table1.Columns["IdReport"].ColumnMapping = MappingType.Hidden;
+                            dataRPD.DataSource = table1;
+                            foreach (DataGridViewColumn col in dataRPD.Columns)
+                            {
+                                col.HeaderText = table1.Columns[col.DataPropertyName].Caption;
+                            }
+                        }
+                    }
+                }
+            }
+            if(rBtn_amount.Checked)
+            {
+                using (SqlConnection sqlconn = new SqlConnection(WeddingClient.sqlConnectionString))
+                {
+                    string sqlquery = "SELECT Day, Month, Year, DayRevenue, Ratio, AmoutOfWedding" +
+                        " FROM REVENUE_REPORT_DT RP_D, REVENUE_REPORT RP" +
+                        " WHERE RP_D. IdReport = RP.IdReport AND AmoutOfWedding LIKE @searchRPD";
+                    sqlconn.Open();
+                    using (SqlCommand sqlcomm = new SqlCommand(sqlquery, sqlconn))
+                    {
+                        sqlcomm.Parameters.AddWithValue("@searchRPD", "%" + tb_seacrh_rpDay.Text + "%");
+                        using (SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlcomm))
+                        {
+                            table1 = new DataTable();
+                            sqlDataAdapter.Fill(table1);
+                            DataColumn[] keys = new DataColumn[1];
+                            keys[0] = table1.Columns["IdReport, Day"];
+                            table1.PrimaryKey = keys;
+                        //    table1.Columns["IdReport"].ColumnMapping = MappingType.Hidden;
+                            dataRPD.DataSource = table1;
+                            foreach (DataGridViewColumn col in dataRPD.Columns)
+                            {
+                                col.HeaderText = table1.Columns[col.DataPropertyName].Caption;
+                            }
+                        }
+                    }
+                }
+            }
+         
+        }
     }
 }
