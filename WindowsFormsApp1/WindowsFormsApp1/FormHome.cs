@@ -13,6 +13,11 @@ namespace WindowsFormsApp1
     public partial class FormHome : Form
     {
         private Form curChildForm;
+
+        public Form GetCurrentChildForm()
+        {
+            return curChildForm;
+        }
         public FormHome()
         {
             InitializeComponent();
@@ -26,6 +31,8 @@ namespace WindowsFormsApp1
         private void btnWedding_Click(object sender, EventArgs e)
         {
             this.panelNavigate.Top=this.btnWedding.Top;
+            openChildForm(new FormBooking());
+            
         }
 
         private void btnMenu_Click(object sender, EventArgs e)
@@ -45,13 +52,14 @@ namespace WindowsFormsApp1
             this.panelNavigate.Top = this.btnReport.Top;
         }
 
-        private void btnEmpty_Click(object sender, EventArgs e)
+        private void btnLobby_Click(object sender, EventArgs e)
         {
-            this.panelNavigate.Top = this.btnEmpty.Top;
+            this.panelNavigate.Top = this.btnLobby.Top;
+            openChildForm(new FormLobby());
         }
         private void openChildForm (Form childForm)
         {
-            if (childForm == null) ;
+            if (childForm == null) return;
             childForm.TopLevel = false;
             childForm.Dock = DockStyle.Fill;
             this.curChildForm = childForm;

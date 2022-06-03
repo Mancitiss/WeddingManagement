@@ -6,14 +6,15 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsApp1
 {
-    internal class Account
+    public class Account
     {
-        internal string username;
-        internal string id;
-        internal Int16 priority;
+        public string id;
+        public string username;
+        public string pw;
+        public short priority;
 
-        internal Account() { }
-        internal Account(string username, string id, Int16 priority)
+        public Account() { }
+        public Account(string username, string id, short priority)
         {
             this.username = username;
             this.id = id;

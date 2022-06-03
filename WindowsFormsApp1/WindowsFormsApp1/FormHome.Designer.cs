@@ -30,6 +30,9 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormHome));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.panelNavigate = new System.Windows.Forms.Panel();
+            this.btnLobby = new System.Windows.Forms.Button();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.btnReport = new System.Windows.Forms.Button();
             this.btnService = new System.Windows.Forms.Button();
             this.btnMenu = new System.Windows.Forms.Button();
@@ -37,21 +40,18 @@
             this.btnHome = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.MainForm = new System.Windows.Forms.Panel();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.btnEmpty = new System.Windows.Forms.Button();
-            this.panelNavigate = new System.Windows.Forms.Panel();
             this.btnExit = new System.Windows.Forms.Button();
+            this.MainForm = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.Controls.Add(this.panelNavigate);
-            this.panel1.Controls.Add(this.btnEmpty);
+            this.panel1.Controls.Add(this.btnLobby);
             this.panel1.Controls.Add(this.pictureBox2);
             this.panel1.Controls.Add(this.btnReport);
             this.panel1.Controls.Add(this.btnService);
@@ -64,6 +64,39 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(231, 781);
             this.panel1.TabIndex = 0;
+            // 
+            // panelNavigate
+            // 
+            this.panelNavigate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(214)))), ((int)(((byte)(102)))));
+            this.panelNavigate.Location = new System.Drawing.Point(221, 205);
+            this.panelNavigate.Name = "panelNavigate";
+            this.panelNavigate.Size = new System.Drawing.Size(10, 85);
+            this.panelNavigate.TabIndex = 0;
+            // 
+            // btnLobby
+            // 
+            this.btnLobby.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(78)))), ((int)(((byte)(77)))));
+            this.btnLobby.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnLobby.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLobby.ForeColor = System.Drawing.Color.White;
+            this.btnLobby.Location = new System.Drawing.Point(0, 641);
+            this.btnLobby.Name = "btnLobby";
+            this.btnLobby.Size = new System.Drawing.Size(224, 87);
+            this.btnLobby.TabIndex = 7;
+            this.btnLobby.Text = "Lobby";
+            this.btnLobby.UseVisualStyleBackColor = false;
+            this.btnLobby.Click += new System.EventHandler(this.btnLobby_Click);
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
+            this.pictureBox2.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(231, 206);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox2.TabIndex = 6;
+            this.pictureBox2.TabStop = false;
             // 
             // btnReport
             // 
@@ -153,49 +186,6 @@
             this.panel2.Size = new System.Drawing.Size(1164, 108);
             this.panel2.TabIndex = 1;
             // 
-            // MainForm
-            // 
-            this.MainForm.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.MainForm.Location = new System.Drawing.Point(231, 108);
-            this.MainForm.MaximumSize = new System.Drawing.Size(1153, 654);
-            this.MainForm.MinimumSize = new System.Drawing.Size(1153, 654);
-            this.MainForm.Name = "MainForm";
-            this.MainForm.Size = new System.Drawing.Size(1153, 654);
-            this.MainForm.TabIndex = 2;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(231, 206);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox2.TabIndex = 6;
-            this.pictureBox2.TabStop = false;
-            // 
-            // btnEmpty
-            // 
-            this.btnEmpty.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(78)))), ((int)(((byte)(77)))));
-            this.btnEmpty.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnEmpty.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEmpty.ForeColor = System.Drawing.Color.White;
-            this.btnEmpty.Location = new System.Drawing.Point(0, 641);
-            this.btnEmpty.Name = "btnEmpty";
-            this.btnEmpty.Size = new System.Drawing.Size(224, 87);
-            this.btnEmpty.TabIndex = 7;
-            this.btnEmpty.Text = "Empty";
-            this.btnEmpty.UseVisualStyleBackColor = false;
-            this.btnEmpty.Click += new System.EventHandler(this.btnEmpty_Click);
-            // 
-            // panelNavigate
-            // 
-            this.panelNavigate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(214)))), ((int)(((byte)(102)))));
-            this.panelNavigate.Location = new System.Drawing.Point(221, 205);
-            this.panelNavigate.Name = "panelNavigate";
-            this.panelNavigate.Size = new System.Drawing.Size(10, 85);
-            this.panelNavigate.TabIndex = 0;
-            // 
             // btnExit
             // 
             this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
@@ -206,6 +196,16 @@
             this.btnExit.Text = "x";
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            // 
+            // MainForm
+            // 
+            this.MainForm.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.MainForm.Location = new System.Drawing.Point(231, 108);
+            this.MainForm.MaximumSize = new System.Drawing.Size(1153, 654);
+            this.MainForm.MinimumSize = new System.Drawing.Size(1153, 654);
+            this.MainForm.Name = "MainForm";
+            this.MainForm.Size = new System.Drawing.Size(1153, 654);
+            this.MainForm.TabIndex = 2;
             // 
             // FormHome
             // 
@@ -219,9 +219,9 @@
             this.Name = "FormHome";
             this.Text = "FormHome";
             this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -239,7 +239,7 @@
         private System.Windows.Forms.Button btnReport;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Panel panelNavigate;
-        private System.Windows.Forms.Button btnEmpty;
+        private System.Windows.Forms.Button btnLobby;
         private System.Windows.Forms.Button btnExit;
     }
 }

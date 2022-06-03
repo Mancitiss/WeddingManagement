@@ -6,18 +6,26 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsApp1
 {
-    internal class Shift
+    public class Shift
     {
-        internal string idShift;
-        internal DateTime Starting;
-        internal DateTime Ending;
+        public string idShift;
+        public DateTime Starting;
+        public DateTime Ending;
 
-        internal Shift() { }
-        internal Shift(string idShift, DateTime starting, DateTime ending)
+        public Shift() { }
+        public Shift(string idShift, DateTime starting, DateTime ending)
         {
             this.idShift = idShift;
             this.Starting = starting;
             this.Ending = ending;
+        }
+
+        // check if all properties are equals
+        public bool Equals(Shift shift)
+        {
+            return this.idShift.Equals(shift.idShift) &&
+                this.Starting.Equals(shift.Starting) &&
+                this.Ending.Equals(shift.Ending);
         }
     }
 }

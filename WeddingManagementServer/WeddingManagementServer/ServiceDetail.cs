@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace WeddingManagementServer
 {
-    internal class ServiceDetail
+    public class ServiceDetail
     {
-        internal string idWedding;
-        internal string idService;
-        internal int AmountOfService;
-        internal long TotalServicePrice;
-        internal string Note;
+        public string idWedding;
+        public string idService;
+        public int AmountOfService;
+        public long TotalServicePrice;
+        public string Note;
 
-        internal ServiceDetail(string idWedding, string idService, int amountOfService, long totalServicePrice, string note)
+        public ServiceDetail(string idWedding, string idService, int amountOfService, long totalServicePrice, string note)
         {
             this.idWedding = idWedding;
             this.idService = idService;
@@ -24,7 +24,7 @@ namespace WeddingManagementServer
         }
 
         // default constructor
-        internal ServiceDetail()
+        public ServiceDetail()
         {
         }
     }

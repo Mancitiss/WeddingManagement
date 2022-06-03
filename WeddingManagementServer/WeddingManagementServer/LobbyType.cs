@@ -6,20 +6,20 @@ using System.Threading.Tasks;
 
 namespace WeddingManagementServer
 {
-    internal class LobbyType
+    public class LobbyType
     {
-        internal string id;
-        internal string name;
-        internal long minTablePrice;
+        public string id;
+        public string name;
+        public long minTablePrice;
 
-        internal LobbyType(string id, string name, long minTablePrice)
+        public LobbyType(string id, string name, long minTablePrice)
         {
             this.id = id;
             this.name = name;
             this.minTablePrice = minTablePrice;
         }
         
-        internal LobbyType() { }
+        public LobbyType() { }
         
         bool isNull()
         {

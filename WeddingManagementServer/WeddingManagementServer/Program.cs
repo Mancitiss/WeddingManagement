@@ -114,13 +114,14 @@ namespace WeddingManagementServer
                 */
 
                 SslStream_receive(sslStream, 8, out string data);
-                //Console.WriteLine("not logged in:"+data);
+                Console.WriteLine("not logged in:"+data);
                 if (data != null && data != "")
                 {
                     string instruction = data;
                     if (instruction == "0012") //0012 = work available
                     {
                         SslStream_receive_ASCII(sslStream, 19, out data);
+                        Console.WriteLine(data);
                         sslStream.Dispose();
                         c.Dispose();
                         bool pass = false;
@@ -198,31 +199,31 @@ namespace WeddingManagementServer
                     else
                     if (instruction == "0010") // 0010 = log in
                     {
-                        Receive_data_automatically(sslStream, out string json);
-                        Account act = Jil.JSON.Deserialize<Account>(json);
+                        Receive_data_automatically(sslStream, out string tk);
+                        Receive_data_automatically(sslStream, out string mk);
                         try
                         {
-                            string commandtext = "select top 1 id, name, pw, priority from account where username=@username";
+                            string commandtext = "select top 1 id, pw, priority from ACCOUNTS where username=@username";
                             using (SqlConnection sql = new SqlConnection(sqlConnectionString))
                             {
                                 sql.Open();
                                 using (SqlCommand command = new SqlCommand(commandtext, sql))
                                 {
-                                    command.Parameters.AddWithValue("@username", act.username);
+                                    command.Parameters.AddWithValue("@username", tk);
                                     using (SqlDataReader reader = command.ExecuteReader())
                                     {
                                         Console.WriteLine("After avatar");
                                         if (reader.Read())
                                         {
                                             //if (act.pw == reader["pw"].ToString())
-                                            if (act.pw == reader["pw"].ToString() || Crypter.CheckPassword(act.pw, reader["pw"].ToString()))
+                                            if (mk == reader["pw"].ToString() || Crypter.CheckPassword(mk, reader["pw"].ToString()))
                                             {
                                                 bool skip = false;
-                                                if (act.pw == reader["pw"].ToString())
+                                                if (mk == reader["pw"].ToString())
                                                 {
-                                                    using (SqlCommand changepass = new SqlCommand("update top (1) account set pw = @pw where id = @id", sql))
+                                                    using (SqlCommand changepass = new SqlCommand("update top (1) ACCOUNTS set pw = @pw where id = @id", sql))
                                                     {
-                                                        changepass.Parameters.AddWithValue("@pw", Crypter.Blowfish.Crypt(act.pw));
+                                                        changepass.Parameters.AddWithValue("@pw", Crypter.Blowfish.Crypt(mk));
                                                         changepass.Parameters.AddWithValue("@id", reader["id"].ToString());
                                                         changepass.ExecuteNonQuery();
                                                         sslStream.Write(Encoding.Unicode.GetBytes("-200"));
@@ -234,8 +235,12 @@ namespace WeddingManagementServer
                                                     string id = reader["id"].ToString();
                                                     string str_id = id;
                                                     while (id.Length < 19) id = '0' + id;
-
-                                                    sslStream.Write(Encoding.Unicode.GetBytes("0200" + id));
+                                                    
+                                                    Account account = new Account(id, (short)reader["priority"]);
+                                                    Console.WriteLine(account.id + "\n" + account.priority);
+                                                    string json = Jil.JSON.Serialize(account);
+                                                    Console.WriteLine(json);
+                                                    sslStream.Write(Encoding.Unicode.GetBytes("0200" + Wrap_data_with_byte(json)));
                                                     Console.WriteLine("Before dictionaries");
                                                     try
                                                     {
@@ -337,7 +342,7 @@ namespace WeddingManagementServer
                                             {
                                                 Console.WriteLine(e.ToString());
                                             }
-                                        } // log-in failed account doesn't exist
+                                        } // log-in failed ACCOUNTS doesn't exist
                                     }
                                 }
                             }
@@ -426,9 +431,9 @@ namespace WeddingManagementServer
                             string instruction = data;
                             switch (instruction)
                             {
-                                // create new account (only recruiters and admins can do this)
+                                // create new ACCOUNTS (only recruiters and admins can do this)
                                 // return 1011 if success, else 1111
-                                case "0011": // register new account
+                                case "0011": // register new ACCOUNTS
                                     {
                                         try
                                         {
@@ -450,7 +455,7 @@ namespace WeddingManagementServer
                                                     using (var sql = new SqlConnection(sqlConnectionString))
                                                     {
                                                         sql.Open();
-                                                        using (SqlCommand command = new SqlCommand("insert into account values (@id, @username, @pw, @priority)", sql))
+                                                        using (SqlCommand command = new SqlCommand("insert into ACCOUNTS values (@id, @username, @pw, @priority)", sql))
                                                         {
                                                             command.Parameters.AddWithValue("@id", id_string);
                                                             command.Parameters.AddWithValue("@username", act.username);
@@ -458,7 +463,7 @@ namespace WeddingManagementServer
                                                             command.Parameters.AddWithValue("@priority", act.priority);
                                                             command.ExecuteNonQuery();
                                                         }
-                                                        sessions[id].Queue_command(Encoding.Unicode.GetBytes("1011")); // New account created
+                                                        sessions[id].Queue_command(Encoding.Unicode.GetBytes("1011")); // New ACCOUNTS created
                                                     }
                                                 }
                                                 else
@@ -476,7 +481,7 @@ namespace WeddingManagementServer
                                     break;
 
 
-                                // promote/demote account (only recruiters and admins can do this)
+                                // promote/demote ACCOUNTS (only recruiters and admins can do this)
                                 // return 2111 if success, else 3111
                                 case "0111":
                                     {
@@ -496,7 +501,7 @@ namespace WeddingManagementServer
                                                     }
                                                     else
                                                     {
-                                                        using (SqlCommand command = new SqlCommand("select priority from account where id = @id", sql))
+                                                        using (SqlCommand command = new SqlCommand("select priority from ACCOUNTS where id = @id", sql))
                                                         {
                                                             command.Parameters.AddWithValue("@id", act.id);
                                                             currentPriority = (Int16)command.ExecuteScalar();
@@ -505,7 +510,7 @@ namespace WeddingManagementServer
                                                 }
                                                 else if (act.username != null)
                                                 {
-                                                    using (SqlCommand command = new SqlCommand("select priority from account where username = @username", sql))
+                                                    using (SqlCommand command = new SqlCommand("select priority from ACCOUNTS where username = @username", sql))
                                                     {
                                                         command.Parameters.AddWithValue("@username", act.username);
                                                         currentPriority = (Int16)command.ExecuteScalar();
@@ -518,13 +523,13 @@ namespace WeddingManagementServer
                                                 }
                                                 if (sessions[id].priority < currentPriority)
                                                 {
-                                                    using (SqlCommand command = new SqlCommand("update account set priority = @priority where username = @username", sql))
+                                                    using (SqlCommand command = new SqlCommand("update ACCOUNTS set priority = @priority where username = @username", sql))
                                                     {
                                                         command.Parameters.AddWithValue("@username", act.username);
                                                         command.Parameters.AddWithValue("@priority", act.priority);
                                                         command.ExecuteNonQuery();
                                                     }
-                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("2111")); // Account promoted/demoted
+                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("2111")); // ACCOUNTS promoted/demoted
                                                 }
                                                 else
                                                 {
@@ -598,15 +603,15 @@ namespace WeddingManagementServer
                                                         }
                                                     }
                                                     else if (lobbyType.id.Length == 0) {
-                                                        string lobbyId = "LT" + GetNewIdFromTable("LB").ToString();
+                                                        lobbyType.id = "LT" + GetNewIdFromTable("LB").ToString().PadLeft(19, '0');
                                                         using (SqlCommand command = new SqlCommand("insert into LOBBYTYPE (idLobbyType, LobbyName, MinTablePrice) values (@idLobbyType, @LobbyName, @MinTablePrice)", sql))
                                                         {
-                                                            command.Parameters.AddWithValue("@idLobbyType", lobbyId);
+                                                            command.Parameters.AddWithValue("@idLobbyType", lobbyType.id) ;
                                                             command.Parameters.AddWithValue("@LobbyName", lobbyType.name);
                                                             command.Parameters.AddWithValue("@MinTablePrice", lobbyType.minTablePrice);
                                                             if(command.ExecuteNonQuery() > 0)
                                                             {
-                                                                sessions[id].Queue_command(Encoding.Unicode.GetBytes("0320" + lobbyId)); // Lobby type added
+                                                                sessions[id].Queue_command(Encoding.Unicode.GetBytes("0320" + Wrap_data_with_byte(Jil.JSON.Serialize<LobbyType>(lobbyType)))); // Lobby type added
                                                             }
                                                             else
                                                             {
@@ -626,7 +631,7 @@ namespace WeddingManagementServer
                                                                 command.Parameters.AddWithValue("@idLobbyType", lobbyType.id);
                                                                 if (command.ExecuteNonQuery() > 0)
                                                                 {
-                                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("0420")); // Lobby type deleted
+                                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("0420" + Wrap_data_with_byte(Jil.JSON.Serialize<LobbyType>(lobbyType)))); // Lobby type deleted
                                                                 }
                                                                 else
                                                                 {
@@ -646,7 +651,7 @@ namespace WeddingManagementServer
                                     }
                                     break;
 
-                                // get list of lobbies
+  // get list of lobbies
                                 case "0021":
                                     {
                                         List<Lobby> lobbies = new List<Lobby>();
@@ -696,7 +701,7 @@ namespace WeddingManagementServer
                                                                 command.Parameters.AddWithValue("@Status", lobby.Status);
                                                                 if (command.ExecuteNonQuery() > 0)
                                                                 {
-                                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("0121")); // Lobby updated
+                                                                    sessions[id].Queue_command(Combine(Encoding.Unicode.GetBytes("0121" + Wrap_data_with_byte(Jil.JSON.Serialize<Lobby>(lobby))))); // Lobby updated
                                                                 }
                                                                 else
                                                                 {
@@ -707,17 +712,17 @@ namespace WeddingManagementServer
                                                     }
                                                     else if (lobby.idLobby.Length == 0)
                                                     {
-                                                        string lobbyId = "LB" + GetNewIdFromTable("LB").ToString();
+                                                        lobby.idLobby = "LB" + GetNewIdFromTable("LB").ToString().PadLeft(19, '0');
                                                         using (SqlCommand command = new SqlCommand("insert into LOBBY (idLobby, idLobbyType, LobbyName, MaxTable, Status) values (@idLobby, @idLobbyType, @LobbyName, @MaxTable, @Status)", sql))
                                                         {
-                                                            command.Parameters.AddWithValue("@idLobby", lobbyId);
+                                                            command.Parameters.AddWithValue("@idLobby", lobby.idLobby);
                                                             command.Parameters.AddWithValue("@idLobbyType", lobby.idLobbyType);
                                                             command.Parameters.AddWithValue("@LobbyName", lobby.LobbyName);
                                                             command.Parameters.AddWithValue("@MaxTable", lobby.MaxTable);
                                                             command.Parameters.AddWithValue("@Status", lobby.Status);
                                                             if (command.ExecuteNonQuery() > 0)
                                                             {
-                                                                sessions[id].Queue_command(Encoding.Unicode.GetBytes("0321" + lobbyId)); // Lobby added
+                                                                sessions[id].Queue_command(Combine(Encoding.Unicode.GetBytes("0321" + Wrap_data_with_byte(Jil.JSON.Serialize<Lobby>(lobby))))); // Lobby added
                                                             }
                                                             else
                                                             {
@@ -730,6 +735,7 @@ namespace WeddingManagementServer
                                                         // delete a lobby
                                                         string key = lobby.idLobby.Substring(1, 2);
                                                         long idl = long.Parse(lobby.idLobby.Substring(3));
+                                                        lobby.idLobby = lobby.idLobby.Substring(1);
                                                         if (key.Equals("LB") && check_existed_id(idl, key))
                                                         {
                                                             using (SqlCommand command = new SqlCommand("update LOBBY set available = 0 where idLobby = @idLobby", sql))
@@ -805,7 +811,7 @@ namespace WeddingManagementServer
                                                                 command.Parameters.AddWithValue("@Ending", shift.Ending);
                                                                 if (command.ExecuteNonQuery() > 0)
                                                                 {
-                                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("0122")); // Shift updated
+                                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("0122" + Wrap_data_with_byte(Jil.JSON.Serialize<Shift>(shift)))); // Shift updated
                                                                 }
                                                                 else
                                                                 {
@@ -816,15 +822,15 @@ namespace WeddingManagementServer
                                                     }
                                                     else if (shift.idShift.Length == 0)
                                                     {
-                                                        string shiftId = "SH" + GetNewIdFromTable("SH").ToString();
+                                                        shift.idShift = "SH" + GetNewIdFromTable("SH").ToString().PadLeft(19, '0');
                                                         using (SqlCommand command = new SqlCommand("insert into SHIFT (idShift, Starting, Ending) values (@idShift, @Starting, @Ending)", sql))
                                                         {
-                                                            command.Parameters.AddWithValue("@idShift", shiftId);
+                                                            command.Parameters.AddWithValue("@idShift", shift.idShift);
                                                             command.Parameters.AddWithValue("@Starting", shift.Starting);
                                                             command.Parameters.AddWithValue("@Ending", shift.Ending);
                                                             if (command.ExecuteNonQuery() > 0)
                                                             {
-                                                                sessions[id].Queue_command(Encoding.Unicode.GetBytes("0322" + shiftId)); // Shift added
+                                                                sessions[id].Queue_command(Encoding.Unicode.GetBytes("0322" + Wrap_data_with_byte(Jil.JSON.Serialize<Shift>(shift)))); // Shift added
                                                             }
                                                             else
                                                             {
@@ -844,7 +850,7 @@ namespace WeddingManagementServer
                                                                 command.Parameters.AddWithValue("@idShift", shift.idShift);
                                                                 if (command.ExecuteNonQuery() > 0)
                                                                 {
-                                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("0422")); // Shift deleted
+                                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("0422" + Wrap_data_with_byte(Jil.JSON.Serialize<Shift>(shift)))); // Shift deleted
                                                                 }
                                                                 else
                                                                 {
@@ -916,6 +922,7 @@ namespace WeddingManagementServer
                                                     {
                                                         string key = wedding.idWedding.Substring(0, 2);
                                                         long idl = long.Parse(wedding.idWedding.Substring(2));
+                                                        wedding.idWedding = wedding.idWedding.Substring(1);
                                                         if (key.Equals("WE") && check_existed_id(idl, key))
                                                         {
                                                             using (SqlCommand command = new SqlCommand("update WEDDING set idLobby = @idLobby, idShift = @idShift, BookingDate = @BookingDate, WeddingDate = @WeddingDate, PhoneNumber = @PhoneNumber, BroomName = @BroomName, BrideName = @BrideName, AmountOfTable = @AmountOfTable, AmountOfContingencyTable = @AmountOfContingencyTable, TablePrice = @TablePrice, Deposit = @Deposit where idWedding = @idWedding", sql))
@@ -934,7 +941,7 @@ namespace WeddingManagementServer
                                                                 command.Parameters.AddWithValue("@Deposit", wedding.Deposit);
                                                                 if (command.ExecuteNonQuery() > 0)
                                                                 {
-                                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("0123")); // Wedding updated
+                                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("0123" + Wrap_data_with_byte(Jil.JSON.Serialize<WeddingInfo>(wedding)))); // Wedding updated
                                                                 }
                                                                 else
                                                                 {
@@ -945,10 +952,10 @@ namespace WeddingManagementServer
                                                     }
                                                     else if (wedding.idWedding.Length == 0)
                                                     {
-                                                        string idWD = "WD" + GetNewIdFromTable("WD").ToString();
+                                                        wedding.idWedding = "WD" + GetNewIdFromTable("WD").ToString().PadLeft(19, '0');
                                                         using (SqlCommand command = new SqlCommand("insert into WEDDING (idWedding, idLobby, idShift, BookingDate, WeddingDate, PhoneNumber, BroomName, BrideName, AmountOfTable, AmountOfContingencyTable, TablePrice, Deposit) values (@idWedding, @idLobby, @idShift, @BookingDate, @WeddingDate, @PhoneNumber, @BroomName, @BrideName, @AmountOfTable, @AmountOfContingencyTable, @TablePrice, @Deposit)", sql))
                                                         {
-                                                            command.Parameters.AddWithValue("@idWedding", idWD);
+                                                            command.Parameters.AddWithValue("@idWedding", wedding.idWedding);
                                                             command.Parameters.AddWithValue("@idLobby", wedding.idLobby);
                                                             command.Parameters.AddWithValue("@idShift", wedding.idShift);
                                                             command.Parameters.AddWithValue("@BookingDate", wedding.BookingDate);
@@ -962,7 +969,7 @@ namespace WeddingManagementServer
                                                             command.Parameters.AddWithValue("@Deposit", wedding.Deposit);
                                                             if (command.ExecuteNonQuery() > 0)
                                                             {
-                                                                sessions[id].Queue_command(Encoding.Unicode.GetBytes("0323" + idWD)); // Wedding added
+                                                                sessions[id].Queue_command(Encoding.Unicode.GetBytes("0323" + Wrap_data_with_byte(Jil.JSON.Serialize<WeddingInfo>(wedding)))); // Wedding added
                                                             }
                                                             else
                                                             {
@@ -982,7 +989,7 @@ namespace WeddingManagementServer
                                                                 command.Parameters.AddWithValue("@idWedding", wedding.idWedding);
                                                                 if (command.ExecuteNonQuery() > 0)
                                                                 {
-                                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("0423")); // Wedding deleted
+                                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("0423" + Wrap_data_with_byte(Jil.JSON.Serialize<WeddingInfo>(wedding)))); // Wedding deleted
                                                                 }
                                                                 else
                                                                 {
@@ -1030,17 +1037,23 @@ namespace WeddingManagementServer
                                         try
                                         {
                                             Tools.Receive_data_automatically(s, out string json);
+                                            Console.WriteLine(json);
                                             Menu menu = Jil.JSON.Deserialize<Menu>(json);
+                                            menu.Note = "";
+                                            Console.WriteLine(menu.idDishes);
                                             using (var sql = new SqlConnection(sqlConnectionString))
                                             {
                                                 sql.Open();
+                                                Console.WriteLine("Checking");
                                                 if (menu.idDishes != null)
                                                 {
+                                                    Console.WriteLine("Passed");
                                                     if (menu.idDishes.Length == 21)
                                                     {
+                                                        Console.WriteLine("Updating");
                                                         string key = menu.idDishes.Substring(0, 2);
                                                         long idl = long.Parse(menu.idDishes.Substring(2));
-                                                        if (key.Equals("ME") && check_existed_id(idl, key))
+                                                        if (key.Equals("MN") && check_existed_id(idl, key))
                                                         {
                                                             using (SqlCommand command = new SqlCommand("update MENU set DishesName = @DishesName, DishesPrice = @DishesPrice, Note = @Note where idDishes = @idDishes", sql))
                                                             {
@@ -1050,7 +1063,7 @@ namespace WeddingManagementServer
                                                                 command.Parameters.AddWithValue("@Note", menu.Note);
                                                                 if (command.ExecuteNonQuery() > 0)
                                                                 {
-                                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("0124")); // Menu updated
+                                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("0124" + Wrap_data_with_byte(Jil.JSON.Serialize<Menu>(menu)))); // Menu updated
                                                                 }
                                                                 else
                                                                 {
@@ -1061,39 +1074,46 @@ namespace WeddingManagementServer
                                                     }
                                                     if (menu.idDishes.Length == 0)
                                                     {
-                                                        string idDish = "MN" + GetNewIdFromTable("MN").ToString();
+                                                        Console.WriteLine("Adding");
+                                                        menu.idDishes = "MN" + GetNewIdFromTable("MN").ToString().PadLeft(19, '0');
                                                         using (SqlCommand command = new SqlCommand("insert into MENU (idDishes, DishesName, DishesPrice, Note) values (@idDishes, @DishesName, @DishesPrice, @Note)", sql))
                                                         {
-                                                            command.Parameters.AddWithValue("@idDishes", idDish);
+                                                            command.Parameters.AddWithValue("@idDishes", menu.idDishes);
                                                             command.Parameters.AddWithValue("@DishesName", menu.DishesName);
                                                             command.Parameters.AddWithValue("@DishesPrice", menu.DishesPrice);
                                                             command.Parameters.AddWithValue("@Note", menu.Note);
                                                             if (command.ExecuteNonQuery() > 0)
                                                             {
-                                                                sessions[id].Queue_command(Encoding.Unicode.GetBytes("0324" + idDish)); // Menu added
-
+                                                                sessions[id].Queue_command(Encoding.Unicode.GetBytes("0324" + Wrap_data_with_byte(Jil.JSON.Serialize<Menu>(menu)))); // Menu added
+                                                                Console.WriteLine("Added");
                                                             }
                                                             else
                                                             {
                                                                 sessions[id].Queue_command(Encoding.Unicode.GetBytes("0224")); // Menu not added
+                                                                Console.WriteLine("Not added");
                                                             }
                                                         }
                                                     }
                                                     else if (menu.idDishes.Length == 22 && menu.idDishes.StartsWith("-"))
                                                     {
+                                                        Console.WriteLine("Deleting");
                                                         string key = menu.idDishes.Substring(1, 2);
                                                         long idl = long.Parse(menu.idDishes.Substring(3));
+                                                        menu.idDishes = menu.idDishes.Substring(1);
                                                         if (key.Equals("MN") && check_existed_id(idl, key))
                                                         {
+                                                            Console.WriteLine("Exists");
                                                             using (SqlCommand command = new SqlCommand("update MENU set available = 0 where idDishes = @idDishes", sql))
                                                             {
                                                                 command.Parameters.AddWithValue("@idDishes", menu.idDishes);
                                                                 if (command.ExecuteNonQuery() > 0)
                                                                 {
-                                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("0424")); // Menu deleted
+                                                                    Console.WriteLine("Deleted");
+                                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("0424" + Wrap_data_with_byte(Jil.JSON.Serialize<Menu>(menu)))); // Menu deleted
                                                                 }
                                                                 else
                                                                 {
+                                                                    Console.WriteLine("Not deleted");
                                                                     sessions[id].Queue_command(Encoding.Unicode.GetBytes("0224")); // Menu not deleted
                                                                 }
                                                             }
@@ -1102,9 +1122,10 @@ namespace WeddingManagementServer
                                                 }
                                             }
                                         }
-                                        catch (Exception)
+                                        catch (Exception e)
                                         {
                                             sessions[id].Queue_command(Encoding.Unicode.GetBytes("0224"));
+                                            Console.WriteLine(e.ToString());
                                         }
                                     }
                                     break;
@@ -1159,7 +1180,7 @@ namespace WeddingManagementServer
                                                                 command.Parameters.AddWithValue("@Note", service.Note);
                                                                 if (command.ExecuteNonQuery() > 0)
                                                                 {
-                                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("0125")); // Service updated
+                                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("0125" + Wrap_data_with_byte(Jil.JSON.Serialize<Service>(service)))); // Service updated
                                                                 }
                                                                 else
                                                                 {
@@ -1170,16 +1191,16 @@ namespace WeddingManagementServer
                                                     }
                                                     else if (service.idService.Length == 0)
                                                     {
-                                                        string idService = "SE" + GetNewIdFromTable("SE").ToString();
+                                                        service.idService = "SE" + GetNewIdFromTable("SE").ToString().PadLeft(19, '0');
                                                         using (SqlCommand command = new SqlCommand("insert into SERVICE (idService, ServiceName, ServicePrice, Note) values (@idService, @ServiceName, @ServicePrice, @Note)", sql))
                                                         {
-                                                            command.Parameters.AddWithValue("@idService", idService);
+                                                            command.Parameters.AddWithValue("@idService", service.idService);
                                                             command.Parameters.AddWithValue("@ServiceName", service.ServiceName);
                                                             command.Parameters.AddWithValue("@ServicePrice", service.ServicePrice);
                                                             command.Parameters.AddWithValue("@Note", service.Note);
                                                             if (command.ExecuteNonQuery() > 0)
                                                             {
-                                                                sessions[id].Queue_command(Encoding.Unicode.GetBytes("0325" + idService)); // Service added
+                                                                sessions[id].Queue_command(Encoding.Unicode.GetBytes("0325" + Wrap_data_with_byte(Jil.JSON.Serialize<Service>(service)))); // Service added
                                                             }
                                                             else
                                                             {
@@ -1191,6 +1212,7 @@ namespace WeddingManagementServer
                                                     {
                                                         string key = service.idService.Substring(1, 2);
                                                         long idl = long.Parse(service.idService.Substring(3));
+                                                        service.idService = service.idService.Substring(1);
                                                         if (key.Equals("SE") && check_existed_id(idl, key))
                                                         {
                                                             using (SqlCommand command = new SqlCommand("update SERVICE set available = 0 where idService = @idService", sql))
@@ -1198,7 +1220,7 @@ namespace WeddingManagementServer
                                                                 command.Parameters.AddWithValue("@idService", service.idService);
                                                                 if (command.ExecuteNonQuery() > 0)
                                                                 {
-                                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("0425")); // Service deleted
+                                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("0425" + Wrap_data_with_byte(Jil.JSON.Serialize<Service>(service)))); // Service deleted
                                                                 }
                                                                 else
                                                                 {
@@ -1269,6 +1291,7 @@ namespace WeddingManagementServer
                                                                     {
                                                                         string key = tableDetail.idDishes.Substring(1, 2);
                                                                         long idl = long.Parse(tableDetail.idDishes.Substring(3));
+                                                                        tableDetail.idDishes = tableDetail.idDishes.Substring(1);
                                                                         if (key.Equals("MN") && check_existed_id(idl, key))
                                                                         {
                                                                             using (SqlCommand command = new SqlCommand("update TABLE_DETAIL set idDishes = @idDishes, AmountOfDishes = @AmountOfDishes, TotalDishesPrice = @TotalDishesPrice, Note = @Note where idWedding = @idWedding", sql))
@@ -1280,7 +1303,7 @@ namespace WeddingManagementServer
                                                                                 command.Parameters.AddWithValue("@Note", tableDetail.Note);
                                                                                 if (command.ExecuteNonQuery() > 0)
                                                                                 {
-                                                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("0326")); // Table detail added
+                                                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("0326" + Wrap_data_with_byte(Jil.JSON.Serialize<TableDetail>(tableDetail)))); // Table detail added
                                                                                 }
                                                                                 else
                                                                                 {
@@ -1294,7 +1317,7 @@ namespace WeddingManagementServer
                                                                     {
                                                                         string key = tableDetail.idWedding.Substring(0, 2);
                                                                         long idl = long.Parse(tableDetail.idWedding.Substring(2));
-                                                                        if (key.Equals("WE") && check_existed_id(idl, key))
+                                                                        if (key.Equals("MN") && check_existed_id(idl, key))
                                                                         {
                                                                             using (SqlCommand command = new SqlCommand("update TABLE_DETAIL set AmountOfDishes = @AmountOfDishes, TotalDishesPrice = @TotalDishesPrice, Note = @Note where idWedding = @idWedding and idDishes = @idDishes", sql))
                                                                             {
@@ -1305,7 +1328,7 @@ namespace WeddingManagementServer
                                                                                 command.Parameters.AddWithValue("@Note", tableDetail.Note);
                                                                                 if (command.ExecuteNonQuery() > 0)
                                                                                 {
-                                                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("0126")); // Table detail updated
+                                                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("0126" + Wrap_data_with_byte(Jil.JSON.Serialize<TableDetail>(tableDetail)))); // Table detail updated
                                                                                 }
                                                                                 else
                                                                                 {
@@ -1317,9 +1340,10 @@ namespace WeddingManagementServer
                                                                     }
                                                                     else if (tableDetail.idDishes.Length == 22 && tableDetail.idDishes.StartsWith("-"))
                                                                     {
-                                                                        string key = tableDetail.idWedding.Substring(0, 2);
-                                                                        long idl = long.Parse(tableDetail.idWedding.Substring(2));
-                                                                        if (key.Equals("WE") && check_existed_id(idl, key))
+                                                                        string key = tableDetail.idDishes.Substring(1, 2);
+                                                                        long idl = long.Parse(tableDetail.idDishes.Substring(3));
+                                                                        tableDetail.idDishes = tableDetail.idDishes.Substring(1);
+                                                                        if (key.Equals("MN") && check_existed_id(idl, key))
                                                                         {
                                                                             using (SqlCommand command = new SqlCommand("delete from TABLE_DETAIL where idWedding = @idWedding and idDishes = @idDishes", sql))
                                                                             {
@@ -1327,7 +1351,7 @@ namespace WeddingManagementServer
                                                                                 command.Parameters.AddWithValue("@idDishes", tableDetail.idDishes);
                                                                                 if (command.ExecuteNonQuery() > 0)
                                                                                 {
-                                                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("0426")); // Table detail deleted
+                                                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("0426" + Wrap_data_with_byte(Jil.JSON.Serialize<TableDetail>(tableDetail)))); // Table detail deleted
                                                                                 }
                                                                                 else
                                                                                 {
@@ -1400,6 +1424,7 @@ namespace WeddingManagementServer
                                                                     {
                                                                         string key = serviceDetail.idService.Substring(1, 2);
                                                                         long idl = long.Parse(serviceDetail.idService.Substring(3));
+                                                                        serviceDetail.idService = serviceDetail.idService.Substring(1);
                                                                         if (key.Equals("SE") && check_existed_id(idl, key))
                                                                         {
                                                                             using (SqlCommand command = new SqlCommand("insert into SERVICE_DETAIL (idWedding, idService, @AmountOfService, @TotalServicePrice, @Note) values (@idWedding, @idService, @AmountOfService, @TotalServicePrice, @Note)", sql))
@@ -1411,7 +1436,7 @@ namespace WeddingManagementServer
                                                                                 command.Parameters.AddWithValue("@Note", serviceDetail.Note);
                                                                                 if (command.ExecuteNonQuery() > 0)
                                                                                 {
-                                                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("0327")); // Service detail added
+                                                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("0327" + Wrap_data_with_byte(Jil.JSON.Serialize<ServiceDetail>(serviceDetail)))); // Service detail added
                                                                                 }
                                                                                 else
                                                                                 {
@@ -1432,7 +1457,7 @@ namespace WeddingManagementServer
                                                                             command.Parameters.AddWithValue("@Note", serviceDetail.Note);
                                                                             if (command.ExecuteNonQuery() > 0)
                                                                             {
-                                                                                sessions[id].Queue_command(Encoding.Unicode.GetBytes("0127")); // Service detail updated
+                                                                                sessions[id].Queue_command(Encoding.Unicode.GetBytes("0127" + Wrap_data_with_byte(Jil.JSON.Serialize<ServiceDetail>(serviceDetail)))); // Service detail updated
                                                                             }
                                                                             else
                                                                             {
@@ -1444,6 +1469,7 @@ namespace WeddingManagementServer
                                                                     {
                                                                         string key = serviceDetail.idService.Substring(1, 2);
                                                                         long idl = long.Parse(serviceDetail.idService.Substring(3));
+                                                                        serviceDetail.idService = serviceDetail.idService.Substring(1);
                                                                         if (key.Equals("SE") && check_existed_id(idl, key))
                                                                         {
                                                                             using (SqlCommand command = new SqlCommand("delete from SERVICE_DETAIL where idWedding = @idWedding and idService = @idService", sql))
@@ -1452,7 +1478,7 @@ namespace WeddingManagementServer
                                                                                 command.Parameters.AddWithValue("@idService", serviceDetail.idService);
                                                                                 if (command.ExecuteNonQuery() > 0)
                                                                                 {
-                                                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("0427")); // Service detail deleted
+                                                                                    sessions[id].Queue_command(Encoding.Unicode.GetBytes("0427" + Wrap_data_with_byte(Jil.JSON.Serialize<ServiceDetail>(serviceDetail)))); // Service detail deleted
                                                                                 }
                                                                                 else
                                                                                 {
@@ -1614,7 +1640,7 @@ namespace WeddingManagementServer
             }
         }
 
-        internal static long GetNewAccountId()
+        internal static long GetNewACCOUNTSId()
         {
             Int64 randomid = 0;
             while (randomid <= 0 || check_existed_id(randomid))
@@ -1643,47 +1669,47 @@ namespace WeddingManagementServer
                 {
                     case "LT":
                         {
-                            string idStr = key + randomid.ToString();
+                            string idStr = key + randomid.ToString().PadLeft(19, '0');
                             return check_existed_id("LOBBY_TYPE", "idLobbyType", idStr);
                         }
                     case "LO":
                         {
-                            string idStr = key + randomid.ToString();
+                            string idStr = key + randomid.ToString().PadLeft(19, '0');
                             return check_existed_id("LOBBY", "idLobby", idStr);
                         }
                     case "SH":
                         {
-                            string idStr = key + randomid.ToString();
+                            string idStr = key + randomid.ToString().PadLeft(19, '0');
                             return check_existed_id("SHIFT", "idShift", idStr);
                         }
                     case "WD":
                         {
-                            string idStr = key + randomid.ToString();
+                            string idStr = key + randomid.ToString().PadLeft(19, '0');
                             return check_existed_id("WEDDING_INFOR", "idWedding", idStr);
                         }
                     case "MN":
                         {
-                            string idStr = key + randomid.ToString();
+                            string idStr = key + randomid.ToString().PadLeft(19, '0');
                             return check_existed_id("MENU", "idDishes", idStr);
                         }
                     case "SV":
                         {
-                            string idStr = key + randomid.ToString();
+                            string idStr = key + randomid.ToString().PadLeft(19, '0');
                             return check_existed_id("SERVICE", "idService", idStr);
                         }
                     case "BI":
                         {
-                            string idStr = key + randomid.ToString();
+                            string idStr = key + randomid.ToString().PadLeft(19, '0');
                             return check_existed_id("BILL", "idBill", idStr);
                         }
                     case "RR":
                         {
-                            string idStr = key + randomid.ToString();
+                            string idStr = key + randomid.ToString().PadLeft(19, '0');
                             return check_existed_id("REVENUE_REPORT", "idReport", idStr);
                         }
                     case "PA":
                         {
-                            string idStr = key + randomid.ToString();
+                            string idStr = key + randomid.ToString().PadLeft(19, '0');
                             return check_existed_id("PARAMETER", "idParameter", idStr);
                         }
                     default:
@@ -1698,13 +1724,15 @@ namespace WeddingManagementServer
 
         private static bool check_existed_id(string table, string idColumn, string key)
         {
-            string commandtext = "select top 1 id from " + table + " where " + idColumn +"=@id";
+            Console.WriteLine(key);
+            Console.WriteLine(key.PadLeft(19, '0'));
+            string commandtext = "select top 1 * from " + table + " where " + idColumn +"=@id";
             using (SqlConnection sql = new SqlConnection(sqlConnectionString))
             {
                 sql.Open();
                 using (SqlCommand command = new SqlCommand(commandtext, sql))
                 {
-                    command.Parameters.AddWithValue("@id", key);
+                    command.Parameters.AddWithValue("@id", key.PadLeft(19, '0'));
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
                         if (reader.Read())

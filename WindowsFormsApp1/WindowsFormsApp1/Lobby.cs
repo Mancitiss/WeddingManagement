@@ -1,18 +1,28 @@
 ﻿namespace WindowsFormsApp1
 {
-    internal class Lobby
+    public class Lobby
     {
-        internal string idLobby;
-        internal string idLobbyType;
-        internal string LobbyName;
-        internal int MaxTable;
-        internal bool Status;
+        public string idLobby;
+        public string idLobbyType;
+        public string LobbyName;
+        public int MaxTable;
+        public bool Status;
 
-        internal Lobby(string idLobby, string idLobbyType, string LobbyName, int MaxTable, bool Status)
+        public Lobby(string idLobby, string idLobbyType, string LobbyName, int MaxTable, bool Status)
         {
             this.idLobby = idLobby;
         }
 
-        internal Lobby() { }
+        public Lobby() { }
+
+        public bool Equals(Lobby lobby)
+        {
+            // check if all fields are equal
+            return this.idLobby.Equals(lobby.idLobby) &&
+                   this.idLobbyType.Equals(lobby.idLobbyType) &&
+                   this.LobbyName.Equals(lobby.LobbyName) &&
+                   this.MaxTable.Equals(lobby.MaxTable) &&
+                   this.Status.Equals(lobby.Status);
+        }
     }
 }

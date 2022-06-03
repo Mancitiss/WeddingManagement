@@ -29,77 +29,66 @@ namespace Test
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox_bookingdate = new Test.CustomBorderTextBox();
-            this.textBox_phone = new Test.CustomBorderTextBox();
-            this.textBox_representative = new Test.CustomBorderTextBox();
             this.label_bookdate = new System.Windows.Forms.Label();
             this.label_tittle_wedding_in4 = new System.Windows.Forms.Label();
             this.label_phone = new System.Windows.Forms.Label();
             this.label_representative = new System.Windows.Forms.Label();
-            this.textBox_bride = new Test.CustomBorderTextBox();
-            this.textBox_groom = new Test.CustomBorderTextBox();
-            this.textBox_weddingdate = new Test.CustomBorderTextBox();
             this.label_bride = new System.Windows.Forms.Label();
             this.label_groom = new System.Windows.Forms.Label();
             this.label_weddingdate = new System.Windows.Forms.Label();
-            this.customBorderTextBox5 = new Test.CustomBorderTextBox();
-            this.textBox_table_price = new Test.CustomBorderTextBox();
-            this.customBorderTextBox7 = new Test.CustomBorderTextBox();
             this.label_deposit = new System.Windows.Forms.Label();
-            this.label_table_price = new System.Windows.Forms.Label();
             this.label_contingency = new System.Windows.Forms.Label();
-            this.textBox_table = new Test.CustomBorderTextBox();
             this.label_table = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.Column12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pictureBox_insert_wd = new System.Windows.Forms.PictureBox();
-            this.pictureBox_edit_wd = new System.Windows.Forms.PictureBox();
-            this.pictureBox_delete_wd = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_insert_wd)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_edit_wd)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_delete_wd)).BeginInit();
+            this.wedding = new System.Windows.Forms.GroupBox();
+            this.cbb_lobby = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.cbb_shift = new System.Windows.Forms.ComboBox();
+            this.label_shift = new System.Windows.Forms.Label();
+            this.tb_deposit = new Test.CustomBorderTextBox();
+            this.tb_representative = new Test.CustomBorderTextBox();
+            this.tb_phone = new Test.CustomBorderTextBox();
+            this.tb_contigency = new Test.CustomBorderTextBox();
+            this.tb_table = new Test.CustomBorderTextBox();
+            this.tb_groom = new Test.CustomBorderTextBox();
+            this.tb_bride = new Test.CustomBorderTextBox();
+            this.date_booking = new System.Windows.Forms.DateTimePicker();
+            this.date_wedding = new System.Windows.Forms.DateTimePicker();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btn_add_wedding = new System.Windows.Forms.Button();
+            this.btn_update_wedding = new System.Windows.Forms.Button();
+            this.btn_delete_wedding = new System.Windows.Forms.Button();
+            this.groupBox_menu = new System.Windows.Forms.GroupBox();
+            this.btn_detail_dishes = new System.Windows.Forms.Button();
+            this.tb_dishes_price = new Test.CustomBorderTextBox();
+            this.tb_price_dishes = new Test.CustomBorderTextBox();
+            this.btn_add_menu = new System.Windows.Forms.Button();
+            this.label_dishes_price = new System.Windows.Forms.Label();
+            this.label_amount_dishes = new System.Windows.Forms.Label();
+            this.cbb_dishes = new System.Windows.Forms.ComboBox();
+            this.label_menu = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btn_detail_service = new System.Windows.Forms.Button();
+            this.tb_service_price = new Test.CustomBorderTextBox();
+            this.cbb_price_service = new Test.CustomBorderTextBox();
+            this.btn_add_service = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.cbb_service = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.dataWedding = new System.Windows.Forms.DataGridView();
+            this.wedding.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.groupBox_menu.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataWedding)).BeginInit();
             this.SuspendLayout();
-            // 
-            // textBox_bookingdate
-            // 
-            this.textBox_bookingdate.Location = new System.Drawing.Point(226, 154);
-            this.textBox_bookingdate.Name = "textBox_bookingdate";
-            this.textBox_bookingdate.Size = new System.Drawing.Size(139, 22);
-            this.textBox_bookingdate.TabIndex = 19;
-            // 
-            // textBox_phone
-            // 
-            this.textBox_phone.Location = new System.Drawing.Point(227, 111);
-            this.textBox_phone.Name = "textBox_phone";
-            this.textBox_phone.Size = new System.Drawing.Size(139, 22);
-            this.textBox_phone.TabIndex = 18;
-            // 
-            // textBox_representative
-            // 
-            this.textBox_representative.Location = new System.Drawing.Point(227, 72);
-            this.textBox_representative.Name = "textBox_representative";
-            this.textBox_representative.Size = new System.Drawing.Size(139, 22);
-            this.textBox_representative.TabIndex = 17;
             // 
             // label_bookdate
             // 
             this.label_bookdate.AutoSize = true;
             this.label_bookdate.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_bookdate.ForeColor = System.Drawing.Color.Crimson;
-            this.label_bookdate.Location = new System.Drawing.Point(91, 154);
+            this.label_bookdate.Location = new System.Drawing.Point(16, 20);
             this.label_bookdate.Name = "label_bookdate";
             this.label_bookdate.Size = new System.Drawing.Size(116, 23);
             this.label_bookdate.TabIndex = 16;
@@ -107,10 +96,11 @@ namespace Test
             // 
             // label_tittle_wedding_in4
             // 
+            this.label_tittle_wedding_in4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label_tittle_wedding_in4.AutoSize = true;
             this.label_tittle_wedding_in4.Font = new System.Drawing.Font("Segoe Print", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_tittle_wedding_in4.ForeColor = System.Drawing.Color.Crimson;
-            this.label_tittle_wedding_in4.Location = new System.Drawing.Point(193, 12);
+            this.label_tittle_wedding_in4.Location = new System.Drawing.Point(310, 15);
             this.label_tittle_wedding_in4.Margin = new System.Windows.Forms.Padding(0);
             this.label_tittle_wedding_in4.Name = "label_tittle_wedding_in4";
             this.label_tittle_wedding_in4.Size = new System.Drawing.Size(414, 54);
@@ -122,7 +112,7 @@ namespace Test
             this.label_phone.AutoSize = true;
             this.label_phone.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_phone.ForeColor = System.Drawing.Color.Crimson;
-            this.label_phone.Location = new System.Drawing.Point(91, 110);
+            this.label_phone.Location = new System.Drawing.Point(17, 73);
             this.label_phone.Name = "label_phone";
             this.label_phone.Size = new System.Drawing.Size(129, 23);
             this.label_phone.TabIndex = 14;
@@ -133,39 +123,18 @@ namespace Test
             this.label_representative.AutoSize = true;
             this.label_representative.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_representative.ForeColor = System.Drawing.Color.Crimson;
-            this.label_representative.Location = new System.Drawing.Point(91, 68);
+            this.label_representative.Location = new System.Drawing.Point(15, 28);
             this.label_representative.Name = "label_representative";
             this.label_representative.Size = new System.Drawing.Size(128, 23);
             this.label_representative.TabIndex = 13;
             this.label_representative.Text = "Representative:";
-            // 
-            // textBox_bride
-            // 
-            this.textBox_bride.Location = new System.Drawing.Point(520, 154);
-            this.textBox_bride.Name = "textBox_bride";
-            this.textBox_bride.Size = new System.Drawing.Size(144, 22);
-            this.textBox_bride.TabIndex = 25;
-            // 
-            // textBox_groom
-            // 
-            this.textBox_groom.Location = new System.Drawing.Point(520, 112);
-            this.textBox_groom.Name = "textBox_groom";
-            this.textBox_groom.Size = new System.Drawing.Size(144, 22);
-            this.textBox_groom.TabIndex = 24;
-            // 
-            // textBox_weddingdate
-            // 
-            this.textBox_weddingdate.Location = new System.Drawing.Point(520, 72);
-            this.textBox_weddingdate.Name = "textBox_weddingdate";
-            this.textBox_weddingdate.Size = new System.Drawing.Size(144, 22);
-            this.textBox_weddingdate.TabIndex = 23;
             // 
             // label_bride
             // 
             this.label_bride.AutoSize = true;
             this.label_bride.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_bride.ForeColor = System.Drawing.Color.Crimson;
-            this.label_bride.Location = new System.Drawing.Point(384, 152);
+            this.label_bride.Location = new System.Drawing.Point(308, 71);
             this.label_bride.Name = "label_bride";
             this.label_bride.Size = new System.Drawing.Size(101, 23);
             this.label_bride.TabIndex = 22;
@@ -176,7 +145,7 @@ namespace Test
             this.label_groom.AutoSize = true;
             this.label_groom.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_groom.ForeColor = System.Drawing.Color.Crimson;
-            this.label_groom.Location = new System.Drawing.Point(384, 112);
+            this.label_groom.Location = new System.Drawing.Point(308, 29);
             this.label_groom.Name = "label_groom";
             this.label_groom.Size = new System.Drawing.Size(115, 23);
             this.label_groom.TabIndex = 21;
@@ -187,312 +156,515 @@ namespace Test
             this.label_weddingdate.AutoSize = true;
             this.label_weddingdate.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_weddingdate.ForeColor = System.Drawing.Color.Crimson;
-            this.label_weddingdate.Location = new System.Drawing.Point(384, 70);
+            this.label_weddingdate.Location = new System.Drawing.Point(291, 20);
             this.label_weddingdate.Name = "label_weddingdate";
             this.label_weddingdate.Size = new System.Drawing.Size(122, 23);
             this.label_weddingdate.TabIndex = 20;
             this.label_weddingdate.Text = "Wedding date:";
-            // 
-            // customBorderTextBox5
-            // 
-            this.customBorderTextBox5.Location = new System.Drawing.Point(521, 234);
-            this.customBorderTextBox5.Name = "customBorderTextBox5";
-            this.customBorderTextBox5.Size = new System.Drawing.Size(144, 22);
-            this.customBorderTextBox5.TabIndex = 33;
-            // 
-            // textBox_table_price
-            // 
-            this.textBox_table_price.Location = new System.Drawing.Point(521, 195);
-            this.textBox_table_price.Name = "textBox_table_price";
-            this.textBox_table_price.Size = new System.Drawing.Size(144, 22);
-            this.textBox_table_price.TabIndex = 32;
-            // 
-            // customBorderTextBox7
-            // 
-            this.customBorderTextBox7.Location = new System.Drawing.Point(227, 232);
-            this.customBorderTextBox7.Name = "customBorderTextBox7";
-            this.customBorderTextBox7.Size = new System.Drawing.Size(140, 22);
-            this.customBorderTextBox7.TabIndex = 31;
             // 
             // label_deposit
             // 
             this.label_deposit.AutoSize = true;
             this.label_deposit.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_deposit.ForeColor = System.Drawing.Color.Crimson;
-            this.label_deposit.Location = new System.Drawing.Point(384, 233);
+            this.label_deposit.Location = new System.Drawing.Point(308, 113);
             this.label_deposit.Name = "label_deposit";
             this.label_deposit.Size = new System.Drawing.Size(72, 23);
             this.label_deposit.TabIndex = 30;
             this.label_deposit.Text = "Deposit:";
-            // 
-            // label_table_price
-            // 
-            this.label_table_price.AutoSize = true;
-            this.label_table_price.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_table_price.ForeColor = System.Drawing.Color.Crimson;
-            this.label_table_price.Location = new System.Drawing.Point(384, 193);
-            this.label_table_price.Name = "label_table_price";
-            this.label_table_price.Size = new System.Drawing.Size(95, 23);
-            this.label_table_price.TabIndex = 29;
-            this.label_table_price.Text = "Table price:";
             // 
             // label_contingency
             // 
             this.label_contingency.AutoSize = true;
             this.label_contingency.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_contingency.ForeColor = System.Drawing.Color.Crimson;
-            this.label_contingency.Location = new System.Drawing.Point(93, 232);
+            this.label_contingency.Location = new System.Drawing.Point(17, 153);
             this.label_contingency.Name = "label_contingency";
             this.label_contingency.Size = new System.Drawing.Size(111, 23);
             this.label_contingency.TabIndex = 28;
             this.label_contingency.Text = "Contingency:";
-            // 
-            // textBox_table
-            // 
-            this.textBox_table.Location = new System.Drawing.Point(228, 194);
-            this.textBox_table.Name = "textBox_table";
-            this.textBox_table.Size = new System.Drawing.Size(138, 22);
-            this.textBox_table.TabIndex = 27;
             // 
             // label_table
             // 
             this.label_table.AutoSize = true;
             this.label_table.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_table.ForeColor = System.Drawing.Color.Crimson;
-            this.label_table.Location = new System.Drawing.Point(93, 194);
+            this.label_table.Location = new System.Drawing.Point(17, 113);
             this.label_table.Name = "label_table";
             this.label_table.Size = new System.Drawing.Size(53, 23);
             this.label_table.TabIndex = 26;
             this.label_table.Text = "Table:";
             // 
-            // dataGridView1
+            // wedding
             // 
-            this.dataGridView1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column12,
-            this.Column13,
-            this.Column11,
-            this.Column1,
-            this.Column3,
-            this.Column2,
-            this.Column4,
-            this.Column5,
-            this.Column6,
-            this.Column7,
-            this.Column8,
-            this.Column9,
-            this.Column10});
-            this.dataGridView1.Location = new System.Drawing.Point(-5, 288);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(805, 164);
-            this.dataGridView1.TabIndex = 34;
+            this.wedding.Controls.Add(this.cbb_lobby);
+            this.wedding.Controls.Add(this.label1);
+            this.wedding.Controls.Add(this.cbb_shift);
+            this.wedding.Controls.Add(this.label_shift);
+            this.wedding.Controls.Add(this.label_groom);
+            this.wedding.Controls.Add(this.label_representative);
+            this.wedding.Controls.Add(this.label_phone);
+            this.wedding.Controls.Add(this.tb_deposit);
+            this.wedding.Controls.Add(this.tb_representative);
+            this.wedding.Controls.Add(this.tb_phone);
+            this.wedding.Controls.Add(this.tb_contigency);
+            this.wedding.Controls.Add(this.label_deposit);
+            this.wedding.Controls.Add(this.label_bride);
+            this.wedding.Controls.Add(this.label_contingency);
+            this.wedding.Controls.Add(this.tb_table);
+            this.wedding.Controls.Add(this.tb_groom);
+            this.wedding.Controls.Add(this.label_table);
+            this.wedding.Controls.Add(this.tb_bride);
+            this.wedding.ForeColor = System.Drawing.Color.Black;
+            this.wedding.Location = new System.Drawing.Point(12, 112);
+            this.wedding.Name = "wedding";
+            this.wedding.Size = new System.Drawing.Size(616, 192);
+            this.wedding.TabIndex = 42;
+            this.wedding.TabStop = false;
+            this.wedding.Text = "WEDDING";
             // 
-            // Column12
+            // cbb_lobby
             // 
-            this.Column12.HeaderText = "idWedding";
-            this.Column12.MinimumWidth = 6;
-            this.Column12.Name = "Column12";
-            this.Column12.Width = 110;
+            this.cbb_lobby.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbb_lobby.FormattingEnabled = true;
+            this.cbb_lobby.Location = new System.Drawing.Point(512, 151);
+            this.cbb_lobby.Name = "cbb_lobby";
+            this.cbb_lobby.Size = new System.Drawing.Size(104, 24);
+            this.cbb_lobby.TabIndex = 37;
             // 
-            // Column13
+            // label1
             // 
-            this.Column13.HeaderText = "idShift";
-            this.Column13.MinimumWidth = 6;
-            this.Column13.Name = "Column13";
-            this.Column13.Width = 110;
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.Crimson;
+            this.label1.Location = new System.Drawing.Point(445, 152);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(61, 23);
+            this.label1.TabIndex = 36;
+            this.label1.Text = "Lobby:";
             // 
-            // Column11
+            // cbb_shift
             // 
-            this.Column11.HeaderText = "idLobby";
-            this.Column11.MinimumWidth = 6;
-            this.Column11.Name = "Column11";
-            this.Column11.Width = 110;
+            this.cbb_shift.BackColor = System.Drawing.Color.White;
+            this.cbb_shift.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbb_shift.FormattingEnabled = true;
+            this.cbb_shift.Location = new System.Drawing.Point(363, 152);
+            this.cbb_shift.Name = "cbb_shift";
+            this.cbb_shift.Size = new System.Drawing.Size(76, 24);
+            this.cbb_shift.TabIndex = 35;
             // 
-            // Column1
+            // label_shift
             // 
-            this.Column1.HeaderText = "Representative";
-            this.Column1.MinimumWidth = 6;
-            this.Column1.Name = "Column1";
-            this.Column1.Width = 110;
+            this.label_shift.AutoSize = true;
+            this.label_shift.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_shift.ForeColor = System.Drawing.Color.Crimson;
+            this.label_shift.Location = new System.Drawing.Point(308, 153);
+            this.label_shift.Name = "label_shift";
+            this.label_shift.Size = new System.Drawing.Size(49, 23);
+            this.label_shift.TabIndex = 34;
+            this.label_shift.Text = "Shift:";
             // 
-            // Column3
+            // tb_deposit
             // 
-            this.Column3.HeaderText = "Booking date";
-            this.Column3.MinimumWidth = 6;
-            this.Column3.Name = "Column3";
-            this.Column3.Width = 110;
+            this.tb_deposit.Location = new System.Drawing.Point(472, 115);
+            this.tb_deposit.Name = "tb_deposit";
+            this.tb_deposit.Size = new System.Drawing.Size(144, 22);
+            this.tb_deposit.TabIndex = 33;
             // 
-            // Column2
+            // tb_representative
             // 
-            this.Column2.HeaderText = "Phone number";
-            this.Column2.MinimumWidth = 6;
-            this.Column2.Name = "Column2";
-            this.Column2.Width = 110;
+            this.tb_representative.Location = new System.Drawing.Point(152, 33);
+            this.tb_representative.Name = "tb_representative";
+            this.tb_representative.Size = new System.Drawing.Size(139, 22);
+            this.tb_representative.TabIndex = 17;
             // 
-            // Column4
+            // tb_phone
             // 
-            this.Column4.HeaderText = "Wedding date";
-            this.Column4.MinimumWidth = 6;
-            this.Column4.Name = "Column4";
-            this.Column4.Width = 110;
+            this.tb_phone.Location = new System.Drawing.Point(151, 75);
+            this.tb_phone.Name = "tb_phone";
+            this.tb_phone.Size = new System.Drawing.Size(139, 22);
+            this.tb_phone.TabIndex = 18;
             // 
-            // Column5
+            // tb_contigency
             // 
-            this.Column5.HeaderText = "Groom name";
-            this.Column5.MinimumWidth = 6;
-            this.Column5.Name = "Column5";
-            this.Column5.Width = 110;
+            this.tb_contigency.Location = new System.Drawing.Point(151, 153);
+            this.tb_contigency.Name = "tb_contigency";
+            this.tb_contigency.Size = new System.Drawing.Size(140, 22);
+            this.tb_contigency.TabIndex = 31;
             // 
-            // Column6
+            // tb_table
             // 
-            this.Column6.HeaderText = "Bride name";
-            this.Column6.MinimumWidth = 6;
-            this.Column6.Name = "Column6";
-            this.Column6.Width = 110;
+            this.tb_table.Location = new System.Drawing.Point(152, 115);
+            this.tb_table.Name = "tb_table";
+            this.tb_table.Size = new System.Drawing.Size(138, 22);
+            this.tb_table.TabIndex = 27;
             // 
-            // Column7
+            // tb_groom
             // 
-            this.Column7.HeaderText = "Table";
-            this.Column7.MinimumWidth = 6;
-            this.Column7.Name = "Column7";
-            this.Column7.Width = 110;
+            this.tb_groom.Location = new System.Drawing.Point(472, 29);
+            this.tb_groom.Name = "tb_groom";
+            this.tb_groom.Size = new System.Drawing.Size(144, 22);
+            this.tb_groom.TabIndex = 24;
             // 
-            // Column8
+            // tb_bride
             // 
-            this.Column8.HeaderText = "Table price";
-            this.Column8.MinimumWidth = 6;
-            this.Column8.Name = "Column8";
-            this.Column8.Width = 110;
+            this.tb_bride.Location = new System.Drawing.Point(472, 71);
+            this.tb_bride.Name = "tb_bride";
+            this.tb_bride.Size = new System.Drawing.Size(144, 22);
+            this.tb_bride.TabIndex = 25;
             // 
-            // Column9
+            // date_booking
             // 
-            this.Column9.HeaderText = "Contigency";
-            this.Column9.MinimumWidth = 6;
-            this.Column9.Name = "Column9";
-            this.Column9.Width = 110;
+            this.date_booking.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.date_booking.Location = new System.Drawing.Point(155, 22);
+            this.date_booking.Name = "date_booking";
+            this.date_booking.Size = new System.Drawing.Size(114, 22);
+            this.date_booking.TabIndex = 34;
             // 
-            // Column10
+            // date_wedding
             // 
-            this.Column10.HeaderText = "Deposit";
-            this.Column10.MinimumWidth = 6;
-            this.Column10.Name = "Column10";
-            this.Column10.Width = 110;
+            this.date_wedding.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.date_wedding.Location = new System.Drawing.Point(429, 21);
+            this.date_wedding.Name = "date_wedding";
+            this.date_wedding.Size = new System.Drawing.Size(110, 22);
+            this.date_wedding.TabIndex = 45;
             // 
-            // pictureBox_insert_wd
+            // groupBox1
             // 
-            this.pictureBox_insert_wd.BackgroundImage = global::Test.Properties.Resources.icons8_plus_50__1_;
-            this.pictureBox_insert_wd.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox_insert_wd.Location = new System.Drawing.Point(680, 248);
-            this.pictureBox_insert_wd.Name = "pictureBox_insert_wd";
-            this.pictureBox_insert_wd.Size = new System.Drawing.Size(36, 34);
-            this.pictureBox_insert_wd.TabIndex = 41;
-            this.pictureBox_insert_wd.TabStop = false;
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.date_booking);
+            this.groupBox1.Controls.Add(this.label_weddingdate);
+            this.groupBox1.Controls.Add(this.date_wedding);
+            this.groupBox1.Controls.Add(this.label_bookdate);
+            this.groupBox1.Location = new System.Drawing.Point(461, 72);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(543, 48);
+            this.groupBox1.TabIndex = 47;
+            this.groupBox1.TabStop = false;
             // 
-            // pictureBox_edit_wd
+            // btn_add_wedding
             // 
-            this.pictureBox_edit_wd.BackgroundImage = global::Test.Properties.Resources.icons8_edit_24;
-            this.pictureBox_edit_wd.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox_edit_wd.Location = new System.Drawing.Point(722, 247);
-            this.pictureBox_edit_wd.Name = "pictureBox_edit_wd";
-            this.pictureBox_edit_wd.Size = new System.Drawing.Size(31, 35);
-            this.pictureBox_edit_wd.TabIndex = 40;
-            this.pictureBox_edit_wd.TabStop = false;
+            this.btn_add_wedding.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.btn_add_wedding.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btn_add_wedding.Location = new System.Drawing.Point(347, 515);
+            this.btn_add_wedding.Name = "btn_add_wedding";
+            this.btn_add_wedding.Size = new System.Drawing.Size(85, 39);
+            this.btn_add_wedding.TabIndex = 49;
+            this.btn_add_wedding.Text = "ADD";
+            this.btn_add_wedding.UseVisualStyleBackColor = false;
+            this.btn_add_wedding.Click += new System.EventHandler(this.btn_add_wedding_Click);
             // 
-            // pictureBox_delete_wd
+            // btn_update_wedding
             // 
-            this.pictureBox_delete_wd.BackgroundImage = global::Test.Properties.Resources.icons8_bin_48;
-            this.pictureBox_delete_wd.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox_delete_wd.ErrorImage = null;
-            this.pictureBox_delete_wd.Location = new System.Drawing.Point(759, 247);
-            this.pictureBox_delete_wd.Name = "pictureBox_delete_wd";
-            this.pictureBox_delete_wd.Size = new System.Drawing.Size(29, 35);
-            this.pictureBox_delete_wd.TabIndex = 39;
-            this.pictureBox_delete_wd.TabStop = false;
+            this.btn_update_wedding.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.btn_update_wedding.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btn_update_wedding.Location = new System.Drawing.Point(438, 515);
+            this.btn_update_wedding.Name = "btn_update_wedding";
+            this.btn_update_wedding.Size = new System.Drawing.Size(85, 39);
+            this.btn_update_wedding.TabIndex = 55;
+            this.btn_update_wedding.Text = "UPDATE";
+            this.btn_update_wedding.UseVisualStyleBackColor = false;
+            // 
+            // btn_delete_wedding
+            // 
+            this.btn_delete_wedding.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.btn_delete_wedding.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btn_delete_wedding.Location = new System.Drawing.Point(529, 515);
+            this.btn_delete_wedding.Name = "btn_delete_wedding";
+            this.btn_delete_wedding.Size = new System.Drawing.Size(85, 39);
+            this.btn_delete_wedding.TabIndex = 56;
+            this.btn_delete_wedding.Text = "DELETE";
+            this.btn_delete_wedding.UseVisualStyleBackColor = false;
+            this.btn_delete_wedding.Click += new System.EventHandler(this.btn_delete_wedding_Click);
+            // 
+            // groupBox_menu
+            // 
+            this.groupBox_menu.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.groupBox_menu.Controls.Add(this.btn_detail_dishes);
+            this.groupBox_menu.Controls.Add(this.tb_dishes_price);
+            this.groupBox_menu.Controls.Add(this.tb_price_dishes);
+            this.groupBox_menu.Controls.Add(this.btn_add_menu);
+            this.groupBox_menu.Controls.Add(this.label_dishes_price);
+            this.groupBox_menu.Controls.Add(this.label_amount_dishes);
+            this.groupBox_menu.Controls.Add(this.cbb_dishes);
+            this.groupBox_menu.Controls.Add(this.label_menu);
+            this.groupBox_menu.Location = new System.Drawing.Point(654, 140);
+            this.groupBox_menu.Name = "groupBox_menu";
+            this.groupBox_menu.Size = new System.Drawing.Size(350, 176);
+            this.groupBox_menu.TabIndex = 58;
+            this.groupBox_menu.TabStop = false;
+            this.groupBox_menu.Text = "MENU";
+            // 
+            // btn_detail_dishes
+            // 
+            this.btn_detail_dishes.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btn_detail_dishes.Location = new System.Drawing.Point(244, 99);
+            this.btn_detail_dishes.Name = "btn_detail_dishes";
+            this.btn_detail_dishes.Size = new System.Drawing.Size(85, 32);
+            this.btn_detail_dishes.TabIndex = 61;
+            this.btn_detail_dishes.Text = "DETAIL";
+            this.btn_detail_dishes.UseVisualStyleBackColor = false;
+            this.btn_detail_dishes.Click += new System.EventHandler(this.btn_detail_dishes_Click);
+            // 
+            // tb_dishes_price
+            // 
+            this.tb_dishes_price.BackColor = System.Drawing.Color.White;
+            this.tb_dishes_price.Location = new System.Drawing.Point(101, 71);
+            this.tb_dishes_price.Name = "tb_dishes_price";
+            this.tb_dishes_price.Size = new System.Drawing.Size(127, 22);
+            this.tb_dishes_price.TabIndex = 60;
+            // 
+            // tb_price_dishes
+            // 
+            this.tb_price_dishes.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.tb_price_dishes.Location = new System.Drawing.Point(101, 112);
+            this.tb_price_dishes.Name = "tb_price_dishes";
+            this.tb_price_dishes.ReadOnly = true;
+            this.tb_price_dishes.Size = new System.Drawing.Size(127, 22);
+            this.tb_price_dishes.TabIndex = 38;
+            // 
+            // btn_add_menu
+            // 
+            this.btn_add_menu.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btn_add_menu.Location = new System.Drawing.Point(244, 137);
+            this.btn_add_menu.Name = "btn_add_menu";
+            this.btn_add_menu.Size = new System.Drawing.Size(85, 32);
+            this.btn_add_menu.TabIndex = 59;
+            this.btn_add_menu.Text = "ADD";
+            this.btn_add_menu.UseVisualStyleBackColor = false;
+            // 
+            // label_dishes_price
+            // 
+            this.label_dishes_price.AutoSize = true;
+            this.label_dishes_price.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_dishes_price.ForeColor = System.Drawing.Color.Crimson;
+            this.label_dishes_price.Location = new System.Drawing.Point(19, 110);
+            this.label_dishes_price.Name = "label_dishes_price";
+            this.label_dishes_price.Size = new System.Drawing.Size(51, 23);
+            this.label_dishes_price.TabIndex = 40;
+            this.label_dishes_price.Text = "Price:";
+            // 
+            // label_amount_dishes
+            // 
+            this.label_amount_dishes.AutoSize = true;
+            this.label_amount_dishes.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_amount_dishes.ForeColor = System.Drawing.Color.Crimson;
+            this.label_amount_dishes.Location = new System.Drawing.Point(19, 69);
+            this.label_amount_dishes.Name = "label_amount_dishes";
+            this.label_amount_dishes.Size = new System.Drawing.Size(76, 23);
+            this.label_amount_dishes.TabIndex = 38;
+            this.label_amount_dishes.Text = "Amount:";
+            // 
+            // cbb_dishes
+            // 
+            this.cbb_dishes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbb_dishes.FormattingEnabled = true;
+            this.cbb_dishes.Location = new System.Drawing.Point(101, 26);
+            this.cbb_dishes.Name = "cbb_dishes";
+            this.cbb_dishes.Size = new System.Drawing.Size(234, 24);
+            this.cbb_dishes.TabIndex = 37;
+            // 
+            // label_menu
+            // 
+            this.label_menu.AutoSize = true;
+            this.label_menu.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_menu.ForeColor = System.Drawing.Color.Crimson;
+            this.label_menu.Location = new System.Drawing.Point(19, 26);
+            this.label_menu.Name = "label_menu";
+            this.label_menu.Size = new System.Drawing.Size(63, 23);
+            this.label_menu.TabIndex = 36;
+            this.label_menu.Text = "Dishes:";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.BackColor = System.Drawing.Color.Linen;
+            this.groupBox2.Controls.Add(this.btn_detail_service);
+            this.groupBox2.Controls.Add(this.tb_service_price);
+            this.groupBox2.Controls.Add(this.cbb_price_service);
+            this.groupBox2.Controls.Add(this.btn_add_service);
+            this.groupBox2.Controls.Add(this.label2);
+            this.groupBox2.Controls.Add(this.label3);
+            this.groupBox2.Controls.Add(this.cbb_service);
+            this.groupBox2.Controls.Add(this.label4);
+            this.groupBox2.Location = new System.Drawing.Point(654, 327);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(350, 182);
+            this.groupBox2.TabIndex = 60;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "SERVICE";
+            // 
+            // btn_detail_service
+            // 
+            this.btn_detail_service.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btn_detail_service.Location = new System.Drawing.Point(244, 98);
+            this.btn_detail_service.Name = "btn_detail_service";
+            this.btn_detail_service.Size = new System.Drawing.Size(85, 32);
+            this.btn_detail_service.TabIndex = 62;
+            this.btn_detail_service.Text = "DETAIL";
+            this.btn_detail_service.UseVisualStyleBackColor = false;
+            this.btn_detail_service.Click += new System.EventHandler(this.btn_detail_service_Click);
+            // 
+            // tb_service_price
+            // 
+            this.tb_service_price.BackColor = System.Drawing.Color.White;
+            this.tb_service_price.Location = new System.Drawing.Point(101, 70);
+            this.tb_service_price.Name = "tb_service_price";
+            this.tb_service_price.Size = new System.Drawing.Size(127, 22);
+            this.tb_service_price.TabIndex = 61;
+            // 
+            // cbb_price_service
+            // 
+            this.cbb_price_service.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.cbb_price_service.Location = new System.Drawing.Point(101, 112);
+            this.cbb_price_service.Name = "cbb_price_service";
+            this.cbb_price_service.ReadOnly = true;
+            this.cbb_price_service.Size = new System.Drawing.Size(127, 22);
+            this.cbb_price_service.TabIndex = 60;
+            // 
+            // btn_add_service
+            // 
+            this.btn_add_service.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btn_add_service.Location = new System.Drawing.Point(244, 136);
+            this.btn_add_service.Name = "btn_add_service";
+            this.btn_add_service.Size = new System.Drawing.Size(85, 32);
+            this.btn_add_service.TabIndex = 59;
+            this.btn_add_service.Text = "ADD";
+            this.btn_add_service.UseVisualStyleBackColor = false;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.Crimson;
+            this.label2.Location = new System.Drawing.Point(19, 111);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(51, 23);
+            this.label2.TabIndex = 40;
+            this.label2.Text = "Price:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.Crimson;
+            this.label3.Location = new System.Drawing.Point(19, 70);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(76, 23);
+            this.label3.TabIndex = 38;
+            this.label3.Text = "Amount:";
+            // 
+            // cbb_service
+            // 
+            this.cbb_service.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbb_service.FormattingEnabled = true;
+            this.cbb_service.Location = new System.Drawing.Point(101, 27);
+            this.cbb_service.Name = "cbb_service";
+            this.cbb_service.Size = new System.Drawing.Size(234, 24);
+            this.cbb_service.TabIndex = 37;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.Crimson;
+            this.label4.Location = new System.Drawing.Point(19, 27);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(64, 23);
+            this.label4.TabIndex = 36;
+            this.label4.Text = "Serivce";
+            // 
+            // dataWedding
+            // 
+            this.dataWedding.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.dataWedding.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataWedding.Location = new System.Drawing.Point(12, 310);
+            this.dataWedding.Name = "dataWedding";
+            this.dataWedding.RowHeadersWidth = 51;
+            this.dataWedding.RowTemplate.Height = 24;
+            this.dataWedding.Size = new System.Drawing.Size(616, 199);
+            this.dataWedding.TabIndex = 57;
             // 
             // NhanTiec
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(204)))), ((int)(((byte)(176)))));
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.pictureBox_insert_wd);
-            this.Controls.Add(this.pictureBox_edit_wd);
-            this.Controls.Add(this.pictureBox_delete_wd);
-            this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.customBorderTextBox5);
-            this.Controls.Add(this.textBox_table_price);
-            this.Controls.Add(this.customBorderTextBox7);
-            this.Controls.Add(this.label_deposit);
-            this.Controls.Add(this.label_table_price);
-            this.Controls.Add(this.label_contingency);
-            this.Controls.Add(this.textBox_table);
-            this.Controls.Add(this.label_table);
-            this.Controls.Add(this.textBox_bride);
-            this.Controls.Add(this.textBox_groom);
-            this.Controls.Add(this.textBox_weddingdate);
-            this.Controls.Add(this.label_bride);
-            this.Controls.Add(this.label_groom);
-            this.Controls.Add(this.label_weddingdate);
-            this.Controls.Add(this.textBox_bookingdate);
-            this.Controls.Add(this.textBox_phone);
-            this.Controls.Add(this.textBox_representative);
-            this.Controls.Add(this.label_bookdate);
+            this.ClientSize = new System.Drawing.Size(1014, 562);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupBox_menu);
+            this.Controls.Add(this.dataWedding);
+            this.Controls.Add(this.btn_delete_wedding);
+            this.Controls.Add(this.btn_update_wedding);
+            this.Controls.Add(this.btn_add_wedding);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.wedding);
             this.Controls.Add(this.label_tittle_wedding_in4);
-            this.Controls.Add(this.label_phone);
-            this.Controls.Add(this.label_representative);
             this.Name = "NhanTiec";
             this.Text = "NhanTiec";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_insert_wd)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_edit_wd)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_delete_wd)).EndInit();
+            this.wedding.ResumeLayout(false);
+            this.wedding.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.groupBox_menu.ResumeLayout(false);
+            this.groupBox_menu.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataWedding)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private CustomBorderTextBox textBox_bookingdate;
-        private CustomBorderTextBox textBox_phone;
-        private CustomBorderTextBox textBox_representative;
+        private CustomBorderTextBox tb_phone;
+        private CustomBorderTextBox tb_representative;
         private System.Windows.Forms.Label label_bookdate;
         private System.Windows.Forms.Label label_tittle_wedding_in4;
         private System.Windows.Forms.Label label_phone;
         private System.Windows.Forms.Label label_representative;
-        private CustomBorderTextBox textBox_bride;
-        private CustomBorderTextBox textBox_groom;
-        private CustomBorderTextBox textBox_weddingdate;
+        private CustomBorderTextBox tb_bride;
+        private CustomBorderTextBox tb_groom;
         private System.Windows.Forms.Label label_bride;
         private System.Windows.Forms.Label label_groom;
         private System.Windows.Forms.Label label_weddingdate;
-        private CustomBorderTextBox customBorderTextBox5;
-        private CustomBorderTextBox textBox_table_price;
-        private CustomBorderTextBox customBorderTextBox7;
+        private CustomBorderTextBox tb_deposit;
+        private CustomBorderTextBox tb_contigency;
         private System.Windows.Forms.Label label_deposit;
-        private System.Windows.Forms.Label label_table_price;
         private System.Windows.Forms.Label label_contingency;
-        private CustomBorderTextBox textBox_table;
+        private CustomBorderTextBox tb_table;
         private System.Windows.Forms.Label label_table;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column12;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column13;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column11;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column10;
-        private System.Windows.Forms.PictureBox pictureBox_insert_wd;
-        private System.Windows.Forms.PictureBox pictureBox_edit_wd;
-        private System.Windows.Forms.PictureBox pictureBox_delete_wd;
+        private System.Windows.Forms.GroupBox wedding;
+        private System.Windows.Forms.DateTimePicker date_booking;
+        private System.Windows.Forms.DateTimePicker date_wedding;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button btn_add_wedding;
+        private System.Windows.Forms.Button btn_update_wedding;
+        private System.Windows.Forms.Button btn_delete_wedding;
+        private System.Windows.Forms.ComboBox cbb_lobby;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox cbb_shift;
+        private System.Windows.Forms.Label label_shift;
+        private System.Windows.Forms.GroupBox groupBox_menu;
+        private CustomBorderTextBox tb_price_dishes;
+        private System.Windows.Forms.Button btn_add_menu;
+        private System.Windows.Forms.Label label_dishes_price;
+        private System.Windows.Forms.Label label_amount_dishes;
+        private System.Windows.Forms.ComboBox cbb_dishes;
+        private System.Windows.Forms.Label label_menu;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private CustomBorderTextBox cbb_price_service;
+        private System.Windows.Forms.Button btn_add_service;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox cbb_service;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.DataGridView dataWedding;
+        private CustomBorderTextBox tb_dishes_price;
+        private CustomBorderTextBox tb_service_price;
+        private System.Windows.Forms.Button btn_detail_dishes;
+        private System.Windows.Forms.Button btn_detail_service;
     }
 }

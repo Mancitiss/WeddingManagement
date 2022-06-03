@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{D40261E3-A71B-4346-A73E-8409CA228488}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <RootNamespace>WindowsFormsApp1</RootNamespace>
     <AssemblyName>WindowsFormsApp1</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
@@ -32,12 +32,16 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Configuration">
       <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2\System.Configuration.dll</HintPath>
     </Reference>
     <Reference Include="System.Core" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -50,6 +54,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Account.cs" />
+    <Compile Include="CustomeBorderTextbox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CustomeBorderTextbox.Designer.cs">
+      <DependentUpon>CustomeBorderTextbox.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dishes.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -61,6 +71,12 @@
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormBooking.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormBooking.Designer.cs">
+      <DependentUpon>FormBooking.cs</DependentUpon>
     </Compile>
     <Compile Include="FormDishes.cs">
       <SubType>Form</SubType>
@@ -86,8 +102,15 @@
     <Compile Include="FormServices.Designer.cs">
       <DependentUpon>FormServices.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormWedding.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormWedding.Designer.cs">
+      <DependentUpon>FormWedding.cs</DependentUpon>
+    </Compile>
     <Compile Include="Lobby.cs" />
     <Compile Include="LobbyType.cs" />
+    <Compile Include="Menu.cs" />
     <Compile Include="MenuItem.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -96,6 +119,8 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service.cs" />
+    <Compile Include="ServiceDetail.cs" />
     <Compile Include="Services.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -103,14 +128,20 @@
       <DependentUpon>Services.cs</DependentUpon>
     </Compile>
     <Compile Include="Shift.cs" />
+    <Compile Include="TableDetail.cs" />
     <Compile Include="Tools.cs" />
     <Compile Include="WeddingClient.cs" />
     <Compile Include="WeddingInfo.cs" />
     <EmbeddedResource Include="Dishes.resx">
       <DependentUpon>Dishes.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormBooking.resx">
+      <DependentUpon>FormBooking.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormDishes.resx">
       <DependentUpon>FormDishes.cs</DependentUpon>
@@ -123,6 +154,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormServices.resx">
       <DependentUpon>FormServices.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormWedding.resx">
+      <DependentUpon>FormWedding.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MenuItem.resx">
       <DependentUpon>MenuItem.cs</DependentUpon>
@@ -156,11 +190,11 @@
     <PackageReference Include="Bunifu.UI.WinForms">
       <Version>6.0.0-Beta</Version>
     </PackageReference>
-    <PackageReference Include="Guna.UI2.WinForms">
-      <Version>2.0.3.2</Version>
-    </PackageReference>
     <PackageReference Include="Jil">
       <Version>2.17.0</Version>
+    </PackageReference>
+    <PackageReference Include="Sigil">
+      <Version>5.0.0</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
