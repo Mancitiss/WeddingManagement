@@ -27,6 +27,11 @@ namespace WeddingManagementApplication
         private void btnAccount_Click(object sender, EventArgs e)
         {
             this.Visible = false;
+            if (WeddingClient.client_priority > 2)
+            {
+                MessageBox.Show("You don't have permission to access this page!");
+                return;
+            }
             FormAccount a = new FormAccount();
             a.ShowDialog();
         }
