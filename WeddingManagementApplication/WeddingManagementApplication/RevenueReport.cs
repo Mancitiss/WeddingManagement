@@ -84,6 +84,7 @@ namespace WeddingManagementApplication
                                     MessageBox.Show("Create new report successfully!", "SUCCESS", MessageBoxButtons.OK);
                                 }
                             }
+                            inserted = true;
                         }
                         else
                         {
