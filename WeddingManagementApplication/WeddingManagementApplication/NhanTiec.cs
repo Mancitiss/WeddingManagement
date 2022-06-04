@@ -613,10 +613,10 @@ namespace WeddingManagementApplication
                         }
                         else
                         {
-                            using (SqlCommand cmd = new SqlCommand("UPDATE SERVICE_DETAIL SET AmountOfService = @AmountOfServide, TotalServicePrice = @TotalServicePrice WHERE IdWedding = @idWedding AND IdDishes = @idDishes", sql))
+                            using (SqlCommand cmd = new SqlCommand("UPDATE SERVICE_DETAIL SET AmountOfService = @AmountOfServide, TotalServicePrice = @TotalServicePrice WHERE IdWedding = @idWedding AND IdService = @idService", sql))
                             {
                                 cmd.Parameters.AddWithValue("@idWedding", NhanTiec.currentWeddingId);
-                                cmd.Parameters.AddWithValue("@idDishes", service.idService);
+                                cmd.Parameters.AddWithValue("@idService", service.idService);
                                 cmd.Parameters.AddWithValue("@AmountOfServide", Convert.ToInt32(tb_service_price.Text));
                                 cmd.Parameters.AddWithValue("@TotalServicePrice", service.ServicePrice * Convert.ToInt32(tb_service_price.Text));
                                 if (cmd.ExecuteNonQuery() > 0)
@@ -626,7 +626,7 @@ namespace WeddingManagementApplication
                                     using (SqlCommand cmd2 = new SqlCommand("UPDATE BILL SET ServicePriceTotal = ServicePriceTotal + @serviceChanged, Total = Total + @serviceChanged, MoneyLeft = MoneyLeft + @serviceChanged WHERE IdBill = @idWedding", sql))
                                     {
                                         cmd2.Parameters.AddWithValue("@idWedding", NhanTiec.currentWeddingId);
-                                        cmd2.Parameters.AddWithValue("@tableChanged", changes);
+                                        cmd2.Parameters.AddWithValue("@serviceChanged", changes);
                                         if (cmd2.ExecuteNonQuery() > 0)
                                         {
                                             MessageBox.Show("Add successfully!", "SUCCESS", MessageBoxButtons.OK);
