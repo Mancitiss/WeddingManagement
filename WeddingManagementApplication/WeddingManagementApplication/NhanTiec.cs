@@ -617,7 +617,7 @@ namespace WeddingManagementApplication
                             {
                                 cmd.Parameters.AddWithValue("@idWedding", NhanTiec.currentWeddingId);
                                 cmd.Parameters.AddWithValue("@idDishes", service.idService);
-                                cmd.Parameters.AddWithValue("@AmountOfDishes", Convert.ToInt32(tb_service_price.Text));
+                                cmd.Parameters.AddWithValue("@AmountOfServide", Convert.ToInt32(tb_service_price.Text));
                                 cmd.Parameters.AddWithValue("@TotalServicePrice", service.ServicePrice * Convert.ToInt32(tb_service_price.Text));
                                 if (cmd.ExecuteNonQuery() > 0)
                                 {
