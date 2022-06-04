@@ -51,7 +51,7 @@ namespace WeddingManagementApplication
                     cmd2.Parameters.AddWithValue("@year", year);
                     using (SqlDataReader dr = cmd2.ExecuteReader())
                     {
-                        int total = 0;
+                        long total = 0;
                         //MessageBox.Show(dr.HasRows.ToString());
                         if (dr.HasRows)
                         {
@@ -69,7 +69,7 @@ namespace WeddingManagementApplication
                                 {
                                     while (reader.Read())
                                     {
-                                        total += int.Parse(reader["DayRevenue"].ToString());
+                                        total += long.Parse(reader["DayRevenue"].ToString());
                                     }
                                 }
 

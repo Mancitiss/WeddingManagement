@@ -310,7 +310,7 @@ namespace WeddingManagementApplication
                             {
                                 cmd.Parameters.AddWithValue("@IdDishes", currentTypeId);
                                 cmd.Parameters.AddWithValue("@name", tb_dishes_name.Text);
-                                cmd.Parameters.AddWithValue("@price", int.Parse(tb_dishes_price.Text));
+                                cmd.Parameters.AddWithValue("@price", long.Parse(tb_dishes_price.Text));
                                 cmd.Parameters.AddWithValue("@note", tb_dishes_note.Text);
                                 if (cmd.ExecuteNonQuery() > 0)
                                 {

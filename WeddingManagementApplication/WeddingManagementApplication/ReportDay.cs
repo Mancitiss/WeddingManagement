@@ -46,9 +46,9 @@ namespace WeddingManagementApplication
             DataColumn column = new DataColumn("Ratio", typeof(float));
             column.Caption = "Ratio";
             table1.Columns.Add(column);
-            for (int i = 0; i < table1.Rows.Count; i++)
+            foreach (DataRow row in table1.Rows)
             {
-                table1.Rows[i]["Ratio"] = Convert.ToSingle(table1.Rows[i]["DayRevenue"]) / Convert.ToSingle(table1.Rows[i]["RevenueToTal"]);
+                row["Ratio"] = Convert.ToSingle(row["DayRevenue"]) / Convert.ToSingle(row["RevenueToTal"]);
             }
             dataRPD.DataSource = table1;
             foreach (DataGridViewColumn col in dataRPD.Columns)

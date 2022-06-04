@@ -307,7 +307,7 @@ namespace WeddingManagementApplication
                             using (SqlCommand cmd = new SqlCommand("UPDATE SERVICE SET ServiceName=@name,ServicePrice=@price,Note=@note WHERE IdService = @IdService", sql))
                             {
                                 cmd.Parameters.AddWithValue("@IdService", currentServiceId);
-                                cmd.Parameters.AddWithValue("@price", int.Parse(tb_service_price.Text));
+                                cmd.Parameters.AddWithValue("@price", long.Parse(tb_service_price.Text));
                                 cmd.Parameters.AddWithValue("@name", tb_service_name.Text);
                                 cmd.Parameters.AddWithValue("@note", tb_service_note.Text);
                                 if (cmd.ExecuteNonQuery() > 0)

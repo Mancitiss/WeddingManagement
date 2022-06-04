@@ -754,7 +754,7 @@ namespace WeddingManagementApplication
             using (SqlConnection sql = new SqlConnection(WeddingClient.sqlConnectionString))
             {
                 sql.Open();
-                using (SqlCommand cmd = new SqlCommand("SELECT * FROM WEDDING_INFOR WHERE IdLobby = @idLobby AND IdShift = @idShift AND Available > 0", sql))
+                using (SqlCommand cmd = new SqlCommand("SELECT * FROM WEDDING_INFOR WHERE IdLobby = @idLobby AND IdShift = @idShift AND Available is NULL", sql))
                 {
                     cmd.Parameters.AddWithValue("@idLobby", idLobby);
                     cmd.Parameters.AddWithValue("@idShift", idShift);

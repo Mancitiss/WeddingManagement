@@ -242,7 +242,7 @@ namespace WeddingManagementApplication
                             {
                                 cmd.Parameters.AddWithValue("@IdLobbyType", currentTypeId);
                                 cmd.Parameters.AddWithValue("@name", comboBox1.Text);
-                                cmd.Parameters.AddWithValue("@price", int.Parse(textBox1.Text));
+                                cmd.Parameters.AddWithValue("@price", long.Parse(textBox1.Text));
                                 if (cmd.ExecuteNonQuery() > 0)
                                 {
                                     // remove from list
