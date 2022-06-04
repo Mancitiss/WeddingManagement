@@ -49,6 +49,9 @@ namespace WeddingManagementApplication
                         if (command.ExecuteNonQuery() > 0)
                         {
                             this.flowLayoutPanel1.Controls.Add(s);
+                            tbEnd.Text = "";
+                            tbName.Text = "";
+                            tbStart.Text = "";
                         }
                         else
                         {
@@ -135,6 +138,95 @@ namespace WeddingManagementApplication
         private void label4_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            if (this.tbEnd.Text == "" || this.tbName.Text == "" || this.tbStart.Text == "")
+            {
+                MessageBox.Show("Vui lòng điền đủ thông tin");
+            }
+            else
+            {
+                int count = 0;
+                Shift selectedShift = new Shift();
+                Shift pre = new Shift();
+                foreach (var s in this.flowLayoutPanel1.Controls)
+                {
+                    selectedShift = s as Shift;
+                    if (selectedShift != null)
+                    {
+
+                        if (selectedShift._btnCheck == true)
+                        {
+                            pre = selectedShift;
+                            count++;
+                        }
+                    }
+                    if (count > 1)
+                    {
+                        MessageBox.Show("Chỉ xóa 1 đối tượng");
+                        break;
+                    }
+                }
+                if (count == 1)
+                {
+                    using (var sql = new SqlConnection(WeddingClient.sqlConnectionString))
+                    {
+                        sql.Open();
+                        using (SqlCommand command = new SqlCommand("update Shift Set Available=@avl,ShiftName=@name,Starting=@start,Ending=@end where IdShift=@id", sql))
+                        {
+                            command.Parameters.AddWithValue("@id", pre._id);
+                            command.Parameters.AddWithValue("@start", tbStart.Text);
+                            command.Parameters.AddWithValue("@end", tbEnd.Text);
+                            command.Parameters.AddWithValue("@avl", this.rbtA.Checked ? 1 : 0);
+                            command.Parameters.AddWithValue("@name", tbName.Text);
+                            if (command.ExecuteNonQuery() > 0)
+                            {
+                                this.flowLayoutPanel1.Controls.Clear();
+                                    using (SqlCommand command1 = new SqlCommand("select * from Shift where Available > 0", sql))
+                                    {
+                                        using (SqlDataReader reader = command1.ExecuteReader())
+                                        {
+                                            while (reader.Read())
+                                            {
+                                                Shift shift = new Shift();
+                                                //MessageBox.Show("alo");
+                                                shift._lbName = reader["ShiftName"].ToString();
+                                                shift._lbStart = reader["Starting"].ToString();
+                                                shift._lbEnd = reader["Ending"].ToString();
+                                                shift._lbStatus = reader["available"].ToString() == "1" ? "Trống" : "Đã được đặt";
+                                                shift._id = reader["IdShift"].ToString();
+                                                this.flowLayoutPanel1.Controls.Add(shift);
+                                            }
+                                        }
+                                    }
+                                MessageBox.Show("Cập nhật thành công");
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        Point lastPoint = new Point();
+        private void panel1_MouseDown(object sender, MouseEventArgs e)
+        {
+                lastPoint = new Point(e.X, e.Y);
+
+        }
+
+        private void panel1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                this.Left += e.X - lastPoint.X;
+                this.Top += e.Y - lastPoint.Y;
+            }
         }
     }
 }

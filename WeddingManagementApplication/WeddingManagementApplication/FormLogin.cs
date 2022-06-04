@@ -10,12 +10,14 @@ using System.Windows.Forms;
 
 namespace WeddingManagementApplication
 {
+    
     public partial class FormLogin : Form
     {
         public FormLogin()
         {
             InitializeComponent();
         }
+
 
         private void TextBoxUserName_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
         {
@@ -147,5 +149,20 @@ namespace WeddingManagementApplication
             }
             return false;
         }
+        Point lastPoint;
+        private void FormLogin_MouseDown(object sender, MouseEventArgs e)
+        {
+            lastPoint = new Point(e.X, e.Y);
+        }
+
+        private void FormLogin_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                this.Left += e.X - lastPoint.X;
+                this.Top += e.Y - lastPoint.Y;
+            }
+        }
+       
     }
 }

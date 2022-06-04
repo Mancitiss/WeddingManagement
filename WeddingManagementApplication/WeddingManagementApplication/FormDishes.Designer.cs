@@ -50,7 +50,7 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(731, 9);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(17, 17);
+            this.label6.Size = new System.Drawing.Size(15, 16);
             this.label6.TabIndex = 12;
             this.label6.Text = "X";
             this.label6.Click += new System.EventHandler(this.label6_Click);
@@ -209,6 +209,8 @@
             this.Name = "FormDishes";
             this.Text = "FormDishes";
             this.Load += new System.EventHandler(this.form_dishes_load);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseMove);
             ((System.ComponentModel.ISupportInitialize)(this.data_gv_dishes)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

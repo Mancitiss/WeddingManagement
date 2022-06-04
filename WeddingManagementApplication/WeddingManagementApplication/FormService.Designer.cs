@@ -95,7 +95,7 @@
             this.img_close_service.AutoSize = true;
             this.img_close_service.Location = new System.Drawing.Point(725, 9);
             this.img_close_service.Name = "img_close_service";
-            this.img_close_service.Size = new System.Drawing.Size(17, 17);
+            this.img_close_service.Size = new System.Drawing.Size(15, 16);
             this.img_close_service.TabIndex = 87;
             this.img_close_service.Text = "X";
             this.img_close_service.Click += new System.EventHandler(this.img_close_service_Click);
@@ -208,6 +208,8 @@
             this.Name = "FormServices";
             this.Text = "FormServices";
             this.Load += new System.EventHandler(this.form_service_load);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseMove);
             ((System.ComponentModel.ISupportInitialize)(this.dataService)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
