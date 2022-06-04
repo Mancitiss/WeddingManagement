@@ -124,32 +124,40 @@ namespace WeddingManagementApplication
         
         private void button1_Click(object sender, EventArgs e)
         {
-            if (comboBox1.Text == "" || !long.TryParse(textBox1.Text, out long price))
+            if (WeddingClient.client_priority > 2)
             {
-                MessageBox.Show("Please fill all the fields!", "LACK", MessageBoxButtons.OK);
+                MessageBox.Show("You don't have permission to do this!", "NOT PERMIT", MessageBoxButtons.OK);
+                return;
             }
             else
             {
-                using (SqlConnection sql = new SqlConnection(WeddingClient.sqlConnectionString))
+                if (comboBox1.Text == "" || !long.TryParse(textBox1.Text, out long price))
                 {
-                    sql.Open();
-                    using (SqlCommand cmd = new SqlCommand("INSERT INTO LOBBY_TYPE (IdLobbyType, LobbyName, MinTablePrice, Available) VALUES (@IdLobbyType, @LobbyName, @MinTablePrice, 1)", sql))
+                    MessageBox.Show("Please fill all the fields!", "LACK", MessageBoxButtons.OK);
+                }
+                else
+                {
+                    using (SqlConnection sql = new SqlConnection(WeddingClient.sqlConnectionString))
                     {
-                        string newTypeId = "LT" + WeddingClient.GetNewIdFromTable("LT").ToString().PadLeft(19, '0');
-                        cmd.Parameters.AddWithValue("@IdLobbyType", newTypeId);
-                        cmd.Parameters.AddWithValue("@LobbyName", comboBox1.Text);
-                        cmd.Parameters.AddWithValue("@MinTablePrice", price);
-                        if (cmd.ExecuteNonQuery() > 0)
+                        sql.Open();
+                        using (SqlCommand cmd = new SqlCommand("INSERT INTO LOBBY_TYPE (IdLobbyType, LobbyName, MinTablePrice, Available) VALUES (@IdLobbyType, @LobbyName, @MinTablePrice, 1)", sql))
                         {
-                            // add to table
-                            row = table.NewRow();
-                            row["lobbyTypeName"] = comboBox1.Text;
-                            row["MinTablePrice"] = price;
-                            row["IdLobbyType"] = newTypeId;
-                            table.Rows.Add(row);
-                            MessageBox.Show("New type added!");
-                            // add to list
-                            WeddingClient.listLobbyTypes.Add(new LobbyTypeData(newTypeId, comboBox1.Text, price));
+                            string newTypeId = "LT" + WeddingClient.GetNewIdFromTable("LT").ToString().PadLeft(19, '0');
+                            cmd.Parameters.AddWithValue("@IdLobbyType", newTypeId);
+                            cmd.Parameters.AddWithValue("@LobbyName", comboBox1.Text);
+                            cmd.Parameters.AddWithValue("@MinTablePrice", price);
+                            if (cmd.ExecuteNonQuery() > 0)
+                            {
+                                // add to table
+                                row = table.NewRow();
+                                row["lobbyTypeName"] = comboBox1.Text;
+                                row["MinTablePrice"] = price;
+                                row["IdLobbyType"] = newTypeId;
+                                table.Rows.Add(row);
+                                MessageBox.Show("New type added!");
+                                // add to list
+                                WeddingClient.listLobbyTypes.Add(new LobbyTypeData(newTypeId, comboBox1.Text, price));
+                            }
                         }
                     }
                 }
@@ -158,38 +166,46 @@ namespace WeddingManagementApplication
 
         private void button2_Click(object sender, EventArgs e)
         {
-            // check if current type ID is not empty
-            if (currentTypeId == "")
+            if (WeddingClient.client_priority > 2)
             {
-                MessageBox.Show("Please select a type!", "LACK", MessageBoxButtons.OK);
+                MessageBox.Show("You don't have permission to do this!", "NOT PERMIT", MessageBoxButtons.OK);
+                return;
             }
             else
             {
-                using (SqlConnection sql = new SqlConnection(WeddingClient.sqlConnectionString))
+                // check if current type ID is not empty
+                if (currentTypeId == "")
                 {
-                    sql.Open();
-                    using (SqlCommand cmd = new SqlCommand("UPDATE LOBBY_TYPE SET Available = 0 WHERE IdLobbyType = @IdLobbyType", sql))
+                    MessageBox.Show("Please select a type!", "LACK", MessageBoxButtons.OK);
+                }
+                else
+                {
+                    using (SqlConnection sql = new SqlConnection(WeddingClient.sqlConnectionString))
                     {
-                        cmd.Parameters.AddWithValue("@IdLobbyType", currentTypeId);
-                        if (cmd.ExecuteNonQuery() > 0)
+                        sql.Open();
+                        using (SqlCommand cmd = new SqlCommand("UPDATE LOBBY_TYPE SET Available = 0 WHERE IdLobbyType = @IdLobbyType", sql))
                         {
-                            // remove from list
-                            foreach (LobbyTypeData lobbyType in WeddingClient.listLobbyTypes)
+                            cmd.Parameters.AddWithValue("@IdLobbyType", currentTypeId);
+                            if (cmd.ExecuteNonQuery() > 0)
                             {
-                                if (lobbyType.idLobbyType == currentTypeId)
+                                // remove from list
+                                foreach (LobbyTypeData lobbyType in WeddingClient.listLobbyTypes)
                                 {
-                                    WeddingClient.listLobbyTypes.Remove(lobbyType);
-                                    break;
+                                    if (lobbyType.idLobbyType == currentTypeId)
+                                    {
+                                        WeddingClient.listLobbyTypes.Remove(lobbyType);
+                                        break;
+                                    }
                                 }
+                                // remove from table
+                                table.Rows.Remove(table.Rows.Find(currentTypeId));
+                                MessageBox.Show("Type deleted!", "SUCCESS", MessageBoxButtons.OK);
                             }
-                            // remove from table
-                            table.Rows.Remove(table.Rows.Find(currentTypeId));
-                            MessageBox.Show("Type deleted!", "SUCCESS", MessageBoxButtons.OK);
                         }
                     }
                 }
+                FormLobbyType.currentTypeId = "";
             }
-            FormLobbyType.currentTypeId = "";
 
         }
 
@@ -200,39 +216,46 @@ namespace WeddingManagementApplication
 
         private void button3_Click(object sender, EventArgs e)
         {
-            if (comboBox1.Text == "" || !long.TryParse(textBox1.Text, out long price))
+            if (WeddingClient.client_priority > 2)
             {
-                MessageBox.Show("Please fill all the fields!", "LACK", MessageBoxButtons.OK);
+                MessageBox.Show("You don't have permission to do this!", "NOT PERMIT", MessageBoxButtons.OK);
+                return;
             }
             else
             {
-                if (currentTypeId == "")
+                if (comboBox1.Text == "" || !long.TryParse(textBox1.Text, out long price))
                 {
-                    MessageBox.Show("Please select a type!", "LACK", MessageBoxButtons.OK);
+                    MessageBox.Show("Please fill all the fields!", "LACK", MessageBoxButtons.OK);
                 }
                 else
                 {
-                    using (SqlConnection sql = new SqlConnection(WeddingClient.sqlConnectionString))
+                    if (currentTypeId == "")
                     {
-                        sql.Open();
-                        using (SqlCommand cmd = new SqlCommand("UPDATE LOBBY_TYPE SET LobbyName=@name, MinTablePrice=@price WHERE IdLobbyType = @IdLobbyType", sql))
+                        MessageBox.Show("Please select a type!", "LACK", MessageBoxButtons.OK);
+                    }
+                    else
+                    {
+                        using (SqlConnection sql = new SqlConnection(WeddingClient.sqlConnectionString))
                         {
-                            cmd.Parameters.AddWithValue("@IdLobbyType", currentTypeId);
-                            cmd.Parameters.AddWithValue("@name", comboBox1.Text);
-                            cmd.Parameters.AddWithValue("@price", int.Parse(textBox1.Text));
-                            if (cmd.ExecuteNonQuery() > 0)
+                            sql.Open();
+                            using (SqlCommand cmd = new SqlCommand("UPDATE LOBBY_TYPE SET LobbyName=@name, MinTablePrice=@price WHERE IdLobbyType = @IdLobbyType", sql))
                             {
-                                // remove from list
-                                // remove from table
-                                MessageBox.Show("Type Update!", "SUCCESS", MessageBoxButtons.OK);
+                                cmd.Parameters.AddWithValue("@IdLobbyType", currentTypeId);
+                                cmd.Parameters.AddWithValue("@name", comboBox1.Text);
+                                cmd.Parameters.AddWithValue("@price", int.Parse(textBox1.Text));
+                                if (cmd.ExecuteNonQuery() > 0)
+                                {
+                                    // remove from list
+                                    // remove from table
+                                    MessageBox.Show("Type Update!", "SUCCESS", MessageBoxButtons.OK);
+                                }
                             }
                         }
                     }
+                    FormLobbyType.currentTypeId = "";
+                    load_data_LobbyType();
                 }
-                FormLobbyType.currentTypeId = "";
-                load_data_LobbyType();
             }
-
         }
     }
 }

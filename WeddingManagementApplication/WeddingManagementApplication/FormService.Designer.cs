@@ -49,7 +49,9 @@
             // btn_delete_service
             // 
             this.btn_delete_service.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btn_delete_service.Location = new System.Drawing.Point(631, 363);
+            this.btn_delete_service.Font = new System.Drawing.Font("Segoe UI Semibold", 7.8F, System.Drawing.FontStyle.Bold);
+            this.btn_delete_service.ForeColor = System.Drawing.Color.Crimson;
+            this.btn_delete_service.Location = new System.Drawing.Point(659, 372);
             this.btn_delete_service.Name = "btn_delete_service";
             this.btn_delete_service.Size = new System.Drawing.Size(85, 39);
             this.btn_delete_service.TabIndex = 86;
@@ -60,7 +62,9 @@
             // btn_add_service
             // 
             this.btn_add_service.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btn_add_service.Location = new System.Drawing.Point(511, 363);
+            this.btn_add_service.Font = new System.Drawing.Font("Segoe UI Semibold", 7.8F, System.Drawing.FontStyle.Bold);
+            this.btn_add_service.ForeColor = System.Drawing.Color.Crimson;
+            this.btn_add_service.Location = new System.Drawing.Point(478, 372);
             this.btn_add_service.Name = "btn_add_service";
             this.btn_add_service.Size = new System.Drawing.Size(85, 39);
             this.btn_add_service.TabIndex = 85;
@@ -94,9 +98,10 @@
             // img_close_service
             // 
             this.img_close_service.AutoSize = true;
+            this.img_close_service.BackColor = System.Drawing.Color.White;
             this.img_close_service.Location = new System.Drawing.Point(725, 9);
             this.img_close_service.Name = "img_close_service";
-            this.img_close_service.Size = new System.Drawing.Size(15, 16);
+            this.img_close_service.Size = new System.Drawing.Size(17, 17);
             this.img_close_service.TabIndex = 87;
             this.img_close_service.Text = "X";
             this.img_close_service.Click += new System.EventHandler(this.img_close_service_Click);
@@ -176,6 +181,8 @@
             // btn_search_service
             // 
             this.btn_search_service.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btn_search_service.Font = new System.Drawing.Font("Segoe UI Semibold", 7.8F, System.Drawing.FontStyle.Bold);
+            this.btn_search_service.ForeColor = System.Drawing.Color.Crimson;
             this.btn_search_service.Location = new System.Drawing.Point(646, 114);
             this.btn_search_service.Name = "btn_search_service";
             this.btn_search_service.Size = new System.Drawing.Size(85, 39);
@@ -186,12 +193,15 @@
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(568, 405);
+            this.btnUpdate.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnUpdate.Font = new System.Drawing.Font("Segoe UI Semibold", 7.8F, System.Drawing.FontStyle.Bold);
+            this.btnUpdate.ForeColor = System.Drawing.Color.Crimson;
+            this.btnUpdate.Location = new System.Drawing.Point(569, 372);
             this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(98, 34);
+            this.btnUpdate.Size = new System.Drawing.Size(84, 39);
             this.btnUpdate.TabIndex = 97;
             this.btnUpdate.Text = "UPDATE";
-            this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.UseVisualStyleBackColor = false;
             this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // FormServices

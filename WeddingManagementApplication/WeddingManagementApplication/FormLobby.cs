@@ -205,84 +205,100 @@ namespace WeddingManagementApplication
 
         private void btn_delete_Click(object sender, EventArgs e)
         {// check if current type ID is not empty
-            if (currentLobbyId == "")
+            if (WeddingClient.client_priority > 2)
             {
-                MessageBox.Show("Please select a lobby!", "LACK", MessageBoxButtons.OK);
+                MessageBox.Show("You don't have permission to do this!", "NOT PERMIT", MessageBoxButtons.OK);
+                return;
             }
             else
             {
-                using (SqlConnection sql = new SqlConnection(WeddingClient.sqlConnectionString))
+                if (currentLobbyId == "")
                 {
-                    sql.Open();
-                    using (SqlCommand cmd = new SqlCommand("UPDATE LOBBY SET Available = 0 WHERE IdLobby = @IdLobby", sql))
+                    MessageBox.Show("Please select a lobby!", "LACK", MessageBoxButtons.OK);
+                }
+                else
+                {
+                    using (SqlConnection sql = new SqlConnection(WeddingClient.sqlConnectionString))
                     {
-                        cmd.Parameters.AddWithValue("@IdLobby", currentLobbyId);
-                        if (cmd.ExecuteNonQuery() > 0)
+                        sql.Open();
+                        using (SqlCommand cmd = new SqlCommand("UPDATE LOBBY SET Available = 0 WHERE IdLobby = @IdLobby", sql))
                         {
-                            // remove from list
-                            foreach (LobbyData lobby in WeddingClient.listLobbies)
+                            cmd.Parameters.AddWithValue("@IdLobby", currentLobbyId);
+                            if (cmd.ExecuteNonQuery() > 0)
                             {
-                                if (lobby.idLobby == currentLobbyId)
+                                // remove from list
+                                foreach (LobbyData lobby in WeddingClient.listLobbies)
                                 {
-                                    WeddingClient.listLobbies.Remove(lobby);
-                                    break;
+                                    if (lobby.idLobby == currentLobbyId)
+                                    {
+                                        WeddingClient.listLobbies.Remove(lobby);
+                                        break;
+                                    }
                                 }
+                                // remove from table
+                                table.Rows.Remove(table.Rows.Find(currentLobbyId));
+                                MessageBox.Show("Lobby deleted!", "SUCESS", MessageBoxButtons.OK);
                             }
-                            // remove from table
-                            table.Rows.Remove(table.Rows.Find(currentLobbyId));
-                            MessageBox.Show("Lobby deleted!", "SUCESS", MessageBoxButtons.OK);
                         }
                     }
                 }
+                FormLobby.currentLobbyId = "";
             }
-            FormLobby.currentLobbyId = "";
         }
 
         private void btn_add_Click(object sender, EventArgs e)
         {
-            if (!int.TryParse(maxTableTextBox.Text, out int maxTable))
+            if (WeddingClient.client_priority > 2)
             {
-                MessageBox.Show("Max table must be number!", "ERROR", MessageBoxButtons.OK);
-                return; 
-            }
-            if (nameTextBox.Text == "" || maxTableTextBox.Text == "" )
-            {
-                MessageBox.Show("Please fill all the fields!", "LACK", MessageBoxButtons.OK);
-            }
-            else if (lobbyTypeCombobox.SelectedIndex == -1)
-            {
-                MessageBox.Show("Please select a lobby type!", "LACK", MessageBoxButtons.OK);
+                MessageBox.Show("You don't have permission to do this!", "NOT PERMIT", MessageBoxButtons.OK);
+                return;
             }
             else
             {
-                using (SqlConnection sql = new SqlConnection(WeddingClient.sqlConnectionString))
+                if (!int.TryParse(maxTableTextBox.Text, out int maxTable))
                 {
-                    sql.Open();
-                    
-                    using (SqlCommand cmd = new SqlCommand("INSERT INTO LOBBY (IdLobby, IdLobbyType, LobbyName, MaxTable, Note, Available) VALUES (@IdLobby, @IdLobbyType, @LobbyName, @MaxTable, @Note, 1)", sql))
+                    MessageBox.Show("Max table must be number!", "ERROR", MessageBoxButtons.OK);
+                    return;
+                }
+                if (nameTextBox.Text == "" || maxTableTextBox.Text == "")
+                {
+                    MessageBox.Show("Please fill all the fields!", "LACK", MessageBoxButtons.OK);
+                }
+                else if (lobbyTypeCombobox.SelectedIndex == -1)
+                {
+                    MessageBox.Show("Please select a lobby type!", "LACK", MessageBoxButtons.OK);
+                }
+                else
+                {
+                    using (SqlConnection sql = new SqlConnection(WeddingClient.sqlConnectionString))
                     {
-                        string idLobbyType = ((LobbyTypeData)lobbyTypeCombobox.SelectedItem).idLobbyType;
-                        //lobbyTypeCombobox.SelectedValue.ToString()
-                        string newTypeId = "LO" + WeddingClient.GetNewIdFromTable("LO").ToString().PadLeft(19, '0');
-                        cmd.Parameters.AddWithValue("@IdLobby", newTypeId);
-                        cmd.Parameters.AddWithValue("@IdLobbyType", idLobbyType);
-                        cmd.Parameters.AddWithValue("@LobbyName", nameTextBox.Text);
-                        cmd.Parameters.AddWithValue("@MaxTable", maxTable);
-                        cmd.Parameters.AddWithValue("@Note", noteTextBox.Text);
-                        if (cmd.ExecuteNonQuery() > 0)
+                        sql.Open();
+
+                        using (SqlCommand cmd = new SqlCommand("INSERT INTO LOBBY (IdLobby, IdLobbyType, LobbyName, MaxTable, Note, Available) VALUES (@IdLobby, @IdLobbyType, @LobbyName, @MaxTable, @Note, 1)", sql))
                         {
-                            // add to table
-                            row = table.NewRow();
-                            row["LobbyName"] = nameTextBox.Text;
-                            row["LobbyType"] = WeddingClient.listLobbyTypes.Find(x => { if (x.idLobbyType == idLobbyType) return true; else return false; }).LobbyName;
-                            row["MaxTable"] = maxTable;
-                            row["Note"] = noteTextBox.Text;
-                            row["IdLobby"] = newTypeId;
-                            row["IdLobbyType"] = idLobbyType;
-                            table.Rows.Add(row);
-                            MessageBox.Show("New type added!");
-                            // add to list
-                            WeddingClient.listLobbies.Add(new LobbyData(newTypeId, idLobbyType, nameTextBox.Text, maxTable, noteTextBox.Text));
+                            string idLobbyType = ((LobbyTypeData)lobbyTypeCombobox.SelectedItem).idLobbyType;
+                            //lobbyTypeCombobox.SelectedValue.ToString()
+                            string newTypeId = "LO" + WeddingClient.GetNewIdFromTable("LO").ToString().PadLeft(19, '0');
+                            cmd.Parameters.AddWithValue("@IdLobby", newTypeId);
+                            cmd.Parameters.AddWithValue("@IdLobbyType", idLobbyType);
+                            cmd.Parameters.AddWithValue("@LobbyName", nameTextBox.Text);
+                            cmd.Parameters.AddWithValue("@MaxTable", maxTable);
+                            cmd.Parameters.AddWithValue("@Note", noteTextBox.Text);
+                            if (cmd.ExecuteNonQuery() > 0)
+                            {
+                                // add to table
+                                row = table.NewRow();
+                                row["LobbyName"] = nameTextBox.Text;
+                                row["LobbyType"] = WeddingClient.listLobbyTypes.Find(x => { if (x.idLobbyType == idLobbyType) return true; else return false; }).LobbyName;
+                                row["MaxTable"] = maxTable;
+                                row["Note"] = noteTextBox.Text;
+                                row["IdLobby"] = newTypeId;
+                                row["IdLobbyType"] = idLobbyType;
+                                table.Rows.Add(row);
+                                MessageBox.Show("New type added!");
+                                // add to list
+                                WeddingClient.listLobbies.Add(new LobbyData(newTypeId, idLobbyType, nameTextBox.Text, maxTable, noteTextBox.Text));
+                            }
                         }
                     }
                 }
@@ -313,55 +329,63 @@ namespace WeddingManagementApplication
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            if (!int.TryParse(maxTableTextBox.Text, out int maxTable))
+            if (WeddingClient.client_priority > 2)
             {
-                MessageBox.Show("Max table must be number!", "ERROR", MessageBoxButtons.OK);
+                MessageBox.Show("You don't have permission to do this!", "NOT PERMIT", MessageBoxButtons.OK);
                 return;
-            }
-            if (nameTextBox.Text == "" || maxTableTextBox.Text == "")
-            {
-                MessageBox.Show("Please fill all the fields!", "LACK", MessageBoxButtons.OK);
-            }
-            else if (lobbyTypeCombobox.SelectedIndex == -1)
-            {
-                MessageBox.Show("Please select a lobby type!", "LACK", MessageBoxButtons.OK);
             }
             else
             {
-                if (currentLobbyId == "")
+                if (!int.TryParse(maxTableTextBox.Text, out int maxTable))
                 {
-                    MessageBox.Show("Please select a lobby!", "LACK", MessageBoxButtons.OK);
+                    MessageBox.Show("Max table must be number!", "ERROR", MessageBoxButtons.OK);
+                    return;
+                }
+                if (nameTextBox.Text == "" || maxTableTextBox.Text == "")
+                {
+                    MessageBox.Show("Please fill all the fields!", "LACK", MessageBoxButtons.OK);
+                }
+                else if (lobbyTypeCombobox.SelectedIndex == -1)
+                {
+                    MessageBox.Show("Please select a lobby type!", "LACK", MessageBoxButtons.OK);
                 }
                 else
                 {
-                    using (SqlConnection sql = new SqlConnection(WeddingClient.sqlConnectionString))
+                    if (currentLobbyId == "")
                     {
-                        sql.Open();
-                        String ID = "";
-                        using (SqlCommand cm = new SqlCommand("SELECT * from LOBBY_TYPE where LobbyName =@name",sql))
+                        MessageBox.Show("Please select a lobby!", "LACK", MessageBoxButtons.OK);
+                    }
+                    else
+                    {
+                        using (SqlConnection sql = new SqlConnection(WeddingClient.sqlConnectionString))
                         {
-                            cm.Parameters.AddWithValue("@name", lobbyTypeCombobox.Text);
-                            SqlDataReader rd =cm.ExecuteReader();
-                            while(rd.Read())
+                            sql.Open();
+                            String ID = "";
+                            using (SqlCommand cm = new SqlCommand("SELECT * from LOBBY_TYPE where LobbyName =@name", sql))
                             {
-                                ID = rd["IdLobbytype"].ToString();
-                            }    
-                        }    
-                        using (SqlCommand cmd = new SqlCommand("UPDATE LOBBY SET IdLobbyType=@idlt, LobbyName=@name, MaxTable=@table WHERE IdLobby = @IdLobby", sql))
-                        {
-                            cmd.Parameters.AddWithValue("@IdLobby", currentLobbyId);
-                            cmd.Parameters.AddWithValue("@idlt", ID);
-                            cmd.Parameters.AddWithValue("@name", nameTextBox.Text);
-                            cmd.Parameters.AddWithValue("@table", int.Parse(maxTableTextBox.Text));
-                            if (cmd.ExecuteNonQuery() > 0)
+                                cm.Parameters.AddWithValue("@name", lobbyTypeCombobox.Text);
+                                SqlDataReader rd = cm.ExecuteReader();
+                                while (rd.Read())
+                                {
+                                    ID = rd["IdLobbytype"].ToString();
+                                }
+                            }
+                            using (SqlCommand cmd = new SqlCommand("UPDATE LOBBY SET IdLobbyType=@idlt, LobbyName=@name, MaxTable=@table WHERE IdLobby = @IdLobby", sql))
                             {
-                                MessageBox.Show("Lobby Update!", "SUCESS", MessageBoxButtons.OK);
+                                cmd.Parameters.AddWithValue("@IdLobby", currentLobbyId);
+                                cmd.Parameters.AddWithValue("@idlt", ID);
+                                cmd.Parameters.AddWithValue("@name", nameTextBox.Text);
+                                cmd.Parameters.AddWithValue("@table", int.Parse(maxTableTextBox.Text));
+                                if (cmd.ExecuteNonQuery() > 0)
+                                {
+                                    MessageBox.Show("Lobby Update!", "SUCESS", MessageBoxButtons.OK);
+                                }
                             }
                         }
                     }
+                    FormLobby.currentLobbyId = "";
+                    Load_data_Lobby();
                 }
-                FormLobby.currentLobbyId = "";
-                Load_data_Lobby();
             }
         }
     }

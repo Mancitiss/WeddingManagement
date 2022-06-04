@@ -29,7 +29,7 @@ namespace WeddingManagementApplication
             this.Visible = false;
             if (WeddingClient.client_priority > 2)
             {
-                MessageBox.Show("You don't have permission to access this page!");
+                MessageBox.Show("You don't have permission to access!", "NOT PERMIT", MessageBoxButtons.OK);
                 return;
             }
             FormAccount a = new FormAccount();

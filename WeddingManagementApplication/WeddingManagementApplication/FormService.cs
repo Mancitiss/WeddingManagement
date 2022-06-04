@@ -23,28 +23,7 @@ namespace WeddingManagementApplication
         public FormServices()
         {
             InitializeComponent();
-        }
-
-        //private void Services_Load(object sender, System.EventArgs e)
-        //{
-        //    // load services from database
-        //    List<Service> services = new List<Service>();
-        //    using (var sql = new SqlConnection(WeddingClient.sqlConnectionString))
-        //    {
-        //        sql.Open();
-        //        using (SqlCommand command = new SqlCommand("select * from SERVICE where Available > 0", sql))
-        //        {
-        //            using (SqlDataReader reader = command.ExecuteReader())
-        //            {
-        //                while (reader.Read())
-        //                {
-        //                    services.Add(new Service(reader["idService"].ToString(), reader["ServiceName"].ToString(), (long)reader["ServicePrice"], reader["Note"].ToString()));
-        //                }
-        //            }
-        //        }
-        //    }
-        //    AddServices(services);
-        //}
+        }     
 
         void load_data_service()
         {
@@ -164,44 +143,52 @@ namespace WeddingManagementApplication
 
         private void btn_add_service_Click(object sender, EventArgs e)
         {
-            if (tb_service_name.Text == "" || tb_service_price.Text == "")
+            if (WeddingClient.client_priority > 2)
             {
-                MessageBox.Show("Please fill out all the fields!", "LACK", MessageBoxButtons.OK);
+                MessageBox.Show("You don't have permission to do this!", "NOT PERMIT", MessageBoxButtons.OK);
+                return;
             }
-
             else
             {
-                using (SqlConnection sql = new SqlConnection(WeddingClient.sqlConnectionString))
+                if (tb_service_name.Text == "" || tb_service_price.Text == "")
                 {
-                    sql.Open();
-                    try
-                    {
-                        using (SqlCommand cmd = new SqlCommand("INSERT INTO SERVICE (IdService, ServiceName, ServicePrice, Note, Available) VALUES (@IdService, @ServiceName, @ServicePrice,@Note,1)", sql))
-                        {
-                            string newServiceId = "SV" + WeddingClient.GetNewIdFromTable("SV").ToString().PadLeft(19, '0');
-                            cmd.Parameters.AddWithValue("@IdService", newServiceId);
-                            cmd.Parameters.AddWithValue("@ServiceName", tb_service_name.Text);
-                            cmd.Parameters.AddWithValue("@ServicePrice", tb_service_price.Text);
-                            cmd.Parameters.AddWithValue("@Note", tb_service_note.Text);
+                    MessageBox.Show("Please fill out all the fields!", "LACK", MessageBoxButtons.OK);
+                }
 
-                            if (cmd.ExecuteNonQuery() > 0)
+                else
+                {
+                    using (SqlConnection sql = new SqlConnection(WeddingClient.sqlConnectionString))
+                    {
+                        sql.Open();
+                        try
+                        {
+                            using (SqlCommand cmd = new SqlCommand("INSERT INTO SERVICE (IdService, ServiceName, ServicePrice, Note, Available) VALUES (@IdService, @ServiceName, @ServicePrice,@Note,1)", sql))
                             {
-                                // add to table
-                                row = table.NewRow();
-                                row["ServiceName"] = tb_service_name.Text; // k biết chỗ nào để nó add lun :v
-                                row["ServicePrice"] = tb_service_price.Text;
-                                row["Note"] = tb_service_note.Text;
-                                row["IdService"] = newServiceId;
-                                table.Rows.Add(row);
-                                MessageBox.Show("A service added", "SUCCESS", MessageBoxButtons.OK);
-                                // add to list
-                                WeddingClient.listServices.Add(new ServicesData(newServiceId, tb_service_name.Text, Convert.ToInt64(tb_service_price.Text), tb_service_note.Text));
+                                string newServiceId = "SV" + WeddingClient.GetNewIdFromTable("SV").ToString().PadLeft(19, '0');
+                                cmd.Parameters.AddWithValue("@IdService", newServiceId);
+                                cmd.Parameters.AddWithValue("@ServiceName", tb_service_name.Text);
+                                cmd.Parameters.AddWithValue("@ServicePrice", tb_service_price.Text);
+                                cmd.Parameters.AddWithValue("@Note", tb_service_note.Text);
+
+                                if (cmd.ExecuteNonQuery() > 0)
+                                {
+                                    // add to table
+                                    row = table.NewRow();
+                                    row["ServiceName"] = tb_service_name.Text; // k biết chỗ nào để nó add lun :v
+                                    row["ServicePrice"] = tb_service_price.Text;
+                                    row["Note"] = tb_service_note.Text;
+                                    row["IdService"] = newServiceId;
+                                    table.Rows.Add(row);
+                                    MessageBox.Show("A service added", "SUCCESS", MessageBoxButtons.OK);
+                                    // add to list
+                                    WeddingClient.listServices.Add(new ServicesData(newServiceId, tb_service_name.Text, Convert.ToInt64(tb_service_price.Text), tb_service_note.Text));
+                                }
                             }
                         }
-                    }
-                    catch(Exception ex)
-                    {
-                        MessageBox.Show("Price must be number", "Error", MessageBoxButtons.OK ); 
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Price must be number", "Error", MessageBoxButtons.OK);
+                        }
                     }
                 }
             }
@@ -209,37 +196,45 @@ namespace WeddingManagementApplication
 
         private void btn_delete_service_Click(object sender, EventArgs e)
         {
-            if (currentServiceId == "")
+            if (WeddingClient.client_priority > 2)
             {
-               MessageBox.Show("Please select a service to delete!", "LACK", MessageBoxButtons.OK);
+                MessageBox.Show("You don't have permission to do this!", "NOT PERMIT", MessageBoxButtons.OK);
+                return;
             }
             else
             {
-                using (SqlConnection sql = new SqlConnection(WeddingClient.sqlConnectionString))
+                if (currentServiceId == "")
                 {
-                    sql.Open();
-                    using (SqlCommand cmd = new SqlCommand("UPDATE SERVICE SET Available = 0 WHERE IdService = @IdService", sql))
+                    MessageBox.Show("Please select a service to delete!", "LACK", MessageBoxButtons.OK);
+                }
+                else
+                {
+                    using (SqlConnection sql = new SqlConnection(WeddingClient.sqlConnectionString))
                     {
-                        cmd.Parameters.AddWithValue("@IdService", currentServiceId);
-                        if (cmd.ExecuteNonQuery() > 0)
+                        sql.Open();
+                        using (SqlCommand cmd = new SqlCommand("UPDATE SERVICE SET Available = 0 WHERE IdService = @IdService", sql))
                         {
-                            // remove from list
-                            foreach (ServicesData ser in WeddingClient.listServices)
+                            cmd.Parameters.AddWithValue("@IdService", currentServiceId);
+                            if (cmd.ExecuteNonQuery() > 0)
                             {
-                                if (ser.idService == currentServiceId)
+                                // remove from list
+                                foreach (ServicesData ser in WeddingClient.listServices)
                                 {
-                                    WeddingClient.listServices.Remove(ser);
-                                    break;
+                                    if (ser.idService == currentServiceId)
+                                    {
+                                        WeddingClient.listServices.Remove(ser);
+                                        break;
+                                    }
                                 }
+                                // remove from table
+                                table.Rows.Remove(table.Rows.Find(currentServiceId));
+                                MessageBox.Show("A service deleted!", "LACK", MessageBoxButtons.OK);
                             }
-                            // remove from table
-                            table.Rows.Remove(table.Rows.Find(currentServiceId));
-                            MessageBox.Show("A service deleted!", "LACK", MessageBoxButtons.OK);
                         }
                     }
                 }
+                FormServices.currentServiceId = "";
             }
-            FormServices.currentServiceId = "";
         }
 
         private void btn_search_service_Click(object sender, EventArgs e)
@@ -286,39 +281,46 @@ namespace WeddingManagementApplication
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            if (tb_service_name.Text == "" || tb_service_price.Text == "")
+            if (WeddingClient.client_priority > 2)
             {
-                MessageBox.Show("Please fill out all the fields!", "LACK", MessageBoxButtons.OK);
+                MessageBox.Show("You don't have permission to do this!", "NOT PERMIT", MessageBoxButtons.OK);
+                return;
             }
-
             else
             {
-                if (currentServiceId == "")
+                if (tb_service_name.Text == "" || tb_service_price.Text == "")
                 {
-                    MessageBox.Show("Please select a service to delete!", "LACK", MessageBoxButtons.OK);
+                    MessageBox.Show("Please fill out all the fields!", "LACK", MessageBoxButtons.OK);
                 }
+
                 else
                 {
-                    using (SqlConnection sql = new SqlConnection(WeddingClient.sqlConnectionString))
+                    if (currentServiceId == "")
                     {
-                        sql.Open();
-                        using (SqlCommand cmd = new SqlCommand("UPDATE SERVICE SET ServiceName=@name,ServicePrice=@price,Note=@note WHERE IdService = @IdService", sql))
+                        MessageBox.Show("Please select a service to delete!", "LACK", MessageBoxButtons.OK);
+                    }
+                    else
+                    {
+                        using (SqlConnection sql = new SqlConnection(WeddingClient.sqlConnectionString))
                         {
-                            cmd.Parameters.AddWithValue("@IdService", currentServiceId);
-                            cmd.Parameters.AddWithValue("@price", int.Parse(tb_service_price.Text));
-                            cmd.Parameters.AddWithValue("@name", tb_service_name.Text);
-                            cmd.Parameters.AddWithValue("@note", tb_service_note.Text);
-                            if (cmd.ExecuteNonQuery() > 0)
+                            sql.Open();
+                            using (SqlCommand cmd = new SqlCommand("UPDATE SERVICE SET ServiceName=@name,ServicePrice=@price,Note=@note WHERE IdService = @IdService", sql))
                             {
-                                MessageBox.Show("A service Updated!", "LACK", MessageBoxButtons.OK);
+                                cmd.Parameters.AddWithValue("@IdService", currentServiceId);
+                                cmd.Parameters.AddWithValue("@price", int.Parse(tb_service_price.Text));
+                                cmd.Parameters.AddWithValue("@name", tb_service_name.Text);
+                                cmd.Parameters.AddWithValue("@note", tb_service_note.Text);
+                                if (cmd.ExecuteNonQuery() > 0)
+                                {
+                                    MessageBox.Show("A service Updated!", "LACK", MessageBoxButtons.OK);
+                                }
                             }
                         }
                     }
+                    FormServices.currentServiceId = "";
+                    load_data_service();
                 }
-                FormServices.currentServiceId = "";
-                load_data_service();
             }
-
         }
     }
 }

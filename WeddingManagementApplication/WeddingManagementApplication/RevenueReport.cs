@@ -81,7 +81,7 @@ namespace WeddingManagementApplication
                                 if (cmd3.ExecuteNonQuery() > 0)
                                 {
                                     Search("");
-                                    MessageBox.Show("Report Add Successfully");
+                                    MessageBox.Show("Create new report successfully!", "SUCCESS", MessageBoxButtons.OK);
                                 }
                             }
                         }
@@ -99,11 +99,11 @@ namespace WeddingManagementApplication
                                 {
                                     inserted = true;
                                     //Search("");
-                                    MessageBox.Show("Report Add Successfully");
+                                    MessageBox.Show("Create new report successfully!", "SUCCESS", MessageBoxButtons.OK);
                                 }
                                 else
                                 {
-                                    MessageBox.Show("Wedding Add Failed");
+                                    MessageBox.Show("Fail to create new report!", "FAIL", MessageBoxButtons.OK);
                                 }
                             }
 

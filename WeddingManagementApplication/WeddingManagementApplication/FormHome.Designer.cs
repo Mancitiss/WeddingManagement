@@ -133,7 +133,7 @@
             // 
             // panelNavigate
             // 
-            this.panelNavigate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(214)))), ((int)(((byte)(102)))));
+            this.panelNavigate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(201)))), ((int)(((byte)(182)))), ((int)(((byte)(161)))));
             this.panelNavigate.Location = new System.Drawing.Point(221, 206);
             this.panelNavigate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelNavigate.Name = "panelNavigate";
@@ -276,7 +276,7 @@
             this.labelElegant.Font = new System.Drawing.Font("SimSun-ExtB", 19.8F);
             this.labelElegant.Location = new System.Drawing.Point(1121, 693);
             this.labelElegant.Name = "labelElegant";
-            this.labelElegant.Size = new System.Drawing.Size(134, 34);
+            this.labelElegant.Size = new System.Drawing.Size(134, 33);
             this.labelElegant.TabIndex = 17;
             this.labelElegant.Text = "Elegant";
             // 
@@ -286,7 +286,7 @@
             this.labelMerry.Font = new System.Drawing.Font("SimSun-ExtB", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelMerry.Location = new System.Drawing.Point(382, 693);
             this.labelMerry.Name = "labelMerry";
-            this.labelMerry.Size = new System.Drawing.Size(100, 34);
+            this.labelMerry.Size = new System.Drawing.Size(100, 33);
             this.labelMerry.TabIndex = 16;
             this.labelMerry.Text = "Merry";
             // 
@@ -296,7 +296,7 @@
             this.labelRomantic.Font = new System.Drawing.Font("SimSun-ExtB", 19.8F);
             this.labelRomantic.Location = new System.Drawing.Point(742, 693);
             this.labelRomantic.Name = "labelRomantic";
-            this.labelRomantic.Size = new System.Drawing.Size(151, 34);
+            this.labelRomantic.Size = new System.Drawing.Size(151, 33);
             this.labelRomantic.TabIndex = 15;
             this.labelRomantic.Text = "Romantic";
             // 
@@ -357,7 +357,7 @@
             // lobbyDropDown1
             // 
             this.lobbyDropDown1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(204)))), ((int)(((byte)(176)))));
-            this.lobbyDropDown1.Location = new System.Drawing.Point(230, 322);
+            this.lobbyDropDown1.Location = new System.Drawing.Point(224, 324);
             this.lobbyDropDown1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.lobbyDropDown1.MaximumSize = new System.Drawing.Size(150, 97);
             this.lobbyDropDown1.Name = "lobbyDropDown1";
@@ -369,7 +369,7 @@
             // searchDropDown1
             // 
             this.searchDropDown1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(204)))), ((int)(((byte)(176)))));
-            this.searchDropDown1.Location = new System.Drawing.Point(224, 210);
+            this.searchDropDown1.Location = new System.Drawing.Point(224, 233);
             this.searchDropDown1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.searchDropDown1.Name = "searchDropDown1";
             this.searchDropDown1.Size = new System.Drawing.Size(161, 166);

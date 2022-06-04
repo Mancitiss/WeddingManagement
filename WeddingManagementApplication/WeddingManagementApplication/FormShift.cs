@@ -23,87 +23,107 @@ namespace WeddingManagementApplication
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            if(this.tbEnd.Text ==""||this.tbName.Text ==""||this.tbStart.Text =="")
+            if (WeddingClient.client_priority > 2)
             {
-                MessageBox.Show("Vui lòng điền đủ thông tin");
-            }    
+                MessageBox.Show("You don't have permission to do this!", "NOT PERMIT", MessageBoxButtons.OK);
+                return;
+            }
             else
             {
-                Shift s =new Shift();
-                s._lbName=this.tbName.Text;
-                s._lbStart=this.tbStart.Text;
-                s._lbEnd=this.tbEnd.Text;
-                s._lbStatus = this.rbtA.Checked ? "Trống" : "Đầy";
-                int state = this.rbtA.Checked ? 1 : 0;
-                using (var sql = new SqlConnection(WeddingClient.sqlConnectionString))
+
+                if (this.tbEnd.Text == "" || this.tbName.Text == "" || this.tbStart.Text == "")
                 {
-                    sql.Open();
-                    // add menu to database
-                    // if success add menu to list
-                    using (SqlCommand command = new SqlCommand("insert into Shift  values (@idShift, @available, @Name, @Start,@End)", sql))
+                    MessageBox.Show("Please fill all the fields!", "LACK", MessageBoxButtons.OK);
+                }
+                else
+                {
+                    Shift s = new Shift();
+                    s._lbName = this.tbName.Text;
+                    s._lbStart = this.tbStart.Text;
+                    s._lbEnd = this.tbEnd.Text;
+                 //   s._lbStatus = this.rbtA.Checked ? "Trống" : "Đầy";
+                 //   int state = this.rbtA.Checked ? 1 : 0;
+                    using (var sql = new SqlConnection(WeddingClient.sqlConnectionString))
                     {
-                        string id = "SH" + WeddingClient.GetNewIdFromTable("SH").ToString().PadLeft(19, '0');
-                        s._id = id;
-                        command.Parameters.AddWithValue("@idShift",id );
-                        command.Parameters.AddWithValue("@available", 1);
-                        command.Parameters.AddWithValue("@Name", s._lbName);
-                        command.Parameters.AddWithValue("@Start", s._lbStart);
-                        command.Parameters.AddWithValue("@End", s._lbEnd);
-                        if (command.ExecuteNonQuery() > 0)
+                        sql.Open();
+                        // add menu to database
+                        // if success add menu to list
+                        using (SqlCommand command = new SqlCommand("insert into Shift  values (@idShift, @available, @Name, @Start,@End)", sql))
                         {
-                            this.flowLayoutPanel1.Controls.Add(s);
-                            tbEnd.Text = "";
-                            tbName.Text = "";
-                            tbStart.Text = "";
-                        }
-                        else
-                        {
+                            string id = "SH" + WeddingClient.GetNewIdFromTable("SH").ToString().PadLeft(19, '0');
+                            s._id = id;
+                            command.Parameters.AddWithValue("@idShift", id);
+                            command.Parameters.AddWithValue("@available", 1);
+                            command.Parameters.AddWithValue("@Name", s._lbName);
+                            command.Parameters.AddWithValue("@Start", s._lbStart);
+                            command.Parameters.AddWithValue("@End", s._lbEnd);
+                            
+                            if (command.ExecuteNonQuery() > 0)
+                            {
+                                this.flowLayoutPanel1.Controls.Add(s);
+                                tbEnd.Text = "";
+                                tbName.Text = "";
+                                tbStart.Text = "";
+                            }
+                            
+                            else
+                            {
+                            }
+                            MessageBox.Show("Add new shift successfully!", "SUCCESS", MessageBoxButtons.OK);
                         }
                     }
                 }
-            }    
+            }
         }
 
         private void btnRemove_Click(object sender, EventArgs e)
         {
-            int count = 0;
-            Shift selectedShift = new Shift();
-            Shift pre = new Shift();
-            foreach (var s in this.flowLayoutPanel1.Controls)
+            if (WeddingClient.client_priority > 2)
             {
-                selectedShift = s as Shift;
-                if (selectedShift != null)
-                {
-                    
-                    if (selectedShift._btnCheck == true)
-                    {
-                        pre = selectedShift;
-                        count++;
-                    }    
-                }
-                if (count > 1)
-                {
-                    MessageBox.Show("Just delete 1 object");
-                    break;
-                }    
+                MessageBox.Show("You don't have permission to do this!", "NOT PERMIT", MessageBoxButtons.OK);
+                return;
             }
-            if (count == 1)
+            else
             {
-                using (var sql = new SqlConnection(WeddingClient.sqlConnectionString))
+                int count = 0;
+                Shift selectedShift = new Shift();
+                Shift pre = new Shift();
+                foreach (var s in this.flowLayoutPanel1.Controls)
                 {
-                    sql.Open();
-                    using (SqlCommand command = new SqlCommand("delete from Shift where IdShift=@id", sql))
+                    selectedShift = s as Shift;
+                    if (selectedShift != null)
                     {
-                        command.Parameters.AddWithValue("@id", pre._id);
-                        if (command.ExecuteNonQuery() > 0)
+
+                        if (selectedShift._btnCheck == true)
                         {
-                            foreach (var s in this.flowLayoutPanel1.Controls)
+                            pre = selectedShift;
+                            count++;
+                        }
+                    }
+                    if (count > 1)
+                    {
+                        MessageBox.Show("Just choose 1 object", "ERROR", MessageBoxButtons.OK);
+                        break;
+                    }
+                }
+                if (count == 1)
+                {
+                    using (var sql = new SqlConnection(WeddingClient.sqlConnectionString))
+                    {
+                        sql.Open();
+                        using (SqlCommand command = new SqlCommand("delete from Shift where IdShift=@id", sql))
+                        {
+                            command.Parameters.AddWithValue("@id", pre._id);
+                            if (command.ExecuteNonQuery() > 0)
                             {
-                                if ((s as Shift)._id == pre._id)
+                                foreach (var s in this.flowLayoutPanel1.Controls)
                                 {
-                                    this.flowLayoutPanel1.Controls.Remove(s as Control);
-                                    MessageBox.Show("Delete Success");
-                                    break;
+                                    if ((s as Shift)._id == pre._id)
+                                    {
+                                        this.flowLayoutPanel1.Controls.Remove(s as Control);
+                                        MessageBox.Show("Delete shift successfully!", "SUCCESS", MessageBoxButtons.OK);
+                                        break;
+                                    }
                                 }
                             }
                         }
@@ -150,48 +170,55 @@ namespace WeddingManagementApplication
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            if (this.tbEnd.Text == "" || this.tbName.Text == "" || this.tbStart.Text == "")
+            if (WeddingClient.client_priority > 2)
             {
-                MessageBox.Show("Please fill full information");
+                MessageBox.Show("You don't have permission to do this!", "NOT PERMIT", MessageBoxButtons.OK);
+                return;
             }
             else
             {
-                int count = 0;
-                Shift selectedShift = new Shift();
-                Shift pre = new Shift();
-                foreach (var s in this.flowLayoutPanel1.Controls)
+                if (this.tbEnd.Text == "" || this.tbName.Text == "" || this.tbStart.Text == "")
                 {
-                    selectedShift = s as Shift;
-                    if (selectedShift != null)
+                    MessageBox.Show("Please fill all the fields!", "LACK", MessageBoxButtons.OK);
+                }
+                else
+                {
+                    int count = 0;
+                    Shift selectedShift = new Shift();
+                    Shift pre = new Shift();
+                    foreach (var s in this.flowLayoutPanel1.Controls)
                     {
-
-                        if (selectedShift._btnCheck == true)
+                        selectedShift = s as Shift;
+                        if (selectedShift != null)
                         {
-                            pre = selectedShift;
-                            count++;
+
+                            if (selectedShift._btnCheck == true)
+                            {
+                                pre = selectedShift;
+                                count++;
+                            }
+                        }
+                        if (count > 1)
+                        {
+                            MessageBox.Show("Just choose 1 object", "ERROR", MessageBoxButtons.OK);
+                            break;
                         }
                     }
-                    if (count > 1)
+                    if (count == 1)
                     {
-                        MessageBox.Show("Just choose one object");
-                        break;
-                    }
-                }
-                if (count == 1)
-                {
-                    using (var sql = new SqlConnection(WeddingClient.sqlConnectionString))
-                    {
-                        sql.Open();
-                        using (SqlCommand command = new SqlCommand("update Shift Set Available=@avl,ShiftName=@name,Starting=@start,Ending=@end where IdShift=@id", sql))
+                        using (var sql = new SqlConnection(WeddingClient.sqlConnectionString))
                         {
-                            command.Parameters.AddWithValue("@id", pre._id);
-                            command.Parameters.AddWithValue("@start", tbStart.Text);
-                            command.Parameters.AddWithValue("@end", tbEnd.Text);
-                            command.Parameters.AddWithValue("@avl", 1);
-                            command.Parameters.AddWithValue("@name", tbName.Text);
-                            if (command.ExecuteNonQuery() > 0)
+                            sql.Open();
+                            using (SqlCommand command = new SqlCommand("update Shift Set Available=@avl,ShiftName=@name,Starting=@start,Ending=@end where IdShift=@id", sql))
                             {
-                                this.flowLayoutPanel1.Controls.Clear();
+                                command.Parameters.AddWithValue("@id", pre._id);
+                                command.Parameters.AddWithValue("@start", tbStart.Text);
+                                command.Parameters.AddWithValue("@end", tbEnd.Text);
+                                command.Parameters.AddWithValue("@avl", 1);
+                                command.Parameters.AddWithValue("@name", tbName.Text);
+                                if (command.ExecuteNonQuery() > 0)
+                                {
+                                    this.flowLayoutPanel1.Controls.Clear();
                                     using (SqlCommand command1 = new SqlCommand("select * from Shift where Available > 0", sql))
                                     {
                                         using (SqlDataReader reader = command1.ExecuteReader())
@@ -209,7 +236,8 @@ namespace WeddingManagementApplication
                                             }
                                         }
                                     }
-                                MessageBox.Show("Update Success");
+                                    MessageBox.Show("Update shift successfully", "SUCCESS", MessageBoxButtons.OK);
+                                }
                             }
                         }
                     }

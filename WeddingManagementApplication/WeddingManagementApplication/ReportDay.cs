@@ -75,21 +75,21 @@ namespace WeddingManagementApplication
             int index = comboBoxDay.SelectedIndex;
             int index2 = comboBoxMonth.SelectedIndex;
             if (!int.TryParse(textBoxYear.Text, out int year)) {
-                MessageBox.Show("Please enter year number correctly");
+                MessageBox.Show("Please enter year number correctly!", "ERROR!", MessageBoxButtons.OK);
                 return;
             }
             if (index < 0 || index2 < 0)
             {
-                MessageBox.Show("Please fill full infor ");
+                MessageBox.Show("Please fill full the fields!");
                 return;
             }
             if (!int.TryParse(comboBoxDay.SelectedItem.ToString(), out int day))
             {
-                MessageBox.Show("Input error: Day");
+                MessageBox.Show("Input error: Day!", "ERROR", MessageBoxButtons.OK);
             }
             if (!int.TryParse(comboBoxMonth.SelectedItem.ToString(), out int month))
             {
-                MessageBox.Show("Input error: Month");
+                MessageBox.Show("Input error: Month!", "ERROR", MessageBoxButtons.OK);
             }
             GetRevenue(year, month, day);
             ReportLoad();
@@ -161,7 +161,7 @@ namespace WeddingManagementApplication
                                         {
                                             //textBoxAOW.Text = count.ToString();
                                             //textBoxDayRevenue.Text = total.ToString();
-                                            if (!silent) MessageBox.Show("Add day report success");
+                                            if (!silent) MessageBox.Show("Add new day report successfully!", "SUCCESS", MessageBoxButtons.OK);
                                         }
                                     }
                                 }
@@ -196,7 +196,7 @@ namespace WeddingManagementApplication
                                             {
                                                 //textBoxAOW.Text = count.ToString();
                                                 //textBoxDayRevenue.Text = total.ToString();
-                                                if (!silent) MessageBox.Show("Add day report success");
+                                                if (!silent) MessageBox.Show("Add new day report successfully" , "SUCCESS", MessageBoxButtons.OK);
                                             }
                                         }
                                     }
@@ -220,7 +220,7 @@ namespace WeddingManagementApplication
                                             {
                                                 //textBoxAOW.Text = count.ToString();
                                                 //textBoxDayRevenue.Text = total.ToString();
-                                                if (!silent) MessageBox.Show("Add day report success");
+                                                if (!silent) MessageBox.Show("Add new day report successfully!", "SUCCESS", MessageBoxButtons.OK);
                                             }
                                         }
                                     }

@@ -55,7 +55,7 @@
             this.labelRReport.AutoSize = true;
             this.labelRReport.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Bold);
             this.labelRReport.ForeColor = System.Drawing.Color.Firebrick;
-            this.labelRReport.Location = new System.Drawing.Point(151, 55);
+            this.labelRReport.Location = new System.Drawing.Point(198, 53);
             this.labelRReport.Name = "labelRReport";
             this.labelRReport.Size = new System.Drawing.Size(539, 51);
             this.labelRReport.TabIndex = 2;
@@ -85,16 +85,17 @@
             // labelmonth
             // 
             this.labelmonth.AutoSize = true;
-            this.labelmonth.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F);
-            this.labelmonth.Location = new System.Drawing.Point(327, 219);
+            this.labelmonth.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.labelmonth.ForeColor = System.Drawing.Color.Crimson;
+            this.labelmonth.Location = new System.Drawing.Point(314, 218);
             this.labelmonth.Name = "labelmonth";
-            this.labelmonth.Size = new System.Drawing.Size(85, 29);
+            this.labelmonth.Size = new System.Drawing.Size(80, 28);
             this.labelmonth.TabIndex = 9;
             this.labelmonth.Text = "Month:";
             // 
             // textBoxAOW
             // 
-            this.textBoxAOW.Location = new System.Drawing.Point(659, 268);
+            this.textBoxAOW.Location = new System.Drawing.Point(627, 268);
             this.textBoxAOW.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxAOW.Name = "textBoxAOW";
             this.textBoxAOW.Size = new System.Drawing.Size(111, 27);
@@ -102,7 +103,7 @@
             // 
             // textBoxYear
             // 
-            this.textBoxYear.Location = new System.Drawing.Point(625, 217);
+            this.textBoxYear.Location = new System.Drawing.Point(627, 218);
             this.textBoxYear.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxYear.Name = "textBoxYear";
             this.textBoxYear.Size = new System.Drawing.Size(110, 27);
@@ -111,20 +112,22 @@
             // labelAOW
             // 
             this.labelAOW.AutoSize = true;
-            this.labelAOW.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F);
+            this.labelAOW.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelAOW.ForeColor = System.Drawing.Color.Crimson;
             this.labelAOW.Location = new System.Drawing.Point(407, 268);
             this.labelAOW.Name = "labelAOW";
-            this.labelAOW.Size = new System.Drawing.Size(234, 29);
+            this.labelAOW.Size = new System.Drawing.Size(212, 28);
             this.labelAOW.TabIndex = 5;
             this.labelAOW.Text = "Amount Of Wedding:";
             // 
             // labelYear
             // 
             this.labelYear.AutoSize = true;
-            this.labelYear.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F);
-            this.labelYear.Location = new System.Drawing.Point(549, 217);
+            this.labelYear.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.labelYear.ForeColor = System.Drawing.Color.Crimson;
+            this.labelYear.Location = new System.Drawing.Point(552, 219);
             this.labelYear.Name = "labelYear";
-            this.labelYear.Size = new System.Drawing.Size(70, 29);
+            this.labelYear.Size = new System.Drawing.Size(58, 28);
             this.labelYear.TabIndex = 4;
             this.labelYear.Text = "Year:";
             // 
@@ -182,20 +185,22 @@
             // labelDayRevenue
             // 
             this.labelDayRevenue.AutoSize = true;
-            this.labelDayRevenue.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F);
-            this.labelDayRevenue.Location = new System.Drawing.Point(35, 265);
+            this.labelDayRevenue.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.labelDayRevenue.ForeColor = System.Drawing.Color.Crimson;
+            this.labelDayRevenue.Location = new System.Drawing.Point(28, 269);
             this.labelDayRevenue.Name = "labelDayRevenue";
-            this.labelDayRevenue.Size = new System.Drawing.Size(162, 29);
+            this.labelDayRevenue.Size = new System.Drawing.Size(141, 28);
             this.labelDayRevenue.TabIndex = 1;
             this.labelDayRevenue.Text = "Day Revenue:";
             // 
             // labelDay
             // 
             this.labelDay.AutoSize = true;
-            this.labelDay.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F);
-            this.labelDay.Location = new System.Drawing.Point(131, 220);
+            this.labelDay.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.labelDay.ForeColor = System.Drawing.Color.Crimson;
+            this.labelDay.Location = new System.Drawing.Point(129, 217);
             this.labelDay.Name = "labelDay";
-            this.labelDay.Size = new System.Drawing.Size(60, 29);
+            this.labelDay.Size = new System.Drawing.Size(54, 28);
             this.labelDay.TabIndex = 0;
             this.labelDay.Text = "Day:";
             // 
@@ -213,8 +218,9 @@
             // 
             // buttonAdd
             // 
-            this.buttonAdd.BackColor = System.Drawing.Color.Gainsboro;
-            this.buttonAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.buttonAdd.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.buttonAdd.Font = new System.Drawing.Font("Segoe UI Semibold", 7.8F, System.Drawing.FontStyle.Bold);
+            this.buttonAdd.ForeColor = System.Drawing.Color.Crimson;
             this.buttonAdd.Location = new System.Drawing.Point(767, 316);
             this.buttonAdd.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonAdd.Name = "buttonAdd";
@@ -251,6 +257,8 @@
             // btn_search_rpDay
             // 
             this.btn_search_rpDay.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btn_search_rpDay.Font = new System.Drawing.Font("Segoe UI Semibold", 7.8F, System.Drawing.FontStyle.Bold);
+            this.btn_search_rpDay.ForeColor = System.Drawing.Color.Crimson;
             this.btn_search_rpDay.Location = new System.Drawing.Point(654, 127);
             this.btn_search_rpDay.Name = "btn_search_rpDay";
             this.btn_search_rpDay.Size = new System.Drawing.Size(75, 32);

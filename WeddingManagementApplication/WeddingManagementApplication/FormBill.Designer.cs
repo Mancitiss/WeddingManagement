@@ -193,7 +193,7 @@ namespace WeddingManagementApplication
             // paymentDTP
             // 
             this.paymentDTP.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.paymentDTP.Location = new System.Drawing.Point(452, 76);
+            this.paymentDTP.Location = new System.Drawing.Point(465, 76);
             this.paymentDTP.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.paymentDTP.Name = "paymentDTP";
             this.paymentDTP.Size = new System.Drawing.Size(121, 22);
@@ -221,7 +221,7 @@ namespace WeddingManagementApplication
             // 
             // tb_moneyLeft
             // 
-            this.tb_moneyLeft.Location = new System.Drawing.Point(452, 114);
+            this.tb_moneyLeft.Location = new System.Drawing.Point(465, 114);
             this.tb_moneyLeft.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tb_moneyLeft.Name = "tb_moneyLeft";
             this.tb_moneyLeft.ReadOnly = true;
@@ -368,14 +368,14 @@ namespace WeddingManagementApplication
             this.groupBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox2.Size = new System.Drawing.Size(593, 159);
+            this.groupBox2.Size = new System.Drawing.Size(598, 159);
             this.groupBox2.TabIndex = 61;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Payment";
             // 
             // tb_total
             // 
-            this.tb_total.Location = new System.Drawing.Point(452, 37);
+            this.tb_total.Location = new System.Drawing.Point(465, 37);
             this.tb_total.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tb_total.Name = "tb_total";
             this.tb_total.ReadOnly = true;
@@ -442,6 +442,8 @@ namespace WeddingManagementApplication
             // btn_exit
             // 
             this.btn_exit.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btn_exit.Font = new System.Drawing.Font("Segoe UI Semibold", 7.8F, System.Drawing.FontStyle.Bold);
+            this.btn_exit.ForeColor = System.Drawing.Color.Crimson;
             this.btn_exit.Location = new System.Drawing.Point(843, 382);
             this.btn_exit.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btn_exit.Name = "btn_exit";
@@ -454,6 +456,8 @@ namespace WeddingManagementApplication
             // btn_save
             // 
             this.btn_save.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btn_save.Font = new System.Drawing.Font("Segoe UI Semibold", 7.8F, System.Drawing.FontStyle.Bold);
+            this.btn_save.ForeColor = System.Drawing.Color.Crimson;
             this.btn_save.Location = new System.Drawing.Point(751, 382);
             this.btn_save.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btn_save.Name = "btn_save";
@@ -503,9 +507,9 @@ namespace WeddingManagementApplication
             this.groupBox5.Controls.Add(this.rBtn_yes);
             this.groupBox5.Controls.Add(this.rBtn_no);
             this.groupBox5.Location = new System.Drawing.Point(768, 292);
-            this.groupBox5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox5.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox5.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox5.Size = new System.Drawing.Size(132, 27);
             this.groupBox5.TabIndex = 69;
             this.groupBox5.TabStop = false;
@@ -515,9 +519,9 @@ namespace WeddingManagementApplication
             this.groupBox6.Controls.Add(this.pay_yes);
             this.groupBox6.Controls.Add(this.pay_no);
             this.groupBox6.Location = new System.Drawing.Point(768, 347);
-            this.groupBox6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox6.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox6.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox6.Size = new System.Drawing.Size(132, 28);
             this.groupBox6.TabIndex = 70;
             this.groupBox6.TabStop = false;
@@ -525,6 +529,7 @@ namespace WeddingManagementApplication
             // label6
             // 
             this.label6.AutoSize = true;
+            this.label6.BackColor = System.Drawing.Color.White;
             this.label6.Location = new System.Drawing.Point(944, 9);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(17, 17);
@@ -537,7 +542,7 @@ namespace WeddingManagementApplication
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(204)))), ((int)(((byte)(176)))));
-            this.ClientSize = new System.Drawing.Size(973, 441);
+            this.ClientSize = new System.Drawing.Size(967, 441);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.groupBox5);
@@ -556,7 +561,7 @@ namespace WeddingManagementApplication
             this.Controls.Add(this.label_rule_fl);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.MaximumSize = new System.Drawing.Size(973, 441);
+            this.MaximumSize = new System.Drawing.Size(2000, 441);
             this.Name = "FormBill";
             this.Text = "Bill";
             this.groupBox1.ResumeLayout(false);

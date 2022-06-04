@@ -52,7 +52,7 @@ namespace WeddingManagementApplication
             this.labelRReport.AutoSize = true;
             this.labelRReport.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Bold);
             this.labelRReport.ForeColor = System.Drawing.Color.Firebrick;
-            this.labelRReport.Location = new System.Drawing.Point(144, 59);
+            this.labelRReport.Location = new System.Drawing.Point(176, 59);
             this.labelRReport.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelRReport.Name = "labelRReport";
             this.labelRReport.Size = new System.Drawing.Size(609, 51);
@@ -70,16 +70,17 @@ namespace WeddingManagementApplication
             // labelYear
             // 
             this.labelYear.AutoSize = true;
-            this.labelYear.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F);
-            this.labelYear.Location = new System.Drawing.Point(266, 233);
+            this.labelYear.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.labelYear.ForeColor = System.Drawing.Color.Crimson;
+            this.labelYear.Location = new System.Drawing.Point(272, 230);
             this.labelYear.Name = "labelYear";
-            this.labelYear.Size = new System.Drawing.Size(70, 29);
+            this.labelYear.Size = new System.Drawing.Size(58, 28);
             this.labelYear.TabIndex = 4;
             this.labelYear.Text = "Year:";
             // 
             // textBoxRTotal
             // 
-            this.textBoxRTotal.Location = new System.Drawing.Point(677, 231);
+            this.textBoxRTotal.Location = new System.Drawing.Point(673, 229);
             this.textBoxRTotal.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxRTotal.Name = "textBoxRTotal";
             this.textBoxRTotal.ReadOnly = true;
@@ -115,20 +116,22 @@ namespace WeddingManagementApplication
             // labelRTotal
             // 
             this.labelRTotal.AutoSize = true;
-            this.labelRTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F);
-            this.labelRTotal.Location = new System.Drawing.Point(491, 231);
+            this.labelRTotal.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.labelRTotal.ForeColor = System.Drawing.Color.Crimson;
+            this.labelRTotal.Location = new System.Drawing.Point(497, 228);
             this.labelRTotal.Name = "labelRTotal";
-            this.labelRTotal.Size = new System.Drawing.Size(176, 29);
+            this.labelRTotal.Size = new System.Drawing.Size(151, 28);
             this.labelRTotal.TabIndex = 1;
             this.labelRTotal.Text = "Revenue Total:";
             // 
             // labelMonth
             // 
             this.labelMonth.AutoSize = true;
-            this.labelMonth.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F);
-            this.labelMonth.Location = new System.Drawing.Point(22, 233);
+            this.labelMonth.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.labelMonth.ForeColor = System.Drawing.Color.Crimson;
+            this.labelMonth.Location = new System.Drawing.Point(21, 230);
             this.labelMonth.Name = "labelMonth";
-            this.labelMonth.Size = new System.Drawing.Size(85, 29);
+            this.labelMonth.Size = new System.Drawing.Size(80, 28);
             this.labelMonth.TabIndex = 0;
             this.labelMonth.Text = "Month:";
             // 
@@ -146,8 +149,9 @@ namespace WeddingManagementApplication
             // 
             // button1
             // 
-            this.button1.BackColor = System.Drawing.Color.Transparent;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.button1.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.button1.Font = new System.Drawing.Font("Segoe UI Semibold", 7.8F, System.Drawing.FontStyle.Bold);
+            this.button1.ForeColor = System.Drawing.Color.Crimson;
             this.button1.Location = new System.Drawing.Point(760, 283);
             this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button1.Name = "button1";
@@ -181,11 +185,11 @@ namespace WeddingManagementApplication
             // rBtn_month
             // 
             this.rBtn_month.AutoSize = true;
-            this.rBtn_month.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rBtn_month.Location = new System.Drawing.Point(494, 180);
+            this.rBtn_month.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rBtn_month.Location = new System.Drawing.Point(476, 178);
             this.rBtn_month.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.rBtn_month.Name = "rBtn_month";
-            this.rBtn_month.Size = new System.Drawing.Size(82, 27);
+            this.rBtn_month.Size = new System.Drawing.Size(89, 29);
             this.rBtn_month.TabIndex = 93;
             this.rBtn_month.TabStop = true;
             this.rBtn_month.Text = "Month";
@@ -194,11 +198,11 @@ namespace WeddingManagementApplication
             // rBtn_year
             // 
             this.rBtn_year.AutoSize = true;
-            this.rBtn_year.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rBtn_year.Location = new System.Drawing.Point(582, 180);
+            this.rBtn_year.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rBtn_year.Location = new System.Drawing.Point(583, 178);
             this.rBtn_year.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.rBtn_year.Name = "rBtn_year";
-            this.rBtn_year.Size = new System.Drawing.Size(63, 27);
+            this.rBtn_year.Size = new System.Drawing.Size(69, 29);
             this.rBtn_year.TabIndex = 92;
             this.rBtn_year.TabStop = true;
             this.rBtn_year.Text = "Year";
@@ -215,6 +219,8 @@ namespace WeddingManagementApplication
             // btn_search_rpMonth
             // 
             this.btn_search_rpMonth.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btn_search_rpMonth.Font = new System.Drawing.Font("Segoe UI Semibold", 7.8F, System.Drawing.FontStyle.Bold);
+            this.btn_search_rpMonth.ForeColor = System.Drawing.Color.Crimson;
             this.btn_search_rpMonth.Location = new System.Drawing.Point(673, 137);
             this.btn_search_rpMonth.Name = "btn_search_rpMonth";
             this.btn_search_rpMonth.Size = new System.Drawing.Size(75, 32);

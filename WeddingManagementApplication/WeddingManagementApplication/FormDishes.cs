@@ -148,83 +148,99 @@ namespace WeddingManagementApplication
 
         private void btn_add_dishes_Click_1(object sender, EventArgs e)
         {
-            if (tb_dishes_name.Text == "" || tb_dishes_price.Text == "")
+            if (WeddingClient.client_priority > 2)
             {
-                MessageBox.Show("Please fill out all the fields!", "LACK", MessageBoxButtons.OK);
+                MessageBox.Show("You don't have permission to do this!", "NOT PERMIT", MessageBoxButtons.OK);
+                return;
             }
             else
             {
-                using (SqlConnection sql = new SqlConnection(WeddingClient.sqlConnectionString))
+                if (tb_dishes_name.Text == "" || tb_dishes_price.Text == "")
                 {
-                    sql.Open();
-                    try
+                    MessageBox.Show("Please fill out all the fields!", "LACK", MessageBoxButtons.OK);
+                }
+                else
+                {
+                    using (SqlConnection sql = new SqlConnection(WeddingClient.sqlConnectionString))
                     {
-                        using (SqlCommand cmd = new SqlCommand("INSERT INTO MENU (IdDishes, DishesName, DishesPrice,Note, Available) VALUES (@IdDishes, @DishesName, @DishesPrice,@Note,1)", sql))
+                        sql.Open();
+                        try
                         {
-                            string newDishesId = "MN" + WeddingClient.GetNewIdFromTable("MN").ToString().PadLeft(19, '0');
-                            cmd.Parameters.AddWithValue("@IdDishes", newDishesId);
-                            cmd.Parameters.AddWithValue("@DishesName", tb_dishes_name.Text);
-                            cmd.Parameters.AddWithValue("@DishesPrice", tb_dishes_price.Text);
-                            cmd.Parameters.AddWithValue("@Note", tb_dishes_note.Text);
-
-                            if (cmd.ExecuteNonQuery() > 0)
+                            using (SqlCommand cmd = new SqlCommand("INSERT INTO MENU (IdDishes, DishesName, DishesPrice,Note, Available) VALUES (@IdDishes, @DishesName, @DishesPrice,@Note,1)", sql))
                             {
-                                // add to table
-                                row = table.NewRow();
-                                row["DishesName"] = tb_dishes_name.Text;
-                                row["DishesPrice"] = tb_dishes_price.Text;
-                                row["Note"] = tb_dishes_note.Text;
-                                row["IdDishes"] = newDishesId;
-                                table.Rows.Add(row);
-                                MessageBox.Show("A service added", "SUCCESS", MessageBoxButtons.OK);
-                                // add to list
-                                WeddingClient.listDishes.Add(new DishesData(newDishesId, tb_dishes_name.Text, Convert.ToInt64(tb_dishes_price.Text), tb_dishes_note.Text));
-                            }
-                        }
+                                string newDishesId = "MN" + WeddingClient.GetNewIdFromTable("MN").ToString().PadLeft(19, '0');
+                                cmd.Parameters.AddWithValue("@IdDishes", newDishesId);
+                                cmd.Parameters.AddWithValue("@DishesName", tb_dishes_name.Text);
+                                cmd.Parameters.AddWithValue("@DishesPrice", tb_dishes_price.Text);
+                                cmd.Parameters.AddWithValue("@Note", tb_dishes_note.Text);
 
+                                if (cmd.ExecuteNonQuery() > 0)
+                                {
+                                    // add to table
+                                    row = table.NewRow();
+                                    row["DishesName"] = tb_dishes_name.Text;
+                                    row["DishesPrice"] = tb_dishes_price.Text;
+                                    row["Note"] = tb_dishes_note.Text;
+                                    row["IdDishes"] = newDishesId;
+                                    table.Rows.Add(row);
+                                    MessageBox.Show("A service added", "SUCCESS", MessageBoxButtons.OK);
+                                    // add to list
+                                    WeddingClient.listDishes.Add(new DishesData(newDishesId, tb_dishes_name.Text, Convert.ToInt64(tb_dishes_price.Text), tb_dishes_note.Text));
+                                }
+                            }
+
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Price must be number", "Error", MessageBoxButtons.OK);
+                        }
                     }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Price must be number", "Error", MessageBoxButtons.OK);
-                    }
-                }                 
+                }
             }
         }
 
         // listener button delete
         private void btn_delete_dishes_Click(object sender, EventArgs e)
         {
-            if (currentTypeId == "")
+            if (WeddingClient.client_priority > 2)
             {
-                MessageBox.Show("Please select a dish to delete!");
+                MessageBox.Show("You don't have permission to do this!", "NOT PERMIT", MessageBoxButtons.OK);
+                return;
             }
             else
             {
-                using (SqlConnection sql = new SqlConnection(WeddingClient.sqlConnectionString))
+                if (currentTypeId == "")
                 {
-                    sql.Open();
-                    using (SqlCommand cmd = new SqlCommand("UPDATE MENU SET Available = 0 WHERE IdDishes = @IdDishes", sql))
+                    MessageBox.Show("Please select a dish to delete!");
+                }
+                else
+                {
+                    using (SqlConnection sql = new SqlConnection(WeddingClient.sqlConnectionString))
                     {
-                        cmd.Parameters.AddWithValue("@IdDishes", currentTypeId);
-                        if (cmd.ExecuteNonQuery() > 0)
+                        sql.Open();
+                        using (SqlCommand cmd = new SqlCommand("UPDATE MENU SET Available = 0 WHERE IdDishes = @IdDishes", sql))
                         {
-                            // remove from list
-                            foreach (DishesData dishes in WeddingClient.listDishes)
+                            cmd.Parameters.AddWithValue("@IdDishes", currentTypeId);
+                            if (cmd.ExecuteNonQuery() > 0)
                             {
-                                if (dishes.idDishes == currentTypeId)
+                                // remove from list
+                                foreach (DishesData dishes in WeddingClient.listDishes)
                                 {
-                                    WeddingClient.listDishes.Remove(dishes);
-                                    break;
+                                    if (dishes.idDishes == currentTypeId)
+                                    {
+                                        WeddingClient.listDishes.Remove(dishes);
+                                        break;
+                                    }
                                 }
+                                // remove from table
+                                table.Rows.Remove(table.Rows.Find(currentTypeId));
+                                MessageBox.Show("A dish deleted!");
                             }
-                            // remove from table
-                            table.Rows.Remove(table.Rows.Find(currentTypeId));
-                            MessageBox.Show("A dish deleted!");
                         }
                     }
                 }
+                FormDishes.currentTypeId = "";
             }
-            FormDishes.currentTypeId = "";
         }
 
         private void btn_search_Click(object sender, EventArgs e)
@@ -268,36 +284,44 @@ namespace WeddingManagementApplication
 
         private void btn_update_dishes_Click(object sender, EventArgs e)
         {
-            if (tb_dishes_name.Text == "" || tb_dishes_price.Text == "")
+            if (WeddingClient.client_priority > 2)
             {
-                MessageBox.Show("Please fill out all the fields!", "LACK", MessageBoxButtons.OK);
+                MessageBox.Show("You don't have permission to do this!", "NOT PERMIT", MessageBoxButtons.OK);
+                return;
             }
             else
             {
-                if (currentTypeId == "")
+                if (tb_dishes_name.Text == "" || tb_dishes_price.Text == "")
                 {
-                    MessageBox.Show("Please select a dish to delete!");
+                    MessageBox.Show("Please fill out all the fields!", "LACK", MessageBoxButtons.OK);
                 }
                 else
                 {
-                    using (SqlConnection sql = new SqlConnection(WeddingClient.sqlConnectionString))
+                    if (currentTypeId == "")
                     {
-                        sql.Open();
-                        using (SqlCommand cmd = new SqlCommand("UPDATE MENU SET DishesName=@name,DishesPrice=@price,Note=@note WHERE IdDishes = @IdDishes", sql))
+                        MessageBox.Show("Please select a dish to delete!");
+                    }
+                    else
+                    {
+                        using (SqlConnection sql = new SqlConnection(WeddingClient.sqlConnectionString))
                         {
-                            cmd.Parameters.AddWithValue("@IdDishes", currentTypeId);
-                            cmd.Parameters.AddWithValue("@name", tb_dishes_name.Text);
-                            cmd.Parameters.AddWithValue("@price", int.Parse(tb_dishes_price.Text));
-                            cmd.Parameters.AddWithValue("@note", tb_dishes_note.Text);
-                            if (cmd.ExecuteNonQuery() > 0)
+                            sql.Open();
+                            using (SqlCommand cmd = new SqlCommand("UPDATE MENU SET DishesName=@name,DishesPrice=@price,Note=@note WHERE IdDishes = @IdDishes", sql))
                             {
-                                MessageBox.Show("A dish updated!");
+                                cmd.Parameters.AddWithValue("@IdDishes", currentTypeId);
+                                cmd.Parameters.AddWithValue("@name", tb_dishes_name.Text);
+                                cmd.Parameters.AddWithValue("@price", int.Parse(tb_dishes_price.Text));
+                                cmd.Parameters.AddWithValue("@note", tb_dishes_note.Text);
+                                if (cmd.ExecuteNonQuery() > 0)
+                                {
+                                    MessageBox.Show("A dish updated!");
+                                }
                             }
                         }
                     }
+                    FormDishes.currentTypeId = "";
+                    load_data_Dishes();
                 }
-                FormDishes.currentTypeId = "";
-                load_data_Dishes();
             }
         }
     }
