@@ -104,7 +104,7 @@ namespace WeddingManagementApplication
                 int count = 0;
                 string Id = "";
 
-                using (SqlCommand cmd2 = new SqlCommand("SELECT * from BILL where (DAY(PaymentDate)=@day and Month(PaymentDate)=@month and Year(PaymentDate)=@year)", sql))
+                using (SqlCommand cmd2 = new SqlCommand("SELECT * from BILL where (DAY(PaymentDate)=@day and Month(PaymentDate)=@month and Year(PaymentDate)=@year) AND MoneyLeft <= 0", sql))
                 {
                     cmd2.Parameters.AddWithValue("@day", day);
                     cmd2.Parameters.AddWithValue("@month", month);
@@ -248,7 +248,7 @@ namespace WeddingManagementApplication
             {
                 using (SqlConnection sqlconn = new SqlConnection(WeddingClient.sqlConnectionString))
                 {
-                    string sqlquery = "SELECT D.IdReport, D.Day, R.Month, D.DayRevenue, R.RevenueToTal, D.AmoutOfWedding FROM REVENUE_REPORT R, REVENUE_REPORT_DT D WHERE D. IdReport = R.IdReport AND D.Day LIKE @searchRPD";
+                    string sqlquery = "SELECT D.IdReport, D.Day, R.Month, D.DayRevenue, R.RevenueToTal, D.AmoutOfWedding FROM REVENUE_REPORT R, REVENUE_REPORT_DT D WHERE D.IdReport = R.IdReport AND D.Day LIKE @searchRPD";
                     sqlconn.Open();
                     using (SqlCommand sqlcomm = new SqlCommand(sqlquery, sqlconn))
                     {

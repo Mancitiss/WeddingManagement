@@ -23,73 +23,6 @@ namespace WeddingManagementApplication
         }
         private void LoadReportData()
         {
-            //load_data_wedding();
-            /*
-            DataColumn column;
-            DataRow row;
-            // Create first column and add to the DataTable.
-            column = new DataColumn();
-            column.DataType = System.Type.GetType("System.Int32");
-            column.ColumnName = "Month";
-            column.AutoIncrement = false;
-            column.Caption = "Month";
-            column.ReadOnly = true;
-            column.Unique = false;
-            // Add the column to the DataColumnCollection.
-            table1.Columns.Add(column);
-
-            // Create second column.
-            column = new DataColumn();
-            column.DataType = System.Type.GetType("System.Int32");
-            column.ColumnName = "Year";
-            column.AutoIncrement = false;
-            column.Caption = "Year";
-            column.ReadOnly = false;
-            column.Unique = false;
-            table1.Columns.Add(column);
-
-            // create third column
-            column = new DataColumn();
-            column.DataType = System.Type.GetType("System.Int32");
-            column.ColumnName = "Total";
-            column.AutoIncrement = false;
-            column.Caption = "Total";
-            column.ReadOnly = false;
-            column.Unique = false;
-            table1.Columns.Add(column);
-            // create thirteenth column
-            column = new DataColumn();
-            column.DataType = System.Type.GetType("System.String");
-            column.ColumnName = "idReport";
-            column.AutoIncrement = false;
-            column.Caption = "idReport";
-            column.ReadOnly = false;
-            column.Unique = false;
-            column.ColumnMapping = MappingType.Hidden;
-            table1.Columns.Add(column);
-            dataRPMonth.DataSource = table1;
-            foreach (DataGridViewColumn col in dataRPMonth.Columns)
-            {
-                col.HeaderText = table1.Columns[col.DataPropertyName].Caption;
-            }
-            dataRPMonth.RowHeaderMouseClick += new DataGridViewCellMouseEventHandler(dataWedding_RowHeaderMouseClick);
-            using (SqlConnection sql = new SqlConnection(WeddingClient.sqlConnectionString))
-            {
-                sql.Open();
-                using (SqlCommand check = new SqlCommand("SELECT * FROM REVENUE_REPORT", sql))
-                {
-                    using (SqlDataReader reader = check.ExecuteReader())
-                    {
-                        if (reader.Read())
-                        {
-                            DataRow rw = table1.NewRow();
-                            rw.ItemArray = new object[] { reader["Month"], reader["Year"], reader["RevenueTotal"], reader["IdReport"] };
-                            table1.Rows.Add(rw);
-                        }
-                    }
-                }
-            }
-            */
             this.rBtn_month.Checked = true;
             this.rBtn_year.Checked = false;
             Search();
@@ -119,14 +52,14 @@ namespace WeddingManagementApplication
                     using (SqlDataReader dr = cmd2.ExecuteReader())
                     {
                         int total = 0;
-                        MessageBox.Show(dr.HasRows.ToString());
+                        //MessageBox.Show(dr.HasRows.ToString());
                         if (dr.HasRows)
                         {
                             String ID = "";
                             while (dr.Read())
                             {
                                 ID = dr["IdReport"].ToString();
-                                MessageBox.Show(ID);
+                                //MessageBox.Show(ID);
                             }
                             dr.Close();
                             using (SqlCommand cmd3 = new SqlCommand("select * from REVENUE_REPORT_DT WHERE IdReport = @id", sql))
@@ -147,11 +80,6 @@ namespace WeddingManagementApplication
                                 cmd3.Parameters.AddWithValue("@total", total);
                                 if (cmd3.ExecuteNonQuery() > 0)
                                 {
-                                    /*
-                                    DataRow row = table1.NewRow();
-                                    row.ItemArray = new object[] { month, year, total, ID };
-                                    table1.Rows.Add(row);
-                                    */
                                     Search("");
                                     MessageBox.Show("Report Add Successfully");
                                 }
@@ -166,14 +94,9 @@ namespace WeddingManagementApplication
                                 cmd3.Parameters.AddWithValue("@id", newId);
                                 cmd3.Parameters.AddWithValue("@month", month);
                                 cmd3.Parameters.AddWithValue("@year", year);
-                                cmd3.Parameters.AddWithValue("@total", 0 /*int.Parse(textBoxRTotal.Text)*/);
+                                cmd3.Parameters.AddWithValue("@total", 0);
                                 if (cmd3.ExecuteNonQuery() > 0)
                                 {
-                                    /*
-                                    DataRow row = table1.NewRow();
-                                    row.ItemArray = new object[] { month, year, int.Parse(textBoxRTotal.Text), newId };
-                                    table1.Rows.Add(row);
-                                    */
                                     inserted = true;
                                     //Search("");
                                     MessageBox.Show("Report Add Successfully");
@@ -204,40 +127,6 @@ namespace WeddingManagementApplication
         {
 
         }
-        /*
-        private void buttonDelete_Click(object sender, EventArgs e)
-        {
-            if (currentReportId != null && currentReportId.Length == 21)
-            {
-                using (SqlConnection sql = new SqlConnection(WeddingClient.sqlConnectionString))
-                {
-                    sql.Open();
-                    // complete command for me
-                    using (SqlCommand cmd = new SqlCommand("DELETE FROM REVENUE_REPORT_DT  WHERE IdReport = @id", sql))
-                    {
-                        cmd.Parameters.AddWithValue("@id", currentReportId);
-                        if (cmd.ExecuteNonQuery() > 0)
-                        {
-                            //Load_data_wedding();
-                            // delete row in table1
-                            //dataWedding.Rows.RemoveAt(dataWedding.CurrentRow.Index);
-                            table1.Rows.RemoveAt(dataRPMonth.CurrentRow.Index);
-                            MessageBox.Show("Report deleted", "SUCCESS", MessageBoxButtons.OK);
-                            NhanTiec.currentWeddingId = "";
-                        }
-                    }
-                    using (SqlCommand cmd = new SqlCommand("DELETE FROM REVENUE_REPORT WHERE IdReport = @id", sql))
-                    {
-                        cmd.Parameters.AddWithValue("@id", currentReportId);
-                    }
-                }
-            }
-            else
-            {
-                MessageBox.Show("Please select a wedding to delete", "ERROR", MessageBoxButtons.OK);
-            }
-        }
-        */
 
         private void img_close_service_Click(object sender, EventArgs e)
         {
