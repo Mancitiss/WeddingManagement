@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnUpdate = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.rdbU = new System.Windows.Forms.RadioButton();
             this.rbtA = new System.Windows.Forms.RadioButton();
@@ -40,8 +41,7 @@
             this.tbStart = new System.Windows.Forms.TextBox();
             this.tbName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnUpdate = new System.Windows.Forms.Button();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel(); 
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -68,6 +68,16 @@
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
             this.panel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseMove);
+            // 
+            // btnUpdate
+            // 
+            this.btnUpdate.Location = new System.Drawing.Point(195, 468);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(86, 35);
+            this.btnUpdate.TabIndex = 17;
+            this.btnUpdate.Text = "Cập nhật";
+            this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // label4
             // 
@@ -151,6 +161,7 @@
             this.tbEnd.Name = "tbEnd";
             this.tbEnd.Size = new System.Drawing.Size(179, 22);
             this.tbEnd.TabIndex = 7;
+            this.tbEnd.TextChanged += new System.EventHandler(this.tbEnd_TextChanged);
             // 
             // tbStart
             // 
@@ -186,16 +197,6 @@
             this.flowLayoutPanel1.TabIndex = 1;
             this.flowLayoutPanel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
             this.flowLayoutPanel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseMove);
-            // 
-            // btnUpdate
-            // 
-            this.btnUpdate.Location = new System.Drawing.Point(195, 468);
-            this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(86, 35);
-            this.btnUpdate.TabIndex = 17;
-            this.btnUpdate.Text = "Cập nhật";
-            this.btnUpdate.UseVisualStyleBackColor = true;
-            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // FormShift
             // 

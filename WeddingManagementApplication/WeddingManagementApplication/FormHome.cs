@@ -86,7 +86,7 @@ namespace WeddingManagementApplication
         {
             this.searchDropDown1.Visible = false;
             this.panelNavigate.Top = this.btnWedding.Top;
-            FormMenu frm = new FormMenu();
+            FormShift frm = new FormShift();
             frm.ShowDialog();
         }
 
@@ -113,10 +113,11 @@ namespace WeddingManagementApplication
 
         private void btnSettings_Click(object sender, EventArgs e)
         {
-            this.searchDropDown1.Visible = false;
-            this.lobbyDropDown1.Visible = false;
-            FormMenu frm = new FormMenu();
-            frm.ShowDialog();
+            //this.searchDropDown1.Visible = false;
+            //this.lobbyDropDown1.Visible = false;
+            //FormShft frm = new FormMenu();
+            //frm.ShowDialog();
+            MessageBox.Show("Comming soon!", "CLOSE", MessageBoxButtons.OK);
         }
 
         private void btnLogout_Click(object sender, EventArgs e)

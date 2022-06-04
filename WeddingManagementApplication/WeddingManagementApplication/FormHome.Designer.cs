@@ -80,7 +80,7 @@
             // 
             this.btnLogout.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(78)))), ((int)(((byte)(77)))));
             this.btnLogout.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnLogout.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLogout.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Bold);
             this.btnLogout.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnLogout.Location = new System.Drawing.Point(3, 720);
             this.btnLogout.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -96,7 +96,7 @@
             // 
             this.btnSettings.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(78)))), ((int)(((byte)(77)))));
             this.btnSettings.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnSettings.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSettings.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Bold);
             this.btnSettings.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnSettings.Location = new System.Drawing.Point(3, 656);
             this.btnSettings.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -112,7 +112,7 @@
             // 
             this.btnWedding.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(78)))), ((int)(((byte)(77)))));
             this.btnWedding.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnWedding.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnWedding.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Bold);
             this.btnWedding.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnWedding.Location = new System.Drawing.Point(3, 528);
             this.btnWedding.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -310,6 +310,7 @@
             this.lobbyDropDown1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(204)))), ((int)(((byte)(176)))));
             this.lobbyDropDown1.Location = new System.Drawing.Point(0, 228);
             this.lobbyDropDown1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.lobbyDropDown1.MaximumSize = new System.Drawing.Size(150, 97);
             this.lobbyDropDown1.Name = "lobbyDropDown1";
             this.lobbyDropDown1.Size = new System.Drawing.Size(149, 97);
             this.lobbyDropDown1.TabIndex = 1;

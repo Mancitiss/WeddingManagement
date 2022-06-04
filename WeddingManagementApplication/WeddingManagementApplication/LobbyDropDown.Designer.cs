@@ -76,6 +76,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(204)))), ((int)(((byte)(176)))));
             this.Controls.Add(this.flowLayoutPanel1);
+            this.MaximumSize = new System.Drawing.Size(150, 97);
             this.Name = "LobbyDropDown";
             this.Size = new System.Drawing.Size(150, 97);
             this.flowLayoutPanel1.ResumeLayout(false);

@@ -228,5 +228,10 @@ namespace WeddingManagementApplication
                 this.Top += e.Y - lastPoint.Y;
             }
         }
+
+        private void tbEnd_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

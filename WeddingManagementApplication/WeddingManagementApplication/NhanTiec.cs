@@ -681,6 +681,12 @@ namespace WeddingManagementApplication
                 return;
             }
             LobbyData lobby = WeddingClient.listLobbies[indexLobby];
+
+            if (!IsLobbyAvailable(lobby.idLobby, shift.idShift))
+            {
+                MessageBox.Show("This lobby is not available at this shift!", "LACK", MessageBoxButtons.OK);
+                return;
+            }
             
             using(SqlConnection sql = new SqlConnection(WeddingClient.sqlConnectionString))
             {
@@ -743,6 +749,27 @@ namespace WeddingManagementApplication
             }
         }
 
+        private bool IsLobbyAvailable(string idLobby, string idShift)
+        {
+            using (SqlConnection sql = new SqlConnection(WeddingClient.sqlConnectionString))
+            {
+                sql.Open();
+                using (SqlCommand cmd = new SqlCommand("SELECT * FROM WEDDING_INFOR WHERE IdLobby = @idLobby AND IdShift = @idShift AND Available > 0", sql))
+                {
+                    cmd.Parameters.AddWithValue("@idLobby", idLobby);
+                    cmd.Parameters.AddWithValue("@idShift", idShift);
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+            return true;
+        }
+
         // set sự kiện cho btn delete wedding
         private void btn_delete_wedding_Click(object sender, EventArgs e)
         {
@@ -782,6 +809,11 @@ namespace WeddingManagementApplication
         private void NhanTiec_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

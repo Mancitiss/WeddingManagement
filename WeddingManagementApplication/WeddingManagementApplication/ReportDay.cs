@@ -13,188 +13,223 @@ namespace WeddingManagementApplication
 {
     public partial class ReportDay : Form
     {
+
         public static string currentReportId = "";
         public static int currentReportDay = 0;
-        SqlDataAdapter adapter = new SqlDataAdapter();
         DataTable table1 = new DataTable();
         public ReportDay()
         {
             InitializeComponent();
             ReportLoad();
         }
-
+        
         private void ReportLoad()
         {
-            //load_data_wedding();
-            DataColumn column;
-            DataRow row;
-            // Create first column and add to the DataTable.
-            column = new DataColumn();
-            column.DataType = System.Type.GetType("System.Int32");
-            column.ColumnName = "Day";
-            column.AutoIncrement = false;
-            column.Caption = "Day";
-            column.ReadOnly = true;
-            column.Unique = false;
-            // Add the column to the DataColumnCollection.
-            table1.Columns.Add(column);
-
-            // Create second column.
-            column = new DataColumn();
-            column.DataType = System.Type.GetType("System.Int32");
-            column.ColumnName = "DayRevenue";
-            column.AutoIncrement = false;
-            column.Caption = "DayRevenue";
-            column.ReadOnly = false;
-            column.Unique = false;
-            table1.Columns.Add(column);
-
-            // create third column
-            //column = new DataColumn();
-            //column.DataType = System.Type.GetType("System.Double");
-            //column.ColumnName = "Month";
-            //column.AutoIncrement = false;
-            //column.Caption = "month";
-            //column.ReadOnly = false;
-            //column.Unique = false;
-            //table1.Columns.Add(column);
-            // Create second column.
-            column = new DataColumn();
-            column.DataType = System.Type.GetType("System.Int32");
-            column.ColumnName = "AmountOfWedding";
-            column.AutoIncrement = false;
-            column.Caption = "AmountOfWedding";
-            column.ReadOnly = false;
-            column.Unique = false;
-            table1.Columns.Add(column);
-            // create thirteenth column
-            column = new DataColumn();
-            column.DataType = System.Type.GetType("System.String");
-            column.ColumnName = "idReport";
-            column.AutoIncrement = false;
-            column.Caption = "idReport";
-            column.ReadOnly = false;
-            column.Unique = false;
-            column.ColumnMapping = MappingType.Hidden;
-            table1.Columns.Add(column);
-           
-            dataGridView1.DataSource = table1;
-            foreach (DataGridViewColumn col in dataGridView1.Columns)
-            {
-                col.HeaderText = table1.Columns[col.DataPropertyName].Caption;
-            }
-            dataGridView1.RowHeaderMouseClick += new DataGridViewCellMouseEventHandler(dataWedding_RowHeaderMouseClick);
+            table1 =  new  DataTable();
             using (SqlConnection sql = new SqlConnection(WeddingClient.sqlConnectionString))
             {
                 sql.Open();
-                using (SqlCommand check = new SqlCommand("SELECT * FROM REVENUE_REPORT_DT", sql))
+                using (SqlCommand cmd = new SqlCommand("SELECT D.IdReport, D.Day, R.Month, D.DayRevenue, R.RevenueToTal, D.AmoutOfWedding FROM REVENUE_REPORT R, REVENUE_REPORT_DT D", sql)) 
                 {
-                    using (SqlDataReader reader = check.ExecuteReader())
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
                     {
-                        if (reader.Read())
-                        {
-                            DataRow rw = table1.NewRow();
-                            rw.ItemArray = new object[] { reader["Day"], reader["DayRevenue"], reader["AmoutOfWedding"], reader["IdReport"] };
-                            table1.Rows.Add(rw);
-                        }
+                        adapter.Fill(table1);
                     }
                 }
             }
+            table1.Columns[0].ColumnMapping = MappingType.Hidden;
+            table1.Columns[1].Caption = "Day";
+            table1.Columns[2].Caption = "Month";
+            table1.Columns[3].Caption = "Day Revenue";
+            table1.Columns[4].Caption = "Month Revenue";
+            table1.Columns[5].Caption = "Amout Of Wedding";
+            DataColumn column = new DataColumn("Ratio", typeof(float));
+            column.Caption = "Ratio";
+            table1.Columns.Add(column);
+            for (int i = 0; i < table1.Rows.Count; i++)
+            {
+                table1.Rows[i]["Ratio"] = Convert.ToSingle(table1.Rows[i]["DayRevenue"]) / Convert.ToSingle(table1.Rows[i]["RevenueToTal"]);
+            }
+            dataRPD.DataSource = table1;
+            foreach (DataGridViewColumn col in dataRPD.Columns)
+            {
+                col.HeaderText = table1.Columns[col.DataPropertyName].Caption;
+            }
+            dataRPD.RowHeaderMouseClick += new DataGridViewCellMouseEventHandler(dataWedding_RowHeaderMouseClick);
+            
         }
         private void dataWedding_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
+            // get the row of the cell clicked from dataGridView1
+            var rowItem = (DataRowView)dataRPD.Rows[e.RowIndex].DataBoundItem;
+            // find the row of the cell clicked in table
+            int i = table1.Rows.IndexOf(rowItem.Row);
+            DataRow row = table1.Rows[i];
+            
             // select weddingID
-            currentReportId = table1.Rows[e.RowIndex]["idReport"].ToString();
-            currentReportDay= int.Parse(table1.Rows[e.RowIndex]["Day"].ToString());
-            Console.WriteLine(NhanTiec.currentWeddingId);
+            currentReportId = row["idReport"].ToString();
+            currentReportDay = (short)row["Day"];
         }
         private void buttonAdd_Click(object sender, EventArgs e)
         {
             int index = comboBoxDay.SelectedIndex;
             int index2 = comboBoxMonth.SelectedIndex;
-            if (index < 0 ||index2<0)
+            if (!int.TryParse(textBoxYear.Text, out int year)) {
+                MessageBox.Show("Please enter year number correctly");
+                return;
+            }
+            if (index < 0 || index2 < 0)
             {
                 MessageBox.Show("Please fill full infor ");
+                return;
             }
-            else
+            if (!int.TryParse(comboBoxDay.SelectedItem.ToString(), out int day))
+            {
+                MessageBox.Show("Input error: Day");
+            }
+            if (!int.TryParse(comboBoxMonth.SelectedItem.ToString(), out int month))
+            {
+                MessageBox.Show("Input error: Month");
+            }
+            GetRevenue(year, month, day);
+            ReportLoad();
+        }
+
+        public static void GetRevenue(int year, int month, int day, bool silent = false)
+        {
             using (SqlConnection sql = new SqlConnection(WeddingClient.sqlConnectionString))
             {
                 sql.Open();
-                    int total = 0;
-                    int count =0;
-                // complete command for me
-                string Id ="";
-                    using (SqlCommand cmd2 = new SqlCommand("SELECT * from BILL where (DAY(PaymentDate)=@day and Month(PaymentDate)=@month and Year(PaymentDate)=@year)", sql))
+                long total = 0;
+                int count = 0;
+                string Id = "";
+
+                using (SqlCommand cmd2 = new SqlCommand("SELECT * from BILL where (DAY(PaymentDate)=@day and Month(PaymentDate)=@month and Year(PaymentDate)=@year) AND MoneyLeft <= 0", sql))
+                {
+                    cmd2.Parameters.AddWithValue("@day", day);
+                    cmd2.Parameters.AddWithValue("@month", month);
+                    cmd2.Parameters.AddWithValue("@year", year);
+                    using (SqlDataReader reader = cmd2.ExecuteReader())
                     {
-                        cmd2.Parameters.AddWithValue("@day", int.Parse(comboBoxDay.SelectedItem.ToString()));
-                        cmd2.Parameters.AddWithValue("@month", int.Parse(comboBoxMonth.SelectedItem.ToString()));
-                        cmd2.Parameters.AddWithValue("@year", int.Parse(textBoxYear.Text));
-                        using (SqlDataReader reader = cmd2.ExecuteReader())
+                        while (reader.Read())
                         {
-                            if (reader.HasRows)
-                            {
-                                while(reader.Read())
-                                {
-                                    total += (int)reader["Total"];
-                                    count += 1;
-                                }    
-                            }
+                            total += (long)reader["Total"];
+                            count += 1;
                         }
-                    } 
-                    using (SqlCommand cmd2 = new SqlCommand("SELECT * from REVENUE_REPORT where (Month =@month)", sql))
+                    }
+                }
+                bool existed = false;
+                using (SqlCommand cmd2 = new SqlCommand("SELECT * FROM REVENUE_REPORT WHERE Month = @month AND Year = @year", sql))
+                {
+                    cmd2.Parameters.AddWithValue("@month", month);
+                    cmd2.Parameters.AddWithValue("@year", year);
+                    using (SqlDataReader reader = cmd2.ExecuteReader())
                     {
-                        cmd2.Parameters.AddWithValue("@month", int.Parse(comboBoxMonth.SelectedItem.ToString()));
-                        using (SqlDataReader reader = cmd2.ExecuteReader())
+                        if (reader.Read())
                         {
-                            if (reader.HasRows)
+                            Id = reader["idReport"].ToString();
+                            existed = true;
+                        }
+                        else
+                        {
+                            Id = "RR" + WeddingClient.GetNewIdFromTable("RR").ToString();
+                        }
+                    }
+                }
+                if (!existed) // month not found, add
+                {
+                    using (SqlCommand cmd2 = new SqlCommand("INSERT INTO REVENUE_REPORT (IdReport, Month, Year, RevenueTotal) VALUES (@id, @month, @year, 0) ", sql))
+                    {
+                        cmd2.Parameters.AddWithValue("@id", Id);
+                        cmd2.Parameters.AddWithValue("@month", month);
+                        cmd2.Parameters.AddWithValue("@year", year);
+                        if (cmd2.ExecuteNonQuery() > 0)
+                        {
+                            using (SqlCommand cmd3 = new SqlCommand("Insert into REVENUE_REPORT_DT(IdReport,Day,DayRevenue,AmoutOfWedding) values(@id, @day, @rday, @amout)", sql))
                             {
-                                while (reader.Read())
+                                cmd3.Parameters.AddWithValue("@id", Id);
+                                cmd3.Parameters.AddWithValue("@day", day);
+                                cmd3.Parameters.AddWithValue("@rday", total);
+                                cmd3.Parameters.AddWithValue("@amout", count);
+                                if (cmd3.ExecuteNonQuery() > 0)
                                 {
-                                    Id = reader["idReport"].ToString();
-                                    using (SqlCommand cmd =new SqlCommand("INSERT into REVENUE_REPORT(IdReport) Values(@id)",sql))
+                                    using (SqlCommand cmd4 = new SqlCommand("UPDATE REVENUE_REPORT SET RevenueTotal = RevenueTotal + @plus WHERE IdReport = @Id", sql))
                                     {
-                                        cmd.Parameters.AddWithValue("@id", Id);
-                                        cmd.ExecuteNonQuery();
-                                    }    
+                                        cmd4.Parameters.AddWithValue("@plus", total);
+                                        cmd4.Parameters.AddWithValue("@Id", Id);
+                                        if (cmd4.ExecuteNonQuery() > 0)
+                                        {
+                                            //textBoxAOW.Text = count.ToString();
+                                            //textBoxDayRevenue.Text = total.ToString();
+                                            if (!silent) MessageBox.Show("Add day report success");
+                                        }
+                                    }
                                 }
                             }
-                            else
-                            {
-                                Id= "RR" + WeddingClient.GetNewIdFromTable("RR").ToString();
-                            }    
                         }
                     }
-                    using (SqlCommand cmd2 = new SqlCommand("INSERT INTO REVENUE_REPORT (IdReport, Month, year) VALUES (@id, @month, @year) ", sql))
+                }
+                else // month found, update
+                {
+                    using (SqlCommand cmd2 = new SqlCommand("SELECT DayRevenue FROM REVENUE_REPORT_DT WHERE IdReport = @Id AND Day = @day", sql))
                     {
-                        cmd2.Parameters.AddWithValue("@id",Id);
-                        cmd2.Parameters.AddWithValue("@month", int.Parse(comboBoxMonth.SelectedItem.ToString()));
-                        cmd2.Parameters.AddWithValue("@year", int.Parse(textBoxYear.Text));
-                        cmd2.ExecuteNonQuery();
-                    }
-                    using (SqlCommand cmd2 = new SqlCommand("Insert into  REVENUE_REPORT_DT(IdReport,Day,DayRevenue,AmoutOfWedding) values(@id,@day,@rday,@amout)", sql))
-                    {
-                        cmd2.Parameters.AddWithValue("@month", int.Parse(comboBoxMonth.SelectedItem.ToString()));
-                        cmd2.Parameters.AddWithValue("@day", int.Parse(comboBoxDay.SelectedItem.ToString()));
-                        cmd2.Parameters.AddWithValue("@rday", total);
-                        cmd2.Parameters.AddWithValue("@id", Id);
-                        cmd2.Parameters.AddWithValue("@amout", count);
-                        try
+                        cmd2.Parameters.AddWithValue("@Id", Id);
+                        cmd2.Parameters.AddWithValue("@day", day);
+                        using (SqlDataReader reader = cmd2.ExecuteReader())
                         {
-                            if (cmd2.ExecuteNonQuery() > 0)
+                            if (reader.Read()) // day found, update
                             {
-                                textBoxAOW.Text = count.ToString();
-                                textBoxDayRevenue.Text = total.ToString();
+                                long oldRevenue = (long)reader["DayRevenue"];
+                                using (SqlCommand cmd3 = new SqlCommand("UPDATE REVENUE_REPORT_DT SET DayRevenue = @rday, AmoutOfWedding = @amout WHERE IdReport = @Id AND Day = @day", sql))
+                                {
+                                    cmd3.Parameters.AddWithValue("@rday", total);
+                                    cmd3.Parameters.AddWithValue("@amout", count);
+                                    cmd3.Parameters.AddWithValue("@Id", Id);
+                                    cmd3.Parameters.AddWithValue("@day", day);
+                                    if (cmd3.ExecuteNonQuery() > 0)
+                                    {
+                                        using (SqlCommand cmd4 = new SqlCommand("UPDATE REVENUE_REPORT SET RevenueTotal = RevenueTotal + @plus WHERE IdReport = @Id", sql))
+                                        {
+                                            cmd4.Parameters.AddWithValue("@plus", total - oldRevenue);
+                                            cmd4.Parameters.AddWithValue("@Id", Id);
+                                            if (cmd4.ExecuteNonQuery() > 0)
+                                            {
+                                                //textBoxAOW.Text = count.ToString();
+                                                //textBoxDayRevenue.Text = total.ToString();
+                                                if (!silent) MessageBox.Show("Add day report success");
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            else // day not found, add
+                            {
+                                using (SqlCommand cmd3 = new SqlCommand("Insert into REVENUE_REPORT_DT(IdReport,Day,DayRevenue,AmoutOfWedding) values(@id, @day, @rday, @amout)", sql))
+                                {
+                                    cmd3.Parameters.AddWithValue("@id", Id);
+                                    cmd3.Parameters.AddWithValue("@day", day);
+                                    cmd3.Parameters.AddWithValue("@rday", total);
+                                    cmd3.Parameters.AddWithValue("@amout", count);
+                                    if (cmd3.ExecuteNonQuery() > 0)
+                                    {
+                                        using (SqlCommand cmd4 = new SqlCommand("UPDATE REVENUE_REPORT SET RevenueTotal = RevenueTotal + @plus WHERE IdReport = @Id", sql))
+                                        {
+                                            cmd4.Parameters.AddWithValue("@plus", total);
+                                            cmd4.Parameters.AddWithValue("@Id", Id);
+                                            if (cmd4.ExecuteNonQuery() > 0)
+                                            {
+                                                //textBoxAOW.Text = count.ToString();
+                                                //textBoxDayRevenue.Text = total.ToString();
+                                                if (!silent) MessageBox.Show("Add day report success");
+                                            }
+                                        }
+                                    }
+                                }
                             }
                         }
-                        catch
-                        {
-                            
-                        }
                     }
-                    DataRow rw = table1.NewRow();
-                    rw.ItemArray = new object[] { int.Parse(comboBoxDay.SelectedItem.ToString()),total, count, Id };
-                    table1.Rows.Add(rw);
                 }
+            }
         }
 
         private void ReportDay_Load(object sender, EventArgs e)
@@ -202,40 +237,82 @@ namespace WeddingManagementApplication
 
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void label6_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
-        //private void buttonDelete_Click(object sender, EventArgs e)
-        //{
-        //    if (currentReportId != null && currentReportId.Length == 21)
-        //    {
-        //        using (SqlConnection sql = new SqlConnection(WeddingClient.sqlConnectionString))
-        //        {
-        //            sql.Open();
-        //            // complete command for me
-        //            using (SqlCommand cmd = new SqlCommand("DELETE FROM REVENUE_REPORT_DT  WHERE (IdReport = @id and Day =@day)", sql))
-        //            {
-        //                cmd.Parameters.AddWithValue("@id", currentReportId);
-        //                cmd.Parameters.AddWithValue("@day", currentReportDay);
-        //                MessageBox.Show(currentReportDay.ToString());
-        //                if (cmd.ExecuteNonQuery() > 0)
-        //                {
-        //                    //Load_data_wedding();
-        //                    // delete row in table1
-        //                    //dataWedding.Rows.RemoveAt(dataWedding.CurrentRow.Index);
-        //                    table1.Rows.RemoveAt(dataGridView1.CurrentRow.Index);
-        //                    MessageBox.Show("Report deleted", "SUCCESS", MessageBoxButtons.OK);
-        //                    NhanTiec.currentWeddingId = "";
-        //                }
-        //            }
-        //        }
-        //    }
-        //    else
-        //    {
-        //        MessageBox.Show("Please select a wedding to delete", "ERROR", MessageBoxButtons.OK);
-        //    }
-        //}
+        private void btn_search_rpDay_Click(object sender, EventArgs e)
+        {
+            if(rBtn_day.Checked)
+            {
+                using (SqlConnection sqlconn = new SqlConnection(WeddingClient.sqlConnectionString))
+                {
+                    string sqlquery = "SELECT D.IdReport, D.Day, R.Month, D.DayRevenue, R.RevenueToTal, D.AmoutOfWedding FROM REVENUE_REPORT R, REVENUE_REPORT_DT D WHERE D.IdReport = R.IdReport AND D.Day LIKE @searchRPD";
+                    sqlconn.Open();
+                    using (SqlCommand sqlcomm = new SqlCommand(sqlquery, sqlconn))
+                    {
+                        sqlcomm.Parameters.AddWithValue("@searchRPD", "%" + tb_seacrh_rpDay.Text + "%");
+                        using (SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlcomm))
+                        {
+                            table1 = new DataTable();
+                            sqlDataAdapter.Fill(table1);
+                            DataColumn[] keys = new DataColumn[2];
+                            keys[0] = table1.Columns["IdReport"];
+                            keys[1] = table1.Columns["Day"];
+                            table1.PrimaryKey = keys;
+                            table1.Columns[0].ColumnMapping = MappingType.Hidden;
+                            table1.Columns[1].Caption = "Day";
+                            table1.Columns[2].Caption = "Month";
+                            table1.Columns[3].Caption = "Day Revenue";
+                            table1.Columns[4].Caption = "Month Revenue";
+                            table1.Columns[5].Caption = "Amout Of Wedding";
+                            DataColumn column = new DataColumn("Ratio", typeof(float));
+                            column.Caption = "Ratio";
+                            table1.Columns.Add(column);
+                            for (int i = 0; i < table1.Rows.Count; i++)
+                            {
+                                table1.Rows[i]["Ratio"] = Convert.ToSingle(table1.Rows[i]["DayRevenue"]) / Convert.ToSingle(table1.Rows[i]["RevenueToTal"]);
+                            }
+                            dataRPD.DataSource = table1;
+                            foreach (DataGridViewColumn col in dataRPD.Columns)
+                            {
+                                col.HeaderText = table1.Columns[col.DataPropertyName].Caption;
+                            }
+                        }
+                    }
+                }
+            }
+            /*
+            if(rBtn_amount.Checked)
+            {
+                using (SqlConnection sqlconn = new SqlConnection(WeddingClient.sqlConnectionString))
+                {
+                    string sqlquery = "SELECT Day, Month, Year, DayRevenue, Ratio, AmoutOfWedding" +
+                        " FROM REVENUE_REPORT_DT RP_D, REVENUE_REPORT RP" +
+                        " WHERE RP_D. IdReport = RP.IdReport AND AmoutOfWedding LIKE @searchRPD";
+                    sqlconn.Open();
+                    using (SqlCommand sqlcomm = new SqlCommand(sqlquery, sqlconn))
+                    {
+                        sqlcomm.Parameters.AddWithValue("@searchRPD", "%" + tb_seacrh_rpDay.Text + "%");
+                        using (SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlcomm))
+                        {
+                            table1 = new DataTable();
+                            sqlDataAdapter.Fill(table1);
+                            DataColumn[] keys = new DataColumn[1];
+                            keys[0] = table1.Columns["IdReport, Day"];
+                            table1.PrimaryKey = keys;
+                        //    table1.Columns["IdReport"].ColumnMapping = MappingType.Hidden;
+                            dataRPD.DataSource = table1;
+                            foreach (DataGridViewColumn col in dataRPD.Columns)
+                            {
+                                col.HeaderText = table1.Columns[col.DataPropertyName].Caption;
+                            }
+                        }
+                    }
+                }
+            }
+            */
+        }
     }
 }
