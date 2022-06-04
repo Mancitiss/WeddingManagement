@@ -34,6 +34,7 @@ namespace WeddingManagementApplication
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.btnUpdate = new System.Windows.Forms.Button();
             this.noteTextBox = new System.Windows.Forms.TextBox();
             this.nameTextBox = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -88,6 +89,7 @@ namespace WeddingManagementApplication
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.btnUpdate);
             this.panel3.Controls.Add(this.noteTextBox);
             this.panel3.Controls.Add(this.nameTextBox);
             this.panel3.Controls.Add(this.label5);
@@ -103,6 +105,18 @@ namespace WeddingManagementApplication
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(976, 126);
             this.panel3.TabIndex = 25;
+            // 
+            // btnUpdate
+            // 
+            this.btnUpdate.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnUpdate.ForeColor = System.Drawing.Color.Crimson;
+            this.btnUpdate.Location = new System.Drawing.Point(776, 76);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(87, 39);
+            this.btnUpdate.TabIndex = 29;
+            this.btnUpdate.Text = "UPDATE";
+            this.btnUpdate.UseVisualStyleBackColor = false;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // noteTextBox
             // 
@@ -166,26 +180,28 @@ namespace WeddingManagementApplication
             // 
             // btn_delete
             // 
+            this.btn_delete.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btn_delete.ForeColor = System.Drawing.Color.Crimson;
-            this.btn_delete.Location = new System.Drawing.Point(869, 84);
+            this.btn_delete.Location = new System.Drawing.Point(869, 76);
             this.btn_delete.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btn_delete.Name = "btn_delete";
-            this.btn_delete.Size = new System.Drawing.Size(85, 31);
+            this.btn_delete.Size = new System.Drawing.Size(85, 39);
             this.btn_delete.TabIndex = 22;
             this.btn_delete.Text = "DELETE";
-            this.btn_delete.UseVisualStyleBackColor = true;
+            this.btn_delete.UseVisualStyleBackColor = false;
             this.btn_delete.Click += new System.EventHandler(this.btn_delete_Click);
             // 
             // btn_add
             // 
+            this.btn_add.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btn_add.ForeColor = System.Drawing.Color.Crimson;
-            this.btn_add.Location = new System.Drawing.Point(760, 84);
+            this.btn_add.Location = new System.Drawing.Point(685, 76);
             this.btn_add.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btn_add.Name = "btn_add";
-            this.btn_add.Size = new System.Drawing.Size(85, 31);
+            this.btn_add.Size = new System.Drawing.Size(85, 39);
             this.btn_add.TabIndex = 21;
             this.btn_add.Text = "ADD";
-            this.btn_add.UseVisualStyleBackColor = true;
+            this.btn_add.UseVisualStyleBackColor = false;
             this.btn_add.Click += new System.EventHandler(this.btn_add_Click);
             // 
             // lobbyTypeCombobox
@@ -240,6 +256,7 @@ namespace WeddingManagementApplication
             // label6
             // 
             this.label6.AutoSize = true;
+            this.label6.BackColor = System.Drawing.Color.White;
             this.label6.Location = new System.Drawing.Point(992, 9);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(17, 17);
@@ -281,6 +298,8 @@ namespace WeddingManagementApplication
             this.RightToLeftLayout = true;
             this.Text = "Sảnh ";
             this.Load += new System.EventHandler(this.FormLobby_Load);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseMove);
             this.groupBox1.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
@@ -302,5 +321,6 @@ namespace WeddingManagementApplication
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label header_lobby;
+        private System.Windows.Forms.Button btnUpdate;
     }
 }

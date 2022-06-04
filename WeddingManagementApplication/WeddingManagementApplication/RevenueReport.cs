@@ -51,7 +51,7 @@ namespace WeddingManagementApplication
                     cmd2.Parameters.AddWithValue("@year", year);
                     using (SqlDataReader dr = cmd2.ExecuteReader())
                     {
-                        int total = 0;
+                        long total = 0;
                         //MessageBox.Show(dr.HasRows.ToString());
                         if (dr.HasRows)
                         {
@@ -69,7 +69,7 @@ namespace WeddingManagementApplication
                                 {
                                     while (reader.Read())
                                     {
-                                        total += int.Parse(reader["DayRevenue"].ToString());
+                                        total += long.Parse(reader["DayRevenue"].ToString());
                                     }
                                 }
 
@@ -81,9 +81,10 @@ namespace WeddingManagementApplication
                                 if (cmd3.ExecuteNonQuery() > 0)
                                 {
                                     Search("");
-                                    MessageBox.Show("Report Add Successfully");
+                                    MessageBox.Show("Create new report successfully!", "SUCCESS", MessageBoxButtons.OK);
                                 }
                             }
+                            inserted = true;
                         }
                         else
                         {
@@ -99,11 +100,11 @@ namespace WeddingManagementApplication
                                 {
                                     inserted = true;
                                     //Search("");
-                                    MessageBox.Show("Report Add Successfully");
+                                    MessageBox.Show("Create new report successfully!", "SUCCESS", MessageBoxButtons.OK);
                                 }
                                 else
                                 {
-                                    MessageBox.Show("Wedding Add Failed");
+                                    MessageBox.Show("Fail to create new report!", "FAIL", MessageBoxButtons.OK);
                                 }
                             }
 
@@ -115,7 +116,7 @@ namespace WeddingManagementApplication
 
             if (inserted)
             {
-                for(int i = 1; i<=31; i++)
+                for(int i = 1; i<=DateTime.DaysInMonth(year, month); i++)
                 {
                     ReportDay.GetRevenue(year, month, i, true);
                 }

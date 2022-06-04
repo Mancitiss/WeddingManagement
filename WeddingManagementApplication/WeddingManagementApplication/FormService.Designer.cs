@@ -42,13 +42,16 @@
             this.tb_service_price = new WeddingManagementApplication.CustomeBorderTextbox();
             this.tb_service_name = new WeddingManagementApplication.CustomeBorderTextbox();
             this.btn_search_service = new System.Windows.Forms.Button();
+            this.btnUpdate = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataService)).BeginInit();
             this.SuspendLayout();
             // 
             // btn_delete_service
             // 
             this.btn_delete_service.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btn_delete_service.Location = new System.Drawing.Point(631, 363);
+            this.btn_delete_service.Font = new System.Drawing.Font("Segoe UI Semibold", 7.8F, System.Drawing.FontStyle.Bold);
+            this.btn_delete_service.ForeColor = System.Drawing.Color.Crimson;
+            this.btn_delete_service.Location = new System.Drawing.Point(659, 372);
             this.btn_delete_service.Name = "btn_delete_service";
             this.btn_delete_service.Size = new System.Drawing.Size(85, 39);
             this.btn_delete_service.TabIndex = 86;
@@ -59,7 +62,9 @@
             // btn_add_service
             // 
             this.btn_add_service.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btn_add_service.Location = new System.Drawing.Point(511, 363);
+            this.btn_add_service.Font = new System.Drawing.Font("Segoe UI Semibold", 7.8F, System.Drawing.FontStyle.Bold);
+            this.btn_add_service.ForeColor = System.Drawing.Color.Crimson;
+            this.btn_add_service.Location = new System.Drawing.Point(478, 372);
             this.btn_add_service.Name = "btn_add_service";
             this.btn_add_service.Size = new System.Drawing.Size(85, 39);
             this.btn_add_service.TabIndex = 85;
@@ -93,6 +98,7 @@
             // img_close_service
             // 
             this.img_close_service.AutoSize = true;
+            this.img_close_service.BackColor = System.Drawing.Color.White;
             this.img_close_service.Location = new System.Drawing.Point(725, 9);
             this.img_close_service.Name = "img_close_service";
             this.img_close_service.Size = new System.Drawing.Size(17, 17);
@@ -175,6 +181,8 @@
             // btn_search_service
             // 
             this.btn_search_service.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btn_search_service.Font = new System.Drawing.Font("Segoe UI Semibold", 7.8F, System.Drawing.FontStyle.Bold);
+            this.btn_search_service.ForeColor = System.Drawing.Color.Crimson;
             this.btn_search_service.Location = new System.Drawing.Point(646, 114);
             this.btn_search_service.Name = "btn_search_service";
             this.btn_search_service.Size = new System.Drawing.Size(85, 39);
@@ -183,12 +191,26 @@
             this.btn_search_service.UseVisualStyleBackColor = false;
             this.btn_search_service.Click += new System.EventHandler(this.btn_search_service_Click);
             // 
+            // btnUpdate
+            // 
+            this.btnUpdate.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnUpdate.Font = new System.Drawing.Font("Segoe UI Semibold", 7.8F, System.Drawing.FontStyle.Bold);
+            this.btnUpdate.ForeColor = System.Drawing.Color.Crimson;
+            this.btnUpdate.Location = new System.Drawing.Point(569, 372);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(84, 39);
+            this.btnUpdate.TabIndex = 97;
+            this.btnUpdate.Text = "UPDATE";
+            this.btnUpdate.UseVisualStyleBackColor = false;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+            // 
             // FormServices
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(204)))), ((int)(((byte)(176)))));
             this.ClientSize = new System.Drawing.Size(754, 443);
+            this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.btn_search_service);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.tb_search_service);
@@ -208,6 +230,8 @@
             this.Name = "FormServices";
             this.Text = "FormServices";
             this.Load += new System.EventHandler(this.form_service_load);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseMove);
             ((System.ComponentModel.ISupportInitialize)(this.dataService)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -230,5 +254,6 @@
         private System.Windows.Forms.Label label1;
         private CustomeBorderTextbox tb_service_name;
         private System.Windows.Forms.Button btn_search_service;
+        private System.Windows.Forms.Button btnUpdate;
     }
 }

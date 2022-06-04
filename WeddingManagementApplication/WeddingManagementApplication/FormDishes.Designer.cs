@@ -37,17 +37,19 @@
             this.btn_delete_dishes = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.btn_search = new System.Windows.Forms.Button();
+            this.btn_update_dishes = new System.Windows.Forms.Button();
             this.tb_search_dishes = new WeddingManagementApplication.CustomeBorderTextbox();
             this.tb_dishes_note = new WeddingManagementApplication.CustomeBorderTextbox();
             this.tb_dishes_price = new WeddingManagementApplication.CustomeBorderTextbox();
             this.tb_dishes_name = new WeddingManagementApplication.CustomeBorderTextbox();
-            this.btn_search = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.data_gv_dishes)).BeginInit();
             this.SuspendLayout();
             // 
             // label6
             // 
             this.label6.AutoSize = true;
+            this.label6.BackColor = System.Drawing.Color.White;
             this.label6.Location = new System.Drawing.Point(731, 9);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(17, 17);
@@ -103,7 +105,9 @@
             // btn_add_dishes
             // 
             this.btn_add_dishes.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btn_add_dishes.Location = new System.Drawing.Point(513, 370);
+            this.btn_add_dishes.Font = new System.Drawing.Font("Segoe UI Semibold", 7.8F, System.Drawing.FontStyle.Bold);
+            this.btn_add_dishes.ForeColor = System.Drawing.Color.Crimson;
+            this.btn_add_dishes.Location = new System.Drawing.Point(474, 372);
             this.btn_add_dishes.Name = "btn_add_dishes";
             this.btn_add_dishes.Size = new System.Drawing.Size(85, 39);
             this.btn_add_dishes.TabIndex = 74;
@@ -114,7 +118,9 @@
             // btn_delete_dishes
             // 
             this.btn_delete_dishes.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btn_delete_dishes.Location = new System.Drawing.Point(633, 370);
+            this.btn_delete_dishes.Font = new System.Drawing.Font("Segoe UI Semibold", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_delete_dishes.ForeColor = System.Drawing.Color.Crimson;
+            this.btn_delete_dishes.Location = new System.Drawing.Point(663, 372);
             this.btn_delete_dishes.Name = "btn_delete_dishes";
             this.btn_delete_dishes.Size = new System.Drawing.Size(85, 39);
             this.btn_delete_dishes.TabIndex = 75;
@@ -144,6 +150,32 @@
             this.label4.TabIndex = 77;
             this.label4.Text = "Search";
             // 
+            // btn_search
+            // 
+            this.btn_search.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btn_search.Font = new System.Drawing.Font("Segoe UI Semibold", 7.8F, System.Drawing.FontStyle.Bold);
+            this.btn_search.ForeColor = System.Drawing.Color.Crimson;
+            this.btn_search.Location = new System.Drawing.Point(639, 117);
+            this.btn_search.Name = "btn_search";
+            this.btn_search.Size = new System.Drawing.Size(85, 39);
+            this.btn_search.TabIndex = 78;
+            this.btn_search.Text = "SEARCH";
+            this.btn_search.UseVisualStyleBackColor = false;
+            this.btn_search.Click += new System.EventHandler(this.btn_search_Click);
+            // 
+            // btn_update_dishes
+            // 
+            this.btn_update_dishes.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btn_update_dishes.Font = new System.Drawing.Font("Segoe UI Semibold", 7.8F, System.Drawing.FontStyle.Bold);
+            this.btn_update_dishes.ForeColor = System.Drawing.Color.Crimson;
+            this.btn_update_dishes.Location = new System.Drawing.Point(565, 372);
+            this.btn_update_dishes.Name = "btn_update_dishes";
+            this.btn_update_dishes.Size = new System.Drawing.Size(91, 38);
+            this.btn_update_dishes.TabIndex = 79;
+            this.btn_update_dishes.Text = "UPDATE";
+            this.btn_update_dishes.UseVisualStyleBackColor = false;
+            this.btn_update_dishes.Click += new System.EventHandler(this.btn_update_dishes_Click);
+            // 
             // tb_search_dishes
             // 
             this.tb_search_dishes.Location = new System.Drawing.Point(486, 89);
@@ -172,17 +204,6 @@
             this.tb_dishes_name.Size = new System.Drawing.Size(205, 22);
             this.tb_dishes_name.TabIndex = 67;
             // 
-            // btn_search
-            // 
-            this.btn_search.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btn_search.Location = new System.Drawing.Point(639, 117);
-            this.btn_search.Name = "btn_search";
-            this.btn_search.Size = new System.Drawing.Size(85, 39);
-            this.btn_search.TabIndex = 78;
-            this.btn_search.Text = "SEARCH";
-            this.btn_search.UseVisualStyleBackColor = false;
-            this.btn_search.Click += new System.EventHandler(this.btn_search_Click);
-            // 
             // FormDishes
             // 
             this.AccessibleRole = System.Windows.Forms.AccessibleRole.Sound;
@@ -190,6 +211,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(204)))), ((int)(((byte)(176)))));
             this.ClientSize = new System.Drawing.Size(754, 443);
+            this.Controls.Add(this.btn_update_dishes);
             this.Controls.Add(this.btn_search);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.tb_search_dishes);
@@ -209,6 +231,8 @@
             this.Name = "FormDishes";
             this.Text = "FormDishes";
             this.Load += new System.EventHandler(this.form_dishes_load);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseMove);
             ((System.ComponentModel.ISupportInitialize)(this.data_gv_dishes)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -231,5 +255,6 @@
         private System.Windows.Forms.Label label4;
         private CustomeBorderTextbox tb_search_dishes;
         private System.Windows.Forms.Button btn_search;
+        private System.Windows.Forms.Button btn_update_dishes;
     }
 }

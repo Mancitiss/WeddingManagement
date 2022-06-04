@@ -70,8 +70,8 @@ namespace WeddingManagementApplication
             childForm.TopLevel = false;
             childForm.Dock = DockStyle.Fill;
             this.curChildForm = childForm;
-            this.MainForm.Controls.Add(this.curChildForm);
-            this.MainForm.Tag = childForm;
+        //    this.MainForm.Controls.Add(this.curChildForm);
+          //  this.MainForm.Tag = childForm;
             childForm.BringToFront();
             childForm.Show();
         }
@@ -196,6 +196,26 @@ namespace WeddingManagementApplication
 
         private void lobbyDropDown1_Load(object sender, EventArgs e)
         {
+        }
+        Point lastPoint = new Point();
+        private void panel1_MouseDown(object sender, MouseEventArgs e)
+        {
+            lastPoint = new Point(e.X, e.Y);
+
+        }
+
+        private void panel1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                this.Left += e.X - lastPoint.X;
+                this.Top += e.Y - lastPoint.Y;
+            }
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

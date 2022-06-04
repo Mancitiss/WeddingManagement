@@ -27,7 +27,27 @@ namespace WeddingManagementApplication
 
             // make invoice date time picker readonly
             invoiceDTP.Enabled = false;
-            
+
+        }
+
+        private void pay_yes_Click(object sender, EventArgs e)
+        {
+            this.tb_moneyLeft.Text = "0";
+        }
+
+        private void pay_no_Click(object sender, EventArgs e)
+        {
+            if (rBtn_yes.Checked)
+            {
+                tb_moneyLeft.Text = penaltyTotal.ToString();
+            }
+            else
+            {
+                if (currentMoneyLeft > 0)
+                    tb_moneyLeft.Text = baseTotal.ToString();
+                else
+                    tb_moneyLeft.Text = "0";
+            }
         }
 
         public string id;

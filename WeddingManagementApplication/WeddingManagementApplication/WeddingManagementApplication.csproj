@@ -142,6 +142,10 @@
     <Reference Include="CryptSharp, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\CryptSharpOfficial.2.1.0.0\lib\CryptSharp.dll</HintPath>
     </Reference>
+    <Reference Include="DragAssembly, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\DragAssembly.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -230,6 +234,12 @@
     </Compile>
     <Compile Include="gridView_service.Designer.cs">
       <DependentUpon>gridView_service.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Home.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Home.Designer.cs">
+      <DependentUpon>Home.cs</DependentUpon>
     </Compile>
     <Compile Include="LobbyData.cs" />
     <Compile Include="LobbyDropDown.cs">
@@ -342,6 +352,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="gridView_service.resx">
       <DependentUpon>gridView_service.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Home.resx">
+      <DependentUpon>Home.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LobbyDropDown.resx">
       <DependentUpon>LobbyDropDown.cs</DependentUpon>

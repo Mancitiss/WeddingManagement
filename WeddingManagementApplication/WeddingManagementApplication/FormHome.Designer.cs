@@ -42,17 +42,24 @@
             this.btnSearch = new System.Windows.Forms.Button();
             this.btnHome = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.btnExit = new System.Windows.Forms.Button();
-            this.MainForm = new System.Windows.Forms.Panel();
+            this.pictureBoxAnhChinh = new System.Windows.Forms.PictureBox();
+            this.labelElegant = new System.Windows.Forms.Label();
+            this.labelMerry = new System.Windows.Forms.Label();
+            this.labelRomantic = new System.Windows.Forms.Label();
+            this.pictureBoxAnhNhoTrai = new System.Windows.Forms.PictureBox();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.pictureBoxAnhNhoGiua = new System.Windows.Forms.PictureBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.reportDropDown1 = new WeddingManagementApplication.ReportDropDown();
             this.lobbyDropDown1 = new WeddingManagementApplication.LobbyDropDown();
             this.searchDropDown1 = new WeddingManagementApplication.SearchDropDown();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.panel2.SuspendLayout();
-            this.MainForm.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAnhChinh)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAnhNhoTrai)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAnhNhoGiua)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -126,7 +133,7 @@
             // 
             // panelNavigate
             // 
-            this.panelNavigate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(214)))), ((int)(((byte)(102)))));
+            this.panelNavigate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(201)))), ((int)(((byte)(182)))), ((int)(((byte)(161)))));
             this.panelNavigate.Location = new System.Drawing.Point(221, 206);
             this.panelNavigate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelNavigate.Name = "panelNavigate";
@@ -160,6 +167,8 @@
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox2.TabIndex = 6;
             this.pictureBox2.TabStop = false;
+            this.pictureBox2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
+            this.pictureBox2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseMove);
             // 
             // btnReport
             // 
@@ -250,50 +259,96 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
-            // panel2
+            // pictureBoxAnhChinh
             // 
-            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(106)))), ((int)(((byte)(101)))));
-            this.panel2.Controls.Add(this.btnExit);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(231, 0);
-            this.panel2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1164, 108);
-            this.panel2.TabIndex = 1;
+            this.pictureBoxAnhChinh.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxAnhChinh.Image")));
+            this.pictureBoxAnhChinh.Location = new System.Drawing.Point(235, 0);
+            this.pictureBoxAnhChinh.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pictureBoxAnhChinh.Name = "pictureBoxAnhChinh";
+            this.pictureBoxAnhChinh.Size = new System.Drawing.Size(1157, 376);
+            this.pictureBoxAnhChinh.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxAnhChinh.TabIndex = 11;
+            this.pictureBoxAnhChinh.TabStop = false;
             // 
-            // btnExit
+            // labelElegant
             // 
-            this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnExit.Location = new System.Drawing.Point(1133, 2);
-            this.btnExit.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(27, 25);
-            this.btnExit.TabIndex = 0;
-            this.btnExit.Text = "x";
-            this.btnExit.UseVisualStyleBackColor = true;
-            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            this.labelElegant.AutoSize = true;
+            this.labelElegant.Font = new System.Drawing.Font("SimSun-ExtB", 19.8F);
+            this.labelElegant.Location = new System.Drawing.Point(1121, 693);
+            this.labelElegant.Name = "labelElegant";
+            this.labelElegant.Size = new System.Drawing.Size(134, 33);
+            this.labelElegant.TabIndex = 17;
+            this.labelElegant.Text = "Elegant";
             // 
-            // MainForm
+            // labelMerry
             // 
-            this.MainForm.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("MainForm.BackgroundImage")));
-            this.MainForm.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.MainForm.Controls.Add(this.reportDropDown1);
-            this.MainForm.Controls.Add(this.lobbyDropDown1);
-            this.MainForm.Controls.Add(this.searchDropDown1);
-            this.MainForm.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.MainForm.Location = new System.Drawing.Point(231, 108);
-            this.MainForm.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.MainForm.MaximumSize = new System.Drawing.Size(1153, 786);
-            this.MainForm.MinimumSize = new System.Drawing.Size(1153, 786);
-            this.MainForm.Name = "MainForm";
-            this.MainForm.Size = new System.Drawing.Size(1153, 786);
-            this.MainForm.TabIndex = 2;
-            this.MainForm.MouseHover += new System.EventHandler(this.MainForm_MouseHover);
+            this.labelMerry.AutoSize = true;
+            this.labelMerry.Font = new System.Drawing.Font("SimSun-ExtB", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelMerry.Location = new System.Drawing.Point(382, 693);
+            this.labelMerry.Name = "labelMerry";
+            this.labelMerry.Size = new System.Drawing.Size(100, 33);
+            this.labelMerry.TabIndex = 16;
+            this.labelMerry.Text = "Merry";
+            // 
+            // labelRomantic
+            // 
+            this.labelRomantic.AutoSize = true;
+            this.labelRomantic.Font = new System.Drawing.Font("SimSun-ExtB", 19.8F);
+            this.labelRomantic.Location = new System.Drawing.Point(742, 693);
+            this.labelRomantic.Name = "labelRomantic";
+            this.labelRomantic.Size = new System.Drawing.Size(151, 33);
+            this.labelRomantic.TabIndex = 15;
+            this.labelRomantic.Text = "Romantic";
+            // 
+            // pictureBoxAnhNhoTrai
+            // 
+            this.pictureBoxAnhNhoTrai.Image = global::WeddingManagementApplication.Properties.Resources.merry;
+            this.pictureBoxAnhNhoTrai.Location = new System.Drawing.Point(284, 444);
+            this.pictureBoxAnhNhoTrai.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pictureBoxAnhNhoTrai.Name = "pictureBoxAnhNhoTrai";
+            this.pictureBoxAnhNhoTrai.Size = new System.Drawing.Size(316, 229);
+            this.pictureBoxAnhNhoTrai.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxAnhNhoTrai.TabIndex = 12;
+            this.pictureBoxAnhNhoTrai.TabStop = false;
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
+            this.pictureBox3.Location = new System.Drawing.Point(1049, 444);
+            this.pictureBox3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(284, 229);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox3.TabIndex = 14;
+            this.pictureBox3.TabStop = false;
+            // 
+            // pictureBoxAnhNhoGiua
+            // 
+            this.pictureBoxAnhNhoGiua.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxAnhNhoGiua.Image")));
+            this.pictureBoxAnhNhoGiua.Location = new System.Drawing.Point(675, 444);
+            this.pictureBoxAnhNhoGiua.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pictureBoxAnhNhoGiua.Name = "pictureBoxAnhNhoGiua";
+            this.pictureBoxAnhNhoGiua.Size = new System.Drawing.Size(307, 229);
+            this.pictureBoxAnhNhoGiua.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxAnhNhoGiua.TabIndex = 13;
+            this.pictureBoxAnhNhoGiua.TabStop = false;
+            // 
+            // label6
+            // 
+            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(1366, 9);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(17, 17);
+            this.label6.TabIndex = 73;
+            this.label6.Text = "X";
+            this.label6.Click += new System.EventHandler(this.label6_Click);
             // 
             // reportDropDown1
             // 
             this.reportDropDown1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(204)))), ((int)(((byte)(176)))));
-            this.reportDropDown1.Location = new System.Drawing.Point(-1, 484);
+            this.reportDropDown1.Location = new System.Drawing.Point(233, 582);
             this.reportDropDown1.Name = "reportDropDown1";
             this.reportDropDown1.Size = new System.Drawing.Size(147, 91);
             this.reportDropDown1.TabIndex = 2;
@@ -302,7 +357,7 @@
             // lobbyDropDown1
             // 
             this.lobbyDropDown1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(204)))), ((int)(((byte)(176)))));
-            this.lobbyDropDown1.Location = new System.Drawing.Point(0, 228);
+            this.lobbyDropDown1.Location = new System.Drawing.Point(224, 324);
             this.lobbyDropDown1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.lobbyDropDown1.MaximumSize = new System.Drawing.Size(150, 97);
             this.lobbyDropDown1.Name = "lobbyDropDown1";
@@ -314,10 +369,10 @@
             // searchDropDown1
             // 
             this.searchDropDown1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(204)))), ((int)(((byte)(176)))));
-            this.searchDropDown1.Location = new System.Drawing.Point(-1, 164);
+            this.searchDropDown1.Location = new System.Drawing.Point(224, 233);
             this.searchDropDown1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.searchDropDown1.Name = "searchDropDown1";
-            this.searchDropDown1.Size = new System.Drawing.Size(161, 209);
+            this.searchDropDown1.Size = new System.Drawing.Size(161, 166);
             this.searchDropDown1.TabIndex = 0;
             this.searchDropDown1.Visible = false;
             // 
@@ -325,20 +380,34 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(237)))), ((int)(((byte)(223)))));
             this.ClientSize = new System.Drawing.Size(1395, 786);
-            this.Controls.Add(this.MainForm);
-            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.reportDropDown1);
+            this.Controls.Add(this.lobbyDropDown1);
+            this.Controls.Add(this.searchDropDown1);
+            this.Controls.Add(this.labelElegant);
+            this.Controls.Add(this.labelMerry);
+            this.Controls.Add(this.labelRomantic);
+            this.Controls.Add(this.pictureBoxAnhNhoTrai);
+            this.Controls.Add(this.pictureBox3);
+            this.Controls.Add(this.pictureBoxAnhNhoGiua);
+            this.Controls.Add(this.pictureBoxAnhChinh);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.MaximumSize = new System.Drawing.Size(1395, 786);
             this.Name = "FormHome";
             this.Text = "FormHome";
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.panel2.ResumeLayout(false);
-            this.MainForm.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAnhChinh)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAnhNhoTrai)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAnhNhoGiua)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -350,18 +419,23 @@
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.Button btnHome;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Panel MainForm;
         private System.Windows.Forms.Button btnReport;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Panel panelNavigate;
         private System.Windows.Forms.Button btnLobby;
-        private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Button btnLogout;
         private System.Windows.Forms.Button btnSettings;
         private System.Windows.Forms.Button btnWedding;
         private SearchDropDown searchDropDown1;
         private LobbyDropDown lobbyDropDown1;
         private ReportDropDown reportDropDown1;
+        private System.Windows.Forms.PictureBox pictureBoxAnhChinh;
+        private System.Windows.Forms.Label labelElegant;
+        private System.Windows.Forms.Label labelMerry;
+        private System.Windows.Forms.Label labelRomantic;
+        private System.Windows.Forms.PictureBox pictureBoxAnhNhoTrai;
+        private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.PictureBox pictureBoxAnhNhoGiua;
+        private System.Windows.Forms.Label label6;
     }
 }

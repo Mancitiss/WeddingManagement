@@ -33,7 +33,6 @@
             this.btnAccount = new System.Windows.Forms.Button();
             this.btnWedding = new System.Windows.Forms.Button();
             this.bill = new System.Windows.Forms.Button();
-            this.btnReport = new System.Windows.Forms.Button();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -43,11 +42,10 @@
             this.flowLayoutPanel1.Controls.Add(this.btnAccount);
             this.flowLayoutPanel1.Controls.Add(this.btnWedding);
             this.flowLayoutPanel1.Controls.Add(this.bill);
-            this.flowLayoutPanel1.Controls.Add(this.btnReport);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(161, 207);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(161, 167);
             this.flowLayoutPanel1.TabIndex = 0;
             // 
             // btnShift
@@ -102,19 +100,6 @@
             this.bill.UseVisualStyleBackColor = false;
             this.bill.Click += new System.EventHandler(this.bill_Click);
             // 
-            // btnReport
-            // 
-            this.btnReport.BackColor = System.Drawing.Color.IndianRed;
-            this.btnReport.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Bold);
-            this.btnReport.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnReport.Location = new System.Drawing.Point(3, 167);
-            this.btnReport.Name = "btnReport";
-            this.btnReport.Size = new System.Drawing.Size(155, 35);
-            this.btnReport.TabIndex = 6;
-            this.btnReport.Text = "Report";
-            this.btnReport.UseVisualStyleBackColor = false;
-            this.btnReport.Click += new System.EventHandler(this.btnReport_Click);
-            // 
             // SearchDropDown
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -122,7 +107,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(204)))), ((int)(((byte)(176)))));
             this.Controls.Add(this.flowLayoutPanel1);
             this.Name = "SearchDropDown";
-            this.Size = new System.Drawing.Size(161, 207);
+            this.Size = new System.Drawing.Size(161, 167);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -135,6 +120,5 @@
         private System.Windows.Forms.Button btnAccount;
         private System.Windows.Forms.Button btnWedding;
         private System.Windows.Forms.Button bill;
-        private System.Windows.Forms.Button btnReport;
     }
 }

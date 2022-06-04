@@ -374,6 +374,8 @@ namespace WeddingManagementApplication
             // btn_add_wedding
             // 
             this.btn_add_wedding.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btn_add_wedding.Font = new System.Drawing.Font("Segoe UI Semibold", 7.8F, System.Drawing.FontStyle.Bold);
+            this.btn_add_wedding.ForeColor = System.Drawing.Color.Crimson;
             this.btn_add_wedding.Location = new System.Drawing.Point(347, 514);
             this.btn_add_wedding.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btn_add_wedding.Name = "btn_add_wedding";
@@ -386,6 +388,8 @@ namespace WeddingManagementApplication
             // btn_update_wedding
             // 
             this.btn_update_wedding.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btn_update_wedding.Font = new System.Drawing.Font("Segoe UI Semibold", 7.8F, System.Drawing.FontStyle.Bold);
+            this.btn_update_wedding.ForeColor = System.Drawing.Color.Crimson;
             this.btn_update_wedding.Location = new System.Drawing.Point(437, 514);
             this.btn_update_wedding.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btn_update_wedding.Name = "btn_update_wedding";
@@ -397,6 +401,8 @@ namespace WeddingManagementApplication
             // btn_delete_wedding
             // 
             this.btn_delete_wedding.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btn_delete_wedding.Font = new System.Drawing.Font("Segoe UI Semibold", 7.8F, System.Drawing.FontStyle.Bold);
+            this.btn_delete_wedding.ForeColor = System.Drawing.Color.Crimson;
             this.btn_delete_wedding.Location = new System.Drawing.Point(529, 514);
             this.btn_delete_wedding.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btn_delete_wedding.Name = "btn_delete_wedding";
@@ -430,6 +436,8 @@ namespace WeddingManagementApplication
             // btn_detail_dishes
             // 
             this.btn_detail_dishes.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btn_detail_dishes.Font = new System.Drawing.Font("Segoe UI Semibold", 7.8F, System.Drawing.FontStyle.Bold);
+            this.btn_detail_dishes.ForeColor = System.Drawing.Color.Crimson;
             this.btn_detail_dishes.Location = new System.Drawing.Point(244, 98);
             this.btn_detail_dishes.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btn_detail_dishes.Name = "btn_detail_dishes";
@@ -461,6 +469,8 @@ namespace WeddingManagementApplication
             // btn_add_menu
             // 
             this.btn_add_menu.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btn_add_menu.Font = new System.Drawing.Font("Segoe UI Semibold", 7.8F, System.Drawing.FontStyle.Bold);
+            this.btn_add_menu.ForeColor = System.Drawing.Color.Crimson;
             this.btn_add_menu.Location = new System.Drawing.Point(244, 137);
             this.btn_add_menu.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btn_add_menu.Name = "btn_add_menu";
@@ -537,6 +547,8 @@ namespace WeddingManagementApplication
             // btn_detail_service
             // 
             this.btn_detail_service.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btn_detail_service.Font = new System.Drawing.Font("Segoe UI Semibold", 7.8F, System.Drawing.FontStyle.Bold);
+            this.btn_detail_service.ForeColor = System.Drawing.Color.Crimson;
             this.btn_detail_service.Location = new System.Drawing.Point(244, 98);
             this.btn_detail_service.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btn_detail_service.Name = "btn_detail_service";
@@ -569,6 +581,8 @@ namespace WeddingManagementApplication
             // btn_add_service
             // 
             this.btn_add_service.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btn_add_service.Font = new System.Drawing.Font("Segoe UI Semibold", 7.8F, System.Drawing.FontStyle.Bold);
+            this.btn_add_service.ForeColor = System.Drawing.Color.Crimson;
             this.btn_add_service.Location = new System.Drawing.Point(244, 135);
             this.btn_add_service.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btn_add_service.Name = "btn_add_service";
@@ -638,6 +652,7 @@ namespace WeddingManagementApplication
             // label6
             // 
             this.label6.AutoSize = true;
+            this.label6.BackColor = System.Drawing.Color.White;
             this.label6.Location = new System.Drawing.Point(984, 9);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(17, 17);
