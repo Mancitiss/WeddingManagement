@@ -13,9 +13,12 @@ namespace WeddingManagementApplication
 {
     public partial class FormShift : Form
     {
+        public delegate void HandleClick(Shift s);
+        public static HandleClick onclick;
         public FormShift()
         {
             InitializeComponent();
+            onclick = ShiftClick;
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -42,7 +45,7 @@ namespace WeddingManagementApplication
                         string id = "SH" + WeddingClient.GetNewIdFromTable("SH").ToString().PadLeft(19, '0');
                         s._id = id;
                         command.Parameters.AddWithValue("@idShift",id );
-                        command.Parameters.AddWithValue("@available", state);
+                        command.Parameters.AddWithValue("@available", 1);
                         command.Parameters.AddWithValue("@Name", s._lbName);
                         command.Parameters.AddWithValue("@Start", s._lbStart);
                         command.Parameters.AddWithValue("@End", s._lbEnd);
@@ -184,7 +187,7 @@ namespace WeddingManagementApplication
                             command.Parameters.AddWithValue("@id", pre._id);
                             command.Parameters.AddWithValue("@start", tbStart.Text);
                             command.Parameters.AddWithValue("@end", tbEnd.Text);
-                            command.Parameters.AddWithValue("@avl", this.rbtA.Checked ? 1 : 0);
+                            command.Parameters.AddWithValue("@avl", 1);
                             command.Parameters.AddWithValue("@name", tbName.Text);
                             if (command.ExecuteNonQuery() > 0)
                             {
@@ -228,7 +231,12 @@ namespace WeddingManagementApplication
                 this.Top += e.Y - lastPoint.Y;
             }
         }
-
+        private void ShiftClick(Shift s)
+        {
+            tbEnd.Text = s._lbEnd;
+            tbName.Text = s._lbName;
+            tbStart.Text = s._lbStart;
+        }
         private void tbEnd_TextChanged(object sender, EventArgs e)
         {
 

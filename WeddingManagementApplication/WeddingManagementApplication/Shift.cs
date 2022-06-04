@@ -52,6 +52,12 @@ namespace WeddingManagementApplication
         private void Shift_Click(object sender, EventArgs e)
         {
             this.btnCheck.Visible = !this.btnCheck.Visible;
+            FormShift.onclick.Invoke(this);
+        }
+
+        private void Shift_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

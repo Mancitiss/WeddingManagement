@@ -128,6 +128,7 @@
             this.Controls.Add(this.lbName);
             this.Name = "Shift";
             this.Size = new System.Drawing.Size(220, 214);
+            this.Load += new System.EventHandler(this.Shift_Load);
             this.Click += new System.EventHandler(this.Shift_Click);
             this.ResumeLayout(false);
             this.PerformLayout();

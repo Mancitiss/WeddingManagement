@@ -41,7 +41,7 @@
             this.tbStart = new System.Windows.Forms.TextBox();
             this.tbName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel(); 
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -100,6 +100,7 @@
             this.rdbU.TabStop = true;
             this.rdbU.Text = "Unavailable";
             this.rdbU.UseVisualStyleBackColor = true;
+            this.rdbU.Visible = false;
             // 
             // rbtA
             // 
@@ -112,6 +113,7 @@
             this.rbtA.TabStop = true;
             this.rbtA.Text = "Available";
             this.rbtA.UseVisualStyleBackColor = true;
+            this.rbtA.Visible = false;
             // 
             // btnRemove
             // 
