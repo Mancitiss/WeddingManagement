@@ -83,7 +83,7 @@ namespace WeddingManagementApplication
                 }
                 if (count > 1)
                 {
-                    MessageBox.Show("Chỉ xóa 1 đối tượng");
+                    MessageBox.Show("Just delete 1 object");
                     break;
                 }    
             }
@@ -102,7 +102,7 @@ namespace WeddingManagementApplication
                                 if ((s as Shift)._id == pre._id)
                                 {
                                     this.flowLayoutPanel1.Controls.Remove(s as Control);
-                                    MessageBox.Show("Xóa thành công");
+                                    MessageBox.Show("Delete Success");
                                     break;
                                 }
                             }
@@ -152,7 +152,7 @@ namespace WeddingManagementApplication
         {
             if (this.tbEnd.Text == "" || this.tbName.Text == "" || this.tbStart.Text == "")
             {
-                MessageBox.Show("Vui lòng điền đủ thông tin");
+                MessageBox.Show("Please fill full information");
             }
             else
             {
@@ -173,7 +173,7 @@ namespace WeddingManagementApplication
                     }
                     if (count > 1)
                     {
-                        MessageBox.Show("Chỉ xóa 1 đối tượng");
+                        MessageBox.Show("Just choose one object");
                         break;
                     }
                 }
@@ -209,7 +209,7 @@ namespace WeddingManagementApplication
                                             }
                                         }
                                     }
-                                MessageBox.Show("Cập nhật thành công");
+                                MessageBox.Show("Update Success");
                             }
                         }
                     }
