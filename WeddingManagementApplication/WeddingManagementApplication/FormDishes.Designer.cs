@@ -42,6 +42,7 @@
             this.tb_dishes_price = new WeddingManagementApplication.CustomeBorderTextbox();
             this.tb_dishes_name = new WeddingManagementApplication.CustomeBorderTextbox();
             this.btn_search = new System.Windows.Forms.Button();
+            this.btn_update_dishes = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.data_gv_dishes)).BeginInit();
             this.SuspendLayout();
             // 
@@ -103,7 +104,7 @@
             // btn_add_dishes
             // 
             this.btn_add_dishes.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btn_add_dishes.Location = new System.Drawing.Point(513, 370);
+            this.btn_add_dishes.Location = new System.Drawing.Point(513, 359);
             this.btn_add_dishes.Name = "btn_add_dishes";
             this.btn_add_dishes.Size = new System.Drawing.Size(85, 39);
             this.btn_add_dishes.TabIndex = 74;
@@ -114,7 +115,7 @@
             // btn_delete_dishes
             // 
             this.btn_delete_dishes.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btn_delete_dishes.Location = new System.Drawing.Point(633, 370);
+            this.btn_delete_dishes.Location = new System.Drawing.Point(633, 359);
             this.btn_delete_dishes.Name = "btn_delete_dishes";
             this.btn_delete_dishes.Size = new System.Drawing.Size(85, 39);
             this.btn_delete_dishes.TabIndex = 75;
@@ -183,6 +184,16 @@
             this.btn_search.UseVisualStyleBackColor = false;
             this.btn_search.Click += new System.EventHandler(this.btn_search_Click);
             // 
+            // btn_update_dishes
+            // 
+            this.btn_update_dishes.Location = new System.Drawing.Point(576, 400);
+            this.btn_update_dishes.Name = "btn_update_dishes";
+            this.btn_update_dishes.Size = new System.Drawing.Size(91, 38);
+            this.btn_update_dishes.TabIndex = 79;
+            this.btn_update_dishes.Text = "UPDATE";
+            this.btn_update_dishes.UseVisualStyleBackColor = true;
+            this.btn_update_dishes.Click += new System.EventHandler(this.btn_update_dishes_Click);
+            // 
             // FormDishes
             // 
             this.AccessibleRole = System.Windows.Forms.AccessibleRole.Sound;
@@ -190,6 +201,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(204)))), ((int)(((byte)(176)))));
             this.ClientSize = new System.Drawing.Size(754, 443);
+            this.Controls.Add(this.btn_update_dishes);
             this.Controls.Add(this.btn_search);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.tb_search_dishes);
@@ -233,5 +245,6 @@
         private System.Windows.Forms.Label label4;
         private CustomeBorderTextbox tb_search_dishes;
         private System.Windows.Forms.Button btn_search;
+        private System.Windows.Forms.Button btn_update_dishes;
     }
 }

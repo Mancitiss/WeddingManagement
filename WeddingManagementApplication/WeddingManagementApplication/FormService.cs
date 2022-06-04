@@ -283,5 +283,42 @@ namespace WeddingManagementApplication
                 this.Top += e.Y - lastPoint.Y;
             }
         }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            if (tb_service_name.Text == "" || tb_service_price.Text == "")
+            {
+                MessageBox.Show("Please fill out all the fields!", "LACK", MessageBoxButtons.OK);
+            }
+
+            else
+            {
+                if (currentServiceId == "")
+                {
+                    MessageBox.Show("Please select a service to delete!", "LACK", MessageBoxButtons.OK);
+                }
+                else
+                {
+                    using (SqlConnection sql = new SqlConnection(WeddingClient.sqlConnectionString))
+                    {
+                        sql.Open();
+                        using (SqlCommand cmd = new SqlCommand("UPDATE SERVICE SET ServiceName=@name,ServicePrice=@price,Note=@note WHERE IdService = @IdService", sql))
+                        {
+                            cmd.Parameters.AddWithValue("@IdService", currentServiceId);
+                            cmd.Parameters.AddWithValue("@price", int.Parse(tb_service_price.Text));
+                            cmd.Parameters.AddWithValue("@name", tb_service_name.Text);
+                            cmd.Parameters.AddWithValue("@note", tb_service_note.Text);
+                            if (cmd.ExecuteNonQuery() > 0)
+                            {
+                                MessageBox.Show("A service Updated!", "LACK", MessageBoxButtons.OK);
+                            }
+                        }
+                    }
+                }
+                FormServices.currentServiceId = "";
+                load_data_service();
+            }
+
+        }
     }
 }

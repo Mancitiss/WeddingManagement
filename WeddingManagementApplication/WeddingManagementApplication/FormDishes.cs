@@ -265,5 +265,40 @@ namespace WeddingManagementApplication
                 this.Top += e.Y - lastPoint.Y;
             }
         }
+
+        private void btn_update_dishes_Click(object sender, EventArgs e)
+        {
+            if (tb_dishes_name.Text == "" || tb_dishes_price.Text == "")
+            {
+                MessageBox.Show("Please fill out all the fields!", "LACK", MessageBoxButtons.OK);
+            }
+            else
+            {
+                if (currentTypeId == "")
+                {
+                    MessageBox.Show("Please select a dish to delete!");
+                }
+                else
+                {
+                    using (SqlConnection sql = new SqlConnection(WeddingClient.sqlConnectionString))
+                    {
+                        sql.Open();
+                        using (SqlCommand cmd = new SqlCommand("UPDATE MENU SET DishesName=@name,DishesPrice=@price,Note=@note WHERE IdDishes = @IdDishes", sql))
+                        {
+                            cmd.Parameters.AddWithValue("@IdDishes", currentTypeId);
+                            cmd.Parameters.AddWithValue("@name", tb_dishes_name.Text);
+                            cmd.Parameters.AddWithValue("@price", int.Parse(tb_dishes_price.Text));
+                            cmd.Parameters.AddWithValue("@note", tb_dishes_note.Text);
+                            if (cmd.ExecuteNonQuery() > 0)
+                            {
+                                MessageBox.Show("A dish updated!");
+                            }
+                        }
+                    }
+                }
+                FormDishes.currentTypeId = "";
+                load_data_Dishes();
+            }
+        }
     }
 }

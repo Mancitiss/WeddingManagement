@@ -42,6 +42,7 @@
             this.tb_service_price = new WeddingManagementApplication.CustomeBorderTextbox();
             this.tb_service_name = new WeddingManagementApplication.CustomeBorderTextbox();
             this.btn_search_service = new System.Windows.Forms.Button();
+            this.btnUpdate = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataService)).BeginInit();
             this.SuspendLayout();
             // 
@@ -183,12 +184,23 @@
             this.btn_search_service.UseVisualStyleBackColor = false;
             this.btn_search_service.Click += new System.EventHandler(this.btn_search_service_Click);
             // 
+            // btnUpdate
+            // 
+            this.btnUpdate.Location = new System.Drawing.Point(568, 405);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(98, 34);
+            this.btnUpdate.TabIndex = 97;
+            this.btnUpdate.Text = "UPDATE";
+            this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+            // 
             // FormServices
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(204)))), ((int)(((byte)(176)))));
             this.ClientSize = new System.Drawing.Size(754, 443);
+            this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.btn_search_service);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.tb_search_service);
@@ -232,5 +244,6 @@
         private System.Windows.Forms.Label label1;
         private CustomeBorderTextbox tb_service_name;
         private System.Windows.Forms.Button btn_search_service;
+        private System.Windows.Forms.Button btnUpdate;
     }
 }
