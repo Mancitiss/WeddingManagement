@@ -49,6 +49,7 @@ namespace WeddingManagementApplication
             this.label9 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.header_lobby = new System.Windows.Forms.Label();
+            this.btnUpdate = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -88,6 +89,7 @@ namespace WeddingManagementApplication
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.btnUpdate);
             this.panel3.Controls.Add(this.noteTextBox);
             this.panel3.Controls.Add(this.nameTextBox);
             this.panel3.Controls.Add(this.label5);
@@ -179,7 +181,7 @@ namespace WeddingManagementApplication
             // btn_add
             // 
             this.btn_add.ForeColor = System.Drawing.Color.Crimson;
-            this.btn_add.Location = new System.Drawing.Point(760, 84);
+            this.btn_add.Location = new System.Drawing.Point(685, 84);
             this.btn_add.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btn_add.Name = "btn_add";
             this.btn_add.Size = new System.Drawing.Size(85, 31);
@@ -263,6 +265,17 @@ namespace WeddingManagementApplication
             this.header_lobby.Text = "LOBBY LIST";
             this.header_lobby.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // btnUpdate
+            // 
+            this.btnUpdate.ForeColor = System.Drawing.Color.Crimson;
+            this.btnUpdate.Location = new System.Drawing.Point(776, 85);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(87, 28);
+            this.btnUpdate.TabIndex = 29;
+            this.btnUpdate.Text = "UPDATE";
+            this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+            // 
             // FormLobby
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -304,5 +317,6 @@ namespace WeddingManagementApplication
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label header_lobby;
+        private System.Windows.Forms.Button btnUpdate;
     }
 }

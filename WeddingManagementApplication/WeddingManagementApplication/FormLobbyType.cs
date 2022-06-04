@@ -190,11 +190,49 @@ namespace WeddingManagementApplication
                 }
             }
             FormLobbyType.currentTypeId = "";
+
         }
 
         private void label6_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (comboBox1.Text == "" || !long.TryParse(textBox1.Text, out long price))
+            {
+                MessageBox.Show("Please fill all the fields!", "LACK", MessageBoxButtons.OK);
+            }
+            else
+            {
+                if (currentTypeId == "")
+                {
+                    MessageBox.Show("Please select a type!", "LACK", MessageBoxButtons.OK);
+                }
+                else
+                {
+                    using (SqlConnection sql = new SqlConnection(WeddingClient.sqlConnectionString))
+                    {
+                        sql.Open();
+                        using (SqlCommand cmd = new SqlCommand("UPDATE LOBBY_TYPE SET LobbyName=@name, MinTablePrice=@price WHERE IdLobbyType = @IdLobbyType", sql))
+                        {
+                            cmd.Parameters.AddWithValue("@IdLobbyType", currentTypeId);
+                            cmd.Parameters.AddWithValue("@name", comboBox1.Text);
+                            cmd.Parameters.AddWithValue("@price", int.Parse(textBox1.Text));
+                            if (cmd.ExecuteNonQuery() > 0)
+                            {
+                                // remove from list
+                                // remove from table
+                                MessageBox.Show("Type Update!", "SUCCESS", MessageBoxButtons.OK);
+                            }
+                        }
+                    }
+                }
+                FormLobbyType.currentTypeId = "";
+                load_data_LobbyType();
+            }
+
         }
     }
 }

@@ -323,7 +323,7 @@
             this.searchDropDown1.Location = new System.Drawing.Point(-1, 164);
             this.searchDropDown1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.searchDropDown1.Name = "searchDropDown1";
-            this.searchDropDown1.Size = new System.Drawing.Size(161, 209);
+            this.searchDropDown1.Size = new System.Drawing.Size(161, 166);
             this.searchDropDown1.TabIndex = 0;
             this.searchDropDown1.Visible = false;
             // 
