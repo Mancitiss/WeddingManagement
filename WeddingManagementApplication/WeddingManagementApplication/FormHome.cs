@@ -70,8 +70,8 @@ namespace WeddingManagementApplication
             childForm.TopLevel = false;
             childForm.Dock = DockStyle.Fill;
             this.curChildForm = childForm;
-            this.MainForm.Controls.Add(this.curChildForm);
-            this.MainForm.Tag = childForm;
+        //    this.MainForm.Controls.Add(this.curChildForm);
+          //  this.MainForm.Tag = childForm;
             childForm.BringToFront();
             childForm.Show();
         }
@@ -211,6 +211,11 @@ namespace WeddingManagementApplication
                 this.Left += e.X - lastPoint.X;
                 this.Top += e.Y - lastPoint.Y;
             }
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
