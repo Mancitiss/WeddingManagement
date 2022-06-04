@@ -35,12 +35,12 @@
             this.btnWedding = new System.Windows.Forms.Button();
             this.panelNavigate = new System.Windows.Forms.Panel();
             this.btnLobby = new System.Windows.Forms.Button();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.btnReport = new System.Windows.Forms.Button();
             this.btnService = new System.Windows.Forms.Button();
             this.btnMenu = new System.Windows.Forms.Button();
             this.btnSearch = new System.Windows.Forms.Button();
             this.btnHome = new System.Windows.Forms.Button();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBoxAnhChinh = new System.Windows.Forms.PictureBox();
             this.labelElegant = new System.Windows.Forms.Label();
@@ -156,6 +156,20 @@
             this.btnLobby.Click += new System.EventHandler(this.btnLobby_Click);
             this.btnLobby.MouseHover += new System.EventHandler(this.btnLobby_MouseHover);
             // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
+            this.pictureBox2.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(231, 206);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox2.TabIndex = 6;
+            this.pictureBox2.TabStop = false;
+            this.pictureBox2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
+            this.pictureBox2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseMove);
+            // 
             // btnReport
             // 
             this.btnReport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(78)))), ((int)(((byte)(77)))));
@@ -236,20 +250,6 @@
             this.btnHome.Click += new System.EventHandler(this.btnHome_Click);
             this.btnHome.MouseHover += new System.EventHandler(this.btnHome_MouseHover);
             // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(231, 206);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox2.TabIndex = 6;
-            this.pictureBox2.TabStop = false;
-            this.pictureBox2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
-            this.pictureBox2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseMove);
-            // 
             // pictureBox1
             // 
             this.pictureBox1.Location = new System.Drawing.Point(0, 2);
@@ -273,40 +273,40 @@
             // labelElegant
             // 
             this.labelElegant.AutoSize = true;
-            this.labelElegant.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Italic);
-            this.labelElegant.Location = new System.Drawing.Point(1137, 693);
+            this.labelElegant.Font = new System.Drawing.Font("SimSun-ExtB", 19.8F);
+            this.labelElegant.Location = new System.Drawing.Point(1121, 693);
             this.labelElegant.Name = "labelElegant";
-            this.labelElegant.Size = new System.Drawing.Size(127, 38);
+            this.labelElegant.Size = new System.Drawing.Size(134, 34);
             this.labelElegant.TabIndex = 17;
             this.labelElegant.Text = "Elegant";
             // 
             // labelMerry
             // 
             this.labelMerry.AutoSize = true;
-            this.labelMerry.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Italic);
+            this.labelMerry.Font = new System.Drawing.Font("SimSun-ExtB", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelMerry.Location = new System.Drawing.Point(382, 693);
             this.labelMerry.Name = "labelMerry";
-            this.labelMerry.Size = new System.Drawing.Size(101, 38);
+            this.labelMerry.Size = new System.Drawing.Size(100, 34);
             this.labelMerry.TabIndex = 16;
             this.labelMerry.Text = "Merry";
             // 
             // labelRomantic
             // 
             this.labelRomantic.AutoSize = true;
-            this.labelRomantic.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Italic);
-            this.labelRomantic.Location = new System.Drawing.Point(750, 693);
+            this.labelRomantic.Font = new System.Drawing.Font("SimSun-ExtB", 19.8F);
+            this.labelRomantic.Location = new System.Drawing.Point(742, 693);
             this.labelRomantic.Name = "labelRomantic";
-            this.labelRomantic.Size = new System.Drawing.Size(155, 38);
+            this.labelRomantic.Size = new System.Drawing.Size(151, 34);
             this.labelRomantic.TabIndex = 15;
             this.labelRomantic.Text = "Romantic";
             // 
             // pictureBoxAnhNhoTrai
             // 
             this.pictureBoxAnhNhoTrai.Image = global::WeddingManagementApplication.Properties.Resources.merry;
-            this.pictureBoxAnhNhoTrai.Location = new System.Drawing.Point(278, 444);
+            this.pictureBoxAnhNhoTrai.Location = new System.Drawing.Point(284, 444);
             this.pictureBoxAnhNhoTrai.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pictureBoxAnhNhoTrai.Name = "pictureBoxAnhNhoTrai";
-            this.pictureBoxAnhNhoTrai.Size = new System.Drawing.Size(347, 229);
+            this.pictureBoxAnhNhoTrai.Size = new System.Drawing.Size(316, 229);
             this.pictureBoxAnhNhoTrai.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxAnhNhoTrai.TabIndex = 12;
             this.pictureBoxAnhNhoTrai.TabStop = false;
@@ -314,10 +314,10 @@
             // pictureBox3
             // 
             this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
-            this.pictureBox3.Location = new System.Drawing.Point(1052, 444);
+            this.pictureBox3.Location = new System.Drawing.Point(1049, 444);
             this.pictureBox3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(286, 229);
+            this.pictureBox3.Size = new System.Drawing.Size(284, 229);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox3.TabIndex = 14;
             this.pictureBox3.TabStop = false;
@@ -325,10 +325,10 @@
             // pictureBoxAnhNhoGiua
             // 
             this.pictureBoxAnhNhoGiua.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxAnhNhoGiua.Image")));
-            this.pictureBoxAnhNhoGiua.Location = new System.Drawing.Point(704, 444);
+            this.pictureBoxAnhNhoGiua.Location = new System.Drawing.Point(675, 444);
             this.pictureBoxAnhNhoGiua.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pictureBoxAnhNhoGiua.Name = "pictureBoxAnhNhoGiua";
-            this.pictureBoxAnhNhoGiua.Size = new System.Drawing.Size(269, 229);
+            this.pictureBoxAnhNhoGiua.Size = new System.Drawing.Size(307, 229);
             this.pictureBoxAnhNhoGiua.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxAnhNhoGiua.TabIndex = 13;
             this.pictureBoxAnhNhoGiua.TabStop = false;
@@ -380,6 +380,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(237)))), ((int)(((byte)(223)))));
             this.ClientSize = new System.Drawing.Size(1395, 786);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.reportDropDown1);
@@ -395,6 +396,7 @@
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.MaximumSize = new System.Drawing.Size(1395, 786);
             this.Name = "FormHome";
             this.Text = "FormHome";
             this.panel1.ResumeLayout(false);
