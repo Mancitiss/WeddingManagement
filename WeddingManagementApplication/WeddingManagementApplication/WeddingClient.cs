@@ -22,7 +22,7 @@ namespace WeddingManagementApplication
 
     //    internal static string sqlConnectionString = ConfigurationManager.AppSettings.Get("An");
 
-        internal static string sqlConnectionString = ConfigurationManager.AppSettings.Get("Huyen");
+        internal static string sqlConnectionString = ConfigurationManager.AppSettings.Get("conString");
 
         public static string client_id;
         public static short client_priority;

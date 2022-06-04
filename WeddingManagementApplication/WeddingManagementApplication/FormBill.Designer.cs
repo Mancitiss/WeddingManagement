@@ -259,6 +259,7 @@ namespace WeddingManagementApplication
             this.rBtn_yes.TabStop = true;
             this.rBtn_yes.Text = "Yes";
             this.rBtn_yes.UseVisualStyleBackColor = true;
+            this.rBtn_yes.Click += new EventHandler(this.RBtn_yes_Click);
             // 
             // rBtn_no
             // 
@@ -269,7 +270,8 @@ namespace WeddingManagementApplication
             this.rBtn_no.Size = new System.Drawing.Size(47, 21);
             this.rBtn_no.TabIndex = 38;
             this.rBtn_no.Text = "No";
-            this.rBtn_no.UseVisualStyleBackColor = true;
+            this.rBtn_no.UseVisualStyleBackColor = true; 
+            this.rBtn_no.Click += new EventHandler(this.RBtn_no_Click);
             // 
             // groupBox1
             // 
@@ -490,6 +492,7 @@ namespace WeddingManagementApplication
             this.pay_no.TabStop = true;
             this.pay_no.Text = "No";
             this.pay_no.UseVisualStyleBackColor = true;
+            this.pay_no.Click += new System.EventHandler(this.pay_no_Click);
             // 
             // pay_yes
             // 
@@ -501,6 +504,7 @@ namespace WeddingManagementApplication
             this.pay_yes.TabIndex = 67;
             this.pay_yes.Text = "Yes";
             this.pay_yes.UseVisualStyleBackColor = true;
+            this.pay_yes.Click += new System.EventHandler(this.pay_yes_Click);
             // 
             // groupBox5
             // 

@@ -115,7 +115,7 @@ namespace WeddingManagementApplication
 
             if (inserted)
             {
-                for(int i = 1; i<=31; i++)
+                for(int i = 1; i<=DateTime.DaysInMonth(year, month); i++)
                 {
                     ReportDay.GetRevenue(year, month, i, true);
                 }
