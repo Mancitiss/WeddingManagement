@@ -16,7 +16,6 @@ Giảng viên: Đỗ Thị Thanh Tuyền
 
 #### Sinh viên thực hiện
 - Nguyễn Thị Thanh Huyền 
-- Trần Tùng Linh 
 - Bùi Đoàn Khánh Ân
 - Võ Vương Thanh Tú
 - Nguyễn Thanh Thảo
